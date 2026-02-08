@@ -1,7 +1,7 @@
 import uiScriptLocale
 
 BUTTON_START_X_POS = -60
-BUTTON_X_STEP = 30
+BUTTON_X_STEP = 40
 
 window = {
 	"name" : "MessengerWindow",
@@ -74,7 +74,6 @@ window = {
 			"down_image" : "d:/ymir work/ui/game/windows/messenger_whisper_03.sub",
 			"disable_image" : "d:/ymir work/ui/game/windows/messenger_whisper_04.sub",
 		},
-
 		{
 			"name" : "RemoveButton",
 			"type" : "button",

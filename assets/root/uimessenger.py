@@ -7,8 +7,6 @@ import messenger
 import localeInfo
 import constInfo
 import uiToolTip
-import uiGameOption
-
 import uiCommon
 from _weakref import proxy
 
@@ -381,11 +379,6 @@ class MessengerWindow(ui.ScriptWindow):
 		self.addFriendButton.SetEvent(ui.__mem_func__(self.OnPressAddFriendButton))
 		self.guildButton.SetEvent(ui.__mem_func__(self.OnPressGuildButton))
 
-		self.addFriendButton.SetPosition(-60, 30)
-		self.whisperButton.SetPosition(-20, 30)
-		self.removeButton.SetPosition(20, 30)
-		self.guildButton.SetPosition(60, 30)
-
 		self.whisperButton.Disable()
 		self.removeButton.Disable()
 
@@ -505,11 +498,6 @@ class MessengerWindow(ui.ScriptWindow):
 
 	def SetGuildButtonEvent(self, event):
 		self.guildButtonEvent=event
-
-	def OnCloseInputDialog(self):
-		self.inputDialog.Close()
-		self.inputDialog = None
-		return True
 
 	def OnPressGuildButton(self):
 		self.guildButtonEvent()
