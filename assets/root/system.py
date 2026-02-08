@@ -1,8 +1,17 @@
 import sys
 import app
 import dbg
+import builtins
+import _frozen_importlib as _bootstrap
+import _frozen_importlib_external as _bootstrap_external
+import marshal
+import pack
+import __main__
 
-sys.path.append("lib")
+# Keep import paths deterministic for the embedded runtime.
+sys.path = [p for p in sys.path if isinstance(p, str)]
+if "lib" not in sys.path:
+	sys.path.append("lib")
 
 class TraceFile:
 	def write(self, msg):
@@ -38,10 +47,6 @@ sys.stderr = TraceErrorFile()
 # pack file support (must move to system.py, systemrelease.pyc)
 #
 
-import marshal
-import imp
-import pack
-
 class pack_file_iterator(object):
 	def __init__(self, packfile):
 		self.pack_file = packfile
@@ -52,7 +57,7 @@ class pack_file_iterator(object):
 			return tmp
 		raise StopIteration
 
-_chr = __builtins__.chr
+_chr = builtins.chr
 
 class pack_file(object):
 
@@ -67,12 +72,12 @@ class pack_file(object):
 	def __iter__(self):
 		return pack_file_iterator(self)
 
-	def read(self, len = None):
+	def read(self, length = None):
 		if not self.data:
 			return ''
-		if len:
-			tmp = self.data[:len]
-			self.data = self.data[len:]
+		if length:
+			tmp = self.data[:length]
+			self.data = self.data[length:]
 			return tmp
 		else:
 			tmp = self.data
@@ -85,57 +90,66 @@ class pack_file(object):
 	def readlines(self):
 		return [x for x in self]
 
-__builtins__.pack_open = pack_open = pack_file
+builtins.pack_open = pack_open = pack_file
+
+old_open = open
+def open(filename, mode = 'rb'):
+	try:
+		if mode in ('r', 'rb') and pack.Exist(filename):
+			return pack_file(filename, mode)
+	except Exception:
+		pass
+	return old_open(filename, mode)
+
+builtins.open = open
+builtins.old_open = old_open
+builtins.new_open = open
 
 _ModuleType = type(sys)
 
-old_import = __import__
-def _process_result(code, fqname):
-	# did get_code() return an actual module? (rather than a code object)
-	is_module = isinstance(code, _ModuleType)
-
-	# use the returned module, or create a new one to exec code into
-	if is_module:
-		module = code
-	else:
-		module = imp.new_module(fqname)
-
-	# insert additional values into the module (before executing the code)
-	#module.__dict__.update(values)
-
-	# the module is almost ready... make it visible
-	sys.modules[fqname] = module
-
-	# execute the code within the module's namespace
-	if not is_module:
-		exec(code, module.__dict__)
-
-	# fetch from sys.modules instead of returning module directly.
-	# also make module's __name__ agree with fqname, in case
-	# the "exec code in module.__dict__" played games on us.
-	module = sys.modules[fqname]
-	module.__name__ = fqname
-	return module
-
 module_do = lambda x:None
+currentExecName = ""
 
-def __pack_import(name,globals=None,locals=None,fromlist=None):
-	if name in sys.modules:
-		return sys.modules[name]
+class custom_import_hook(object):
+	def _pack_filename(self, name):
+		filename = name + ".py"
+		if pack.Exist(filename):
+			return filename
+		return None
 
-	filename = name + '.py'
+	def find_spec(self, fullname, path=None, target=None):
+		filename = self._pack_filename(fullname)
+		if not filename:
+			return None
+		return _bootstrap.spec_from_loader(fullname, self, origin=filename)
 
-	if pack.Exist(filename):
+	def create_module(self, spec):
+		return None
+
+	def exec_module(self, module):
+		global currentExecName
+		name = module.__name__
+		filename = self._pack_filename(name)
+		if not filename:
+			raise ImportError(name)
 		dbg.Trace('importing from pack %s\\n' % name)
+		currentExecName = name
+		execfile(filename, module.__dict__)
+		module_do(module)
 
-		newmodule = _process_result(compile(pack_file(filename,'r').read(),filename,'exec'),name)		
+	def find_module(self, name, path=None):
+		if self._pack_filename(name):
+			return self
+		return None
 
-		module_do(newmodule)
-		return newmodule
-		#return imp.load_module(name, pack_file(filename,'r'),filename,('.py','r',imp.PY_SOURCE))
-	else:
-		dbg.Trace('importing from lib %s\\n' % name)
-		return old_import(name,globals,locals,fromlist)
+	def load_module(self, name):
+		if name in sys.modules:
+			return sys.modules[name]
+
+		module = _ModuleType(name)
+		sys.modules[name] = module
+		self.exec_module(module)
+		return sys.modules[name]
 
 def splitext(p):
 	root, ext = '', ''
@@ -180,12 +194,18 @@ class PythonExecutioner:
 	def __LoadCompiledFile__(kPESelf, sFileName): 
 		kFile=pack_open(sFileName)
 
-		if kFile.read(4)!=imp.get_magic(): 
+		magic = kFile.read(4)
+		if isinstance(magic, str):
+			magic = magic.encode("latin1")
+
+		if magic != _bootstrap_external.MAGIC_NUMBER:
 			raise 
 
 		kFile.read(4) 
 
 		kData=kFile.read() 
+		if isinstance(kData, str):
+			kData = kData.encode("latin1")
 		return marshal.loads(kData) 
 
 def execfile(fileName, dict): 
@@ -196,9 +216,11 @@ def exec_add_module_do(mod):
 	global execfile
 	mod.__dict__['execfile'] = execfile
 
-import builtins
-builtins.__import__ = __pack_import
 module_do = exec_add_module_do
+
+meta_hook = custom_import_hook()
+if meta_hook not in sys.meta_path:
+	sys.meta_path.insert(0, meta_hook)
 
 """
 #
@@ -287,7 +309,10 @@ def RunMainScript(name):
 		dbg.LogBox(msg)
 		app.Abort()
 	
-import debugInfo
+try:
+	import debugInfo
+except ImportError:
+	import debuginfo as debugInfo
 debugInfo.SetDebugMode(__DEBUG__)
 
 loginMark = "-cs"

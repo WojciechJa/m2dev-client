@@ -2750,9 +2750,6 @@ class PythonScriptLoader(object):
 
 	def LoadScriptFile(self, window, FileName):
 		import exception
-		import exceptions
-		import os
-		import errno
 		self.Clear()
 
 		print(("===== Load Script File : %s" % (FileName)))
