@@ -75,10 +75,10 @@ class __mem_func__:
 			return self.func(self.obj, *arg)
 
 	def __init__(self, mfunc):
-		if mfunc.im_func.func_code.co_argcount>1:
-			self.call=__mem_func__.__arg_call__(mfunc.im_class, mfunc.im_self, mfunc.im_func)
+		if mfunc.__func__.__code__.co_argcount>1:
+			self.call=__mem_func__.__arg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
 		else:
-			self.call=__mem_func__.__noarg_call__(mfunc.im_class, mfunc.im_self, mfunc.im_func)
+			self.call=__mem_func__.__noarg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
 
 	def __call__(self, *arg):
 		return self.call(*arg)
@@ -822,14 +822,14 @@ class ImageBox(Window):
 		wndMgr.LoadImage(self.hWnd, imageName)
 
 		if len(self.eventDict)!=0:
-			print "LOAD IMAGE", self, self.eventDict
+			print(("LOAD IMAGE", self, self.eventDict))
 			
 	def LoadImageFromFile(self, imageName):
 		self.name=imageName
 		wndMgr.LoadImageFromFile(self.hWnd, imageName)
 
 		if len(self.eventDict)!=0:
-			print "LOAD IMAGE", self, self.eventDict
+			print(("LOAD IMAGE", self, self.eventDict))
 
 	def SetAlpha(self, alpha):
 		wndMgr.SetDiffuseColor(self.hWnd, 1.0, 1.0, 1.0, alpha)
@@ -1021,7 +1021,7 @@ class Button(Window):
 		snd.PlaySound("sound/ui/click.wav")
 
 		if self.eventFunc:
-			apply(self.eventFunc, self.eventArgs)
+			self.eventFunc(*self.eventArgs)
 
 	def ShowToolTip(self):
 		if self.ToolTipText:
@@ -2333,7 +2333,7 @@ class ListBox(Window):
 		self._LocateItem()
 
 	def ChangeItem(self, number, text):
-		for key, value in self.keyDict.items():
+		for key, value in list(self.keyDict.items()):
 			if value == number:
 				self.textDict[key] = text
 
@@ -2385,7 +2385,7 @@ class ListBox(Window):
 
 	def SelectItem(self, line):
 
-		if not self.keyDict.has_key(line):
+		if line not in self.keyDict:
 			return
 
 		if line == self.selectedLine:
@@ -2705,7 +2705,7 @@ class ScriptWindow(Window):
 		self.ElementDictionary[name] = child
 
 	def IsChild(self, name):
-		return self.ElementDictionary.has_key(name)
+		return name in self.ElementDictionary
 	def GetChild(self, name):
 		return self.ElementDictionary[name]
 
@@ -2755,7 +2755,7 @@ class PythonScriptLoader(object):
 		import errno
 		self.Clear()
 
-		print "===== Load Script File : %s" % (FileName)
+		print(("===== Load Script File : %s" % (FileName)))
 
 		try:
 			# chr, player ���� sandbox ������ import�� ������ �ʱ� ������,(���� �ǿ��� ������ �ſ� ŭ.)
@@ -2767,14 +2767,14 @@ class PythonScriptLoader(object):
 			self.ScriptDictionary["DRAGON_SOUL_EQUIPMENT_SLOT_START"] = player.DRAGON_SOUL_EQUIPMENT_SLOT_START
 			self.ScriptDictionary["LOCALE_PATH"] = app.GetLocalePath()
 			self.ScriptDictionary["LOCALE_PATH_COMMON"] = app.GetLocalePathCommon()
-			execfile(FileName, self.ScriptDictionary)
-		except IOError, err:
+			exec(compile(open(FileName, "rb").read(), FileName, 'exec'), self.ScriptDictionary)
+		except IOError as err:
 			import sys
 			import dbg			
 			dbg.TraceError("Failed to load script file : %s" % (FileName))
 			dbg.TraceError("error  : %s" % (err))
 			exception.Abort("LoadScriptFile1")
-		except RuntimeError,err:
+		except RuntimeError as err:
 			import sys
 			import dbg			
 			dbg.TraceError("Failed to load script file : %s" % (FileName))
@@ -2799,15 +2799,15 @@ class PythonScriptLoader(object):
 		if app.IsRTL():
 			w = wndMgr.GetScreenWidth()
 			h = wndMgr.GetScreenHeight()
-			if Body.has_key("width"):
+			if "width" in Body:
 				w = int(Body["width"])
-			if Body.has_key("height"):
+			if "height" in Body:
 				h = int(Body["height"])
 
 			window.SetSize(w, h)
 		else:
 			window.SetSize(int(Body["width"]), int(Body["height"]))
-			if True == Body.has_key("style"):
+			if True == ("style" in Body):
 				for StyleList in Body["style"]:
 					window.AddFlag(StyleList)
 
@@ -2817,17 +2817,17 @@ class PythonScriptLoader(object):
 		if app.IsRTL():
 			parent.AddFlag("rtl")
 
-		if True == dicChildren.has_key("style"):
+		if True == ("style" in dicChildren):
 			for style in dicChildren["style"]:
 				parent.AddFlag(style)
 
-		if False == dicChildren.has_key("children"):
+		if False == ("children" in dicChildren):
 			return False
 
 		Index = 0
 
 		ChildrenList = dicChildren["children"]
-		parent.Children = range(len(ChildrenList))
+		parent.Children = list(range(len(ChildrenList)))
 		for ElementValue in ChildrenList:
 			try:
 				Name = ElementValue["name"]				
@@ -3006,8 +3006,8 @@ class PythonScriptLoader(object):
 	def CheckKeyList(self, name, value, key_list):
 
 		for DataKey in key_list:
-			if False == value.has_key(DataKey):
-				print "Failed to find data key", "[" + name + "/" + DataKey + "]"
+			if False == (DataKey in value):
+				print(("Failed to find data key", "[" + name + "/" + DataKey + "]"))
 				return False
 
 		return True
@@ -3015,7 +3015,7 @@ class PythonScriptLoader(object):
 	def LoadDefaultData(self, window, value, parentWindow):
 		loc_x = int(value["x"])
 		loc_y = int(value["y"])
-		if value.has_key("vertical_align"):
+		if "vertical_align" in value:
 			if "center" == value["vertical_align"]:
 				window.SetWindowVerticalAlignCenter()
 			elif "bottom" == value["vertical_align"]:
@@ -3023,7 +3023,7 @@ class PythonScriptLoader(object):
 
 		if parentWindow.IsRTL():
 			loc_x = int(value["x"]) + window.GetWidth()
-			if value.has_key("horizontal_align"):
+			if "horizontal_align" in value:
 				if "center" == value["horizontal_align"]:
 					window.SetWindowHorizontalAlignCenter()
 					loc_x = - int(value["x"])
@@ -3034,12 +3034,12 @@ class PythonScriptLoader(object):
 			else:
 				window.SetWindowHorizontalAlignRight()
 
-			if value.has_key("all_align"):
+			if "all_align" in value:
 				window.SetWindowVerticalAlignCenter()
 				window.SetWindowHorizontalAlignCenter()
 				loc_x = - int(value["x"])
 		else:
-			if value.has_key("horizontal_align"):
+			if "horizontal_align" in value:
 				if "center" == value["horizontal_align"]:
 					window.SetWindowHorizontalAlignCenter()
 				elif "right" == value["horizontal_align"]:
@@ -3062,29 +3062,29 @@ class PythonScriptLoader(object):
 	## Button
 	def LoadElementButton(self, window, value, parentWindow):
 
-		if value.has_key("width") and value.has_key("height"):
+		if "width" in value and "height" in value:
 			window.SetSize(int(value["width"]), int(value["height"]))
 
-		if True == value.has_key("default_image"):
+		if True == ("default_image" in value):
 			window.SetUpVisual(value["default_image"])
-		if True == value.has_key("over_image"):
+		if True == ("over_image" in value):
 			window.SetOverVisual(value["over_image"])
-		if True == value.has_key("down_image"):
+		if True == ("down_image" in value):
 			window.SetDownVisual(value["down_image"])
-		if True == value.has_key("disable_image"):
+		if True == ("disable_image" in value):
 			window.SetDisableVisual(value["disable_image"])
 
-		if True == value.has_key("text"):
-			if True == value.has_key("text_height"):
+		if True == ("text" in value):
+			if True == ("text_height" in value):
 				window.SetText(value["text"], value["text_height"])
 			else:
 				window.SetText(value["text"])
 
-			if value.has_key("text_color"):
+			if "text_color" in value:
 				window.SetTextColor(value["text_color"])
 
-		if True == value.has_key("tooltip_text"):
-			if True == value.has_key("tooltip_x") and True == value.has_key("tooltip_y"):
+		if True == ("tooltip_text" in value):
+			if True == ("tooltip_x" in value) and True == ("tooltip_y" in value):
 				window.SetToolTipText(value["tooltip_text"], int(value["tooltip_x"]), int(value["tooltip_y"]))
 			else:
 				window.SetToolTipText(value["tooltip_text"])
@@ -3120,13 +3120,13 @@ class PythonScriptLoader(object):
 		if False == self.CheckKeyList(value["name"], value, self.ANI_IMAGE_KEY_LIST):
 			return False
 
-		if True == value.has_key("delay"):
+		if True == ("delay" in value):
 			window.SetDelay(value["delay"])
 
 		for image in value["images"]:
 			window.AppendImage(image)
 
-		if value.has_key("width") and value.has_key("height"):
+		if "width" in value and "height" in value:
 			window.SetSize(value["width"], value["height"])
 
 		self.LoadDefaultData(window, value, parentWindow)
@@ -3141,17 +3141,17 @@ class PythonScriptLoader(object):
 
 		window.LoadImage(value["image"])
 
-		if True == value.has_key("x_origin") and True == value.has_key("y_origin"):
+		if True == ("x_origin" in value) and True == ("y_origin" in value):
 			window.SetOrigin(float(value["x_origin"]), float(value["y_origin"]))
 
-		if True == value.has_key("x_scale") and True == value.has_key("y_scale"):
+		if True == ("x_scale" in value) and True == ("y_scale" in value):
 			window.SetScale(float(value["x_scale"]), float(value["y_scale"]))
 
-		if True == value.has_key("rect"):
+		if True == ("rect" in value):
 			RenderingRect = value["rect"]
 			window.SetRenderingRect(RenderingRect[0], RenderingRect[1], RenderingRect[2], RenderingRect[3])
 
-		if True == value.has_key("mode"):
+		if True == ("mode" in value):
 			mode = value["mode"]
 			if "MODULATE" == mode:
 				window.SetRenderingMode(wndMgr.RENDERING_MODE_MODULATE)
@@ -3180,10 +3180,10 @@ class PythonScriptLoader(object):
 		b = 1.0
 		a = 1.0
 
-		if True == value.has_key("image_r") and \
-			True == value.has_key("image_g") and \
-			True == value.has_key("image_b") and \
-			True == value.has_key("image_a"):
+		if True == ("image_r" in value) and \
+			True == ("image_g" in value) and \
+			True == ("image_b" in value) and \
+			True == ("image_a" in value):
 			r = float(value["image_r"])
 			g = float(value["image_g"])
 			b = float(value["image_b"])
@@ -3200,7 +3200,7 @@ class PythonScriptLoader(object):
 									int(slot["width"]),
 									int(slot["height"]))
 
-		if True == value.has_key("image"):
+		if True == ("image" in value):
 			wndMgr.SetSlotBaseImage(window.hWnd,
 									value["image"],
 									r, g, b, a)
@@ -3226,9 +3226,9 @@ class PythonScriptLoader(object):
 
 		xBlank = 0
 		yBlank = 0
-		if True == value.has_key("x_blank"):
+		if True == ("x_blank" in value):
 			xBlank = int(value["x_blank"])
-		if True == value.has_key("y_blank"):
+		if True == ("y_blank" in value):
 			yBlank = int(value["y_blank"])
 
 		if app.IsRTL():
@@ -3243,22 +3243,22 @@ class PythonScriptLoader(object):
 							int(value["y_step"]),
 							xBlank,
 							yBlank)
-		if True == value.has_key("image"):
+		if True == ("image" in value):
 			r = 1.0
 			g = 1.0
 			b = 1.0
 			a = 1.0
-			if True == value.has_key("image_r") and \
-				True == value.has_key("image_g") and \
-				True == value.has_key("image_b") and \
-				True == value.has_key("image_a"):
+			if True == ("image_r" in value) and \
+				True == ("image_g" in value) and \
+				True == ("image_b" in value) and \
+				True == ("image_a" in value):
 				r = float(value["image_r"])
 				g = float(value["image_g"])
 				b = float(value["image_b"])
 				a = float(value["image_a"])
 			wndMgr.SetSlotBaseImage(window.hWnd, value["image"], r, g, b, a)
 
-		if True == value.has_key("style"):
+		if True == ("style" in value):
 			if "select" == value["style"]:
 				wndMgr.SetSlotStyle(window.hWnd, wndMgr.SLOT_STYLE_SELECT)
 
@@ -3272,17 +3272,17 @@ class PythonScriptLoader(object):
 	## Text
 	def LoadElementText(self, window, value, parentWindow):
 
-		if value.has_key("fontsize"):
+		if "fontsize" in value:
 			fontSize = value["fontsize"]
 
 			if "LARGE" == fontSize:
 				window.SetFontName(localeInfo.UI_DEF_FONT_LARGE)
 
-		elif value.has_key("fontname"):
+		elif "fontname" in value:
 			fontName = value["fontname"]
 			window.SetFontName(fontName)
 
-		if value.has_key("text_horizontal_align"):
+		if "text_horizontal_align" in value:
 			if "left" == value["text_horizontal_align"]:
 				window.SetHorizontalAlignLeft()
 			elif "center" == value["text_horizontal_align"]:
@@ -3290,7 +3290,7 @@ class PythonScriptLoader(object):
 			elif "right" == value["text_horizontal_align"]:
 				window.SetHorizontalAlignRight()
 
-		if value.has_key("text_vertical_align"):
+		if "text_vertical_align" in value:
 			if "top" == value["text_vertical_align"]:
 				window.SetVerticalAlignTop()
 			elif "center" == value["text_vertical_align"]:
@@ -3298,23 +3298,23 @@ class PythonScriptLoader(object):
 			elif "bottom" == value["text_vertical_align"]:
 				window.SetVerticalAlignBottom()
 
-		if value.has_key("all_align"):
+		if "all_align" in value:
 			window.SetHorizontalAlignCenter()
 			window.SetVerticalAlignCenter()
 			window.SetWindowHorizontalAlignCenter()
 			window.SetWindowVerticalAlignCenter()
 
-		if value.has_key("r") and value.has_key("g") and value.has_key("b"):
+		if "r" in value and "g" in value and "b" in value:
 			window.SetFontColor(float(value["r"]), float(value["g"]), float(value["b"]))
-		elif value.has_key("color"):
+		elif "color" in value:
 			window.SetPackedFontColor(value["color"])
 		else:
 			window.SetFontColor(0.8549, 0.8549, 0.8549)
 
-		if value.has_key("outline"):
+		if "outline" in value:
 			if value["outline"]:
 				window.SetOutline()
-		if True == value.has_key("text"):
+		if True == ("text" in value):
 			window.SetText(value["text"])
 
 		self.LoadDefaultData(window, value, parentWindow)
@@ -3328,16 +3328,16 @@ class PythonScriptLoader(object):
 			return False
 
 
-		if value.has_key("secret_flag"):
+		if "secret_flag" in value:
 			window.SetSecret(value["secret_flag"])
-		if value.has_key("only_number"):
+		if "only_number" in value:
 			if value["only_number"]:
 				window.SetNumberMode()
-		if value.has_key("enable_ime"):
+		if "enable_ime" in value:
 			window.SetIMEFlag(value["enable_ime"])
-		if value.has_key("limit_width"):
+		if "limit_width" in value:
 			window.SetLimitWidth(value["limit_width"])
-		if value.has_key("multi_line"):
+		if "multi_line" in value:
 			if value["multi_line"]:
 				window.SetMultiLine()
 
@@ -3409,7 +3409,7 @@ class PythonScriptLoader(object):
 		if False == self.CheckKeyList(value["name"], value, self.BOX_KEY_LIST):
 			return False
 
-		if True == value.has_key("color"):
+		if True == ("color" in value):
 			window.SetColor(value["color"])
 
 		window.SetSize(int(value["width"]), int(value["height"]))
@@ -3423,7 +3423,7 @@ class PythonScriptLoader(object):
 		if False == self.CheckKeyList(value["name"], value, self.BAR_KEY_LIST):
 			return False
 
-		if True == value.has_key("color"):
+		if True == ("color" in value):
 			window.SetColor(value["color"])
 
 		window.SetSize(int(value["width"]), int(value["height"]))
@@ -3437,7 +3437,7 @@ class PythonScriptLoader(object):
 		if False == self.CheckKeyList(value["name"], value, self.LINE_KEY_LIST):
 			return False
 
-		if True == value.has_key("color"):
+		if True == ("color" in value):
 			window.SetColor(value["color"])
 
 		window.SetSize(int(value["width"]), int(value["height"]))
@@ -3491,7 +3491,7 @@ class PythonScriptLoader(object):
 		if False == self.CheckKeyList(value["name"], value, self.LIST_BOX_KEY_LIST):
 			return False
 
-		if value.has_key("item_align"):
+		if "item_align" in value:
 			window.SetTextCenterAlign(value["item_align"])
 
 		window.SetSize(value["width"], value["height"])
@@ -3509,7 +3509,7 @@ class PythonScriptLoader(object):
 		window.SetSize(value["width"], value["height"])
 		self.LoadDefaultData(window, value, parentWindow)
 
-		if value.has_key("item_align"):
+		if "item_align" in value:
 			window.SetTextCenterAlign(value["item_align"])
 
 		return True
@@ -3521,13 +3521,13 @@ class PythonScriptLoader(object):
 		window.SetSize(value["width"], value["height"])
 		self.LoadDefaultData(window, value, parentWindow)
 
-		if value.has_key("itemsize_x") and value.has_key("itemsize_y"):
+		if "itemsize_x" in value and "itemsize_y" in value:
 			window.SetItemSize(int(value["itemsize_x"]), int(value["itemsize_y"]))
 
-		if value.has_key("itemstep"):
+		if "itemstep" in value:
 			window.SetItemStep(int(value["itemstep"]))
 
-		if value.has_key("viewcount"):
+		if "viewcount" in value:
 			window.SetViewItemCount(int(value["viewcount"]))
 
 		return True

@@ -35,13 +35,13 @@ def LoadMouseButtonSettings():
 		tokens = f.read().split()
 
 	if len(tokens) != 2:
-		raise RuntimeError, "MOUSE_SETTINGS_FILE_ERROR"
+		raise RuntimeError("MOUSE_SETTINGS_FILE_ERROR")
 
 	MOUSE_SETTINGS[0] = int(tokens[0])
 	MOUSE_SETTINGS[1] = int(tokens[1])
 
 def unsigned32(n):
-	return n & 0xFFFFFFFFL
+	return n & 0xFFFFFFFF
 
 #-------------------Giftbox Begin------------------------------
 
@@ -214,7 +214,7 @@ class ExpandedTaskBar(ui.ScriptWindow):
 	
 	def SetTop(self):
 		super(ExpandedTaskBar, self).SetTop()	
-		for button in self.toggleButtonDict.values():
+		for button in list(self.toggleButtonDict.values()):
 			button.SetTop()
 	
 	def Show(self):
@@ -551,17 +551,17 @@ class TaskBar(ui.ScriptWindow):
 		self.RefreshQuickSlot()
 
 	def __RampageGauge_OverIn(self):
-		print "rampage_over_in"
+		print("rampage_over_in")
 		self.rampageGauge2.Show()
 		self.rampageGauge1.Hide()
 
 	def __RampageGauge_OverOut(self):
-		print "rampage_over_out"
+		print("rampage_over_out")
 		self.rampageGauge2.Hide()
 		self.rampageGauge1.Show()
 
 	def __RampageGauge_Click(self):
-		print "rampage_up"
+		print("rampage_up")
 		net.SendChatPacket("/in_game_mall")
 		# gift icon hide when click mall icon
 		self.wndGiftBox.Hide()	
@@ -571,7 +571,7 @@ class TaskBar(ui.ScriptWindow):
 			LoadMouseButtonSettings()
 			(mouseLeftButtonEvent, mouseRightButtonEvent) = GetMouseButtonSettings()
 			if not self.__IsInSafeMouseButtonSettingRange(mouseLeftButtonEvent) or not self.__IsInSafeMouseButtonSettingRange(mouseRightButtonEvent):
-					raise RuntimeError, "INVALID_MOUSE_BUTTON_SETTINGS"
+					raise RuntimeError("INVALID_MOUSE_BUTTON_SETTINGS")
 		except:
 			InitMouseButtonSettings(self.EVENT_MOVE_AND_ATTACK, self.EVENT_CAMERA)
 			(mouseLeftButtonEvent, mouseRightButtonEvent) = GetMouseButtonSettings()
@@ -685,7 +685,7 @@ class TaskBar(ui.ScriptWindow):
 		slotIndex = 0
 
 		for slotWindow in self.quickslot:
-			for i in xrange(QUICK_SLOT_SLOT_COUNT):
+			for i in range(QUICK_SLOT_SLOT_COUNT):
 				(Type, Position) = player.GetLocalQuickSlot(slotIndex)
 
 				if Type == player.SLOT_TYPE_SKILL:
@@ -742,10 +742,10 @@ class TaskBar(ui.ScriptWindow):
 		if 0 != quarterPoint:
 			FullCount = min(4, curPoint / quarterPoint)
 
-		for i in xrange(4):
+		for i in range(4):
 			self.expGauge[i].Hide()
 
-		for i in xrange(FullCount):
+		for i in range(FullCount):
 			self.expGauge[i].SetRenderingRect(0.0, 0.0, 0.0, 0.0)
 			self.expGauge[i].Show()
 
@@ -772,7 +772,7 @@ class TaskBar(ui.ScriptWindow):
 		startNumber = 0
 
 		for slot in self.quickslot:
-			for i in xrange(4):
+			for i in range(4):
 				slotNumber = i + startNumber
 
 				(Type, Position) = player.GetLocalQuickSlot(slotNumber)
@@ -793,7 +793,7 @@ class TaskBar(ui.ScriptWindow):
 					## 자동물약 (#72723, #72724) 특수처리 - 아이템인데도 슬롯에 활성화/비활성화 표시를 위한 작업임 - [hyo]
 					if constInfo.IS_AUTO_POTION(itemIndex):
 						# metinSocket - [0] : 활성화 여부, [1] : 사용한 양, [2] : 최대 용량
-						metinSocket = [player.GetItemMetinSocket(Position, j) for j in xrange(player.METIN_SOCKET_MAX_NUM)]
+						metinSocket = [player.GetItemMetinSocket(Position, j) for j in range(player.METIN_SOCKET_MAX_NUM)]
 						
 						if 0 != int(metinSocket[0]):
 							slot.ActivateSlot(slotNumber)
@@ -927,7 +927,7 @@ class TaskBar(ui.ScriptWindow):
 		## Quick Slot
 		for slotWindow in self.quickslot:
 
-			for i in xrange(QUICK_SLOT_SLOT_COUNT):
+			for i in range(QUICK_SLOT_SLOT_COUNT):
 
 				(Type, Position) = player.GetLocalQuickSlot(slotIndex)
 
@@ -948,7 +948,7 @@ class TaskBar(ui.ScriptWindow):
 		## Quick Slot
 		for slotWindow in self.quickslot:
 
-			for i in xrange(4):
+			for i in range(4):
 
 				(Type, Position) = player.GetLocalQuickSlot(slotIndex)
 
@@ -969,7 +969,7 @@ class TaskBar(ui.ScriptWindow):
 		## Quick Slot
 		for slotWindow in self.quickslot:
 
-			for i in xrange(4):
+			for i in range(4):
 
 				(Type, Position) = player.GetLocalQuickSlot(slotIndex)
 
@@ -1079,7 +1079,7 @@ class TaskBar(ui.ScriptWindow):
 
 			getSkillIndex=player.GetSkillIndex
 			getSkillLevel=player.GetSkillLevel
-			for i in xrange(PAGE_SLOT_COUNT):
+			for i in range(PAGE_SLOT_COUNT):
 
 				skillIndex = getSkillIndex(startNumber+i)
 				skillLevel = getSkillLevel(startNumber+i)

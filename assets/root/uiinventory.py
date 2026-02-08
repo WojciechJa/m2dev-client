@@ -87,7 +87,7 @@ class CostumeWindow(ui.ScriptWindow):
 	def RefreshCostumeSlot(self):
 		getItemVNum=player.GetItemIndex
 		
-		for i in xrange(item.COSTUME_SLOT_COUNT):
+		for i in range(item.COSTUME_SLOT_COUNT):
 			slotNumber = item.COSTUME_SLOT_START + i
 			self.wndEquip.SetItemSlot(slotNumber, getItemVNum(slotNumber), 0)
 
@@ -198,7 +198,7 @@ class BeltInventoryWindow(ui.ScriptWindow):
 				self.wndBeltInventoryLayer.SetPosition(self.wndBeltInventoryLayer.GetWidth() - 5, 0)
 				self.minBtn.SetPosition(self.minBtn.GetWidth() + 3, 15)
 
-			for i in xrange(item.BELT_INVENTORY_SLOT_COUNT):
+			for i in range(item.BELT_INVENTORY_SLOT_COUNT):
 				slotNumber = item.BELT_INVENTORY_SLOT_START + i
 				wndBeltInventorySlot.SetCoverButton(slotNumber,	"d:/ymir work/ui/game/quest/slot_button_01.sub",\
 												"d:/ymir work/ui/game/quest/slot_button_01.sub",\
@@ -222,7 +222,7 @@ class BeltInventoryWindow(ui.ScriptWindow):
 	def RefreshSlot(self):
 		getItemVNum=player.GetItemIndex
 		
-		for i in xrange(item.BELT_INVENTORY_SLOT_COUNT):
+		for i in range(item.BELT_INVENTORY_SLOT_COUNT):
 			slotNumber = item.BELT_INVENTORY_SLOT_START + i
 			self.wndBeltInventorySlot.SetItemSlot(slotNumber, getItemVNum(slotNumber), player.GetItemCount(slotNumber))
 			self.wndBeltInventorySlot.SetAlwaysRenderCoverButton(slotNumber, TRUE)
@@ -442,7 +442,7 @@ class InventoryWindow(ui.ScriptWindow):
  
 		if self.wndBelt:
 			self.isOpenedBeltWindowWhenClosingInventory = self.wndBelt.IsOpeningInventory()		# Was belt inventory open when inventory was closed?
-			print "Is Opening Belt Inven?? ", self.isOpenedBeltWindowWhenClosingInventory
+			print(("Is Opening Belt Inven?? ", self.isOpenedBeltWindowWhenClosingInventory))
 			self.wndBelt.Close()
   
 		if self.dlgPickMoney:
@@ -465,16 +465,16 @@ class InventoryWindow(ui.ScriptWindow):
 		self.RefreshEquipSlotWindow()
 
 	def ClickMallButton(self):
-		print "click_mall_button"
+		print("click_mall_button")
 		net.SendChatPacket("/click_mall")
 
 	# DSSButton
 	def ClickDSSButton(self):
-		print "click_dss_button"
+		print("click_dss_button")
 		self.interface.ToggleDragonSoulWindow()
 
 	def ClickCostumeButton(self):
-		print "Click Costume Button"
+		print("Click Costume Button")
 		if self.wndCostume:
 			if self.wndCostume.IsShow(): 
 				self.wndCostume.Hide()
@@ -527,7 +527,7 @@ class InventoryWindow(ui.ScriptWindow):
 		getItemCount=player.GetItemCount
 		setItemVNum=self.wndItem.SetItemSlot
 		
-		for i in xrange(player.INVENTORY_PAGE_SIZE):
+		for i in range(player.INVENTORY_PAGE_SIZE):
 			slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(i)
 			
 			itemCount = getItemCount(slotNumber)
@@ -544,7 +544,7 @@ class InventoryWindow(ui.ScriptWindow):
 			## Auto-potion special handling (HP: #72723~#72726, SP: #72727~#72730) - Display activation/deactivation in slot even though it's an item - [hyo]
 			if constInfo.IS_AUTO_POTION(itemVnum):
 				# metinSocket - [0]: Activation status, [1]: Amount used, [2]: Maximum capacity
-				metinSocket = [player.GetItemMetinSocket(slotNumber, j) for j in xrange(player.METIN_SOCKET_MAX_NUM)]	
+				metinSocket = [player.GetItemMetinSocket(slotNumber, j) for j in range(player.METIN_SOCKET_MAX_NUM)]	
 				
 				if slotNumber >= player.INVENTORY_PAGE_SIZE * self.inventoryPageIndex:
 					slotNumber -= player.INVENTORY_PAGE_SIZE * self.inventoryPageIndex
@@ -575,7 +575,7 @@ class InventoryWindow(ui.ScriptWindow):
 		getItemVNum=player.GetItemIndex
 		getItemCount=player.GetItemCount
 		setItemVNum=self.wndEquip.SetItemSlot
-		for i in xrange(player.EQUIPMENT_PAGE_COUNT):
+		for i in range(player.EQUIPMENT_PAGE_COUNT):
 			slotNumber = player.EQUIPMENT_SLOT_START + i
 			itemCount = getItemCount(slotNumber)
 			if itemCount <= 1:
@@ -583,13 +583,13 @@ class InventoryWindow(ui.ScriptWindow):
 			setItemVNum(slotNumber, getItemVNum(slotNumber), itemCount)
 
 		if app.ENABLE_NEW_EQUIPMENT_SYSTEM:
-			for i in xrange(player.NEW_EQUIPMENT_SLOT_COUNT):
+			for i in range(player.NEW_EQUIPMENT_SLOT_COUNT):
 				slotNumber = player.NEW_EQUIPMENT_SLOT_START + i
 				itemCount = getItemCount(slotNumber)
 				if itemCount <= 1:
 					itemCount = 0
 				setItemVNum(slotNumber, getItemVNum(slotNumber), itemCount)
-				print "ENABLE_NEW_EQUIPMENT_SYSTEM", slotNumber, itemCount, getItemVNum(slotNumber)
+				print(("ENABLE_NEW_EQUIPMENT_SYSTEM", slotNumber, itemCount, getItemVNum(slotNumber)))
 				
 
 
@@ -993,7 +993,7 @@ class InventoryWindow(ui.ScriptWindow):
 					return TRUE
 			elif "USE_PUT_INTO_BELT_SOCKET" == useType:								
 				dstItemVNum = player.GetItemIndex(dstSlotPos)
-				print "USE_PUT_INTO_BELT_SOCKET", srcItemVNum, dstItemVNum
+				print(("USE_PUT_INTO_BELT_SOCKET", srcItemVNum, dstItemVNum))
 
 				item.SelectItem(dstItemVNum)
 		
@@ -1012,7 +1012,7 @@ class InventoryWindow(ui.ScriptWindow):
 		if item.ITEM_TYPE_WEAPON != item.GetItemType():
 			return False
 
-		for i in xrange(player.METIN_SOCKET_MAX_NUM):
+		for i in range(player.METIN_SOCKET_MAX_NUM):
 			if player.GetItemMetinSocket(dstSlotPos, i) == constInfo.ERROR_METIN_STONE:
 				return True
 
@@ -1028,7 +1028,7 @@ class InventoryWindow(ui.ScriptWindow):
 		if not item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR):	 
 			return False
 
-		for i in xrange(player.METIN_SOCKET_MAX_NUM):
+		for i in range(player.METIN_SOCKET_MAX_NUM):
 			if player.GetItemAttribute(dstSlotPos, i) != 0:
 				return True
 
@@ -1091,7 +1091,7 @@ class InventoryWindow(ui.ScriptWindow):
 			return False
 			
 		attrCount = 0
-		for i in xrange(player.METIN_SOCKET_MAX_NUM):
+		for i in range(player.METIN_SOCKET_MAX_NUM):
 			if player.GetItemAttribute(dstSlotPos, i) != 0:
 				attrCount += 1
 

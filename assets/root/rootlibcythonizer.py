@@ -24,7 +24,7 @@ for m in moduleLst:
 import sourceWriter
 
 sourceFileName = sourceWriter.run(moduleNameLst, 'rootlib')
-print "%s create successful." % sourceFileName
+print(("%s create successful." % sourceFileName))
 
 # not yet implemented.
 #from distutils.dist import Distribution

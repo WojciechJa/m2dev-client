@@ -21,7 +21,7 @@ class Sandbox(object):
 				
 		for allowed_module_name in self.allowed_modules:
 			try:
-				exec 'import {0}'.format(allowed_module_name)
+				exec('import {0}'.format(allowed_module_name))
 			except:
 				# Just now, pass the exception.
 				# (filename could not use this module)
@@ -36,7 +36,7 @@ class Sandbox(object):
 		# set current imported modules None
 		if self.prevent_imported_modules:
 			import types
-			for k, v in old_modules.items():
+			for k, v in list(old_modules.items()):
 				if type(v) == types.ModuleType:
 					if not (k in self.WHITE_LIST or k in self.allowed_modules):
 						sys.modules[k] = None
@@ -49,16 +49,16 @@ class Sandbox(object):
 			with open(filename, 'rb') as f:
 				data = f.read()
 				code = compile(data, filename, 'exec')
-				exec code in dic
-		except Exception, e:
+				exec(code, dic)
+		except Exception as e:
 			sys.stderr.write(e)
 		finally:
 			# Restore original settings.
 			#sys.modules = old_modules# <- This is not effective. I don't know why, but I guess some where got old sys.modules reference and access old one.
-			for k, v in sys.modules.items():
+			for k, v in list(sys.modules.items()):
 				if not k in old_modules:
 					del sys.modules[k]
-			for k, v in old_modules.items():
+			for k, v in list(old_modules.items()):
 				sys.modules[k] = v
 				
 			sys.path = old_path

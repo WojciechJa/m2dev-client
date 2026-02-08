@@ -1,3 +1,4 @@
+# -*- coding: cp949 -*-
 import ui
 import grp
 import chat
@@ -20,7 +21,7 @@ def InsertChatInputSetWindow(wnd):
 	chatInputSetList.append(wnd)
 def RefreshChatMode():
 	global chatInputSetList
-	map(lambda wnd:wnd.OnRefreshChatMode(), chatInputSetList)
+	list([wnd.OnRefreshChatMode() for wnd in chatInputSetList])
 def DestroyChatInputSetWindow():
 	global chatInputSetList
 	chatInputSetList = []
@@ -620,7 +621,7 @@ class ChatWindow(ui.Window):
 			chat.CHAT_TYPE_WHISPER : colorInfo.CHAT_RGB_WHISPER,
 		}
 
-		for colorItem in CHAT_COLOR_DICT.items():
+		for colorItem in list(CHAT_COLOR_DICT.items()):
 			type=colorItem[0]
 			rgb=colorItem[1]
 			chat.SetChatColor(type, rgb[0], rgb[1], rgb[2])

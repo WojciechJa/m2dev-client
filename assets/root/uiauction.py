@@ -41,9 +41,9 @@ class AuctionWindow(ui.ScriptWindow):
 			"REGISTER"			: self.GetChild("Tab_Button_02"),
 			"UNIQUE_AUCTION"	: self.GetChild("Tab_Button_03"),
 		}
-		for page in self.pageWindow.values():
+		for page in list(self.pageWindow.values()):
 			pyScrLoader.LoadScriptFile(page, page.GetScriptFileName())
-		for key, button in self.tabButtonDict.items():
+		for key, button in list(self.tabButtonDict.items()):
 			button.SetEvent(self.SelectPage, key)
 
 		self.__MakeListPage()
@@ -61,7 +61,7 @@ class AuctionWindow(ui.ScriptWindow):
 
 		AUCTION_LINE_COUNT = 10
 
-		for i in xrange(AUCTION_LINE_COUNT):
+		for i in range(AUCTION_LINE_COUNT):
 
 			numberSlotImage = ui.MakeImageBox(page, "d:/ymir work/ui/public/Parameter_Slot_00.sub", 11, yPos)
 			numberSlot = ui.MakeTextLine(numberSlotImage)
@@ -99,7 +99,7 @@ class AuctionWindow(ui.ScriptWindow):
 
 		LINE_COUNT = 3
 
-		for i in xrange(LINE_COUNT):
+		for i in range(LINE_COUNT):
 
 			yPos = 5 + 99*i
 
@@ -133,15 +133,15 @@ class AuctionWindow(ui.ScriptWindow):
 			## Temporary
 
 	def SelectPage(self, arg):
-		for key, btn in self.tabButtonDict.items():
+		for key, btn in list(self.tabButtonDict.items()):
 			if arg != key:
 				btn.SetUp()
-		for key, img in self.tabDict.items():
+		for key, img in list(self.tabDict.items()):
 			if arg == key:
 				img.Show()
 			else:
 				img.Hide()
-		for key, page in self.pageWindow.items():
+		for key, page in list(self.pageWindow.items()):
 			if arg == key:
 				page.Show()
 			else:

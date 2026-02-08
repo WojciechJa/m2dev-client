@@ -46,7 +46,7 @@ class pack_file_iterator(object):
 	def __init__(self, packfile):
 		self.pack_file = packfile
 		
-	def next(self):
+	def __next__(self):
 		tmp = self.pack_file.readline()
 		if tmp:
 			return tmp
@@ -59,7 +59,7 @@ class pack_file(object):
 	def __init__(self, filename, mode = 'rb'):
 		assert mode in ('r', 'rb')
 		if not pack.Exist(filename):
-			raise IOError, 'No file or directory'
+			raise IOError('No file or directory')
 		self.data = pack.Get(filename)
 		if mode == 'r':
 			self.data=_chr(10).join(self.data.split(_chr(13)+_chr(10)))
@@ -108,7 +108,7 @@ def _process_result(code, fqname):
 
 	# execute the code within the module's namespace
 	if not is_module:
-		exec code in module.__dict__
+		exec(code, module.__dict__)
 
 	# fetch from sys.modules instead of returning module directly.
 	# also make module's __name__ agree with fqname, in case
@@ -196,8 +196,8 @@ def exec_add_module_do(mod):
 	global execfile
 	mod.__dict__['execfile'] = execfile
 
-import __builtin__
-__builtin__.__import__ = __pack_import
+import builtins
+builtins.__import__ = __pack_import
 module_do = exec_add_module_do
 
 """
@@ -271,8 +271,8 @@ def ShowException(excTitle):
 
 def RunMainScript(name):
 	try:		
-		execfile(name, __main__.__dict__)
-	except RuntimeError, msg:
+		exec(compile(open(name, "rb").read(), name, 'exec'), __main__.__dict__)
+	except RuntimeError as msg:
 		msg = str(msg)
 
 		import locale

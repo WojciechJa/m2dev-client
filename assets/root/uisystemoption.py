@@ -27,7 +27,7 @@ class OptionDialog(ui.ScriptWindow):
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
-		print " -------------------------------------- DELETE SYSTEM OPTION DIALOG"
+		print(" -------------------------------------- DELETE SYSTEM OPTION DIALOG")
 
 	def __Initialize(self):
 		self.tilingMode = 0
@@ -47,7 +47,7 @@ class OptionDialog(ui.ScriptWindow):
 		self.ClearDictionary()
 
 		self.__Initialize()
-		print " -------------------------------------- DESTROY SYSTEM OPTION DIALOG"
+		print(" -------------------------------------- DESTROY SYSTEM OPTION DIALOG")
 
 	def __Load_LoadScript(self, fileName):
 		try:

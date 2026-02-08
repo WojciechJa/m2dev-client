@@ -33,7 +33,7 @@ def Suffle(src):
 		items = [item for item in src]
 
 		itemCount = len(items)
-		for oldPos in xrange(itemCount):
+		for oldPos in range(itemCount):
 			newPos = app.GetRandom(0, itemCount-1)
 			items[newPos], items[oldPos] = items[oldPos], items[newPos]
 
@@ -128,7 +128,7 @@ class ConnectingDialog(ui.ScriptWindow):
 
 class LoginWindow(ui.ScriptWindow):
 	def __init__(self, stream):
-		print "NEW LOGIN WINDOW  ----------------------------------------------------------------------------"
+		print("NEW LOGIN WINDOW  ----------------------------------------------------------------------------")
 		ui.ScriptWindow.__init__(self)
 		net.SetPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
 		net.SetAccountConnectorHandler(self)
@@ -157,12 +157,12 @@ class LoginWindow(ui.ScriptWindow):
 		net.ClearPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
 		net.SetAccountConnectorHandler(0)
 		ui.ScriptWindow.__del__(self)
-		print "---------------------------------------------------------------------------- DELETE LOGIN WINDOW"
+		print("---------------------------------------------------------------------------- DELETE LOGIN WINDOW")
 
 	def Open(self):
 		ServerStateChecker.Create(self)
 
-		print "LOGIN WINDOW OPEN ----------------------------------------------------------------------------"
+		print("LOGIN WINDOW OPEN ----------------------------------------------------------------------------")
 
 		self.loginFailureMsgDict={
 			#"DEFAULT" : localeInfo.LOGIN_FAILURE_UNKNOWN,
@@ -253,7 +253,7 @@ class LoginWindow(ui.ScriptWindow):
 
 		ServerStateChecker.Initialize(self)
 
-		print "---------------------------------------------------------------------------- CLOSE LOGIN WINDOW "
+		print("---------------------------------------------------------------------------- CLOSE LOGIN WINDOW ")
 		#
 		# Check both since BGM stops if selectMusic is not set. 
 		#
@@ -290,7 +290,7 @@ class LoginWindow(ui.ScriptWindow):
 
 		# VIRTUAL_KEYBOARD_BUG_FIX
 		if self.virtualKeyboard:
-			for keyIndex in xrange(0, VIRTUAL_KEYBOARD_NUM_KEYS+1):
+			for keyIndex in range(0, VIRTUAL_KEYBOARD_NUM_KEYS+1):
 				key = self.GetChild2("key_%d" % keyIndex)
 				if key:
 					key.SetEvent(None)
@@ -320,7 +320,7 @@ class LoginWindow(ui.ScriptWindow):
 			with open("channel.inf", "w") as file:
 				file.write("%d %d %d" % (self.__GetServerID(), self.__GetChannelID(), self.__GetRegionID()))
 		except:
-			print "LoginWindow.__SaveChannelInfo - SaveError"
+			print("LoginWindow.__SaveChannelInfo - SaveError")
 
 	def __LoadChannelInfo(self):
 		try:
@@ -339,7 +339,7 @@ class LoginWindow(ui.ScriptWindow):
 					return regionID, selServerID, selChannelID
 
 		except:
-			print "LoginWindow.__LoadChannelInfo - OpenError"
+			print("LoginWindow.__LoadChannelInfo - OpenError")
 		return -1, -1, -1
 
 	def __ExitGame(self):
@@ -508,7 +508,7 @@ class LoginWindow(ui.ScriptWindow):
 				key.ButtonText.SetFontColor(0, 0, 0)
 				keyIndex += 1
 			
-		for keyIndex in xrange(keyIndex, VIRTUAL_KEYBOARD_NUM_KEYS+1):
+		for keyIndex in range(keyIndex, VIRTUAL_KEYBOARD_NUM_KEYS+1):
 			key = self.GetChild2("key_%d" % keyIndex)
 			if key:
 				key.SetEvent(lambda x=' ': self.__VirtualKeyboard_PressKey(x))
@@ -683,9 +683,9 @@ class LoginWindow(ui.ScriptWindow):
 
 		try:
 			loginInfo={}
-			execfile(loginInfoFileName, loginInfo)
+			exec(compile(open(loginInfoFileName, "rb").read(), loginInfoFileName, 'exec'), loginInfo)
 		except IOError:
-			print(\
+			print((\
 				"For automatic login, please create" + loginInfoFileName + "file\n"\
 				"\n"\
 				"Contents:\n"\
@@ -698,7 +698,7 @@ class LoginWindow(ui.ScriptWindow):
 				"autoLogin=enable auto login\n"
 				"autoSelect=enable auto select\n"
 				"locale=(ymir) works as ymir for LC_Ymir. Works as korea if not specified\n"
-			);
+			));
 
 		id=loginInfo.get("id", "")
 		pwd=loginInfo.get("pwd", "")
@@ -740,9 +740,9 @@ class LoginWindow(ui.ScriptWindow):
 		if isAutoLogin:
 			self.Connect(id, pwd)
 			
-			print "=================================================================================="
-			print "Auto login: %s - %s:%d %s" % (loginInfoFileName, addr, port, id)
-			print "=================================================================================="
+			print("==================================================================================")
+			print(("Auto login: %s - %s:%d %s" % (loginInfoFileName, addr, port, id)))
+			print("==================================================================================")
 
 		
 	def PopupDisplayMessage(self, msg):
@@ -801,7 +801,7 @@ class LoginWindow(ui.ScriptWindow):
 			return -1
 
 		retServerIndex = 0
-		for eachServerID, regionDataDict in regionDict.items():
+		for eachServerID, regionDataDict in list(regionDict.items()):
 			if eachServerID == targetServerID:
 				return retServerIndex
 
@@ -888,7 +888,7 @@ class LoginWindow(ui.ScriptWindow):
 	def __RefreshServerList(self):
 		regionID = self.__GetRegionID()
 		
-		if not serverInfo.REGION_DICT.has_key(regionID):
+		if regionID not in serverInfo.REGION_DICT:
 			return
 
 		self.serverList.ClearItem()
@@ -897,7 +897,7 @@ class LoginWindow(ui.ScriptWindow):
 
 		# SEVER_LIST_BUG_FIX
 		visible_index = 1
-		for id, regionDataDict in regionDict.items():
+		for id, regionDataDict in list(regionDict.items()):
 			name = regionDataDict.get("name", "noname")
 			try:
 				server_id = serverInfo.SERVER_ID_DICT[id]
@@ -920,11 +920,11 @@ class LoginWindow(ui.ScriptWindow):
 		try:
 			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
 		except:
-			print " __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID)
+			print((" __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID)))
 			return
 
 		ServerStateChecker.Initialize();
-		for id, channelDataDict in channelDict.items():
+		for id, channelDataDict in list(channelDict.items()):
 			key=channelDataDict["key"]
 			ip=channelDataDict["ip"]
 			udp_port=channelDataDict["udp_port"]
@@ -943,10 +943,10 @@ class LoginWindow(ui.ScriptWindow):
 		try:
 			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
 		except:
-			print " __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID)
+			print((" __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID)))
 			return
 
-		for channelID, channelDataDict in channelDict.items():
+		for channelID, channelDataDict in list(channelDict.items()):
 			channelName = channelDataDict["name"]
 			channelState = channelDataDict["state"]
 			self.channelList.InsertItem(channelID, " %s %s" % (channelName, channelState))
@@ -981,18 +981,18 @@ class LoginWindow(ui.ScriptWindow):
 			exception.Abort(localeInfo.CHANNEL_NOT_FIND_INFO)
 
 	def __OnClickExitServerButton(self):
-		print "exit server"
+		print("exit server")
 		self.__OpenLoginBoard()
 
 	def __OnClickSelectRegionButton(self):
 		regionID = self.__GetRegionID()
 		serverID = self.__GetServerID()
 
-		if (not serverInfo.REGION_DICT.has_key(regionID)):
+		if (regionID not in serverInfo.REGION_DICT):
 			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
 			return
 
-		if (not serverInfo.REGION_DICT[regionID].has_key(serverID)):
+		if (serverID not in serverInfo.REGION_DICT[regionID]):
 			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
 			return		
 
@@ -1009,11 +1009,11 @@ class LoginWindow(ui.ScriptWindow):
 		serverID = self.__GetServerID()
 		channelID = self.__GetChannelID()
 
-		if (not serverInfo.REGION_DICT.has_key(regionID)):
+		if (regionID not in serverInfo.REGION_DICT):
 			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
 			return
 
-		if (not serverInfo.REGION_DICT[regionID].has_key(serverID)):
+		if (serverID not in serverInfo.REGION_DICT[regionID]):
 			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
 			return
 
@@ -1040,7 +1040,7 @@ class LoginWindow(ui.ScriptWindow):
 			channelName = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["name"]
 			addrKey = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["key"]
 		except:
-			print " ERROR __OnClickSelectServerButton(%d, %d, %d)" % (regionID, serverID, channelID)
+			print((" ERROR __OnClickSelectServerButton(%d, %d, %d)" % (regionID, serverID, channelID)))
 			serverName = localeInfo.CHANNEL_EMPTY_SERVER
 			channelName = localeInfo.CHANNEL_NORMAL % channelID
 

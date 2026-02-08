@@ -229,7 +229,7 @@ def __RegisterSharedEmotionAnis(mode, path):
 	chrmgr.SetPathName(path)
 	chrmgr.RegisterMotionMode(mode)
 
-	for key, val in ANI_DICT.items():
+	for key, val in list(ANI_DICT.items()):
 		chrmgr.RegisterMotionData(mode, key, val)
 
 def RegisterEmotionAnis(path):
@@ -246,6 +246,6 @@ def RegisterEmotionAnis(path):
 	chrmgr.RegisterMotionData(chr.MOTION_MODE_WEDDING_DRESS, chr.MOTION_RUN, "walk.msa")
 
 def RegisterEmotionIcons():
-	for key, val in ICON_DICT.items():
+	for key, val in list(ICON_DICT.items()):
 		player.RegisterEmotionIcon(key, val)
 

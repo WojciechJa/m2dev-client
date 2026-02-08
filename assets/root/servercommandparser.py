@@ -1,3 +1,4 @@
+# -*- coding: cp949 -*-
 import net
 import background
 import stringCommander
@@ -21,16 +22,16 @@ class ServerCommandParser(object):
 		}
 
 		self.serverCommander=stringCommander.Analyzer()
-		for serverCommandItem in serverCommandList.items():
+		for serverCommandItem in list(serverCommandList.items()):
 			self.serverCommander.SAFE_RegisterCallBack(
 				serverCommandItem[0], serverCommandItem[1]
 			)
 
 	def BINARY_ServerCommand_Run(self, line):
 		try:
-			print " BINARY_ServerCommand_Reserve", line
+			print((" BINARY_ServerCommand_Reserve", line))
 			return self.serverCommander.Run(line)
-		except RuntimeError, msg:
+		except RuntimeError as msg:
 			import dbg
 			dbg.TraceError(msg)
 			return 0

@@ -313,7 +313,7 @@ class SafeboxWindow(ui.ScriptWindow):
 
 		text = "I"
 		pos = -int(float(pageCount-1)/2 * 52)
-		for i in xrange(pageCount):
+		for i in range(pageCount):
 			button = ui.RadioButton()
 			button.SetParent(self)
 			button.SetUpVisual("d:/ymir work/ui/game/windows/tab_button_middle_01.sub")
@@ -367,7 +367,7 @@ class SafeboxWindow(ui.ScriptWindow):
 		getItemCount=safebox.GetItemCount
 		setItemID=self.wndItem.SetItemSlot
 
-		for i in xrange(safebox.SAFEBOX_PAGE_SIZE):
+		for i in range(safebox.SAFEBOX_PAGE_SIZE):
 			slotIndex = self.__LocalPosToGlobalPos(i)
 			itemCount = getItemCount(slotIndex)
 			if itemCount <= 1:
@@ -410,7 +410,7 @@ class SafeboxWindow(ui.ScriptWindow):
 				itemVnum = player.GetItemIndex(attachedSlotPos)
 
 				if constInfo.IS_AUTO_POTION(itemVnum):
-					metinSocket = [player.GetItemMetinSocket(attachedSlotPos, j) for j in xrange(player.METIN_SOCKET_MAX_NUM)]
+					metinSocket = [player.GetItemMetinSocket(attachedSlotPos, j) for j in range(player.METIN_SOCKET_MAX_NUM)]
 					isActivated = (0 != int(metinSocket[0]))
 
 					if isActivated:
@@ -597,7 +597,7 @@ class MallWindow(ui.ScriptWindow):
 		getItemCount=safebox.GetMallItemCount
 		setItemID=self.wndItem.SetItemSlot
 
-		for i in xrange(safebox.GetMallSize()):
+		for i in range(safebox.GetMallSize()):
 			itemID = getItemID(i)
 			itemCount = getItemCount(i)
 			if itemCount <= 1:

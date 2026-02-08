@@ -83,7 +83,7 @@ class QuestCurtain(ui.Window):
 		self.TopBar.SetPosition(0, -self.BarHeight-1)
 		self.BottomBar.SetPosition(0, wndMgr.GetScreenHeight()+1)
 		for OnDoneEvent in QuestCurtain.OnDoneEventList:
-			apply(OnDoneEvent,(self,))
+			OnDoneEvent(*(self,))
 		QuestCurtain.OnDoneEventList = []
 
 	def OnUpdate(self):
@@ -118,7 +118,7 @@ class EventCurtain(ui.Bar):
 	STATE_IN = 2
 
 	def __init__(self, index):
-		print "NEW EVENT CURTAIN  ----------------------------------------------------------------------------"
+		print("NEW EVENT CURTAIN  ----------------------------------------------------------------------------")
 		ui.Bar.__init__(self, "CURTAIN")
 		self.SetWindowName("EventCurtain")
 		self.AddFlag("float")
@@ -133,7 +133,7 @@ class EventCurtain(ui.Bar):
 		self.eventIndex = index
 
 	def __del__(self):
-		print "---------------------------------------------------------------------------- DELETE EVENT CURTAIN"
+		print("---------------------------------------------------------------------------- DELETE EVENT CURTAIN")
 		ui.Bar.__del__(self)
 
 	def SetAlpha(self, alpha):
@@ -416,7 +416,7 @@ class QuestDialog(ui.ScriptWindow):
 
 	def AddOnCloseEvent(self,f):
 		if self.OnCloseEvent:
-			self.OnCloseEvent = lambda z=[self.OnCloseEvent, f]:map(apply,z)
+			self.OnCloseEvent = lambda z=[self.OnCloseEvent, f]:list(map(apply,z))
 		else:
 			self.OnCloseEvent = f
 
@@ -476,7 +476,7 @@ class QuestDialog(ui.ScriptWindow):
 		if not self.board:
 			return
 
-		self.btnAnswer = [self.MakeEachButton(i) for i in xrange (n)]
+		self.btnAnswer = [self.MakeEachButton(i) for i in range (n)]
 			
 		import localeInfo
 		self.prevbutton = self.MakeNextPrevPageButton()
@@ -747,7 +747,7 @@ class QuestDialog(ui.ScriptWindow):
 
 			import grpText
 			lineCount = grpText.GetSplitingTextLineCount(tempDesc, 25)
-			for i in xrange(lineCount):
+			for i in range(lineCount):
 				desc += grpText.GetSplitingTextLine(tempDesc, 25, i) + "/"
 
 			desc = desc[:-1]

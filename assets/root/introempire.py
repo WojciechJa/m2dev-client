@@ -40,7 +40,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 			event.RenderEventSet(self.descIndex)
 
 	def __init__(self, stream):
-		print "NEW EMPIRE WINDOW  ----------------------------------------------------------------------------"
+		print("NEW EMPIRE WINDOW  ----------------------------------------------------------------------------")
 		ui.ScriptWindow.__init__(self)
 		net.SetPhaseWindow(net.PHASE_WINDOW_EMPIRE, self)
 
@@ -61,10 +61,10 @@ class SelectEmpireWindow(ui.ScriptWindow):
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
 		net.SetPhaseWindow(net.PHASE_WINDOW_EMPIRE, 0)
-		print "---------------------------------------------------------------------------- DELETE EMPIRE WINDOW"
+		print("---------------------------------------------------------------------------- DELETE EMPIRE WINDOW")
 
 	def Close(self):
-		print "---------------------------------------------------------------------------- CLOSE EMPIRE WINDOW"		
+		print("---------------------------------------------------------------------------- CLOSE EMPIRE WINDOW")		
 
 		self.ClearDictionary()
 		self.leftButton = None
@@ -83,7 +83,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 		event.Destroy()
 
 	def Open(self):
-		print "OPEN EMPIRE WINDOW ----------------------------------------------------------------------------"
+		print("OPEN EMPIRE WINDOW ----------------------------------------------------------------------------")
 
 		self.SetSize(wndMgr.GetScreenWidth(), wndMgr.GetScreenHeight())
 		self.SetWindowName("SelectEmpireWindow")
@@ -104,7 +104,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 		app.ShowCursor()
 
 	def __CreateButtons(self):
-		for key, img in self.empireArea.items():
+		for key, img in list(self.empireArea.items()):
 
 			img.SetAlpha(0.0)
 
@@ -128,7 +128,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 			self.empireAreaDestAlpha[arg] = 0.0
 
 	def OnSelectEmpire(self, arg):
-		for key in self.empireArea.keys():
+		for key in list(self.empireArea.keys()):
 			self.empireAreaDestAlpha[key] = 0.0
 			self.empireAreaFlagDestAlpha[key] = 0.0
 			self.empireFlagDestAlpha[key] = 0.0
@@ -138,7 +138,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 		self.empireID = arg
 		
 		event.ClearEventSet(self.descIndex)
-		if self.EMPIRE_DESCRIPTION_TEXT_FILE_NAME.has_key(arg):
+		if arg in self.EMPIRE_DESCRIPTION_TEXT_FILE_NAME:
 			self.descIndex = event.RegisterEventSet(self.EMPIRE_DESCRIPTION_TEXT_FILE_NAME[arg])
 
 			if app.IsRTL():
@@ -195,9 +195,9 @@ class SelectEmpireWindow(ui.ScriptWindow):
 		self.exitButton.SetEvent(ui.__mem_func__(self.ClickExitButton))
 		self.leftButton.SetEvent(ui.__mem_func__(self.ClickLeftButton))
 		self.rightButton.SetEvent(ui.__mem_func__(self.ClickRightButton))
-		for flag in self.empireAreaFlag.values():
+		for flag in list(self.empireAreaFlag.values()):
 			flag.SetAlpha(0.0)
-		for flag in self.empireFlag.values():
+		for flag in list(self.empireFlag.values()):
 			flag.SetAlpha(0.0)
 
 		return 1
@@ -233,7 +233,7 @@ class SelectEmpireWindow(ui.ScriptWindow):
 		self.__UpdateAlpha(self.empireFlag, self.empireFlagCurAlpha, self.empireFlagDestAlpha)
 
 	def __UpdateAlpha(self, dict, curAlphaDict, destAlphaDict):
-		for key, img in dict.items():
+		for key, img in list(dict.items()):
 
 			curAlpha = curAlphaDict[key]
 			destAlpha = destAlphaDict[key]

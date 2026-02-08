@@ -80,7 +80,7 @@ class SelectItemWindow(ui.ScriptWindow):
 		getItemCount=player.GetItemCount
 		setItemVNum=self.itemSlot.SetItemSlot
 
-		for i in xrange(player.INVENTORY_PAGE_SIZE*2):
+		for i in range(player.INVENTORY_PAGE_SIZE*2):
 			slotNumber = i
 
 			itemVNum = getItemVNum(slotNumber)
@@ -112,7 +112,7 @@ class SelectItemWindow(ui.ScriptWindow):
 				lineCount += 1
 			self.SetTableSize(lineCount)
 
-		for selectWndPos, inventoryPos in self.inventorySlotPosDict.items():
+		for selectWndPos, inventoryPos in list(self.inventorySlotPosDict.items()):
 			itemVNum = getItemVNum(inventoryPos)
 			itemCount = getItemCount(inventoryPos)
 

@@ -79,9 +79,9 @@ class HorseImage(ui.ExpandedImageBox):
 
 	FILE_DICT = {
 		00 : FILE_PATH+"00.dds",
-		01 : FILE_PATH+"00.dds",
-		02 : FILE_PATH+"00.dds",
-		03 : FILE_PATH+"00.dds",
+		0o1 : FILE_PATH+"00.dds",
+		0o2 : FILE_PATH+"00.dds",
+		0o3 : FILE_PATH+"00.dds",
 		10 : FILE_PATH+"10.dds",
 		11 : FILE_PATH+"11.dds",
 		12 : FILE_PATH+"12.dds",
@@ -119,7 +119,7 @@ class HorseImage(ui.ExpandedImageBox):
 				grade = self.__GetHorseGrade(level)
 				self.__AppendText(localeInfo.LEVEL_LIST[grade])
 			except IndexError:
-				print "HorseImage.SetState(level=%d, health=%d, battery=%d) - Unknown Index" % (level, health, battery)
+				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - Unknown Index" % (level, health, battery)))
 				return
 
 			try:
@@ -127,7 +127,7 @@ class HorseImage(ui.ExpandedImageBox):
 				if len(healthName)>0:
 					self.__AppendText(healthName)
 			except IndexError:
-				print "HorseImage.SetState(level=%d, health=%d, battery=%d) - Unknown Index" % (level, health, battery)
+				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - Unknown Index" % (level, health, battery)))
 				return
 
 			if health>0:
@@ -137,12 +137,12 @@ class HorseImage(ui.ExpandedImageBox):
 			try:
 				fileName=self.FILE_DICT[health*10+battery]
 			except KeyError:
-				print "HorseImage.SetState(level=%d, health=%d, battery=%d) - KeyError" % (level, health, battery)
+				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - KeyError" % (level, health, battery)))
 
 			try:
 				self.LoadImage(fileName)
 			except:
-				print "HorseImage.SetState(level=%d, health=%d, battery=%d) - LoadError %s" % (level, health, battery, fileName)
+				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - LoadError %s" % (level, health, battery, fileName)))
 
 		self.SetScale(0.7, 0.7)
 
@@ -207,7 +207,7 @@ class AutoPotionImage(ui.ExpandedImageBox):
 		self.__Refresh()
 
 	def __Refresh(self):
-		print "__Refresh"
+		print("__Refresh")
 	
 		isActivated, currentAmount, totalAmount, slotIndex = player.GetAutoPotionInfo(self.potionType)
 		
@@ -225,7 +225,7 @@ class AutoPotionImage(ui.ExpandedImageBox):
 		fmt = self.filePath + "%.2d.dds"
 		fileName = fmt % grade
 		
-		print self.potionType, amountPercent, fileName
+		print((self.potionType, amountPercent, fileName))
 
 		try:
 			self.LoadImage(fileName)
@@ -443,7 +443,7 @@ class AffectShower(ui.Window):
 
 	def ClearAffects(self): ## ��ų ����Ʈ�� ���۴ϴ�.
 		self.living_affectImageDict={}
-		for key, image in self.affectImageDict.items():
+		for key, image in list(self.affectImageDict.items()):
 			if not image.IsSkillAffect():
 				self.living_affectImageDict[key] = image
 		self.affectImageDict = self.living_affectImageDict
@@ -451,7 +451,7 @@ class AffectShower(ui.Window):
 
 	def BINARY_NEW_AddAffect(self, type, pointIdx, value, duration):
 
-		print "BINARY_NEW_AddAffect", type, pointIdx, value, duration
+		print(("BINARY_NEW_AddAffect", type, pointIdx, value, duration))
 
 		if type < 500:
 			return
@@ -461,10 +461,10 @@ class AffectShower(ui.Window):
 		else:
 			affect = type
 
-		if self.affectImageDict.has_key(affect):
+		if affect in self.affectImageDict:
 			return
 
-		if not self.AFFECT_DATA_DICT.has_key(affect):
+		if affect not in self.AFFECT_DATA_DICT:
 			return
 
 		## ����� ��ȣ, ������ ������ Duration �� 0 ���� �����Ѵ�.
@@ -507,8 +507,8 @@ class AffectShower(ui.Window):
 				self.affectImageDict[affect] = image
 				self.__ArrangeImageList()
 				
-			except Exception, e:
-				print "except Aff auto potion affect ", e
+			except Exception as e:
+				print(("except Aff auto potion affect ", e))
 				pass				
 			
 		else:
@@ -516,7 +516,7 @@ class AffectShower(ui.Window):
 				description = description(float(value))
 
 			try:
-				print "Add affect %s" % affect
+				print(("Add affect %s" % affect))
 				image = AffectImage()
 				image.SetParent(self)
 				image.LoadImage(filename)
@@ -541,8 +541,8 @@ class AffectShower(ui.Window):
 				image.Show()
 				self.affectImageDict[affect] = image
 				self.__ArrangeImageList()
-			except Exception, e:
-				print "except Aff affect ", e
+			except Exception as e:
+				print(("except Aff affect ", e))
 				pass
 
 	def BINARY_NEW_RemoveAffect(self, type, pointIdx):
@@ -551,7 +551,7 @@ class AffectShower(ui.Window):
 		else:
 			affect = type
 	
-		print "Remove Affect %s %s" % ( type , pointIdx )
+		print(("Remove Affect %s %s" % ( type , pointIdx )))
 		self.__RemoveAffect(affect)
 		self.__ArrangeImageList()
 
@@ -606,7 +606,7 @@ class AffectShower(ui.Window):
 
 	def __AppendAffect(self, affect):
 
-		if self.affectImageDict.has_key(affect):
+		if affect in self.affectImageDict:
 			return
 
 		try:
@@ -644,11 +644,11 @@ class AffectShower(ui.Window):
 			self.autoPotionImageHP.Hide()
 		"""
 			
-		if not self.affectImageDict.has_key(affect):
-			print "__RemoveAffect %s ( No Affect )" % affect
+		if affect not in self.affectImageDict:
+			print(("__RemoveAffect %s ( No Affect )" % affect))
 			return
 
-		print "__RemoveAffect %s ( Affect )" % affect
+		print(("__RemoveAffect %s ( Affect )" % affect))
 		del self.affectImageDict[affect]
 		
 		self.__ArrangeImageList()
@@ -674,7 +674,7 @@ class AffectShower(ui.Window):
 			self.horseImage.SetPosition(xPos, 0)
 			xPos += self.IMAGE_STEP
 
-		for image in self.affectImageDict.values():
+		for image in list(self.affectImageDict.values()):
 			image.SetPosition(xPos, 0)
 			xPos += self.IMAGE_STEP
 
@@ -684,13 +684,13 @@ class AffectShower(ui.Window):
 			#if 0 < app.GetGlobalTime():
 				self.lastUpdateTime = app.GetGlobalTime()
 
-				for image in self.affectImageDict.values():
+				for image in list(self.affectImageDict.values()):
 					if image.GetAffect() == chr.NEW_AFFECT_AUTO_HP_RECOVERY or image.GetAffect() == chr.NEW_AFFECT_AUTO_SP_RECOVERY:
 						image.UpdateAutoPotionDescription()
 						continue
 						
 					if not image.IsSkillAffect():
 						image.UpdateDescription()
-		except Exception, e:
-			print "AffectShower::OnUpdate error : ", e
+		except Exception as e:
+			print(("AffectShower::OnUpdate error : ", e))
 

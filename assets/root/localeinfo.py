@@ -102,7 +102,7 @@ def LoadLocaleFile(srcFileName, localeDict):
 				else:
 					localeDict[tokens[0]] = tokens[1]
 			else:
-				raise RuntimeError, "Unknown TokenSize"
+				raise RuntimeError("Unknown TokenSize")
 
 			lineIndex += 1
 		except:
@@ -115,7 +115,7 @@ try:
     currentLocalePath = app.GetLocalePath()
     if not app.LoadLocaleData(currentLocalePath):
         dbg.TraceError("localeInfo: Failed to load C++ locale data from %s" % currentLocalePath)
-except Exception, e:
+except Exception as e:
     dbg.TraceError("localeInfo: Error loading C++ locale data: %s" % str(e))
 
 # Option pvp messages

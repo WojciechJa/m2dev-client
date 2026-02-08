@@ -63,7 +63,7 @@ class LocaleRefreshHelper:
 		import localeInfo
 
 		refreshCount = 0
-		for element, localeKey in elementMap.items():
+		for element, localeKey in list(elementMap.items()):
 			try:
 				# Try uiScriptLocale first, then localeInfo
 				if hasattr(uiScriptLocale, localeKey):
@@ -108,7 +108,7 @@ class LocaleRefreshHelper:
 		module = localeInfo if localeModule == "localeInfo" else uiScriptLocale
 		newDict = {}
 
-		for key, localeKey in targetDict.items():
+		for key, localeKey in list(targetDict.items()):
 			if hasattr(module, localeKey):
 				newDict[key] = getattr(module, localeKey)
 			else:
@@ -124,7 +124,7 @@ class LocaleRefreshHelper:
 		# Execute the UI script to get its data
 		scriptData = {}
 		try:
-			execfile(scriptPath, scriptData)
+			exec(compile(open(scriptPath, "rb").read(), scriptPath, 'exec'), scriptData)
 			self.scriptCache[scriptPath] = scriptData
 		except Exception as e:
 			dbg.TraceError("LocaleRefreshHelper: Failed to execute script %s: %s" % (scriptPath, str(e)))

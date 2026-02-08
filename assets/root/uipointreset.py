@@ -1,3 +1,4 @@
+# -*- coding: cp949 -*-
 import net
 
 import ui

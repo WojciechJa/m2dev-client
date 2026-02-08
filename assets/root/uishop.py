@@ -1,3 +1,4 @@
+# -*- coding: cp949 -*-
 import net
 import player
 import item
@@ -37,7 +38,7 @@ class ShopDialog(ui.ScriptWindow):
 		getItemID=shop.GetItemID
 		getItemCount=shop.GetItemCount
 		setItemID=self.itemSlotWindow.SetItemSlot
-		for i in xrange(shop.SHOP_SLOT_COUNT):
+		for i in range(shop.SHOP_SLOT_COUNT):
 			idx = self.__GetRealIndex(i)
 			itemCount = getItemCount(idx)
 			if itemCount <= 1:

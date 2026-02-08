@@ -1,3 +1,4 @@
+# -*- coding: cp949 -*-
 import ui
 import grp
 import app

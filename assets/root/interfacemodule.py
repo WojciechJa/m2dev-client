@@ -351,11 +351,11 @@ class Interface(object):
 			self.dlgWhisperWithoutTarget.Destroy()
 			del self.dlgWhisperWithoutTarget
 
-		if uiQuest.QuestDialog.__dict__.has_key("QuestCurtain"):
+		if "QuestCurtain" in uiQuest.QuestDialog.__dict__:
 			uiQuest.QuestDialog.QuestCurtain.Close()
 
 		if self.wndQuestWindow:
-			for key, eachQuestWindow in self.wndQuestWindow.items():
+			for key, eachQuestWindow in list(self.wndQuestWindow.items()):
 				eachQuestWindow.nextCurtainMode = -1
 				eachQuestWindow.CloseSelf()
 				eachQuestWindow = None
@@ -461,11 +461,11 @@ class Interface(object):
 			btn.SetEvent(0)
 		for btn in self.whisperButtonList:
 			btn.SetEvent(0)
-		for dlg in self.whisperDialogDict.itervalues():
+		for dlg in list(self.whisperDialogDict.values()):
 			dlg.Destroy()
-		for brd in self.guildScoreBoardDict.itervalues():
+		for brd in list(self.guildScoreBoardDict.values()):
 			brd.Destroy()
-		for dlg in self.equipmentDialogDict.itervalues():
+		for dlg in list(self.equipmentDialogDict.values()):
 			dlg.Destroy()
 
 		# ITEM_MALL
@@ -773,7 +773,7 @@ class Interface(object):
 
 		key = uiGuild.GetGVGKey(guildSelf, guildOpp)
 
-		if not self.guildScoreBoardDict.has_key(key):
+		if key not in self.guildScoreBoardDict:
 			return
 
 		self.guildScoreBoardDict[key].Destroy()
@@ -783,7 +783,7 @@ class Interface(object):
 	def UpdateMemberCount(self, gulidID1, memberCount1, guildID2, memberCount2):
 		key = uiGuild.GetGVGKey(gulidID1, guildID2)
 
-		if not self.guildScoreBoardDict.has_key(key):
+		if key not in self.guildScoreBoardDict:
 			return
 
 		self.guildScoreBoardDict[key].UpdateMemberCount(gulidID1, memberCount1, guildID2, memberCount2)
@@ -791,7 +791,7 @@ class Interface(object):
 
 	def OnRecvGuildWarPoint(self, gainGuildID, opponentGuildID, point):
 		key = uiGuild.GetGVGKey(gainGuildID, opponentGuildID)
-		if not self.guildScoreBoardDict.has_key(key):
+		if key not in self.guildScoreBoardDict:
 			return
 
 		guildBoard = self.guildScoreBoardDict[key]
@@ -1125,7 +1125,7 @@ class Interface(object):
 	def SucceedCubeWork(self, itemVnum, count):
 		self.wndCube.Clear()
 
-		print "Cube crafting successful! [%d:%d]" % (itemVnum, count)
+		print(("Cube crafting successful! [%d:%d]" % (itemVnum, count)))
 
 		if 0: # Skip showing result message
 			self.wndCubeResult.SetPosition(*self.wndCube.GetGlobalPosition())
@@ -1154,8 +1154,8 @@ class Interface(object):
 			hideWindows += self.wndDragonSoul,\
 						self.wndDragonSoulRefine,
 
-		hideWindows = filter(lambda x:x.IsShow(), hideWindows)
-		map(lambda x:x.Hide(), hideWindows)
+		hideWindows = [x for x in hideWindows if x.IsShow()]
+		list([x.Hide() for x in hideWindows])
 		import sys
 
 		self.HideAllQuestButton()
@@ -1168,7 +1168,7 @@ class Interface(object):
 
 	def __ShowWindows(self, wnds):
 		import sys
-		map(lambda x:x.Show(), wnds)
+		list([x.Show() for x in wnds])
 		global IsQBHide
 		if not IsQBHide:
 			self.ShowAllQuestButton()
@@ -1230,7 +1230,7 @@ class Interface(object):
 
 	def DisappearPrivateShop(self, vid):
 
-		if not self.privateShopAdvertisementBoardDict.has_key(vid):
+		if vid not in self.privateShopAdvertisementBoardDict:
 			return
 
 		del self.privateShopAdvertisementBoardDict[vid]
@@ -1417,7 +1417,7 @@ class Interface(object):
 		if 0 != btn:
 			self.__DestroyWhisperButton(btn)
 
-		elif self.whisperDialogDict.has_key(name):
+		elif name in self.whisperDialogDict:
 			oldDialog = self.whisperDialogDict[name]
 			oldDialog.Destroy()
 			del self.whisperDialogDict[name]
@@ -1429,7 +1429,7 @@ class Interface(object):
 
 	## Opens whisper window directly with name when "1:1 Chat" is clicked in character menu
 	def OpenWhisperDialog(self, name):
-		if not self.whisperDialogDict.has_key(name):
+		if name not in self.whisperDialogDict:
 			dlg = self.__MakeWhisperDialog(name)
 			dlg.OpenWithTarget(name)
 			dlg.chatLine.SetFocus()
@@ -1442,7 +1442,7 @@ class Interface(object):
 
 	## Shows button when receiving message from another character
 	def RecvWhisper(self, name):
-		if not self.whisperDialogDict.has_key(name):
+		if name not in self.whisperDialogDict:
 			btn = self.__FindWhisperButton(name)
 			if 0 == btn:
 				btn = self.__MakeWhisperButton(name)
@@ -1576,19 +1576,19 @@ class Interface(object):
 			btn.Show()
 
 	def __CheckGameMaster(self, name):
-		if not self.listGMName.has_key(name):
+		if name not in self.listGMName:
 			return
-		if self.whisperDialogDict.has_key(name):
+		if name in self.whisperDialogDict:
 			dlg = self.whisperDialogDict[name]
 			dlg.SetGameMasterLook()
 
 	def RegisterGameMasterName(self, name):
-		if self.listGMName.has_key(name):
+		if name in self.listGMName:
 			return
 		self.listGMName[name] = "GM"
 
 	def IsGameMasterName(self, name):
-		if self.listGMName.has_key(name):
+		if name in self.listGMName:
 			return True
 		else:
 			return False

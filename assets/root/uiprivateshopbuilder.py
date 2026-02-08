@@ -50,11 +50,11 @@ def GetPrivateShopItemPrice(itemVNum):
 		return 0
 		
 def UpdateADBoard():	
-	for key in g_privateShopAdvertisementBoardDict.keys():
+	for key in list(g_privateShopAdvertisementBoardDict.keys()):
 		g_privateShopAdvertisementBoardDict[key].Show()
 		
 def DeleteADBoard(vid):
-	if not g_privateShopAdvertisementBoardDict.has_key(vid):
+	if vid not in g_privateShopAdvertisementBoardDict:
 		return
 			
 	del g_privateShopAdvertisementBoardDict[vid]
@@ -105,7 +105,7 @@ class PrivateShopAdvertisementBoard(ui.ThinBoard):
 			self.SetPosition(x - self.GetWidth()/2, y - self.GetHeight()/2)
 		
 		else:
-			for key in g_privateShopAdvertisementBoardDict.keys():
+			for key in list(g_privateShopAdvertisementBoardDict.keys()):
 				if  player.GetMainCharacterIndex() == key:  # When the private shop is visible and closed, the player's own shop ID changes.
 					g_privateShopAdvertisementBoardDict[key].Show() 	
 					x, y = chr.GetProjectPosition(player.GetMainCharacterIndex(), 220)
@@ -202,9 +202,9 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		setitemVNum=self.itemSlot.SetItemSlot
 		delItem=self.itemSlot.ClearSlot
 
-		for i in xrange(shop.SHOP_SLOT_COUNT):
+		for i in range(shop.SHOP_SLOT_COUNT):
 
-			if not self.itemStock.has_key(i):
+			if i not in self.itemStock:
 				delItem(i)
 				continue
 
@@ -292,7 +292,7 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		sourceSlotPos = self.priceInputBoard.sourceSlotPos
 		targetSlotPos = self.priceInputBoard.targetSlotPos
 
-		for privatePos, (itemWindowType, itemSlotIndex) in self.itemStock.items():
+		for privatePos, (itemWindowType, itemSlotIndex) in list(self.itemStock.items()):
 			if itemWindowType == attachedInvenType and itemSlotIndex == sourceSlotPos:
 				shop.DelPrivateShopItemStock(itemWindowType, itemSlotIndex)
 				del self.itemStock[privatePos]
@@ -338,7 +338,7 @@ class PrivateShopBuilder(ui.ScriptWindow):
 	def OnOverInItem(self, slotIndex):
 
 		if self.tooltipItem:
-			if self.itemStock.has_key(slotIndex):
+			if slotIndex in self.itemStock:
 				self.tooltipItem.SetPrivateShopBuilderItem(*self.itemStock[slotIndex] + (slotIndex,))
 
 	def OnOverOutItem(self):
