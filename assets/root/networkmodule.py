@@ -85,7 +85,6 @@ class MainStream(object):
 		net.SetHandler(self)
 		net.SetTCPRecvBufferSize(128*1024)
 		net.SetTCPSendBufferSize(4096)
-		net.SetUDPRecvBufferSize(4096)
 
 		self.id=""
 		self.pwd=""

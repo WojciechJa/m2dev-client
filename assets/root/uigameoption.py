@@ -8,8 +8,8 @@ import localeInfo
 import constInfo
 import chrmgr
 import player
-import uiPrivateShopBuilder # ±èÁØÈ£
-import interfaceModule # ±èÁØÈ£
+import uiPrivateShopBuilder # ï¿½ï¿½ï¿½ï¿½È£
+import interfaceModule # ï¿½ï¿½ï¿½ï¿½È£
 
 blockMode = 0
 viewChatMode = 0
@@ -85,6 +85,7 @@ class OptionDialog(ui.ScriptWindow):
 			import exception
 			exception.Abort("OptionDialog.__Load_BindObject")
 
+	def __Load(self):
 		self.__Load_LoadScript("uiscript/gameoptiondialog.py")
 
 		self.__Load_BindObject()
@@ -311,16 +312,6 @@ class OptionDialog(ui.ScriptWindow):
 
 	def OnChangePKMode(self):
 		self.__RefreshPVPButtonList()
-
-	def OnCloseInputDialog(self):
-		self.inputDialog.Close()
-		self.inputDialog = None
-		return True
-
-	def OnCloseQuestionDialog(self):
-		self.questionDialog.Close()
-		self.questionDialog = None
-		return True
 
 	def OnPressEscapeKey(self):
 		self.Close()

@@ -43,7 +43,6 @@ class OptionDialog(ui.ScriptWindow):
 		try:
 			pyScriptLoader = ui.PythonScriptLoader()
 			pyScriptLoader.LoadScriptFile(self, "uiscript/optiondialog.py")
-
 		except:
 			import exception
 			exception.Abort("OptionDialog.__LoadDialog.LoadObject")
@@ -71,7 +70,6 @@ class OptionDialog(ui.ScriptWindow):
 			self.blockButtonList.append(GetObject("block_guild_button"))
 			self.blockButtonList.append(GetObject("block_whisper_button"))
 			self.blockButtonList.append(GetObject("block_friend_button"))
-				
 		except:
 			import exception
 			exception.Abort("OptionDialog.__LoadDialog.BindObject")
@@ -274,16 +272,6 @@ class OptionDialog(ui.ScriptWindow):
 		pos = self.ctrlSoundVolume.GetSliderPos()
 		snd.SetSoundVolume(pos)
 		systemSetting.SetSoundVolume(pos)
-
-	def OnCloseInputDialog(self):
-		self.inputDialog.Close()
-		self.inputDialog = None
-		return True
-
-	def OnCloseQuestionDialog(self):
-		self.questionDialog.Close()
-		self.questionDialog = None
-		return True
 
 	def OnPressEscapeKey(self):
 		self.Close()
