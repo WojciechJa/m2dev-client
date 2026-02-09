@@ -123,7 +123,7 @@ class BeltInventoryWindow(ui.ScriptWindow):
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
 
-	def Show(self, openBeltSlot = FALSE):
+	def Show(self, openBeltSlot = False):
 		self.__LoadWindow()
 		self.RefreshSlot()
 
@@ -201,9 +201,9 @@ class BeltInventoryWindow(ui.ScriptWindow):
 			for i in range(item.BELT_INVENTORY_SLOT_COUNT):
 				slotNumber = item.BELT_INVENTORY_SLOT_START + i
 				wndBeltInventorySlot.SetCoverButton(slotNumber,	"d:/ymir work/ui/game/quest/slot_button_01.sub",\
-												"d:/ymir work/ui/game/quest/slot_button_01.sub",\
-												"d:/ymir work/ui/game/quest/slot_button_01.sub",\
-												"d:/ymir work/ui/game/belt_inventory/slot_disabled.tga", FALSE, FALSE)
+											"d:/ymir work/ui/game/quest/slot_button_01.sub",\
+											"d:/ymir work/ui/game/quest/slot_button_01.sub",\
+											"d:/ymir work/ui/game/belt_inventory/slot_disabled.tga", False, False)
 			
 		except:
 			import exception
@@ -225,7 +225,7 @@ class BeltInventoryWindow(ui.ScriptWindow):
 		for i in range(item.BELT_INVENTORY_SLOT_COUNT):
 			slotNumber = item.BELT_INVENTORY_SLOT_START + i
 			self.wndBeltInventorySlot.SetItemSlot(slotNumber, getItemVNum(slotNumber), player.GetItemCount(slotNumber))
-			self.wndBeltInventorySlot.SetAlwaysRenderCoverButton(slotNumber, TRUE)
+			self.wndBeltInventorySlot.SetAlwaysRenderCoverButton(slotNumber, True)
 			
 			avail = "0"
 			
@@ -986,19 +986,18 @@ class InventoryWindow(ui.ScriptWindow):
 				if self.__CanAddItemAttr(dstSlotPos):
 					return True
 			elif "USE_ADD_ACCESSORY_SOCKET" == useType:
-				if self.__CanAddAccessorySocket(dstSlotPos):
+				# MR-10: Add belt support for accessory sockets
+				if self.__CanAddAccessorySocket(dstSlotPos) or self.__CanAddBeltSocket(dstSlotPos):
 					return True
+				# MR-10: -- END OF -- Add belt support for accessory sockets
 			elif "USE_PUT_INTO_ACCESSORY_SOCKET" == useType:								
 				if self.__CanPutAccessorySocket(dstSlotPos, srcItemVNum):
-					return TRUE
-			elif "USE_PUT_INTO_BELT_SOCKET" == useType:								
-				dstItemVNum = player.GetItemIndex(dstSlotPos)
-				print(("USE_PUT_INTO_BELT_SOCKET", srcItemVNum, dstItemVNum))
-
-				item.SelectItem(dstItemVNum)
-		
-				if item.ITEM_TYPE_BELT == item.GetItemType():
 					return True
+			elif "USE_PUT_INTO_BELT_SOCKET" == useType:								
+				# MR-10: Add belt support for accessory sockets
+				if self.__CanPutBeltSocket(dstSlotPos, srcItemVNum):
+					return True
+				# MR-10: -- END OF -- Add belt support for accessory sockets
 
 		return False
 
@@ -1033,6 +1032,32 @@ class InventoryWindow(ui.ScriptWindow):
 				return True
 
 		return False
+
+	# MR-10: Add belt support for accessory sockets
+	def __CanPutBeltSocket(self, dstSlotPos, mtrlVnum):
+		dstItemVNum = player.GetItemIndex(dstSlotPos)
+		if dstItemVNum == 0:
+			return False
+
+		item.SelectItem(dstItemVNum)
+
+		if item.ITEM_TYPE_BELT != item.GetItemType():
+			return False
+
+		if mtrlVnum != constInfo.GET_BELT_MATERIAL_VNUM(dstItemVNum):
+			return False
+
+		curCount = player.GetItemMetinSocket(dstSlotPos, 0)
+		maxCount = player.GetItemMetinSocket(dstSlotPos, 1)
+
+		if maxCount <= 0:
+			return False
+
+		if curCount >= maxCount:
+			return False
+
+		return True
+	# MR-10: -- END OF -- Add belt support for accessory sockets
 
 	def __CanPutAccessorySocket(self, dstSlotPos, mtrlVnum):
 		dstItemVNum = player.GetItemIndex(dstSlotPos)
@@ -1079,6 +1104,29 @@ class InventoryWindow(ui.ScriptWindow):
 			return False
 
 		return True
+
+	# MR-10: Add belt support for accessory sockets
+	def __CanAddBeltSocket(self, dstSlotPos):
+		dstItemVNum = player.GetItemIndex(dstSlotPos)
+
+		if dstItemVNum == 0:
+			return False
+
+		item.SelectItem(dstItemVNum)
+
+		if item.ITEM_TYPE_BELT != item.GetItemType():
+			return False
+
+		curCount = player.GetItemMetinSocket(dstSlotPos, 0)
+		maxCount = player.GetItemMetinSocket(dstSlotPos, 1)
+
+		ACCESSORY_SOCKET_MAX_SIZE = 3
+
+		if maxCount >= ACCESSORY_SOCKET_MAX_SIZE:
+			return False
+
+		return True
+	# MR-10: -- END OF -- Add belt support for accessory sockets
 
 	def __CanAddItemAttr(self, dstSlotPos):
 		dstItemVNum = player.GetItemIndex(dstSlotPos)

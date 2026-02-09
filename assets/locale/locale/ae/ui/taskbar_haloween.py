@@ -107,7 +107,7 @@ window = {
 					)
 				},
 				{
-					## íˆ´íŒì„ ë„ìš°ê¸° ìœ„í•œ ìœˆë„ìš°
+					## ÅøÆÁÀ» ¶ç¿ì±â À§ÇÑ À©µµ¿ì
 					"name" : "HPGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -153,7 +153,7 @@ window = {
 					),
 				},
 				{
-					## íˆ´íŒì„ ë„ìš°ê¸° ìœ„í•œ ìœˆë„ìš°
+					## ÅøÆÁÀ» ¶ç¿ì±â À§ÇÑ À©µµ¿ì
 					"name" : "SPGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -199,7 +199,7 @@ window = {
 					),
 				},
 				{
-					## íˆ´íŒì„ ë„ìš°ê¸° ìœ„í•œ ìœˆë„ìš°
+					## ÅøÆÁÀ» ¶ç¿ì±â À§ÇÑ À©µµ¿ì
 					"name" : "STGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -380,8 +380,8 @@ window = {
 			"children" :
 			(
 				{
-					# ExpandButtonì€ ê¸°ì¡´ì— ChatButtonì´ì—ˆìœ¼ë‚˜, ChatButtonì˜ íš¨ìš©ì„±ì´ ì ë‹¤ íŒë‹¨í•˜ì—¬
-					# ExpandButtonìœ¼ë¡œ ë°”ë€ ê²ƒì´ë‹¤.
+					# ExpandButtonÀº ±âÁ¸¿¡ ChatButtonÀÌ¾úÀ¸³ª, ChatButtonÀÇ È¿¿ë¼ºÀÌ Àû´Ù ÆÇ´ÜÇÏ¿©
+					# ExpandButtonÀ¸·Î ¹Ù²ï °ÍÀÌ´Ù.
 					"name" : "ExpandButton",
 					"type" : "button",
 

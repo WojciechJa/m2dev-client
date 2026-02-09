@@ -11,16 +11,16 @@ FOG_LEVEL0 = 4800.0
 FOG_LEVEL1 = 9600.0
 FOG_LEVEL2 = 12800.0
 FOG_LEVEL = FOG_LEVEL0
-FOG_LEVEL_LIST=[FOG_LEVEL0, FOG_LEVEL1, FOG_LEVEL2]
+FOG_LEVEL_LIST = [FOG_LEVEL0, FOG_LEVEL1, FOG_LEVEL2]
 
 CAMERA_MAX_DISTANCE_SHORT = 2500.0
 CAMERA_MAX_DISTANCE_LONG = 3500.0
-CAMERA_MAX_DISTANCE_LIST=[CAMERA_MAX_DISTANCE_SHORT, CAMERA_MAX_DISTANCE_LONG]
+CAMERA_MAX_DISTANCE_LIST = [CAMERA_MAX_DISTANCE_SHORT, CAMERA_MAX_DISTANCE_LONG]
 CAMERA_MAX_DISTANCE = CAMERA_MAX_DISTANCE_SHORT
 
 CHRNAME_COLOR_INDEX = 0
 
-ENVIRONMENT_NIGHT="d:/ymir work/environment/moonlight04.msenv"
+ENVIRONMENT_NIGHT = "d:/ymir work/environment/moonlight04.msenv"
 
 # constant
 HIGH_PRICE = 500000
@@ -68,6 +68,13 @@ def SET_ITEM_QUESTION_DIALOG_STATUS(flag):
 
 import app
 import net
+
+# MR-10: Add accessorySocketTimeCache for real-time remaining time display of accessory sockets.
+# Cache for accessory/belt socket timers so they persist across UI reloads.
+if not hasattr(app, "_accessorySocketTimeCache"):
+	app._accessorySocketTimeCache = {}
+ACCESSORY_SOCKET_TIME_CACHE = app._accessorySocketTimeCache
+# MR-10: -- END OF -- Add accessorySocketTimeCache for real-time remaining time display of accessory sockets.
 
 ########################
 
@@ -194,11 +201,12 @@ def GET_ACCESSORY_MATERIAL_VNUM(vnum, subType):
 		EAR_ITEM_VNUM_BASE = 17000
 		ret -= EAR_ITEM_VNUM_BASE
 
-	type = ret//20
+	type = ret // 20
 
-	if type<0 or type>=len(ACCESSORY_MATERIAL_LIST):
-		type = (ret-170) // 20
-		if type<0 or type>=len(ACCESSORY_MATERIAL_LIST):
+	if type < 0 or type >= len(ACCESSORY_MATERIAL_LIST):
+		type = (ret - 170) // 20
+
+		if type < 0 or type >= len(ACCESSORY_MATERIAL_LIST):
 			return 0
 
 	return ACCESSORY_MATERIAL_LIST[type]

@@ -231,19 +231,32 @@ class AutoPotionImage(ui.ExpandedImageBox):
 			self.LoadImage(fileName)
 		except:
 			import dbg
-			dbg.TraceError("AutoPotionImage.__Refresh(potionType=%d) - LoadError %s" % (self.potionType, fileName))
+			dbg.TraceError("AutoPotionImage.__Refresh(potionType = %d) - LoadError %s" % (self.potionType, fileName))
 
 		self.SetScale(0.7, 0.7)
 
 		self.toolTip.ClearToolTip()
-		
-		if player.AUTO_POTION_TYPE_HP == type:
+
+		# MR-10: Add toolTip support and real-time countdown for affects
+		itemName = None
+
+		if slotIndex >= 0:
+			itemVnum = player.GetItemIndex(slotIndex)
+
+			if itemVnum:
+				item.SelectItem(itemVnum)
+				itemName = item.GetItemName()
+
+		if itemName:
+			self.toolTip.SetTitle(itemName)
+		elif player.AUTO_POTION_TYPE_HP == self.potionType:
 			self.toolTip.SetTitle(localeInfo.TOOLTIP_AUTO_POTION_HP)
 		else:
 			self.toolTip.SetTitle(localeInfo.TOOLTIP_AUTO_POTION_SP)
-			
-		self.toolTip.AppendTextLine(localeInfo.TOOLTIP_AUTO_POTION_REST	% (amountPercent))
+
+		self.toolTip.AppendTextLine(localeInfo.TOOLTIP_AUTO_POTION_REST % (amountPercent))
 		self.toolTip.ResizeToolTip()
+		# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 
 	def OnMouseOverIn(self):
 		self.toolTip.ShowToolTip()
@@ -259,11 +272,18 @@ class AffectImage(ui.ExpandedImageBox):
 		ui.ExpandedImageBox.__init__(self)
 
 		self.toolTipText = None
-		self.isSkillAffect = TRUE
+		# MR-10: Add toolTip support and real-time countdown for affects
+		self.toolTip = None
+		self.dsTimeCache = {}
+		self.isHover = False
+		# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
+		self.isSkillAffect = True
 		self.description = None
 		self.endTime = 0
 		self.affect = None
-		self.isClocked = TRUE
+		self.isClocked = True
+		self.autoPotionToolTipTitle = None
+		self.autoPotionToolTipLine = None
 
 	def SetAffect(self, affect):
 		self.affect = affect
@@ -275,10 +295,12 @@ class AffectImage(ui.ExpandedImageBox):
 
 		if not self.toolTipText:
 			textLine = ui.TextLine()
+
 			textLine.SetParent(self)
 			textLine.SetSize(0, 0)
 			textLine.SetOutline()
 			textLine.Hide()
+
 			self.toolTipText = textLine
 			
 		self.toolTipText.SetText(text)
@@ -290,15 +312,16 @@ class AffectImage(ui.ExpandedImageBox):
 
 	def SetDuration(self, duration):
 		self.endTime = 0
+
+		# MR-10: Add toolTip support and real-time countdown for affects
 		if duration > 0:
 			self.endTime = app.GetGlobalTimeStamp() + duration
-			leftTime = localeInfo.RTSecondToDHMS(self.endTime - app.GetGlobalTimeStamp())
-			self.toolTip.AppendTextLine("(%s : %s)" % (localeInfo.LEFT_TIME, leftTime))
-			self.toolTip.ResizeToolTip()
+		# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 
 	def UpdateAutoPotionDescription(self):		
 		
 		potionType = 0
+
 		if self.affect == chr.NEW_AFFECT_AUTO_HP_RECOVERY:
 			potionType = player.AUTO_POTION_TYPE_HP
 		else:
@@ -315,21 +338,164 @@ class AffectImage(ui.ExpandedImageBox):
 		except:
 			amountPercent = 100.0
 		
-		self.SetToolTipText(self.description % amountPercent, 0, 40)
+		# MR-10: Add toolTip support and real-time countdown for affects
+		if not self.isHover:
+			return
+
+		self.__EnsureToolTip()
+
+		itemName = None
+
+		if slotIndex >= 0:
+			itemVnum = player.GetItemIndex(slotIndex)
+
+			if itemVnum:
+				item.SelectItem(itemVnum)
+				itemName = item.GetItemName()
+
+		if itemName:
+			title = itemName
+		elif player.AUTO_POTION_TYPE_HP == potionType:
+			title = localeInfo.TOOLTIP_AUTO_POTION_HP
+		else:
+			title = localeInfo.TOOLTIP_AUTO_POTION_SP
+
+		line = self.description % amountPercent
+
+		if self.autoPotionToolTipTitle == title and self.autoPotionToolTipLine == line:
+			return
+
+		self.toolTip.ClearToolTip()
+		self.toolTip.SetTitle(title)
+		self.toolTip.AppendTextLine(line)
+		self.toolTip.ResizeToolTip()
+		self.autoPotionToolTipTitle = title
+		self.autoPotionToolTipLine = line
+		# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 		
 	def SetClock(self, isClocked):
 		self.isClocked = isClocked
 		
+	# MR-10: Add toolTip support and real-time countdown for affects
 	def UpdateDescription(self):
+		if self.__IsDragonSoulAffect():
+			if self.isHover:
+				self.__UpdateDragonSoulDescription()
+
+				if self.toolTip:
+					self.toolTip.ShowToolTip()
+			return
+
 		if not self.isClocked:
+			self.__UpdateDescription2()
 			return
 
 		if not self.description:
 			return
 
-		if self.endTime > 0:
-			leftTime = localeInfo.RTSecondToDHMS(self.endTime - app.GetGlobalTimeStamp())
-			self.toolTip.childrenList[-1].SetText("(%s : %s)" % (localeInfo.LEFT_TIME, leftTime))
+		if self.__ShouldShowTimedToolTip():
+			if self.isHover:
+				remainSec = max(0, self.endTime - app.GetGlobalTimeStamp())
+				self.__UpdateTimedDescription(remainSec)
+
+				if self.toolTip:
+					self.toolTip.ShowToolTip()
+			return
+
+		self.SetToolTipText(self.description, 0, 40)
+		
+	#독일버전에서 시간을 제거하기 위해서 사용 
+	def __UpdateDescription2(self):
+		if not self.description:
+			return
+
+		toolTip = self.description
+		self.SetToolTipText(toolTip, 0, 40)
+
+	def __EnsureToolTip(self):
+		if not self.toolTip:
+			self.toolTip = uiToolTip.ToolTip(100)
+			self.toolTip.HideToolTip()
+
+	def __IsAutoPotionAffect(self):
+		return self.affect in (chr.NEW_AFFECT_AUTO_HP_RECOVERY, chr.NEW_AFFECT_AUTO_SP_RECOVERY)
+
+	def __ShouldShowTimedToolTip(self):
+		return self.isClocked and self.endTime > 0 and not self.__IsAutoPotionAffect()
+
+	def __UpdateTimedDescription(self, remainSec):
+		if not self.description:
+			return
+
+		self.__EnsureToolTip()
+
+		self.toolTip.ClearToolTip()
+		self.toolTip.SetTitle(self.description)
+		self.toolTip.AppendTextLine("(%s : %s)" % (localeInfo.LEFT_TIME, localeInfo.RTSecondToDHMS(remainSec)))
+		self.toolTip.ResizeToolTip()
+
+	def __IsDragonSoulAffect(self):
+		return self.affect in (chr.NEW_AFFECT_DRAGON_SOUL_DECK1, chr.NEW_AFFECT_DRAGON_SOUL_DECK2)
+
+	def __GetDragonSoulMinRemainSec(self):
+		deckIndex = 0 if self.affect == chr.NEW_AFFECT_DRAGON_SOUL_DECK1 else 1
+		now = app.GetGlobalTimeStamp()
+		minRemain = None
+
+		for i in range(6):
+			slotNumber = deckIndex * player.DRAGON_SOUL_EQUIPMENT_FIRST_SIZE + (player.DRAGON_SOUL_EQUIPMENT_SLOT_START + i)
+			itemVnum = player.GetItemIndex(slotNumber)
+
+			if itemVnum == 0:
+				continue
+
+			item.SelectItem(itemVnum)
+			remainSec = None
+
+			for j in range(item.LIMIT_MAX_NUM):
+				(limitType, limitValue) = item.GetLimit(j)
+
+				if item.LIMIT_REAL_TIME == limitType or item.LIMIT_REAL_TIME_START_FIRST_USE == limitType:
+					endTime = player.GetItemMetinSocket(player.INVENTORY, slotNumber, 0)
+					remainSec = endTime - now
+					break
+
+				if item.LIMIT_TIMER_BASED_ON_WEAR == limitType:
+					rawRemain = player.GetItemMetinSocket(player.INVENTORY, slotNumber, 0)
+					cacheKey = (slotNumber, itemVnum)
+					cache = self.dsTimeCache.get(cacheKey)
+
+					if cache and cache["remainSec"] == rawRemain:
+						remainSec = cache["endTime"] - now
+					else:
+						endTime = now + rawRemain
+						self.dsTimeCache[cacheKey] = {"remainSec": rawRemain, "endTime": endTime}
+						remainSec = endTime - now
+					break
+
+			if remainSec is None or remainSec <= 0:
+				continue
+
+			if minRemain is None or remainSec < minRemain:
+				minRemain = remainSec
+
+		return minRemain
+
+	def __UpdateDragonSoulDescription(self):
+		if not self.description:
+			return
+
+		minRemain = self.__GetDragonSoulMinRemainSec()
+
+		self.__EnsureToolTip()
+		self.toolTip.ClearToolTip()
+		self.toolTip.SetTitle(self.description)
+
+		if minRemain is not None:
+			self.toolTip.AppendTextLine("(%s : %s)" % (localeInfo.LEFT_TIME, localeInfo.RTSecondToDHMS(minRemain)))
+
+		self.toolTip.ResizeToolTip()
+	# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 
 	def SetSkillAffectFlag(self, flag):
 		self.isSkillAffect = flag
@@ -338,12 +504,40 @@ class AffectImage(ui.ExpandedImageBox):
 		return self.isSkillAffect
 
 	def OnMouseOverIn(self):
+		# MR-10: Add toolTip support and real-time countdown for affects
+		self.isHover = True
+
+		if self.__IsAutoPotionAffect():
+			self.UpdateAutoPotionDescription()
+
+			if self.toolTip:
+				self.toolTip.ShowToolTip()
+			return
+		if self.__IsDragonSoulAffect():
+			self.__UpdateDragonSoulDescription()
+
+			if self.toolTip:
+				self.toolTip.ShowToolTip()
+			return
+		if self.__ShouldShowTimedToolTip():
+			remainSec = max(0, self.endTime - app.GetGlobalTimeStamp())
+			self.__UpdateTimedDescription(remainSec)
+
+			if self.toolTip:
+				self.toolTip.ShowToolTip()
+			return
 		if self.toolTipText:
 			self.toolTipText.Show()
 
 	def OnMouseOverOut(self):
+		self.isHover = False
+
+		if self.toolTip:
+			self.toolTip.HideToolTip()
+
 		if self.toolTipText:
 			self.toolTipText.Hide()
+		# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 
 class AffectShower(ui.Window):
 
@@ -526,7 +720,7 @@ class AffectShower(ui.Window):
 				if affect == chr.NEW_AFFECT_EXP_BONUS_EURO_FREE or\
 					affect == chr.NEW_AFFECT_EXP_BONUS_EURO_FREE_UNDER_15 or\
 					self.INFINITE_AFFECT_DURATION < duration:
-					image.SetClock(FALSE)
+					image.SetClock(False)
 					image.UpdateDescription()
 				elif affect == chr.NEW_AFFECT_AUTO_SP_RECOVERY or affect == chr.NEW_AFFECT_AUTO_HP_RECOVERY:
 					image.UpdateAutoPotionDescription()
@@ -537,7 +731,7 @@ class AffectShower(ui.Window):
 					image.SetScale(1, 1)
 				else:
 					image.SetScale(0.7, 0.7)
-				image.SetSkillAffectFlag(FALSE)
+				image.SetSkillAffectFlag(False)
 				image.Show()
 				self.affectImageDict[affect] = image
 				self.__ArrangeImageList()
@@ -618,12 +812,13 @@ class AffectShower(ui.Window):
 		filename = affectData[1]
 
 		skillIndex = player.AffectIndexToSkillIndex(affect)
+
 		if 0 != skillIndex:
 			name = skill.GetSkillName(skillIndex)
 
 		image = AffectImage()
 		image.SetParent(self)
-		image.SetSkillAffectFlag(TRUE)
+		image.SetSkillAffectFlag(True)
 
 		try:
 			image.LoadImage(filename)
@@ -680,9 +875,16 @@ class AffectShower(ui.Window):
 
 	def OnUpdate(self):		
 		try:
-			if app.GetGlobalTime() - self.lastUpdateTime > 500:
+			# MR-10: Add toolTip support and real-time countdown for affects
+			curTime = app.GetGlobalTime()
+
+			if curTime < self.lastUpdateTime:
+				self.lastUpdateTime = 0
+
+			if curTime - self.lastUpdateTime > 500:
 			#if 0 < app.GetGlobalTime():
-				self.lastUpdateTime = app.GetGlobalTime()
+				self.lastUpdateTime = curTime
+			# MR-10: -- END OF -- Add toolTip support and real-time countdown for affects
 
 				for image in list(self.affectImageDict.values()):
 					if image.GetAffect() == chr.NEW_AFFECT_AUTO_HP_RECOVERY or image.GetAffect() == chr.NEW_AFFECT_AUTO_SP_RECOVERY:
