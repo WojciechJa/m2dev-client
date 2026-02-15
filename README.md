@@ -11,6 +11,17 @@ This repository contains all client-side data, including locale files, configura
  - **Loading**: Fixed loading background image for Arabic
  - **Crashes**: Fixed crashes for Arabic and Brazilian
 
+ - **Fog update**: Adjusted fog settings to work with the updated official version using the 3 classic options.
+ - **Fog levels**: Adjusted fog level settings for some maps.
+ **Fix by Alaric üôè**
+ - **Refining**: The window now sorts empty slots (from broken stones) to the end of the list, displaying an exact preview of how the item will look like after successful attaching.
+ - **Affects**: Added affect shower support for Mall Attack Speed.
+ - **Dragonsoul Alchemy**:
+   - Fixed the deck affect countdown not auto-updating when time is increased in one of the equipped items.
+   - Fixed the affect countdown requiring a check for remaining time in 500ms-intervals.
+   - The window now opens without the player being qualified (consistency with the official).
+ - **Spirit stone attachment**: The window now displays the item's existing attributes. 
+
 ### ‚¨ÜÔ∏è Improvements
  - **Text hilighting**: Exposed text highlighting (selecting and clearing) to Python
  - **Multiline dialog texts**: Question and Popup dialogs now support multiline translations! Translated strings containing `/n` or `\n` auto-break lines with trimming. Dialog height and position as well as inner element positions are auto-adjusting.
@@ -40,9 +51,12 @@ This guide also uses the latest versions for all software demonstrated as of its
 ### üìã Order of projects configuration
 If one or more of the previous items is not yet configured please come back to this section after you complete their configuration steps.
 
->  - ‚úÖ [M2Dev Server Source](https://github.com/d1str4ught/m2dev-server-src)
->  - ‚úÖ [M2Dev Server](https://github.com/d1str4ught/m2dev-server)
->  - ‚úÖ [M2Dev Client Source](https://github.com/d1str4ught/m2dev-client-src)
+>  - ‚ú
+ [M2Dev Server Source](https://github.com/d1str4ught/m2dev-server-src)
+>  - ‚ú
+ [M2Dev Server](https://github.com/d1str4ught/m2dev-server)
+>  - ‚ú
+ [M2Dev Client Source](https://github.com/d1str4ught/m2dev-client-src)
 >  - ‚ñ∂Ô∏è [M2Dev Client](https://github.com/d1str4ught/m2dev-client)&nbsp;&nbsp;&nbsp;&nbsp;[**YOU ARE HERE**]&nbsp;&nbsp;&nbsp;&nbsp;[**ALSO CONTAINS ADDITIONAL INFORMATION FOR POST-INSTALLATION STEPS**]
 
 <br>
@@ -90,7 +104,8 @@ To clone the client, open up your command prompt and `cd` into your desired loca
   >
   > <br>
   >
-  > ### ‚úÖ You have successfully obtained the Client project!
+  > ### ‚ú
+ You have successfully obtained the Client project!
   >
   > <br>
   >
@@ -174,7 +189,8 @@ Before packing everything else, we make sure that our `item_proto` and `mob_prot
   >
   > <br>
   >
-  > ### ‚úÖ You have successfully compiled the item/mob proto files and distributed them to their respective directories!
+  > ### ‚ú
+ You have successfully compiled the item/mob proto files and distributed them to their respective directories!
   >
   > <br>
   >
@@ -227,7 +243,8 @@ Now that you have your proto files, it's time for the few final steps.
   >
   > <br>
   >
-  > ### ‚úÖ You have successfully packed the assets folders!
+  > ### ‚ú
+ You have successfully packed the assets folders!
   >
   > <br>
   >
@@ -272,7 +289,8 @@ After finishing this part, you should now have knowledge of:
 ## Next steps
 These are some next steps that apply to all project, regardless of the operating system you use.
 
-### üíÖ Maintaining the repositories (cross-platform)
+### üí
+ Maintaining the repositories (cross-platform)
 
 These next steps can be done in both Windows and FreeBSD environments.
 
@@ -318,7 +336,8 @@ These next steps can be done in both Windows and FreeBSD environments.
   >
   > <br>
   >
-  > ### ‚úÖ You have successfully updated your repository!
+  > ### ‚ú
+ You have successfully updated your repository!
   >
   > <br>
   >
@@ -356,7 +375,8 @@ This is the best and maybe one of the fastest ways for the maintainer(s) of the 
   >
   > <br>
   >
-  > ### ‚úÖ You have successfully complained to the manager! Way to go Karen!
+  > ### ‚ú
+ You have successfully complained to the manager! Way to go Karen!
   >
   > <br>
   >
@@ -496,7 +516,8 @@ Feeling ready to take on the WORLD??? Start by your first pull request!
   >
   > <br>
   >
-  > ### ‚úÖ You just submitted your first PR!
+  > ### ‚ú
+ You just submitted your first PR!
   >
   > <br>
   >
