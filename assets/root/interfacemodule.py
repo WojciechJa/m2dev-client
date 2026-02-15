@@ -1019,6 +1019,7 @@ class Interface(object):
         self.DRAGON_SOUL_IS_QUALIFIED = True
         self.wndExpandedTaskBar.SetToolTipText(uiTaskBar.ExpandedTaskBar.BUTTON_DRAGON_SOUL, uiScriptLocale.TASKBAR_DRAGON_SOUL)
 
+    # MR-12: Enable Dragon Soul window opening without completing the quest
     def ToggleDragonSoulWindow(self):
         if False == player.IsObserverMode():
             if app.ENABLE_DRAGON_SOUL_SYSTEM:
@@ -1034,6 +1035,7 @@ class Interface(object):
                     self.wndDragonSoul.Show()
                 else:
                     self.wndDragonSoul.Close()
+    # MR-12: -- END OF -- Enable Dragon Soul window opening without completing the quest
 
     def FailDragonSoulRefine(self, reason, inven_type, inven_pos):
         if False == player.IsObserverMode():
