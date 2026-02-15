@@ -136,12 +136,15 @@ class LoginWindow(ui.ScriptWindow):
 
         self.xServerBoard = 0
         self.yServerBoard = 0
-
+        
         self.loadingImage = None
         self.virtualKeyboard = None
         self.virtualKeyboardMode = "ALPHABET"
         self.virtualKeyboardIsUpper = False
 
+        self.virtualKeyboard = None
+        self.virtualKeyboardMode = "ALPHABET"
+        self.virtualKeyboardIsUpper = False
         self.timeOutMsg = False #Fix
 
         # Multi-language hot-reload system
@@ -195,7 +198,7 @@ class LoginWindow(ui.ScriptWindow):
             return
 
         self.__LoadLoginInfo("loginInfo.xml")
-
+        
         if app.loggined:
             self.loginFailureFuncDict = {
             "WRONGPWD"	: app.Exit,
@@ -212,7 +215,7 @@ class LoginWindow(ui.ScriptWindow):
         # pevent key "[" "]"
         ime.AddExceptKey(91)
         ime.AddExceptKey(93)
-
+            
         self.Show()
 
         global SKIP_LOGIN_PHASE
@@ -249,7 +252,7 @@ class LoginWindow(ui.ScriptWindow):
 
         print("---------------------------------------------------------------------------- CLOSE LOGIN WINDOW ")
         #
-        # Check both since BGM stops if selectMusic is not set.
+        # Check both since BGM stops if selectMusic is not set. 
         #
         if musicInfo.loginMusic != "" and musicInfo.selectMusic != "":
             snd.FadeOutMusic("BGM/"+musicInfo.loginMusic)
@@ -277,6 +280,28 @@ class LoginWindow(ui.ScriptWindow):
         self.serverList = None
         self.channelList = None
 
+        self.VIRTUAL_KEY_ALPHABET_LOWERS = None
+        self.VIRTUAL_KEY_ALPHABET_UPPERS = None
+        self.VIRTUAL_KEY_SYMBOLS = None
+        self.VIRTUAL_KEY_NUMBERS = None
+
+        # VIRTUAL_KEYBOARD_BUG_FIX
+        if self.virtualKeyboard:
+            for keyIndex in range(0, VIRTUAL_KEYBOARD_NUM_KEYS+1):
+                key = self.GetChild2("key_%d" % keyIndex)
+                if key:
+                    key.SetEvent(None)
+
+            self.GetChild("key_space").SetEvent(None)
+            self.GetChild("key_backspace").SetEvent(None)
+            self.GetChild("key_enter").SetEvent(None)
+            self.GetChild("key_shift").SetToggleDownEvent(None)
+            self.GetChild("key_shift").SetToggleUpEvent(None)
+            self.GetChild("key_at").SetToggleDownEvent(None)
+            self.GetChild("key_at").SetToggleUpEvent(None)
+
+            self.virtualKeyboard = None
+
         self.KillFocus()
         self.Hide()
 
@@ -289,10 +314,488 @@ class LoginWindow(ui.ScriptWindow):
 
     def __SaveChannelInfo(self):
         try:
-            with open("channel.inf", "w") as file:
+            with open("config/channel.inf", "w") as file:
                 file.write("%d %d %d" % (self.__GetServerID(), self.__GetChannelID(), self.__GetRegionID()))
         except:
             print("LoginWindow.__SaveChannelInfo - SaveError")
+
+    def __LoadChannelInfo(self):
+        try:
+            with open("config/channel.inf") as file:
+                lines=file.readlines()
+
+                if len(lines)>0:
+                    tokens=lines[0].split()
+
+                    selServerID=int(tokens[0])
+                    selChannelID=int(tokens[1])
+
+                    if len(tokens) == 3:
+                        regionID = int(tokens[2])
+
+                    return regionID, selServerID, selChannelID
+
+        except:
+            print("LoginWindow.__LoadChannelInfo - OpenError")
+        return -1, -1, -1
+
+    def __ExitGame(self):
+        app.Exit()
+
+    def SetIDEditLineFocus(self):
+        if self.idEditLine != None:
+            self.idEditLine.SetFocus()
+
+    def SetPasswordEditLineFocus(self):
+        if self.pwdEditLine != None:
+            self.pwdEditLine.SetFocus()
+
+    def OnEndCountDown(self):
+        self.isNowCountDown = False
+        self.timeOutMsg = False
+        self.OnConnectFailure()
+
+    def OnConnectFailure(self):
+
+        if self.isNowCountDown:
+            return
+
+        snd.PlaySound("sound/ui/loginfail.wav")
+
+        if self.connectingDialog:
+            self.connectingDialog.Close()
+        self.connectingDialog = None
+
+        if app.loggined:
+            self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.__ExitGame)
+        elif self.timeOutMsg:
+            self.PopupNotifyMessage(localeInfo.LOGIN_FAILURE_TIMEOUT, self.SetPasswordEditLineFocus)
+        else:
+            self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.SetPasswordEditLineFocus)
+
+    def OnHandShake(self):
+        if not IsLoginDelay():
+            snd.PlaySound("sound/ui/loginok.wav")
+            self.PopupDisplayMessage(localeInfo.LOGIN_CONNECT_SUCCESS)
+
+    def OnLoginStart(self):
+        if not IsLoginDelay():
+            self.PopupDisplayMessage(localeInfo.LOGIN_PROCESSING)
+
+    def OnLoginFailure(self, error):
+        if self.connectingDialog:
+            self.connectingDialog.Close()
+        self.connectingDialog = None
+
+        try:
+            loginFailureMsg = self.loginFailureMsgDict[error]
+        except KeyError:
+            loginFailureMsg = localeInfo.LOGIN_FAILURE_UNKNOWN  + error
+
+
+        #0000685: [M2EU] ID/password guessing bug fix: always set focus to password field
+        loginFailureFunc=self.loginFailureFuncDict.get(error, self.SetPasswordEditLineFocus)
+
+        if app.loggined:
+            self.PopupNotifyMessage(loginFailureMsg, self.__ExitGame)
+        else:
+            self.PopupNotifyMessage(loginFailureMsg, loginFailureFunc)
+
+        snd.PlaySound("sound/ui/loginfail.wav")
+
+    def __DisconnectAndInputID(self):
+        if self.connectingDialog:
+            self.connectingDialog.Close()
+        self.connectingDialog = None
+
+        self.SetIDEditLineFocus()
+        net.Disconnect()
+
+    def __DisconnectAndInputPassword(self):
+        if self.connectingDialog:
+            self.connectingDialog.Close()
+        self.connectingDialog = None
+
+        self.SetPasswordEditLineFocus()
+        net.Disconnect()
+
+    def __LoadScript(self, fileName):
+        import dbg
+        try:
+            pyScrLoader = ui.PythonScriptLoader()
+            pyScrLoader.LoadScriptFile(self, fileName)
+        except:
+            import exception
+            exception.Abort("LoginWindow.__LoadScript.LoadObject")
+        try:
+            GetObject=self.GetChild
+            self.serverBoard			= GetObject("ServerBoard")
+            self.serverList				= GetObject("ServerList")
+            self.channelList			= GetObject("ChannelList")
+            self.serverSelectButton		= GetObject("ServerSelectButton")
+            self.serverExitButton		= GetObject("ServerExitButton")
+            self.connectBoard			= GetObject("ConnectBoard")
+            self.loginBoard				= GetObject("LoginBoard")
+            self.idText					= GetObject("ID_Text")
+            self.idEditLine				= GetObject("ID_EditLine")
+            self.pwdText				= GetObject("Password_Text")
+            self.pwdEditLine			= GetObject("Password_EditLine")
+            self.serverInfo				= GetObject("ConnectName")
+            self.selectConnectButton	= GetObject("SelectConnectButton")
+            self.loginButton			= GetObject("LoginButton")
+            self.loginExitButton		= GetObject("LoginExitButton")
+
+            self.virtualKeyboard		= self.GetChild2("VirtualKeyboard")
+
+            if self.virtualKeyboard:
+                self.VIRTUAL_KEY_ALPHABET_UPPERS = Suffle(localeInfo.VIRTUAL_KEY_ALPHABET_UPPERS)
+                self.VIRTUAL_KEY_ALPHABET_LOWERS = "".join([localeInfo.VIRTUAL_KEY_ALPHABET_LOWERS[localeInfo.VIRTUAL_KEY_ALPHABET_UPPERS.index(e)] for e in self.VIRTUAL_KEY_ALPHABET_UPPERS])
+                self.VIRTUAL_KEY_SYMBOLS = Suffle(localeInfo.VIRTUAL_KEY_SYMBOLS)
+                self.VIRTUAL_KEY_NUMBERS = Suffle(localeInfo.VIRTUAL_KEY_NUMBERS)
+                self.__VirtualKeyboard_SetAlphabetMode()
+            
+                self.GetChild("key_space").SetEvent(lambda : self.__VirtualKeyboard_PressKey(' '))
+                self.GetChild("key_backspace").SetEvent(lambda : self.__VirtualKeyboard_PressBackspace())
+                self.GetChild("key_enter").SetEvent(lambda : self.__VirtualKeyboard_PressReturn())
+                self.GetChild("key_shift").SetToggleDownEvent(lambda : self.__VirtualKeyboard_SetUpperMode())
+                self.GetChild("key_shift").SetToggleUpEvent(lambda : self.__VirtualKeyboard_SetLowerMode())
+                self.GetChild("key_at").SetToggleDownEvent(lambda : self.__VirtualKeyboard_SetSymbolMode())
+                self.GetChild("key_at").SetToggleUpEvent(lambda : self.__VirtualKeyboard_SetAlphabetMode())
+
+            # Create locale selector (only if it doesn't exist - during hot-reload we keep the old one)
+            if not self.localeSelector:
+                self.localeSelector = LocaleSelector()
+                self.localeSelector.Create(self)
+                self.localeSelector.SetLocaleChangedEvent(ui.__mem_func__(self.__OnLocaleChanged))
+
+        except:
+            import exception
+            exception.Abort("LoginWindow.__LoadScript.BindObject")
+
+        self.selectConnectButton.SetEvent(ui.__mem_func__(self.__OnClickSelectConnectButton))
+
+        self.serverBoard.OnKeyUp = ui.__mem_func__(self.__ServerBoard_OnKeyUp)
+        self.xServerBoard, self.yServerBoard = self.serverBoard.GetLocalPosition()
+
+        self.serverSelectButton.SetEvent(ui.__mem_func__(self.__OnClickSelectServerButton))
+        self.serverExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitButton))
+
+        self.loginButton.SetEvent(ui.__mem_func__(self.__OnClickLoginButton))
+        self.loginExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitButton))
+
+        self.serverList.SetEvent(ui.__mem_func__(self.__OnSelectServer))
+        
+        self.idEditLine.SetReturnEvent(ui.__mem_func__(self.pwdEditLine.SetFocus))
+        self.idEditLine.SetTabEvent(ui.__mem_func__(self.pwdEditLine.SetFocus))
+
+        self.pwdEditLine.SetReturnEvent(ui.__mem_func__(self.__OnClickLoginButton))
+        self.pwdEditLine.SetTabEvent(ui.__mem_func__(self.idEditLine.SetFocus))
+        return 1
+
+    def __VirtualKeyboard_SetKeys(self, keyCodes):
+        uiDefFontBackup = localeInfo.UI_DEF_FONT
+        localeInfo.UI_DEF_FONT = localeInfo.UI_DEF_FONT_LARGE
+
+        keyIndex = 1
+        for keyCode in keyCodes:					
+            key = self.GetChild2("key_%d" % keyIndex)
+            if key:
+                key.SetEvent(lambda x=keyCode: self.__VirtualKeyboard_PressKey(x))
+                key.SetText(keyCode)
+                key.ButtonText.SetFontColor(0, 0, 0)
+                keyIndex += 1
+            
+        for keyIndex in range(keyIndex, VIRTUAL_KEYBOARD_NUM_KEYS+1):
+            key = self.GetChild2("key_%d" % keyIndex)
+            if key:
+                key.SetEvent(lambda x=' ': self.__VirtualKeyboard_PressKey(x))
+                key.SetText(' ')
+        
+        localeInfo.UI_DEF_FONT = uiDefFontBackup
+
+    def __VirtualKeyboard_PressKey(self, code):
+        ime.PasteString(code)
+        
+        #if self.virtualKeyboardMode == "ALPHABET" and self.virtualKeyboardIsUpper:
+        #	self.__VirtualKeyboard_SetLowerMode()
+            
+    def __VirtualKeyboard_PressBackspace(self):
+        ime.PasteBackspace()
+        
+    def __VirtualKeyboard_PressReturn(self):
+        ime.PasteReturn()		
+
+    def __VirtualKeyboard_SetUpperMode(self):
+        self.virtualKeyboardIsUpper = True
+        
+        if self.virtualKeyboardMode == "ALPHABET":
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_UPPERS)
+        elif self.virtualKeyboardMode == "NUMBER":
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
+        else:
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)
+            
+    def __VirtualKeyboard_SetLowerMode(self):
+        self.virtualKeyboardIsUpper = False
+        
+        if self.virtualKeyboardMode == "ALPHABET":
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_LOWERS)
+        elif self.virtualKeyboardMode == "NUMBER":
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)			
+        else:
+            self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
+            
+    def __VirtualKeyboard_SetAlphabetMode(self):
+        self.virtualKeyboardIsUpper = False
+        self.virtualKeyboardMode = "ALPHABET"		
+        self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_LOWERS)	
+
+    def __VirtualKeyboard_SetNumberMode(self):			
+        self.virtualKeyboardIsUpper = False
+        self.virtualKeyboardMode = "NUMBER"
+        self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)
+                    
+    def __VirtualKeyboard_SetSymbolMode(self):
+        self.virtualKeyboardIsUpper = False
+        self.virtualKeyboardMode = "SYMBOL"
+        self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
+                
+    def Connect(self, id, pwd):
+
+        if IsLoginDelay():
+            loginDelay = GetLoginDelay()
+            self.connectingDialog = ConnectingDialog()
+            self.connectingDialog.Open(loginDelay)
+            self.connectingDialog.SAFE_SetTimeOverEvent(self.OnEndCountDown)
+            self.connectingDialog.SAFE_SetExitEvent(self.OnPressExitKey)
+            self.isNowCountDown = True
+
+        else:
+            self.stream.popupWindow.Close()
+            self.stream.popupWindow.Open(localeInfo.LOGIN_CONNETING, self.SetPasswordEditLineFocus, localeInfo.UI_CANCEL)
+
+        self.stream.SetLoginInfo(id, pwd)
+        self.stream.Connect()
+
+    def __OnClickExitButton(self):
+        self.stream.SetPhaseWindow(0)
+
+    def __OnLocaleChanged(self, newLocaleCode):
+        """Handle locale change - save config, reload, and refresh UI"""
+        import dbg
+
+        # 1) Save locale code to config/locale.cfg
+        try:
+            import os
+            if not os.path.exists("config"):
+                os.makedirs("config")
+            with open("config/locale.cfg", "w") as f:
+                f.write(newLocaleCode)
+            dbg.TraceError("Saved new locale to config: %s" % newLocaleCode)
+        except Exception as e:
+            dbg.TraceError("Failed to save locale.cfg: %s" % str(e))
+            return
+
+        # 2) Call C++ to reload locale data (C++ data + Python modules)
+        if not app.ReloadLocale():
+            dbg.TraceError("app.ReloadLocale() failed")
+            return
+
+        dbg.TraceError("Locale changed successfully, refreshing UI...")
+
+        # 3) Refresh all UI text elements with new locale
+        self.__RefreshLocaleUI()
+
+    def __RefreshLocaleUI(self):
+        """
+        Refresh all UI text elements after locale change
+
+        Uses the generic uiLocaleRefresh module to update all visible text elements
+        without needing to reload the entire UI.
+        """
+        import uiScriptLocale
+        import uiLocaleRefresh
+
+        try:
+            # Refresh button and text elements using element mapping
+            elementMapping = {
+                self.serverInfo: "LOGIN_DEFAULT_SERVERADDR",
+                self.selectConnectButton: "LOGIN_SELECT_BUTTON",
+                self.loginButton: "LOGIN_CONNECT",
+                self.loginExitButton: "LOGIN_EXIT",
+                self.serverSelectButton: "OK",
+                self.serverExitButton: "LOGIN_SELECT_EXIT",
+                self.idText: "LOGIN_ID",
+                self.pwdText: "LOGIN_PASSWORD",
+            }
+            uiLocaleRefresh.RefreshByMapping(elementMapping)
+
+            # Refresh ServerBoard Title (special case - accessed via GetChild)
+            try:
+                serverBoardTitle = self.GetChild("Title")
+                serverBoardTitle.SetText(uiScriptLocale.LOGIN_SELECT_TITLE)
+            except:
+                pass
+
+            # Rebuild login error message dictionary with new locale strings
+            loginFailureTemplate = {
+                "ALREADY"	: "LOGIN_FAILURE_ALREAY",
+                "NOID"		: "LOGIN_FAILURE_NOT_EXIST_ID",
+                "WRONGPWD"	: "LOGIN_FAILURE_WRONG_PASSWORD",
+                "FULL"		: "LOGIN_FAILURE_TOO_MANY_USER",
+                "SHUTDOWN"	: "LOGIN_FAILURE_SHUTDOWN",
+                "REPAIR"	: "LOGIN_FAILURE_REPAIR_ID",
+                "BLOCK"		: "LOGIN_FAILURE_BLOCK_ID",
+                "BESAMEKEY"	: "LOGIN_FAILURE_BE_SAME_KEY",
+                "NOTAVAIL"	: "LOGIN_FAILURE_NOT_AVAIL",
+                "NOBILL"	: "LOGIN_FAILURE_NOBILL",
+                "BLKLOGIN"	: "LOGIN_FAILURE_BLOCK_LOGIN",
+                "WEBBLK"	: "LOGIN_FAILURE_WEB_BLOCK",
+                "BADSCLID"	: "LOGIN_FAILURE_WRONG_SOCIALID",
+                "AGELIMIT"	: "LOGIN_FAILURE_SHUTDOWN_TIME",
+            }
+            self.loginFailureMsgDict = uiLocaleRefresh.RebuildDictionary(loginFailureTemplate, "localeInfo")
+
+            # Recreate locale selector to ensure it's on top with updated text
+            if self.localeSelector:
+                self.localeSelector.Destroy()
+                self.localeSelector = None
+
+            self.localeSelector = LocaleSelector()
+            self.localeSelector.Create(self)
+            self.localeSelector.SetLocaleChangedEvent(ui.__mem_func__(self.__OnLocaleChanged))
+            self.localeSelector.Show()
+            self.localeSelector.SetTop()
+
+        except:
+            # import dbg
+            # dbg.TraceError("LoginWindow.__RefreshLocaleUI failed")
+            pass
+
+    def __SetServerInfo(self, name):
+        net.SetServerInfo(name.strip())
+        self.serverInfo.SetText(name)
+
+    def __LoadLoginInfo(self, loginInfoFileName):
+
+        try:
+            loginInfo={}
+            exec(compile(open(loginInfoFileName, "rb").read(), loginInfoFileName, 'exec'), loginInfo)
+        except IOError:
+            print((\
+                "For automatic login, please create" + loginInfoFileName + "file\n"\
+                "\n"\
+                "Contents:\n"\
+                "================================================================\n"\
+                "addr=address\n"\
+                "port=port number\n"\
+                "id=user ID\n"\
+                "pwd=password\n"\
+                "slot=character selection index (if absent or -1, no auto-selection)\n"\
+                "autoLogin=enable auto login\n"
+                "autoSelect=enable auto select\n"
+                "locale=(ymir) works as ymir for LC_Ymir. Works as korea if not specified\n"
+            ));
+
+        id=loginInfo.get("id", "")
+        pwd=loginInfo.get("pwd", "")
+
+        addr=loginInfo.get("addr", "")
+        port=loginInfo.get("port", 0)
+        account_addr=loginInfo.get("account_addr", addr)
+        account_port=loginInfo.get("account_port", port)
+
+        locale = loginInfo.get("locale", "")
+
+        if addr and port:
+            net.SetMarkServer(addr, port)
+
+            net.SetServerInfo(addr+":"+str(port))
+            self.serverInfo.SetText("K:"+addr+":"+str(port))
+
+        slot=loginInfo.get("slot", 0)
+        isAutoLogin=loginInfo.get("auto", 0)
+        isAutoLogin=loginInfo.get("autoLogin", 0)
+        isAutoSelect=loginInfo.get("autoSelect", 0)
+
+        self.stream.SetCharacterSlot(slot)
+        self.stream.SetConnectInfo(addr, port, account_addr, account_port)
+        self.stream.isAutoLogin=isAutoLogin
+        self.stream.isAutoSelect=isAutoSelect
+
+        self.id = None
+        self.pwd = None		
+        self.loginnedServer = None
+        self.loginnedChannel = None			
+        app.loggined = FALSE
+
+        self.loginInfo = loginInfo
+
+        if self.id and self.pwd:
+            app.loggined = TRUE
+
+        if isAutoLogin:
+            self.Connect(id, pwd)
+            
+            print("==================================================================================")
+            print(("Auto login: %s - %s:%d %s" % (loginInfoFileName, addr, port, id)))
+            print("==================================================================================")
+
+        
+    def PopupDisplayMessage(self, msg):
+        self.stream.popupWindow.Close()
+        self.stream.popupWindow.Open(msg)
+
+    def PopupNotifyMessage(self, msg, func=0):
+        if not func:
+            func=self.EmptyFunc
+
+        self.stream.popupWindow.Close()
+        self.stream.popupWindow.Open(msg, func, localeInfo.UI_OK)
+
+    def __OnCloseInputDialog(self):
+        if self.inputDialog:
+            self.inputDialog.Close()
+        self.inputDialog = None
+        return True
+
+    def OnPressExitKey(self):
+        self.stream.popupWindow.Close()
+        self.stream.SetPhaseWindow(0)
+        return True
+
+    def OnExit(self):
+        self.stream.popupWindow.Close()
+
+    def OnUpdate(self):
+        ServerStateChecker.Update()
+
+    def EmptyFunc(self):
+        pass
+
+    #####################################################################################
+
+    def __ServerBoard_OnKeyUp(self, key):
+        if self.serverBoard.IsShow():
+            if app.DIK_RETURN==key:
+                self.__OnClickSelectServerButton()
+        return True
+
+    def __GetRegionID(self):
+        return 0
+
+    def __GetServerID(self):
+        return self.serverList.GetSelectedItem()
+
+    def __GetChannelID(self):
+        return self.channelList.GetSelectedItem()
+
+    # SEVER_LIST_BUG_FIX
+    def __ServerIDToServerIndex(self, regionID, targetServerID):
+        try:
+            regionDict = serverInfo.REGION_DICT[regionID]
+        except KeyError:
+            return -1
 
     def __LoadChannelInfo(self):
         try:
