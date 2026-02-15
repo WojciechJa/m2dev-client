@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Magická hodnota útoku +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Magická obrana +%d	SA
 TOOLTIP_MALL_ATTBONUS	Hodnota útoku  +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Hodnota útoku +12~15 %	SNA
+TOOLTIP_MALL_ATT_SPEED	Rychlost útoku zvýšena +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Yangy se automaticky sesbírají.	SNA
 TOOLTIP_MALL_DEFBONUS	Obrana +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Obrana +12~15 %	SNA

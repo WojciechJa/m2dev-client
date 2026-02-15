@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Αξία Μαγικής άμυνας +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Μαγική άμυνα +%d	SA
 TOOLTIP_MALL_ATTBONUS	Αξία Επίθεσης +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Αξία Επίθεσης +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Αυξημένη ταχύτητα επίθεσης +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Χέρι που μαζεύει αυτόματα τα πεσμένα Yang	SNA
 TOOLTIP_MALL_DEFBONUS	Άμυνα +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Άμυνα +12~15%	SNA

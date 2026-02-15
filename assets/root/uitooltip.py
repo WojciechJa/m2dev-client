@@ -918,16 +918,41 @@ class ItemToolTip(ToolTip):
 
 		for i in range(player.ATTRIBUTE_SLOT_MAX_NUM):
 			type = attrSlot[i][0]
+
 			if 0 != type:
 				return True
 
 		return False
 	
+	# MR-12: Fix broken metin stones showing as empty sockets in item tooltip
 	def AddRefineItemData(self, itemVnum, metinSlot, attrSlot = 0):
+		# Separate metin slots into filled (non-broken) and empty slots
+		filledSlots = []
+		emptySlots = []
+		
 		for i in range(player.METIN_SOCKET_MAX_NUM):
-			metinSlotData=metinSlot[i]
-			if self.GetMetinItemIndex(metinSlotData) == constInfo.ERROR_METIN_STONE:
-				metinSlot[i]=player.METIN_SOCKET_TYPE_SILVER
+			metinSlotData = metinSlot[i]
+			metin_index = self.GetMetinItemIndex(metinSlotData)
+			
+			if metin_index == constInfo.ERROR_METIN_STONE:
+				# Broken stone - convert to empty silver socket
+				emptySlots.append(player.METIN_SOCKET_TYPE_SILVER)
+			elif metin_index == 0:
+				# Empty slot
+				emptySlots.append(metinSlotData)
+			else:
+				# Valid metin stone
+				filledSlots.append(metinSlotData)
+		
+		# Rebuild metinSlot with filled slots first, then empty slots
+		newSlots = filledSlots + emptySlots
+
+		for i in range(player.METIN_SOCKET_MAX_NUM):
+			if i < len(newSlots):
+				metinSlot[i] = newSlots[i]
+			else:
+				metinSlot[i] = 0
+		# MR-12: -- END OF -- Fix broken metin stones showing as empty sockets in item tooltip
 
 		self.AddItemData(itemVnum, metinSlot, attrSlot)
 

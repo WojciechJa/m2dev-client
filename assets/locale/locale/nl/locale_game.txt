@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Magische Aanvals Waarde +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Magische Verdediging +%d	SA
 TOOLTIP_MALL_ATTBONUS	Aanvals Waarde +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Aanvals Waarde +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Aanvals snelheid verhoogd +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Een hand die automatisch gevallen Yang opraapt.	SNA
 TOOLTIP_MALL_DEFBONUS	Verdediging +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Verdediging +12~15%	SNA

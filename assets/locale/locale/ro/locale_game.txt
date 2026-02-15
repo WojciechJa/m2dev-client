@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Valoarea atacului magic +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Apărare magică +%d	SA
 TOOLTIP_MALL_ATTBONUS	Valoarea atacului +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Valoarea atacului +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Viteza de atac a crescut +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Yang este însușit automat.	SNA
 TOOLTIP_MALL_DEFBONUS	Apărare +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Apărare +12~15%	SNA

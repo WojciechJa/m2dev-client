@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Показатель магической атаки +%d
 TOOLTIP_MAGIC_DEF_GRADE	Магическая защита +%d	SA
 TOOLTIP_MALL_ATTBONUS	Показатель атаки +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Показатель атаки +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Скорость атаки повышена +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Янг принимается автом.	SNA
 TOOLTIP_MALL_DEFBONUS	Защита +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Защита +12~15%	SNA

@@ -708,6 +708,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Magischer Angriffswert +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Magische Verteidigung +%d	SA
 TOOLTIP_MALL_ATTBONUS	Angriffswert +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Angriffswert +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Angriffsgeschwindigkeit erhöht +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Autom. wird das Yang aufgenommen.	SNA
 TOOLTIP_MALL_DEFBONUS	Verteidigung +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Verteidigung +12~15%	SNA

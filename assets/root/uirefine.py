@@ -10,7 +10,6 @@ import uiCommon
 import constInfo
 
 class RefineDialog(ui.ScriptWindow):
-
 	makeSocketSuccessPercentage = ( 100, 33, 20, 15, 10, 5, 0 )
 	upgradeStoneSuccessPercentage = ( 30, 29, 28, 27, 26, 25, 24, 23, 22 )
 	upgradeArmorSuccessPercentage = ( 99, 66, 33, 33, 33, 33, 33, 33, 33 )
@@ -89,24 +88,21 @@ class RefineDialog(ui.ScriptWindow):
 		self.dlgQuestion = 0
 
 	def GetRefineSuccessPercentage(self, scrollSlotIndex, itemSlotIndex):
-
 		if -1 != scrollSlotIndex:
 			if player.IsRefineGradeScroll(scrollSlotIndex):
 				curGrade = player.GetItemGrade(itemSlotIndex)
 				itemIndex = player.GetItemIndex(itemSlotIndex)
 
 				item.SelectItem(itemIndex)
+
 				itemType = item.GetItemType()
 				itemSubType = item.GetItemSubType()
 
 				if item.ITEM_TYPE_METIN == itemType:
-
 					if curGrade >= len(self.upgradeStoneSuccessPercentage):
 						return 0
 					return self.upgradeStoneSuccessPercentage[curGrade]
-
 				elif item.ITEM_TYPE_ARMOR == itemType:
-
 					if item.ARMOR_BODY == itemSubType:
 						if curGrade >= len(self.upgradeArmorSuccessPercentage):
 							return 0
@@ -115,11 +111,10 @@ class RefineDialog(ui.ScriptWindow):
 						if curGrade >= len(self.upgradeAccessorySuccessPercentage):
 							return 0
 						return self.upgradeAccessorySuccessPercentage[curGrade]
-
 				else:
-
 					if curGrade >= len(self.upgradeSuccessPercentage):
 						return 0
+
 					return self.upgradeSuccessPercentage[curGrade]
 
 		for i in range(player.METIN_SOCKET_MAX_NUM+1):
@@ -133,15 +128,19 @@ class RefineDialog(ui.ScriptWindow):
 		self.targetItemPos = targetItemPos
 
 		percentage = self.GetRefineSuccessPercentage(scrollItemPos, targetItemPos)
+
 		if 0 == percentage:
 			return
+
 		self.successPercentage.SetText(localeInfo.REFINE_SUCCESS_PROBALITY % (percentage))
 
 		itemIndex = player.GetItemIndex(targetItemPos)
 		self.toolTip.ClearToolTip()
 		metinSlot = []
+
 		for i in range(player.METIN_SOCKET_MAX_NUM):
 			metinSlot.append(player.GetItemMetinSocket(targetItemPos, i))
+
 		self.toolTip.AddItemData(itemIndex, metinSlot)
 
 		self.UpdateDialog()
@@ -151,17 +150,21 @@ class RefineDialog(ui.ScriptWindow):
 	def UpdateDialog(self):
 		newWidth = self.toolTip.GetWidth() + 30
 		newHeight = self.toolTip.GetHeight() + 98
+
 		self.board.SetSize(newWidth, newHeight)
 		self.titleBar.SetWidth(newWidth-15)
 		self.SetSize(newWidth, newHeight)
 
 		(x, y) = self.GetLocalPosition()
+
 		self.SetPosition(x, y)
 
 	def OpenQuestionDialog(self):
 		percentage = self.GetRefineSuccessPercentage(-1, self.targetItemPos)
+
 		if 100 == percentage:
 			self.Accept()
+
 			return
 
 		self.dlgQuestion.SetTop()
@@ -197,11 +200,9 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.type = 0
 
 	def __LoadScript(self):
-
 		try:
 			pyScrLoader = ui.PythonScriptLoader()
 			pyScrLoader.LoadScriptFile(self, "uiscript/refinedialog.py")
-
 		except:
 			import exception
 			exception.Abort("RefineDialog.__LoadScript.LoadObject")
@@ -228,8 +229,10 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.toolTip = toolTip
 
 		self.slotList = []
+
 		for i in range(3):
 			slot = self.__MakeSlot()
+
 			slot.SetParent(toolTip)
 			slot.SetWindowVerticalAlignCenter()
 			self.slotList.append(slot)
@@ -248,26 +251,33 @@ class RefineDialogNew(ui.ScriptWindow):
 
 	def __MakeSlot(self):
 		slot = ui.ImageBox()
+
 		slot.LoadImage("d:/ymir work/ui/public/slot_base.sub")
 		slot.Show()
 		self.children.append(slot)
+
 		return slot
 
 	def __MakeItemImage(self):
 		itemImage = ui.ImageBox()
+
 		itemImage.Show()
 		self.children.append(itemImage)
+
 		return itemImage
 
 	def __MakeThinBoard(self):
 		thinBoard = ui.ThinBoard()
+
 		thinBoard.SetParent(self)
 		thinBoard.Show()
 		self.children.append(thinBoard)
+
 		return thinBoard
 
 	def Destroy(self):
 		self.ClearDictionary()
+
 		self.dlgQuestion = None
 		self.board = 0
 		self.probText = 0
@@ -279,7 +289,6 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.children = []
 
 	def Open(self, targetItemPos, nextGradeItemVnum, cost, prob, type):
-
 		if False == self.isLoaded:
 			self.__LoadScript()
 
@@ -296,12 +305,15 @@ class RefineDialogNew(ui.ScriptWindow):
 
 		self.toolTip.ClearToolTip()
 		metinSlot = []
+
 		for i in range(player.METIN_SOCKET_MAX_NUM):
 			metinSlot.append(player.GetItemMetinSocket(targetItemPos, i))
 
 		attrSlot = []
+
 		for i in range(player.ATTRIBUTE_SLOT_MAX_NUM):
 			attrSlot.append(player.GetItemAttribute(targetItemPos, i))
+
 		self.toolTip.AddRefineItemData(nextGradeItemVnum, metinSlot, attrSlot)
 
 		item.SelectItem(nextGradeItemVnum)
@@ -309,6 +321,7 @@ class RefineDialogNew(ui.ScriptWindow):
 		xSlotCount, ySlotCount = item.GetItemSize()
 		for slot in self.slotList:
 			slot.Hide()
+
 		for i in range(min(3, ySlotCount)):
 			self.slotList[i].SetPosition(-35, i*32 - (ySlotCount-1)*16)
 			self.slotList[i].Show()
@@ -325,19 +338,23 @@ class RefineDialogNew(ui.ScriptWindow):
 
 	def AppendMaterial(self, vnum, count):
 		slot = self.__MakeSlot()
+
 		slot.SetParent(self)
 		slot.SetPosition(15, self.dialogHeight)
 
 		itemImage = self.__MakeItemImage()
+
 		itemImage.SetParent(slot)
 		item.SelectItem(vnum)
 		itemImage.LoadImage(item.GetIconImageFileName())
 
 		thinBoard = self.__MakeThinBoard()
+
 		thinBoard.SetPosition(50, self.dialogHeight)
 		thinBoard.SetSize(self.toolTip.GetWidth(), 20)
 
 		textLine = ui.TextLine()
+
 		textLine.SetParent(thinBoard)
 		textLine.SetFontName(localeInfo.UI_DEF_FONT)
 		textLine.SetPackedFontColor(0xffdddddd)

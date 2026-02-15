@@ -708,6 +708,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Mágikus támadó érték +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Mágikus védelem +%d	SA
 TOOLTIP_MALL_ATTBONUS	Támadó érték +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Támadó érték +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Megnövelt támadósebesség +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Automatikusan felszedi a Yangokat.	SNA
 TOOLTIP_MALL_DEFBONUS	Védekezés +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Védekezés +12~15%	SNA

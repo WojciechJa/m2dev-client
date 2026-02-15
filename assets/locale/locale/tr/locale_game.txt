@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Büyülü Saldırı Değeri +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Büyü Savunması +%d	SA
 TOOLTIP_MALL_ATTBONUS	Saldırı Değeri +%%%d	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Saldırı Değeri +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Saldırı hızı arttırıldı +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Yerdeki mevcut Yang`ın otomatik olarak toplanmasını sağlayan el.	SNA
 TOOLTIP_MALL_DEFBONUS	Savunma +%%%d	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Savunma +12~15%	SNA
