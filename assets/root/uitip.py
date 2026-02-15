@@ -17,10 +17,10 @@ class TextBar(ui.Window):
 		grp.ClearTextBar(self.handle)
 
 	def SetClipRect(self, x1, y1, x2, y2):
-		grp.SetTextBarClipRect(self.handle, x1, y1, x2, y2)
+		grp.SetTextBarClipRect(self.handle, int(x1), int(y1), int(x2), int(y2))
 
 	def TextOut(self, x, y, text):
-		grp.TextBarTextOut(self.handle, x, y, text)
+		grp.TextBarTextOut(self.handle, int(x), int(y), text)
 
 	def OnRender(self):
 		x, y = self.GetGlobalPosition()

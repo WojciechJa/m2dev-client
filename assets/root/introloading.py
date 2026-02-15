@@ -42,8 +42,8 @@ class LoadingWindow(ui.ScriptWindow):
 		net.SetPhaseWindow(net.PHASE_WINDOW_LOAD, self)
 
 		self.stream=stream
-		self.loadingImage=0
-		self.loadingGage=0
+		#self.loadingImage=0
+		#self.loadingGage=0
 		self.errMsg=0
 		self.update=0
 		self.playerX=0
@@ -68,9 +68,9 @@ class LoadingWindow(ui.ScriptWindow):
 			exception.Abort("LodingWindow.Open - LoadScriptFile Error")
 
 		try:
-			self.loadingImage=self.GetChild("BackGround")
+			#self.loadingImage=self.GetChild("BackGround")
 			self.errMsg=self.GetChild("ErrorMessage")
-			self.loadingGage=self.GetChild("FullGage")
+			#self.loadingGage=self.GetChild("FullGage")
 		except:
 			import exception
 			exception.Abort("LodingWindow.Open - LoadScriptFile Error")
@@ -78,7 +78,7 @@ class LoadingWindow(ui.ScriptWindow):
 		self.errMsg.Hide()
 
 		# Loading merged together
-		imgFileNameDict = {
+		"""imgFileNameDict = {
 			# Base
 			0 : "d:/ymir work/uiloading/base/background_loading_warrior.sub",
 			1 : "d:/ymir work/uiloading/base/background_loading_shaman.sub",
@@ -122,7 +122,7 @@ class LoadingWindow(ui.ScriptWindow):
 		height = float(wndMgr.GetScreenHeight()) / float(self.loadingImage.GetHeight())
 
 		self.loadingImage.SetScale(width, height)
-		self.loadingGage.SetPercentage(2, 100)
+		self.loadingGage.SetPercentage(2, 100)"""
 
 		self.Show()
 
@@ -137,8 +137,8 @@ class LoadingWindow(ui.ScriptWindow):
 		app.SetFrameSkip(1)
 
 		self.loadStepList=[]
-		self.loadingImage=0
-		self.loadingGage=0
+		"""self.loadingImage=0
+		self.loadingGage=0"""
 		self.errMsg=0
 		self.ClearDictionary()
 		self.Hide()
@@ -155,8 +155,8 @@ class LoadingWindow(ui.ScriptWindow):
 			self.update=0
 
 	def __SetProgress(self, p):
-		if self.loadingGage:
-			self.loadingGage.SetPercentage(2+98*p/100, 100)
+		"""if self.loadingGage:
+			self.loadingGage.SetPercentage(2+98*p/100, 100)"""
 
 	def DEBUG_LoadData(self, playerX, playerY):
 		self.playerX=playerX

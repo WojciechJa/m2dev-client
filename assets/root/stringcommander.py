@@ -1,65 +1,74 @@
 import _weakref
+import app
 
 class CallBackFunction:
-	class __noarg_call__:
-		def __init__(self, cls, obj, func):
-			self.cls=cls
-			self.obj=_weakref.proxy(obj)
-			self.func=_weakref.proxy(func)
+    class __noarg_call__:
+        def __init__(self, cls, obj, func):
+            self.cls=cls
+            self.obj=_weakref.proxy(obj)
+            self.func=_weakref.proxy(func)
 
-		def __call__(self, *arg):
-			return self.func(self.obj)
+        def __call__(self, *arg):
+            return self.func(self.obj)
 
-	class __arg_call__:
-		def __init__(self, cls, obj, func):
-			self.cls=cls
-			self.obj=_weakref.proxy(obj)
-			self.func=_weakref.proxy(func)
+    class __arg_call__:
+        def __init__(self, cls, obj, func):
+            self.cls=cls
+            self.obj=_weakref.proxy(obj)
+            self.func=_weakref.proxy(func)
 
-		def __call__(self, *arg):
-			return self.func(self.obj, *arg)
+        def __call__(self, *arg):
+            return self.func(self.obj, *arg)
 
-	def __init__(self, mfunc):
-		self.argCount=mfunc.__func__.__code__.co_argcount
+    def __init__(self, mfunc):
+        self.argCount=mfunc.__func__.__code__.co_argcount
+        # Check if function accepts *args (CO_VARARGS = 0x04)
+        self.hasVarArgs=(mfunc.__func__.__code__.co_flags & 0x04)!=0
 
-		if self.argCount>1:
-			self.call=CallBackFunction.__arg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
-		else:
-			self.call=CallBackFunction.__noarg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
+        if self.argCount>1:
+            self.call=CallBackFunction.__arg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
+        else:
+            self.call=CallBackFunction.__noarg_call__(mfunc.__self__.__class__, mfunc.__self__, mfunc.__func__)
 
-	def __call__(self, *arg):
-		return self.call(*arg)
+    def __call__(self, *arg):
+        return self.call(*arg)
 
-	def GetArgumentCount(self):
-		return self.argCount
+    def GetArgumentCount(self):
+        return self.argCount
+
+    if app.ENABLE_ASLAN_MODULAR_ADMIN_PANEL:
+        def HasVarArgs(self):
+            return self.hasVarArgs
 
 class Analyzer:
-	def __init__(self):
-		self.cmdDict={}
+    def __init__(self):
+        self.cmdDict={}
 
-	def SAFE_RegisterCallBack(self, cmd, callBackFunc):
-		self.cmdDict[cmd]=CallBackFunction(callBackFunc)
+    def SAFE_RegisterCallBack(self, cmd, callBackFunc):
+        self.cmdDict[cmd]=CallBackFunction(callBackFunc)
 
-	def Run(self, line):		
-		tokens=line.split()
+    def Run(self, line):
+        tokens=line.split()
 
-		if len(tokens)==0:
-			return 1
+        if len(tokens)==0:
+            return 1
 
-		cmd=tokens.pop(0)
+        cmd=tokens.pop(0)
 
-		try:		
-			callBackFunc=self.cmdDict[cmd]
-		except KeyError:
-			return 0
+        try:
+            callBackFunc=self.cmdDict[cmd]
+        except KeyError:
+            return 0
 
-		argCount=callBackFunc.GetArgumentCount()-1
+        argCount=callBackFunc.GetArgumentCount()-1
 
-		if len(tokens)<argCount:
-			raise RuntimeError("Analyzer.Run(line=%s) - cmd=%s, curArgCount[%d]<needArgCount[%d]" % (line, cmd, len(tokens), argCount))
-			return 0
+        if len(tokens)<argCount:
+            raise RuntimeError("Analyzer.Run(line=%s) - cmd=%s, curArgCount[%d]<needArgCount[%d]" % (line, cmd, len(tokens), argCount))
+            return 0
 
-		tokens=tokens[:argCount]
-		callBackFunc(*tokens)
-		return 1
+        # If function accepts *args, pass all remaining tokens, otherwise limit to argCount
+        if not callBackFunc.HasVarArgs():
+            tokens=tokens[:argCount]
+        callBackFunc(*tokens)
+        return 1
 

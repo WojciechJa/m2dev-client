@@ -30,83 +30,83 @@ VIRTUAL_KEY_SYMBOLS_BR				= "!@#$%^&*()_+|{}:'<>?~aaaaeeeiioooouuc"
 
 # Multi-language hot-reload support
 def LoadLocaleData():
-	"""
-	Reload all game locale text strings from locale_game.txt
+    """
+    Reload all game locale text strings from locale_game.txt
 
-	Called by app.ReloadLocale() when the user changes language.
-	Reloads locale_game.txt and updates all module-level locale strings.
+    Called by app.ReloadLocale() when the user changes language.
+    Reloads locale_game.txt and updates all module-level locale strings.
 
-	Returns:
-		True on success, False on failure
-	"""
-	try:
-		localePath = app.GetLocalePath()
-		localeFilePath = "{:s}/locale_game.txt".format(localePath)
+    Returns:
+        True on success, False on failure
+    """
+    try:
+        localePath = app.GetLocalePath()
+        localeFilePath = "{:s}/locale_game.txt".format(localePath)
 
-		# Reload locale_game.txt - this updates all global variables in this module
-		LoadLocaleFile(localeFilePath, globals())
+        # Reload locale_game.txt - this updates all global variables in this module
+        LoadLocaleFile(localeFilePath, globals())
 
-		return True
-	except:
-		# import dbg
-		# dbg.TraceError("localeInfo.LoadLocaleData failed")
-		return False
+        return True
+    except:
+        # import dbg
+        # dbg.TraceError("localeInfo.LoadLocaleData failed")
+        return False
 
 # Load locale_game.txt
 def LoadLocaleFile(srcFileName, localeDict):
-	def SNA(text):
-		def f(x):
-			return text
-		return f
+    def SNA(text):
+        def f(x):
+            return text
+        return f
 
-	def SA(text):
-		def f(x):
-			return text % x
-		return f
+    def SA(text):
+        def f(x):
+            return text % x
+        return f
 
-	def SAN(text):
-		def f(x):
-			return text % x
-		return f
+    def SAN(text):
+        def f(x):
+            return text % x
+        return f
 
-	def SAA(text):
-		def f(x):
-			return text % x
-		return f
+    def SAA(text):
+        def f(x):
+            return text % x
+        return f
 
-	funcDict = {"SA": SA, "SNA": SNA, "SAA": SAA, "SAN": SAN}
-	lineIndex = 1
+    funcDict = {"SA": SA, "SNA": SNA, "SAA": SAA, "SAN": SAN}
+    lineIndex = 1
 
-	try:
-		lines = pack_open(srcFileName, "r").readlines()
-	except IOError:
-		dbg.LogBox("LoadLocaleError(%(srcFileName)s)" % locals())
-		app.Abort()
+    try:
+        lines = pack_open(srcFileName, "r").readlines()
+    except IOError:
+        dbg.LogBox("LoadLocaleError(%(srcFileName)s)" % locals())
+        app.Abort()
 
-	for line in lines:
-		if line.count("\t") == 0:
-			continue
+    for line in lines:
+        if line.count("\t") == 0:
+            continue
 
-		try:
-			tokens = line[:-1].split("\t")
-			if len(tokens) == 2:
-				localeDict[tokens[0]] = tokens[1]
-			elif len(tokens) >= 3:
-				type = tokens[2].strip()
-				if type:
-					if type in funcDict:
-						localeDict[tokens[0]] = funcDict[type](tokens[1])
-					else:
-						localeDict[tokens[0]] = tokens[1]
-				else:
-					localeDict[tokens[0]] = tokens[1]
-			else:
-				raise RuntimeError("Unknown TokenSize")
+        try:
+            tokens = line[:-1].split("\t")
+            if len(tokens) == 2:
+                localeDict[tokens[0]] = tokens[1]
+            elif len(tokens) >= 3:
+                type = tokens[2].strip()
+                if type:
+                    if type in funcDict:
+                        localeDict[tokens[0]] = funcDict[type](tokens[1])
+                    else:
+                        localeDict[tokens[0]] = tokens[1]
+                else:
+                    localeDict[tokens[0]] = tokens[1]
+            else:
+                raise RuntimeError("Unknown TokenSize")
 
-			lineIndex += 1
-		except:
-			dbg.LogBox("%s: line(%d): %s" % (srcFileName, lineIndex, line), "Error")
-			raise
+            lineIndex += 1
+        except:
+            dbg.LogBox("%s: line(%d): %s" % (srcFileName, lineIndex, line), "Error")
+            raise
 
 LoadLocaleFile("{:s}/locale_game.txt".format(APP_GET_LOCALE_PATH), locals())
 
@@ -117,46 +117,74 @@ try:
 except Exception as e:
     dbg.TraceError("localeInfo: Error loading C++ locale data: %s" % str(e))
 
+if app.ENABLE_ASLAN_MODULAR_ADMIN_PANEL:
+    def LoadLocaleFileAdminPanel(srcFileName, localeDict = locals()):
+        lineIndex = 1
+
+        try:
+            lines = pack_open(srcFileName, "r").readlines()
+        except IOError:
+            return
+
+        for line in lines:
+            try:
+                tokens = line[:-1].split("\t")
+                if len(tokens) == 2:
+                    localeDict[tokens[0]] = tokens[1]
+                else:
+                    raise RuntimeError("Unknown TokenSize")
+
+                lineIndex += 1
+            except:
+                import dbg
+                dbg.LogBox("%s: line(%d): %s" % (srcFileName, lineIndex, line), "Error")
+                raise
+
+    import uiAdminPanel
+    MODULES_LOCALE_PATH = "%s/adminpanel/" % app.GetLocalePath()
+    for key in uiAdminPanel.MODULES_DICT:
+        LoadLocaleFileAdminPanel(MODULES_LOCALE_PATH + uiAdminPanel.MODULES_DICT[key]["modulename"] + ".txt")
+
 # Option pvp messages
 OPTION_PVPMODE_MESSAGE_DICT = {
-	0: PVP_MODE_NORMAL,
-	1: PVP_MODE_REVENGE,
-	2: PVP_MODE_KILL,
-	3: PVP_MODE_PROTECT,
-	4: PVP_MODE_GUILD,
+    0: PVP_MODE_NORMAL,
+    1: PVP_MODE_REVENGE,
+    2: PVP_MODE_KILL,
+    3: PVP_MODE_PROTECT,
+    4: PVP_MODE_GUILD,
 }
 
 # Whisper messages
 WHISPER_ERROR = {
-	1: CANNOT_WHISPER_NOT_LOGON,
-	2: CANNOT_WHISPER_DEST_REFUSE,
-	3: CANNOT_WHISPER_SELF_REFUSE,
+    1: CANNOT_WHISPER_NOT_LOGON,
+    2: CANNOT_WHISPER_DEST_REFUSE,
+    3: CANNOT_WHISPER_SELF_REFUSE,
 }
 
 # Exception of graphic device.
 error = dict(
-	CREATE_WINDOW = GAME_INIT_ERROR_MAIN_WINDOW,
-	CREATE_CURSOR = GAME_INIT_ERROR_CURSOR,
-	CREATE_NETWORK = GAME_INIT_ERROR_NETWORK,
-	CREATE_ITEM_PROTO = GAME_INIT_ERROR_ITEM_PROTO,
-	CREATE_MOB_PROTO = GAME_INIT_ERROR_MOB_PROTO,
-	CREATE_NO_DIRECTX = GAME_INIT_ERROR_DIRECTX,
-	CREATE_DEVICE = GAME_INIT_ERROR_GRAPHICS_NOT_EXIST,
-	CREATE_NO_APPROPRIATE_DEVICE = GAME_INIT_ERROR_GRAPHICS_BAD_PERFORMANCE,
-	CREATE_FORMAT = GAME_INIT_ERROR_GRAPHICS_NOT_SUPPORT_32BIT,
-	NO_ERROR = str()
+    CREATE_WINDOW = GAME_INIT_ERROR_MAIN_WINDOW,
+    CREATE_CURSOR = GAME_INIT_ERROR_CURSOR,
+    CREATE_NETWORK = GAME_INIT_ERROR_NETWORK,
+    CREATE_ITEM_PROTO = GAME_INIT_ERROR_ITEM_PROTO,
+    CREATE_MOB_PROTO = GAME_INIT_ERROR_MOB_PROTO,
+    CREATE_NO_DIRECTX = GAME_INIT_ERROR_DIRECTX,
+    CREATE_DEVICE = GAME_INIT_ERROR_GRAPHICS_NOT_EXIST,
+    CREATE_NO_APPROPRIATE_DEVICE = GAME_INIT_ERROR_GRAPHICS_BAD_PERFORMANCE,
+    CREATE_FORMAT = GAME_INIT_ERROR_GRAPHICS_NOT_SUPPORT_32BIT,
+    NO_ERROR = str()
 )
 
 # Job information (none, skill_group1, skill_group2)
 JOBINFO_TITLE = [
-	[JOB_WARRIOR0, JOB_WARRIOR1, JOB_WARRIOR2,],
-	[JOB_ASSASSIN0, JOB_ASSASSIN1, JOB_ASSASSIN2,],
-	[JOB_SURA0, JOB_SURA1, JOB_SURA2,],
-	[JOB_SHAMAN0, JOB_SHAMAN1, JOB_SHAMAN2,],
+    [JOB_WARRIOR0, JOB_WARRIOR1, JOB_WARRIOR2,],
+    [JOB_ASSASSIN0, JOB_ASSASSIN1, JOB_ASSASSIN2,],
+    [JOB_SURA0, JOB_SURA1, JOB_SURA2,],
+    [JOB_SHAMAN0, JOB_SHAMAN1, JOB_SHAMAN2,],
 ]
 
 #if app.ENABLE_WOLFMAN_CHARACTER:
-	#JOBINFO_TITLE += [[JOB_WOLFMAN0,JOB_WOLFMAN1,JOB_WOLFMAN2,],]
+    #JOBINFO_TITLE += [[JOB_WOLFMAN0,JOB_WOLFMAN1,JOB_WOLFMAN2,],]
 
 # Guild war description
 GUILDWAR_NORMAL_DESCLIST = 					(GUILD_WAR_USE_NORMAL_MAP, GUILD_WAR_LIMIT_30MIN, GUILD_WAR_WIN_CHECK_SCORE)
@@ -177,259 +205,259 @@ HEALTH_LIST = 								(HORSE_HEALTH0, HORSE_HEALTH1, HORSE_HEALTH2, HORSE_HEALTH
 
 # Use-skill messages
 USE_SKILL_ERROR_TAIL_DICT = {	
-	'IN_SAFE':								CANNOT_SKILL_SELF_IN_SAFE,
-	'NEED_TARGET': 							CANNOT_SKILL_NEED_TARGET,
-	'NEED_EMPTY_BOTTLE': 					CANNOT_SKILL_NEED_EMPTY_BOTTLE,
-	'NEED_POISON_BOTTLE': 					CANNOT_SKILL_NEED_POISON_BOTTLE,
-	'REMOVE_FISHING_ROD': 					CANNOT_SKILL_REMOVE_FISHING_ROD,
-	'NOT_YET_LEARN': 						CANNOT_SKILL_NOT_YET_LEARN,
-	'NOT_MATCHABLE_WEAPON':					CANNOT_SKILL_NOT_MATCHABLE_WEAPON,
-	'WAIT_COOLTIME':						CANNOT_SKILL_WAIT_COOLTIME,
-	'NOT_ENOUGH_HP':						CANNOT_SKILL_NOT_ENOUGH_HP,
-	'NOT_ENOUGH_SP':						CANNOT_SKILL_NOT_ENOUGH_SP,
-	'CANNOT_USE_SELF':						CANNOT_SKILL_USE_SELF,
-	'ONLY_FOR_ALLIANCE': 					CANNOT_SKILL_ONLY_FOR_ALLIANCE,
-	'CANNOT_ATTACK_ENEMY_IN_SAFE_AREA':		CANNOT_SKILL_DEST_IN_SAFE,
-	'CANNOT_APPROACH':						CANNOT_SKILL_APPROACH,
-	'CANNOT_ATTACK':						CANNOT_SKILL_ATTACK,
-	'ONLY_FOR_CORPSE':						CANNOT_SKILL_ONLY_FOR_CORPSE,
-	'EQUIP_FISHING_ROD':					CANNOT_SKILL_EQUIP_FISHING_ROD, 
-	'NOT_HORSE_SKILL':						CANNOT_SKILL_NOT_HORSE_SKILL,
-	'HAVE_TO_RIDE':							CANNOT_SKILL_HAVE_TO_RIDE,
+    'IN_SAFE':								CANNOT_SKILL_SELF_IN_SAFE,
+    'NEED_TARGET': 							CANNOT_SKILL_NEED_TARGET,
+    'NEED_EMPTY_BOTTLE': 					CANNOT_SKILL_NEED_EMPTY_BOTTLE,
+    'NEED_POISON_BOTTLE': 					CANNOT_SKILL_NEED_POISON_BOTTLE,
+    'REMOVE_FISHING_ROD': 					CANNOT_SKILL_REMOVE_FISHING_ROD,
+    'NOT_YET_LEARN': 						CANNOT_SKILL_NOT_YET_LEARN,
+    'NOT_MATCHABLE_WEAPON':					CANNOT_SKILL_NOT_MATCHABLE_WEAPON,
+    'WAIT_COOLTIME':						CANNOT_SKILL_WAIT_COOLTIME,
+    'NOT_ENOUGH_HP':						CANNOT_SKILL_NOT_ENOUGH_HP,
+    'NOT_ENOUGH_SP':						CANNOT_SKILL_NOT_ENOUGH_SP,
+    'CANNOT_USE_SELF':						CANNOT_SKILL_USE_SELF,
+    'ONLY_FOR_ALLIANCE': 					CANNOT_SKILL_ONLY_FOR_ALLIANCE,
+    'CANNOT_ATTACK_ENEMY_IN_SAFE_AREA':		CANNOT_SKILL_DEST_IN_SAFE,
+    'CANNOT_APPROACH':						CANNOT_SKILL_APPROACH,
+    'CANNOT_ATTACK':						CANNOT_SKILL_ATTACK,
+    'ONLY_FOR_CORPSE':						CANNOT_SKILL_ONLY_FOR_CORPSE,
+    'EQUIP_FISHING_ROD':					CANNOT_SKILL_EQUIP_FISHING_ROD,
+    'NOT_HORSE_SKILL':						CANNOT_SKILL_NOT_HORSE_SKILL,
+    'HAVE_TO_RIDE':							CANNOT_SKILL_HAVE_TO_RIDE,
 }
 
 # Notify messages
 NOTIFY_MESSAGE = {
-	'CANNOT_EQUIP_SHOP': 					CANNOT_EQUIP_IN_SHOP,
-	'CANNOT_EQUIP_EXCHANGE': 				CANNOT_EQUIP_IN_EXCHANGE,
+    'CANNOT_EQUIP_SHOP': 					CANNOT_EQUIP_IN_SHOP,
+    'CANNOT_EQUIP_EXCHANGE': 				CANNOT_EQUIP_IN_EXCHANGE,
 }
 
 # Attack messages
 ATTACK_ERROR_TAIL_DICT = {
-	'IN_SAFE': 								CANNOT_ATTACK_SELF_IN_SAFE,
-	'DEST_IN_SAFE': 						CANNOT_ATTACK_DEST_IN_SAFE,
+    'IN_SAFE': 								CANNOT_ATTACK_SELF_IN_SAFE,
+    'DEST_IN_SAFE': 						CANNOT_ATTACK_DEST_IN_SAFE,
 }
 
 # Shot messages
 SHOT_ERROR_TAIL_DICT = {
-	'EMPTY_ARROW': 							CANNOT_SHOOT_EMPTY_ARROW,
-	'IN_SAFE':								CANNOT_SHOOT_SELF_IN_SAFE,
-	'DEST_IN_SAFE':							CANNOT_SHOOT_DEST_IN_SAFE,
+    'EMPTY_ARROW': 							CANNOT_SHOOT_EMPTY_ARROW,
+    'IN_SAFE':								CANNOT_SHOOT_SELF_IN_SAFE,
+    'DEST_IN_SAFE':							CANNOT_SHOOT_DEST_IN_SAFE,
 }
 
 # Skill messages
 USE_SKILL_ERROR_CHAT_DICT = {	
-	'NEED_EMPTY_BOTTLE': 					SKILL_NEED_EMPTY_BOTTLE,
-	'NEED_POISON_BOTTLE': 					SKILL_NEED_POISON_BOTTLE, 
-	'ONLY_FOR_GUILD_WAR': 					SKILL_ONLY_FOR_GUILD_WAR,
+    'NEED_EMPTY_BOTTLE': 					SKILL_NEED_EMPTY_BOTTLE,
+    'NEED_POISON_BOTTLE': 					SKILL_NEED_POISON_BOTTLE,
+    'ONLY_FOR_GUILD_WAR': 					SKILL_ONLY_FOR_GUILD_WAR,
 }
 
 # Shop/private-shop messages
 SHOP_ERROR_DICT = {
-	'NOT_ENOUGH_MONEY': 					SHOP_NOT_ENOUGH_MONEY,
-	'SOLDOUT': 								SHOP_SOLDOUT,
-	'INVENTORY_FULL': 						SHOP_INVENTORY_FULL,
-	'INVALID_POS': 							SHOP_INVALID_POS,
-	'NOT_ENOUGH_MONEY_EX': 					SHOP_NOT_ENOUGH_MONEY_EX,
+    'NOT_ENOUGH_MONEY': 					SHOP_NOT_ENOUGH_MONEY,
+    'SOLDOUT': 								SHOP_SOLDOUT,
+    'INVENTORY_FULL': 						SHOP_INVENTORY_FULL,
+    'INVALID_POS': 							SHOP_INVALID_POS,
+    'NOT_ENOUGH_MONEY_EX': 					SHOP_NOT_ENOUGH_MONEY_EX,
 }
 
 # Character status description
 STAT_MINUS_DESCRIPTION = {
-	'HTH-': 								STAT_MINUS_CON,
-	'INT-': 								STAT_MINUS_INT,
-	'STR-': 								STAT_MINUS_STR,
-	'DEX-': 								STAT_MINUS_DEX,
+    'HTH-': 								STAT_MINUS_CON,
+    'INT-': 								STAT_MINUS_INT,
+    'STR-': 								STAT_MINUS_STR,
+    'DEX-': 								STAT_MINUS_DEX,
 }
 
 # MR-11: Complete map name list
 # Map names
 MINIMAP_ZONE_NAME_DICT = {
-	'metin2_map_a1': 						MAP_A1,
-	'map_a2': 								MAP_A2,
-	'metin2_map_a3': 						MAP_A3,
-	'metin2_map_b1': 						MAP_B1,
-	'map_b2': 								MAP_B2,
-	'metin2_map_b3': 						MAP_B3,
-	'metin2_map_c1': 						MAP_C1,
-	'map_c2': 								MAP_C2,
-	'metin2_map_c3': 						MAP_C3,
-	'map_n_snowm_01': 						MAP_SNOW,
-	'metin2_map_n_flame_01': 				MAP_FLAME,
-	'metin2_map_n_desert_01': 				MAP_DESERT,
-	'metin2_map_milgyo': 					MAP_TEMPLE,
-	'metin2_map_monkeydungeon': 			MAP_MONKEY_DUNGEON,
-	'metin2_map_monkeydungeon_02': 			MAP_MONKEY_DUNGEON2,
-	'metin2_map_monkeydungeon_03': 			MAP_MONKEY_DUNGEON3,
-	'metin2_map_spiderdungeon': 			MAP_SPIDER,
-	'metin2_map_spiderdungeon_02': 			MAP_SPIDERDUNGEON_02,
-	'metin2_map_spiderdungeon_03': 			MAP_SPIDERDUNGEON_03,
-	'metin2_map_deviltower1': 				MAP_DEVILTOWER1,
-	'metin2_map_devilsCatacomb': 			MAP_DEVILCATACOMB,
-	'metin2_map_guild_01': 					MAP_GUILD_01,
-	'metin2_map_guild_02': 					MAP_GUILD_02,
-	'metin2_map_guild_03': 					MAP_GUILD_03,
-	'metin2_guild_village_01':				GUILD_VILLAGE_01,
-	'metin2_guild_village_02':				GUILD_VILLAGE_02,
-	'metin2_guild_village_03':				GUILD_VILLAGE_03,
-	'metin2_map_trent': 					MAP_TREE,
-	'metin2_map_trent02': 					MAP_TREE2,
-	'season1/metin2_map_WL_01': 			MAP_WL,
-	'season1/metin2_map_nusluck01': 		MAP_NUSLUCK,
-	'season1/metin2_map_oxevent': 			MAP_OXEVENT,
-	'metin2_map_wedding_01': 				MAP_WEDDING_01,
-	'metin2_map_bf': 						MAP_BATTLE_FIELD,
-	'metin2_map_bf_02': 					MAP_BATTLE_FIELD,
-	'metin2_map_bf_03': 					MAP_BATTLE_FIELD,
-	'Metin2_map_CapeDragonHead': 			MAP_CAPE,
-	'metin2_map_Mt_Thunder': 				MAP_THUNDER,
-	'metin2_map_dawnmistwood': 				MAP_DAWN,
-	'metin2_map_BayBlackSand': 				MAP_BAY,
-	'metin2_map_n_flame_dungeon_01': 		MAP_N_FLAME_DUNGEON_01,
-	'metin2_map_n_snow_dungeon_01': 		MAP_N_SNOW_DUNGEON_01,
-	'metin2_map_duel': 						MAP_DUEL,
-	'season2/metin2_map_skipia_dungeon_01': MAP_SKIPIA_DUNGEON_01,
-	'metin2_map_skipia_dungeon_02': 		MAP_SKIPIA_DUNGEON_02,
-	'metin2_map_skipia_dungeon_boss': 		MAP_SKIPIA_DUNGEON_BOSS,
-	'metin2_map_skipia_dungeon_boss2': 		MAP_SKIPIA_DUNGEON_BOSS_2,
+    'metin2_map_a1': 						MAP_A1,
+    'map_a2': 								MAP_A2,
+    'metin2_map_a3': 						MAP_A3,
+    'metin2_map_b1': 						MAP_B1,
+    'map_b2': 								MAP_B2,
+    'metin2_map_b3': 						MAP_B3,
+    'metin2_map_c1': 						MAP_C1,
+    'map_c2': 								MAP_C2,
+    'metin2_map_c3': 						MAP_C3,
+    'map_n_snowm_01': 						MAP_SNOW,
+    'metin2_map_n_flame_01': 				MAP_FLAME,
+    'metin2_map_n_desert_01': 				MAP_DESERT,
+    'metin2_map_milgyo': 					MAP_TEMPLE,
+    'metin2_map_monkeydungeon': 			MAP_MONKEY_DUNGEON,
+    'metin2_map_monkeydungeon_02': 			MAP_MONKEY_DUNGEON2,
+    'metin2_map_monkeydungeon_03': 			MAP_MONKEY_DUNGEON3,
+    'metin2_map_spiderdungeon': 			MAP_SPIDER,
+    'metin2_map_spiderdungeon_02': 			MAP_SPIDERDUNGEON_02,
+    'metin2_map_spiderdungeon_03': 			MAP_SPIDERDUNGEON_03,
+    'metin2_map_deviltower1': 				MAP_DEVILTOWER1,
+    'metin2_map_devilsCatacomb': 			MAP_DEVILCATACOMB,
+    'metin2_map_guild_01': 					MAP_GUILD_01,
+    'metin2_map_guild_02': 					MAP_GUILD_02,
+    'metin2_map_guild_03': 					MAP_GUILD_03,
+    'metin2_guild_village_01':				GUILD_VILLAGE_01,
+    'metin2_guild_village_02':				GUILD_VILLAGE_02,
+    'metin2_guild_village_03':				GUILD_VILLAGE_03,
+    'metin2_map_trent': 					MAP_TREE,
+    'metin2_map_trent02': 					MAP_TREE2,
+    'season1/metin2_map_WL_01': 			MAP_WL,
+    'season1/metin2_map_nusluck01': 		MAP_NUSLUCK,
+    'season1/metin2_map_oxevent': 			MAP_OXEVENT,
+    'metin2_map_wedding_01': 				MAP_WEDDING_01,
+    'metin2_map_bf': 						MAP_BATTLE_FIELD,
+    'metin2_map_bf_02': 					MAP_BATTLE_FIELD,
+    'metin2_map_bf_03': 					MAP_BATTLE_FIELD,
+    'Metin2_map_CapeDragonHead': 			MAP_CAPE,
+    'metin2_map_Mt_Thunder': 				MAP_THUNDER,
+    'metin2_map_dawnmistwood': 				MAP_DAWN,
+    'metin2_map_BayBlackSand': 				MAP_BAY,
+    'metin2_map_n_flame_dungeon_01': 		MAP_N_FLAME_DUNGEON_01,
+    'metin2_map_n_snow_dungeon_01': 		MAP_N_SNOW_DUNGEON_01,
+    'metin2_map_duel': 						MAP_DUEL,
+    'season2/metin2_map_skipia_dungeon_01': MAP_SKIPIA_DUNGEON_01,
+    'metin2_map_skipia_dungeon_02': 		MAP_SKIPIA_DUNGEON_02,
+    'metin2_map_skipia_dungeon_boss': 		MAP_SKIPIA_DUNGEON_BOSS,
+    'metin2_map_skipia_dungeon_boss2': 		MAP_SKIPIA_DUNGEON_BOSS_2,
 }
 # MR-11: -- END OF -- Complete map name list
 
 # Path of quest icon file
 def GetLetterImageName():
-	return "season1/icon/scroll_close.tga"
+    return "season1/icon/scroll_close.tga"
 
 def GetLetterOpenImageName():
-	return "season1/icon/scroll_open.tga"
+    return "season1/icon/scroll_open.tga"
 
 def GetLetterCloseImageName():
-	return "season1/icon/scroll_close.tga"
+    return "season1/icon/scroll_close.tga"
 
 # Sell item question
 def DO_YOU_SELL_ITEM(sellItemName, sellItemCount, sellItemPrice):
-	return DO_YOU_SELL_ITEM2 % (sellItemName, sellItemCount, NumberToMoneyString(sellItemPrice)) if (sellItemCount > 1) else DO_YOU_SELL_ITEM1 % (sellItemName, NumberToMoneyString(sellItemPrice))
+    return DO_YOU_SELL_ITEM2 % (sellItemName, sellItemCount, NumberToMoneyString(sellItemPrice)) if (sellItemCount > 1) else DO_YOU_SELL_ITEM1 % (sellItemName, NumberToMoneyString(sellItemPrice))
 
 # Buy item question
 def DO_YOU_BUY_ITEM(buyItemName, buyItemCount, buyItemPrice):
-	return DO_YOU_BUY_ITEM2 % (buyItemName, buyItemCount, buyItemPrice) if (buyItemCount > 1) else DO_YOU_BUY_ITEM1 % (buyItemName, buyItemPrice)
+    return DO_YOU_BUY_ITEM2 % (buyItemName, buyItemCount, buyItemPrice) if (buyItemCount > 1) else DO_YOU_BUY_ITEM1 % (buyItemName, buyItemPrice)
 
 # Notify when you can't attach a specific item.
 def REFINE_FAILURE_CAN_NOT_ATTACH(attachedItemName):
-	return REFINE_FAILURE_CAN_NOT_ATTACH0 % (attachedItemName)
+    return REFINE_FAILURE_CAN_NOT_ATTACH0 % (attachedItemName)
 
 def REFINE_FAILURE_NO_SOCKET(attachedItemName):
-	return REFINE_FAILURE_NO_SOCKET0 % (attachedItemName)
+    return REFINE_FAILURE_NO_SOCKET0 % (attachedItemName)
 
 # Drop item question
 def REFINE_FAILURE_NO_GOLD_SOCKET(attachedItemName):
-	return REFINE_FAILURE_NO_GOLD_SOCKET0 % (attachedItemName)
+    return REFINE_FAILURE_NO_GOLD_SOCKET0 % (attachedItemName)
 
 # Drop item question
 def HOW_MANY_ITEM_DO_YOU_DROP(dropItemName, dropItemCount):
-	return HOW_MANY_ITEM_DO_YOU_DROP2 % (dropItemName, dropItemCount) if (dropItemCount > 1) else HOW_MANY_ITEM_DO_YOU_DROP1 % (dropItemName)
+    return HOW_MANY_ITEM_DO_YOU_DROP2 % (dropItemName, dropItemCount) if (dropItemCount > 1) else HOW_MANY_ITEM_DO_YOU_DROP1 % (dropItemName)
 
 # Fishing notify when looks like the fish is hooked.
 def FISHING_NOTIFY(isFish, fishName):
-	return FISHING_NOTIFY1 % (fishName) if isFish else FISHING_NOTIFY2 % (fishName)
+    return FISHING_NOTIFY1 % (fishName) if isFish else FISHING_NOTIFY2 % (fishName)
 
 # Fishing notify when you capture a fish.
 def FISHING_SUCCESS(isFish, fishName):
-	return FISHING_SUCCESS1 % (fishName) if isFish else FISHING_SUCCESS2 % (fishName)
+    return FISHING_SUCCESS1 % (fishName) if isFish else FISHING_SUCCESS2 % (fishName)
 
 # Convert a integer amount into a string and add . as separator for money.
 def NumberToMoneyString(n):
-	return '0 {:s}'.format(MONETARY_UNIT0) if (n <= 0) else '{:s} {:s}'.format('.'.join([(i - 3) < 0 and str(n)[:i] or str(n)[i - 3 : i] for i in range(len(str(n)) % 3, len(str(n)) + 1, 3) if i]), MONETARY_UNIT0)
+    return '0 {:s}'.format(MONETARY_UNIT0) if (n <= 0) else '{:s} {:s}'.format('.'.join([(i - 3) < 0 and str(n)[:i] or str(n)[i - 3 : i] for i in range(len(str(n)) % 3, len(str(n)) + 1, 3) if i]), MONETARY_UNIT0)
 
 # Convert a integer amount into a string and add . as separator for secondary coin.
 def NumberToSecondaryCoinString(n):
-	return '0 {:s}'.format(MONETARY_UNIT_JUN) if (n <= 0) else '{:s} {:s}'.format('.'.join([(i - 3) < 0 and str(n)[:i] or str(n)[i - 3: i] for i in range(len(str(n)) % 3, len(str(n)) + 1, 3) if i]), MONETARY_UNIT_JUN)
+    return '0 {:s}'.format(MONETARY_UNIT_JUN) if (n <= 0) else '{:s} {:s}'.format('.'.join([(i - 3) < 0 and str(n)[:i] or str(n)[i - 3: i] for i in range(len(str(n)) % 3, len(str(n)) + 1, 3) if i]), MONETARY_UNIT_JUN)
 
 # Return the title of alignment by points.
 def GetAlignmentTitleName(alignment):
-	if alignment >= 12000:
-		return TITLE_NAME_LIST[0]
-	elif alignment >= 8000:
-		return TITLE_NAME_LIST[1]
-	elif alignment >= 4000:
-		return TITLE_NAME_LIST[2]
-	elif alignment >= 1000:
-		return TITLE_NAME_LIST[3]
-	elif alignment >= 0:
-		return TITLE_NAME_LIST[4]
-	elif alignment > -4000:
-		return TITLE_NAME_LIST[5]
-	elif alignment > -8000:
-		return TITLE_NAME_LIST[6]
-	elif alignment > -12000:
-		return TITLE_NAME_LIST[7]
+    if alignment >= 12000:
+        return TITLE_NAME_LIST[0]
+    elif alignment >= 8000:
+        return TITLE_NAME_LIST[1]
+    elif alignment >= 4000:
+        return TITLE_NAME_LIST[2]
+    elif alignment >= 1000:
+        return TITLE_NAME_LIST[3]
+    elif alignment >= 0:
+        return TITLE_NAME_LIST[4]
+    elif alignment > -4000:
+        return TITLE_NAME_LIST[5]
+    elif alignment > -8000:
+        return TITLE_NAME_LIST[6]
+    elif alignment > -12000:
+        return TITLE_NAME_LIST[7]
 
-	return TITLE_NAME_LIST[8]
+    return TITLE_NAME_LIST[8]
 
 # Convert seconds to Days-Hours-Minutes
 def SecondToDHM(time):
-	if time < 60:
-		return '0' + MINUTE
+    if time < 60:
+        return '0' + MINUTE
 
-	minute = (time // 60) % 60
-	hour = ((time // 60) // 60) % 24
-	day = ((time // 60) // 60) // 24
+    minute = (time // 60) % 60
+    hour = ((time // 60) // 60) % 24
+    day = ((time // 60) // 60) // 24
 
-	text = ''
+    text = ''
 
-	if day > 0:
-		text += str(day) + DAY
-		text += ' '
+    if day > 0:
+        text += str(day) + DAY
+        text += ' '
 
-	if hour > 0:
-		text += str(hour) + HOUR
-		text += ' '
+    if hour > 0:
+        text += str(hour) + HOUR
+        text += ' '
 
-	if minute > 0:
-		text += str(minute) + MINUTE
-	return text
+    if minute > 0:
+        text += str(minute) + MINUTE
+    return text
 
 # Convert seconds to Hours-Minutes
 def SecondToHM(time):
-	if time < 60:
-		return '0' + MINUTE
+    if time < 60:
+        return '0' + MINUTE
 
-	minute = (time // 60) % 60
-	hour = (time // 60) // 60
+    minute = (time // 60) % 60
+    hour = (time // 60) // 60
 
-	text = ''
-	if hour > 0:
-		text += str(hour) + HOUR
-		if hour > 0:
-			text += ' '
+    text = ''
+    if hour > 0:
+        text += str(hour) + HOUR
+        if hour > 0:
+            text += ' '
 
-	if minute > 0:
-		text += str(minute) + MINUTE
-	return text
+    if minute > 0:
+        text += str(minute) + MINUTE
+    return text
 
 # Convert seconds to Days-Hours-Minutes-Seconds in real time
 def RTSecondToDHMS(time):
-	text = ""
+    text = ""
 
-	d = time // (24 * 3600)
-	time %= (24 * 3600)
-	h = time // 3600
-	time %= 3600
-	m = time // 60
-	s = time % 60
+    d = time // (24 * 3600)
+    time %= (24 * 3600)
+    h = time // 3600
+    time %= 3600
+    m = time // 60
+    s = time % 60
 
-	if d or not text:
-		if d:
-			text += str(d) + " " + DAY + (", " if h or m or s else "")
+    if d or not text:
+        if d:
+            text += str(d) + " " + DAY + (", " if h or m or s else "")
 
-	if h or not text:
-		if h:
-			text += str(h) + " " + HOUR + (", " if m or s else "")
+    if h or not text:
+        if h:
+            text += str(h) + " " + HOUR + (", " if m or s else "")
 
-	if m or not text:
-		if m:
-			text += str(m) + " " + MINUTE + (", " if s else "")
+    if m or not text:
+        if m:
+            text += str(m) + " " + MINUTE + (", " if s else "")
 
-	if s or not text:
-		if s:
-			text += str(s) + " " + SECOND
+    if s or not text:
+        if s:
+            text += str(s) + " " + SECOND
 
-	return text.strip()
+    return text.strip()
