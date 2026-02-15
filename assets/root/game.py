@@ -758,7 +758,6 @@ class GameWindow(ui.ScriptWindow):
 
 		if chr.NEW_AFFECT_DRAGON_SOUL_DECK1 == type or chr.NEW_AFFECT_DRAGON_SOUL_DECK2 == type:
 			self.interface.DragonSoulActivate(type - chr.NEW_AFFECT_DRAGON_SOUL_DECK1)
-
 		elif chr.NEW_AFFECT_DRAGON_SOUL_QUALIFIED == type:
 			self.BINARY_DragonSoulGiveQuilification()
 

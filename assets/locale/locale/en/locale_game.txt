@@ -708,6 +708,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Magical Attack Value +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Magical Defence +%d	SA
 TOOLTIP_MALL_ATTBONUS	Attack Value +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Attack Value +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Attack speed raised +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	A hand that picks up dropped Yang automatically	SNA
 TOOLTIP_MALL_DEFBONUS	Defence +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Defence +12~15%	SNA

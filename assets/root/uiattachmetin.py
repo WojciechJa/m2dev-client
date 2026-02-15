@@ -36,17 +36,21 @@ class AttachMetinDialog(ui.ScriptWindow):
 			exception.Abort("AttachStoneDialog.__LoadScript.BindObject")
 
 		oldToolTip = uiToolTip.ItemToolTip()
+
 		oldToolTip.SetParent(self)
 		oldToolTip.SetPosition(15, 38)
 		oldToolTip.SetFollow(False)
 		oldToolTip.Show()
+
 		self.oldToolTip = oldToolTip
 
 		newToolTip = uiToolTip.ItemToolTip()
+
 		newToolTip.SetParent(self)
 		newToolTip.SetPosition(230 + 20, 38)
 		newToolTip.SetFollow(False)
 		newToolTip.Show()
+
 		self.newToolTip = newToolTip
 
 		self.titleBar.SetCloseEvent(ui.__mem_func__(self.Close))
@@ -88,24 +92,37 @@ class AttachMetinDialog(ui.ScriptWindow):
 		except:
 			dbg.TraceError("AttachMetinDialog.Open.LoadImage - Failed to find item data")
 
+		# MR-12: Fix attribute and metin socket order display in tooltip
+		# Get actual item attributes/bonuses for display
+		attrSlot = []
+
+		for i in range(player.ATTRIBUTE_SLOT_MAX_NUM):
+			attrSlot.append(player.GetItemAttribute(targetItemPos, i))
+
 		metinSlot = []
+
 		for i in range(player.METIN_SOCKET_MAX_NUM):
 			metinSlot.append(player.GetItemMetinSocket(targetItemPos, i))
+
 		for i in range(player.METIN_SOCKET_MAX_NUM):
 			slotData = metinSlot[i]
+
 			if self.CanAttachMetin(slotData, metinSubType):
 				metinSlot[i] = metinIndex
-				break
-		self.newToolTip.AddItemData(itemIndex, metinSlot)
 
+				break
+
+		self.newToolTip.AddItemData(itemIndex, metinSlot, attrSlot)
 		item.SelectItem(metinIndex)
 
 		metinSlot = []
+
 		for i in range(player.METIN_SOCKET_MAX_NUM):
 			metinSlot.append(player.GetItemMetinSocket(targetItemPos, i))
 
 		self.oldToolTip.ResizeToolTipWidth(self.newToolTip.GetWidth())
-		self.oldToolTip.AddItemData(itemIndex, metinSlot)
+		self.oldToolTip.AddItemData(itemIndex, metinSlot, attrSlot)
+		# MR-12: -- END OF -- Fix attribute and metin socket order display in tooltip
 
 		self.UpdateDialog()
 		self.SetTop()

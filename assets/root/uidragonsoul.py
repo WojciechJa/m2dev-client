@@ -702,7 +702,15 @@ class DragonSoulWindow(ui.ScriptWindow):
 			deckIndex = self.deckPageIndex
 
 		if not self.isActivated or self.deckPageIndex != deckIndex:
-			if self.__CanActivateDeck():
+			# MR-12: Improve keyboard shortcut functionality for deck toggling
+			if self.deckPageIndex != deckIndex:
+				self.deckPageIndex = deckIndex
+				self.deckTab[deckIndex].Down()
+				self.deckTab[(deckIndex + 1) % 2].SetUp()
+				self.RefreshEquipSlotWindow()
+
+			# Now validate the deck we switched to
+			if self.__CanActivateDeck(deckIndex):
 				net.SendChatPacket("/dragon_soul activate " + str(deckIndex))
 
 				self.isActivated = True
@@ -712,18 +720,31 @@ class DragonSoulWindow(ui.ScriptWindow):
 			else:
 				self.isActivated = False
 				self.activateButton.SetUp()
+	# MR-12: -- END OF -- Improve keyboard shortcut functionality for deck toggling
 		else:
 			net.SendChatPacket("/dragon_soul deactivate")
 			self.isActivated = False
 			self.activateButton.SetUp()
+
+			# Clear the tooltip cache when deactivating
+			if self.tooltipItem:
+				self.tooltipItem.ClearDragonSoulTimeCache()
 	# MR-3: -- END OF -- Keyboard-enabled deck toggling
 
-	def __CanActivateDeck(self):
+	# MR-12: Fix activation of decks with expired dragon souls
+	def __CanActivateDeck(self, deckIndex = None):
+		# If deckIndex not specified, check the current deck page
+		if deckIndex is None:
+			deckIndex = self.deckPageIndex
+
 		canActiveNum = 0
 
 		for i in range(6):
-			slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(player.INVENTORY, player.DRAGON_SOUL_EQUIPMENT_SLOT_START + i)
-			itemVnum = player.GetItemIndex(slotNumber)
+			# Calculate the slot number for the specified deck
+			equipSlotPos = player.DRAGON_SOUL_EQUIPMENT_SLOT_START + deckIndex * player.DRAGON_SOUL_EQUIPMENT_FIRST_SIZE + i
+			slotNumber = equipSlotPos
+			itemVnum = player.GetItemIndex(player.INVENTORY, slotNumber)
+	# MR-12: -- END OF -- Fix activation of decks with expired dragon souls
 			
 			if itemVnum != 0:
 				item.SelectItem(itemVnum)

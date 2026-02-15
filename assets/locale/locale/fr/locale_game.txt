@@ -708,6 +708,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Valeur d'attaque magique +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Défense magique +%d	SA
 TOOLTIP_MALL_ATTBONUS	Valeur d'attaque +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Valeur d'attaque +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Vitesse d'attaque augmentée +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Une main qui ramasse les Yangs automatiquement. 	SNA
 TOOLTIP_MALL_DEFBONUS	Défense +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Défense +12~15%	SNA

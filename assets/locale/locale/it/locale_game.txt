@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Valore d'attacco magico +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Difesa magica +%d	SA
 TOOLTIP_MALL_ATTBONUS	Valore d'attacco +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Valore d'attacco +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Velocità di attacco aumentata +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Drop di Yang vengono raccolti automaticamete.	SNA
 TOOLTIP_MALL_DEFBONUS	Difesa +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Difesa +12~15%	SNA

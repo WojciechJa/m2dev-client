@@ -802,6 +802,7 @@ TOOLTIP_MAGIC_ATT_GRADE	قيمة الهجوم السحري +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	دفاع سحري +%d	SA
 TOOLTIP_MALL_ATTBONUS	قيمة الهجوم +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	قيمة الهجوم	SNA
+TOOLTIP_MALL_ATT_SPEED	ارتفاع سرعة الهجوم +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	سيتم تلقائياً تسجيل اليانغ.	SNA
 TOOLTIP_MALL_DEFBONUS	الدفاع +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	دفاع	SNA

@@ -722,6 +722,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Valor de Ataque Mágico: +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Defesa vs Magias: +%d	SA
 TOOLTIP_MALL_ATTBONUS	Valor de Ataque: +%d	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Valor de Ataque: +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Aumento da Velocidade de Ataque +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Mão que apanha automaticamente o Yang caído.	SNA
 TOOLTIP_MALL_DEFBONUS	Defesa: +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Defesa: +12~15%	SNA

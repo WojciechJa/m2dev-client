@@ -7,12 +7,13 @@ This repository contains all client-side data, including locale files, configura
 ## 📋 Changelog
 
 ### 🐛 Bug Fixes
- - **Python 3 division compatibility**: Migrated a lot of divisions in a lot of files to `int` divisions instead of `floats` for Python 3 compatibility. This will be fixing a lot of bugs caused by the upgrade such as target board button centering, Dragon stones Grade in tooltip and more.
- - **Completed the map names dictionary**: This improves functionality for all maps within the client, and fixes **the "invisible affects in dungeon" bug!
- - **Dragon stone countdown in tooltip**: The countdown auto-starts and responds perfectly to all situations without waiting for the "first hover" from the player.
- - **Quest refreshing**: Prevented the quest letters from appearing on top of the dialog curtain (if currently chatting with an NPC or item).
- - **Minor translation improvements**
- - **Several missing item icons added**
+ - **Refining**: The window now sorts empty slots (from broken stones) to the end of the list, displaying an exact preview of how the item will look like after successful attaching.
+ - **Affects**: Added affect shower support for Mall Attack Speed.
+ - **Dragonsoul Alchemy**:
+   - Fixed the deck affect countdown not auto-updating when time is increased in one of the equipped items.
+   - Fixed the affect countdown requiring a check for remaining time in 500ms-intervals.
+   - The window now opens without the player being qualified (consistency with the official).
+ - **Spirit stone attachment**: The window now displays the item's existing attributes. 
 
 <br>
 <br>

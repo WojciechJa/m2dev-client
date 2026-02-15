@@ -710,6 +710,7 @@ TOOLTIP_MAGIC_ATT_GRADE	Wartość Magicznego Ataku: +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	Magiczna Obrona: +%d	SA
 TOOLTIP_MALL_ATTBONUS	Wartość Ataku: +%d%%	SA
 TOOLTIP_MALL_ATTBONUS_STATIC	Wartość Ataku: +12~15%	SNA
+TOOLTIP_MALL_ATT_SPEED	Zwiększona Szybkość Ataku +%d%%	SA
 TOOLTIP_MALL_AUTOLOOT	Ręka, która automatycznie podnosi upuszczone Yang.	SNA
 TOOLTIP_MALL_DEFBONUS	Obrona: +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	Obrona +12~15%	SNA
