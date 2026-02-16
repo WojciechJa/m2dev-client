@@ -36,7 +36,13 @@ class TipBoard(ui.Bar):
 
 	SCROLL_WAIT_TIME = 3.0
 	TIP_DURATION = 5.0
-	STEP_HEIGHT = 17
+
+	FONT_HEIGHT = 15
+	TEXT_POS_Y = 10
+	LINE_HEIGHT = FONT_HEIGHT + 5
+	STEP_HEIGHT = LINE_HEIGHT + 5
+	LONG_TEXT_START_X = 300
+	SCREEN_WIDTH = wndMgr.GetScreenWidth()
 
 	def __init__(self):
 		ui.Bar.__init__(self)
@@ -47,10 +53,10 @@ class TipBoard(ui.Bar):
 		self.dstPos = 0
 		self.nextScrollTime = 0
 
-		self.width = 370		
+		self.width = self.SCREEN_WIDTH
 
-		self.SetPosition(0, 70)
-		self.SetSize(370, 20)
+		self.SetPosition(0, 160)
+		self.SetSize(self.SCREEN_WIDTH, 35)
 		self.SetColor(grp.GenerateColor(0.0, 0.0, 0.0, 0.5))
 		self.SetWindowHorizontalAlignCenter()
 
@@ -63,10 +69,11 @@ class TipBoard(ui.Bar):
 
 		x, y = self.GetGlobalPosition()
 
-		self.textBar = TextBar(370, 300)
+		self.textBar = BigTextBar(int(self.SCREEN_WIDTH * 2), 300, self.FONT_HEIGHT)
 		self.textBar.SetParent(self)
-		self.textBar.SetPosition(3, 5)		
-		self.textBar.SetClipRect(0, y, wndMgr.GetScreenWidth(), y+18)
+		self.textBar.SetPosition(6, 8)
+		self.textBar.SetTextColor(242, 231, 193)
+		self.textBar.SetClipRect(0, y, self.SCREEN_WIDTH, y + 8 + self.STEP_HEIGHT)
 		self.textBar.Show()
 
 	def __CleanOldTip(self):
@@ -94,7 +101,15 @@ class TipBoard(ui.Bar):
 		index = 0
 		for tip in self.tipList:
 			text = tip[1]
-			self.textBar.TextOut(0, index*self.STEP_HEIGHT, text)
+
+			if text:
+				(text_width, text_height) = self.textBar.GetTextExtent(text)
+
+				if text_width > self.SCREEN_WIDTH:
+					self.textBar.TextOut(0, index * self.STEP_HEIGHT, text)
+				else:
+					self.textBar.TextOut((wndMgr.GetScreenWidth() - text_width) / 2, index * self.STEP_HEIGHT, text)
+
 			index += 1
 
 	def SetTip(self, text):
@@ -111,7 +126,7 @@ class TipBoard(ui.Bar):
 		if not self.IsShow():
 			self.curPos = -self.STEP_HEIGHT
 			self.dstPos = -self.STEP_HEIGHT
-			self.textBar.SetPosition(3, 5 - self.curPos)
+			self.textBar.SetPosition(3, self.TEXT_POS_Y - self.curPos)
 			self.Show()
 
 	def OnUpdate(self):
@@ -127,9 +142,9 @@ class TipBoard(ui.Bar):
 
 		if self.dstPos > self.curPos:
 			self.curPos += 1
-			self.textBar.SetPosition(3, 5 - self.curPos)
+			self.textBar.SetPosition(3, self.TEXT_POS_Y - self.curPos)
 
-			if self.curPos > len(self.tipList)*self.STEP_HEIGHT:
+			if self.curPos > len(self.tipList) * self.STEP_HEIGHT:
 				self.curPos = -self.STEP_HEIGHT
 				self.dstPos = -self.STEP_HEIGHT
 
