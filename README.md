@@ -7,13 +7,7 @@ This repository contains all client-side data, including locale files, configura
 ## 📋 Changelog
 
 ### 🐛 Bug Fixes
- - **Refining**: The window now sorts empty slots (from broken stones) to the end of the list, displaying an exact preview of how the item will look like after successful attaching.
- - **Affects**: Added affect shower support for Mall Attack Speed.
- - **Dragonsoul Alchemy**:
-   - Fixed the deck affect countdown not auto-updating when time is increased in one of the equipped items.
-   - Fixed the affect countdown requiring a check for remaining time in 500ms-intervals.
-   - The window now opens without the player being qualified (consistency with the official).
- - **Spirit stone attachment**: The window now displays the item's existing attributes. 
+ - **Guild window**: Removed the clickable area for the `BASE` tab and adjusted positions and widths for all other Guild window tabs.
 
 <br>
 <br>

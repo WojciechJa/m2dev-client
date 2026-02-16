@@ -123,57 +123,57 @@ window = {
 							"x" : 6,
 							"y" : 5,
 
-							"width" : 53,
+							"width" : 70,
 							"height" : 27,
 						},
 						{
 							"name" : "Tab_Button_02",
 							"type" : "radio_button",
 
-							"x" : 61,
+							"x" : 78,
 							"y" : 5,
 
-							"width" : 67,
+							"width" : 72,
 							"height" : 27,
 						},
 						{
 							"name" : "Tab_Button_03",
 							"type" : "radio_button",
 
-							"x" : 130,
+							"x" : 152,
 							"y" : 5,
 
-							"width" : 60,
+							"width" : 72,
 							"height" : 27,
 						},
 						{
 							"name" : "Tab_Button_04",
 							"type" : "radio_button",
 
-							"x" : 192,
+							"x" : 226,
 							"y" : 5,
 
-							"width" : 60,
+							"width" : 0,
 							"height" : 27,
 						},
 						{
 							"name" : "Tab_Button_05",
 							"type" : "radio_button",
 
-							"x" : 254,
+							"x" : 226,
 							"y" : 5,
 
-							"width" : 60,
+							"width" : 72,
 							"height" : 27,
 						},
 						{
 							"name" : "Tab_Button_06",
 							"type" : "radio_button",
 
-							"x" : 316,
+							"x" : 300,
 							"y" : 5,
 
-							"width" : 55,
+							"width" : 70,
 							"height" : 27,
 						},
 					),
