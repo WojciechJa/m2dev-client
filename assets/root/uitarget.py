@@ -9,6 +9,7 @@ import chr
 import nonplayer
 import localeInfo
 import constInfo
+import uiCommon
 
 class TargetBoard(ui.ThinBoard):
 
@@ -23,6 +24,7 @@ class TargetBoard(ui.ThinBoard):
 		localeInfo.TARGET_BUTTON_LEAVE_PARTY, 
 		localeInfo.TARGET_BUTTON_EXCLUDE, 
 		localeInfo.TARGET_BUTTON_INVITE_GUILD,
+		localeInfo.TARGET_BUTTON_REMOVE_GUILD,
 		localeInfo.TARGET_BUTTON_DISMOUNT,
 		localeInfo.TARGET_BUTTON_EXIT_OBSERVER,
 		localeInfo.TARGET_BUTTON_VIEW_EQUIPMENT,
@@ -109,6 +111,7 @@ class TargetBoard(ui.ThinBoard):
 		self.buttonDict[localeInfo.TARGET_BUTTON_EXCLUDE].SetEvent(ui.__mem_func__(self.OnPartyRemove))
 
 		self.buttonDict[localeInfo.TARGET_BUTTON_INVITE_GUILD].SAFE_SetEvent(self.__OnGuildAddMember)
+		self.buttonDict[localeInfo.TARGET_BUTTON_REMOVE_GUILD].SAFE_SetEvent(self.__OnGuildRemoveMember)
 		self.buttonDict[localeInfo.TARGET_BUTTON_DISMOUNT].SAFE_SetEvent(self.__OnDismount)
 		self.buttonDict[localeInfo.TARGET_BUTTON_EXIT_OBSERVER].SAFE_SetEvent(self.__OnExitObserver)
 		self.buttonDict[localeInfo.TARGET_BUTTON_VIEW_EQUIPMENT].SAFE_SetEvent(self.__OnViewEquipment)
@@ -347,6 +350,22 @@ class TargetBoard(ui.ThinBoard):
 	def __OnGuildAddMember(self):
 		net.SendGuildAddMemberPacket(self.vid)
 
+	def __OnGuildRemoveMember(self):
+		self.questionDialog = uiCommon.QuestionDialog()
+		self.questionDialog.SetText(localeInfo.GUILD_REMOVE_MEMBER_QUESTION)
+		self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.__OnGuildRemoveMemberAccept))
+		self.questionDialog.SetCancelEvent(ui.__mem_func__(self.__OnGuildRemoveMemberClose))
+		self.questionDialog.Open()
+
+	def __OnGuildRemoveMemberAccept(self):
+		net.SendGuildRemoveMemberPacket(self.nameString)
+		self.__OnGuildRemoveMemberClose()
+  
+	def __OnGuildRemoveMemberClose(self):
+		self.questionDialog.Close()
+		self.questionDialog = None
+		return True
+
 	def __OnDismount(self):
 		net.SendChatPacket("/unmount")
 
@@ -393,10 +412,32 @@ class TargetBoard(ui.ThinBoard):
 
 		self.ShowDefaultButton()
 
-		if guild.MainPlayerHasAuthority(guild.AUTH_ADD_MEMBER):
-			if not guild.IsMemberByName(self.nameString):
-				if 0 == chr.GetGuildID(self.vid):
-					self.__ShowButton(localeInfo.TARGET_BUTTON_INVITE_GUILD)
+		def isGuildMaster(name):
+			guildMasterName = guild.GetGuildMasterName()
+			return guildMasterName == name
+
+		def isGuildMember(name, vid):
+			return guild.IsMemberByName(name) and chr.GetGuildID(vid) != 0
+	
+		def isNotGuildMember(name, vid):
+			return not guild.IsMemberByName(name) and chr.GetGuildID(vid) == 0
+  
+		guildAuthorityButtons = {
+			guild.AUTH_ADD_MEMBER: {
+				"text": localeInfo.TARGET_BUTTON_INVITE_GUILD,
+				"condition": lambda: isNotGuildMember(self.nameString, self.vid),
+			},
+			guild.AUTH_REMOVE_MEMBER: {
+				"text": localeInfo.TARGET_BUTTON_REMOVE_GUILD,
+				"condition": lambda: isGuildMember(self.nameString, self.vid) and not isGuildMaster(self.nameString),
+			},
+		}
+
+		for guildAuthority, guildButton in guildAuthorityButtons.items():
+			hasAuthority = guild.MainPlayerHasAuthority(guildAuthority)
+			satisfiesCondition = guildButton["condition"]()
+			if hasAuthority and satisfiesCondition:
+				self.__ShowButton(guildButton["text"])
 
 		if not messenger.IsFriendByName(self.nameString):
 			self.__ShowButton(localeInfo.TARGET_BUTTON_FRIEND)

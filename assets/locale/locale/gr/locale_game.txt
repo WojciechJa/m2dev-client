@@ -178,6 +178,7 @@ GUILD_TILE_GRADE	Διαχείριση δικαιωμάτων
 GUILD_TILE_INFO	Πληροφορίες Συντεχνίας
 GUILD_TILE_MEMBER	Μέλη Συντεχνίας
 GUILD_TILE_SKILL	Ικανότητα Συντεχνίας
+GUILD_REMOVE_MEMBER_QUESTION	Θέλεις να αφαιρέσεις αυτό το μέλος;
 GUILD_WAR4	Περιοχή πολέμων συντεχνίας
 GUILD_WAR3	Περιοχή πολέμων συντεχνίας
 GUILD_WAR2	Περιοχή πολέμων συντεχνίας
@@ -583,6 +584,7 @@ TARGET_BUTTON_FRIEND	Φίλος
 TARGET_BUTTON_INVITE_GUILD	Πρόσκληση Συντεχνίας
 TARGET_BUTTON_INVITE_PARTY	Πρόσκληση Ομάδας
 TARGET_BUTTON_LEAVE_PARTY	Εγκατάλειψη Ομάδας
+TARGET_BUTTON_REMOVE_GUILD	Αφαίρεση από τη συντεχνία
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Μπες στην Ομάδα
 TARGET_BUTTON_VIEW_EQUIPMENT	Πανοπλία
 TARGET_BUTTON_WHISPER	Ψίθυρος

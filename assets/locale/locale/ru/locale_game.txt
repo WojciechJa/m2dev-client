@@ -178,6 +178,7 @@ GUILD_TILE_GRADE	Управление позицией
 GUILD_TILE_INFO	Гильдия-инфо
 GUILD_TILE_MEMBER	Члены гильдии
 GUILD_TILE_SKILL	Навыки гильдии
+GUILD_REMOVE_MEMBER_QUESTION	Вы хотите удалить этого участника?
 GUILD_VILLAGE_01	Мирйанг
 GUILD_VILLAGE_02	Сонгпа
 GUILD_VILLAGE_03	Даэйами
@@ -583,6 +584,7 @@ TARGET_BUTTON_FRIEND	Друг
 TARGET_BUTTON_INVITE_GUILD	Приглашение гильдии
 TARGET_BUTTON_INVITE_PARTY	Пригласить
 TARGET_BUTTON_LEAVE_PARTY	Покинуть группу
+TARGET_BUTTON_REMOVE_GUILD	Исключить из гильдии
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Вступить в группу
 TARGET_BUTTON_VIEW_EQUIPMENT	Снаряжение
 TARGET_BUTTON_WHISPER	Шептание

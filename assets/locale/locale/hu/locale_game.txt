@@ -177,6 +177,7 @@ GUILD_TILE_GRADE	Jogok Kezelése
 GUILD_TILE_INFO	Céh információ
 GUILD_TILE_MEMBER	Céhtag
 GUILD_TILE_SKILL	Céh készség
+GUILD_REMOVE_MEMBER_QUESTION	Szeretnéd kirúgni ezt a tagot?
 GUILD_WAR4	Céhháború terület
 GUILD_WAR3	Céhháború terület
 GUILD_WAR2	Céhháború terület
@@ -581,6 +582,7 @@ TARGET_BUTTON_FRIEND	Barát
 TARGET_BUTTON_INVITE_GUILD	Céh meghívás
 TARGET_BUTTON_INVITE_PARTY	Csoport meghívás
 TARGET_BUTTON_LEAVE_PARTY	Csoport elhagyása
+TARGET_BUTTON_REMOVE_GUILD	Eltávolítás a céhből
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Belépés a csoportba
 TARGET_BUTTON_VIEW_EQUIPMENT	Felszerelés
 TARGET_BUTTON_WHISPER	Suttogni

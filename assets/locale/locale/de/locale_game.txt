@@ -177,6 +177,7 @@ GUILD_TILE_GRADE	Rechteverwaltung
 GUILD_TILE_INFO	Gildeninformationen
 GUILD_TILE_MEMBER	Gildenmitglieder
 GUILD_TILE_SKILL	Gildenfertigkeiten
+GUILD_REMOVE_MEMBER_QUESTION	Möchtest du dieses Mitglied entfernen?
 GUILD_WAR_LIMIT_30MIN	Zeit: 30 Minuten
 GUILD_WAR_REWARD_POTION	Belohnung: Sieger erhält Tränke
 GUILD_WAR_USE_BATTLE_MAP	Ort: Gildenkriegsarena
@@ -581,6 +582,7 @@ TARGET_BUTTON_FRIEND	Freund
 TARGET_BUTTON_INVITE_GUILD	Gildeneinlad.
 TARGET_BUTTON_INVITE_PARTY	Gruppeneinlad.
 TARGET_BUTTON_LEAVE_PARTY	Gruppe verlassen
+TARGET_BUTTON_REMOVE_GUILD	Aus Gilde entfernen
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Gruppe beitreten
 TARGET_BUTTON_VIEW_EQUIPMENT	Ausrüstung
 TARGET_BUTTON_WHISPER	Flüstern

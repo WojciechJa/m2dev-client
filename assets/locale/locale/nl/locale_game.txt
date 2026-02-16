@@ -178,6 +178,7 @@ GUILD_TILE_GRADE	Rechten Beheer
 GUILD_TILE_INFO	Gilde Informatie	
 GUILD_TILE_MEMBER	Gilde Leden	
 GUILD_TILE_SKILL	Gilde Vaardigheden	
+GUILD_REMOVE_MEMBER_QUESTION	Wil je dit lid verwijderen?
 GUILD_WAR4	Gilde Oorlog Gebied
 GUILD_WAR3	Gilde Oorlog Gebied
 GUILD_WAR2	Gilde Oorlog Gebied
@@ -583,6 +584,7 @@ TARGET_BUTTON_FRIEND	Vriend
 TARGET_BUTTON_INVITE_GUILD	Gilde Uitnodiging	
 TARGET_BUTTON_INVITE_PARTY	Groeps Uitnodiging	
 TARGET_BUTTON_LEAVE_PARTY	Verlaat Groep	
+TARGET_BUTTON_REMOVE_GUILD	Verwijderen uit gilde	
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Aansluiten bij Groep	
 TARGET_BUTTON_VIEW_EQUIPMENT	Pantser
 TARGET_BUTTON_WHISPER	Fluisteren	

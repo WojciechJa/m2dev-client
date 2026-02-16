@@ -171,6 +171,7 @@ GUILD_NOT_ENOUGH_MONEY	Nu deții destul Yang pentru această clădire.
 GUILD_NO_NOTICE_PERMISSION	Nu îți este permis să faci un anunț.
 GUILD_OBJECT	Obiecte
 GUILD_OFFER_EXP	Investește Experiență
+GUILD_REMOVE_MEMBER_QUESTION	Doreşti să elimini acest membru?
 GUILD_SHORT_EXP	Nu ai destule puncte de experiență.
 GUILD_TILE_BASEINFO	Informații de bază
 GUILD_TILE_BOARD	Tablă
@@ -584,6 +585,7 @@ TARGET_BUTTON_INVITE_GUILD	Invitația breslei
 TARGET_BUTTON_INVITE_PARTY	Invitația grupei
 TARGET_BUTTON_LEAVE_PARTY	Părăsește grupa
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Alătură-te grupei
+TARGET_BUTTON_REMOVE_GUILD	Înlătură din breaslă
 TARGET_BUTTON_VIEW_EQUIPMENT	Armament
 TARGET_BUTTON_WHISPER	Șoaptă
 TARGET_LEVEL_BOSS	Boss

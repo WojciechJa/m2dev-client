@@ -113,7 +113,7 @@ class MessengerItem(ui.Window):
 			grp.RenderBar(x + 16, y, self.GetWidth() - 16, self.GetHeight())
 
 class MessengerMemberItem(MessengerItem):
-
+ 
 	STATE_OFFLINE = 0
 	STATE_ONLINE = 1
 
@@ -125,6 +125,10 @@ class MessengerMemberItem(MessengerItem):
 		self.key = None
 		self.state = self.STATE_OFFLINE
 		self.Offline()
+
+	@property
+	def RemoveMessage(self):
+		return localeInfo.MESSENGER_DO_YOU_DELETE
 
 	def GetStepWidth(self):
 		return 15
@@ -245,6 +249,10 @@ class MessengerGuildItem(MessengerMemberItem):
 
 	def OnWarp(self):
 		net.SendGuildUseSkillPacket(155, self.key)
+  
+	@property
+	def RemoveMessage(self):
+		return localeInfo.GUILD_REMOVE_MEMBER_QUESTION
 
 	def CanRemove(self):
 		for i in range(guild.ENEMY_GUILD_SLOT_MAX_COUNT):
@@ -252,7 +260,9 @@ class MessengerGuildItem(MessengerMemberItem):
 				return False
 
 		if guild.MainPlayerHasAuthority(guild.AUTH_REMOVE_MEMBER):
-			if guild.IsMemberByName(self.name):
+			guildMasterName = guild.GetGuildMasterName()
+			isTargetGuildMaster = guildMasterName == self.name
+			if guild.IsMemberByName(self.name) and not isTargetGuildMaster:
 				return True
 
 		return False
@@ -529,7 +539,7 @@ class MessengerWindow(ui.ScriptWindow):
 		if self.selectedItem:
 			if self.selectedItem.CanRemove():
 				self.questionDialog = uiCommon.QuestionDialog()
-				self.questionDialog.SetText(localeInfo.MESSENGER_DO_YOU_DELETE)
+				self.questionDialog.SetText(self.selectedItem.RemoveMessage)
 				self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.OnRemove))
 				self.questionDialog.SetCancelEvent(ui.__mem_func__(self.OnCloseQuestionDialog))
 				self.questionDialog.Open()

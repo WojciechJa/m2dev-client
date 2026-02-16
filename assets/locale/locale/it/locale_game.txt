@@ -178,6 +178,7 @@ GUILD_TILE_GRADE	Amministra diritti
 GUILD_TILE_INFO	Informazioni della Gilda
 GUILD_TILE_MEMBER	Membro della Gilda
 GUILD_TILE_SKILL	Abilità della Gilda
+GUILD_REMOVE_MEMBER_QUESTION	Vuoi espellere questo componente dalla gilda?
 GUILD_WAR4	Area della Guerra tra Gilde
 GUILD_WAR3	Area della Guerra tra Gilde
 GUILD_WAR2	Area della Guerra tra Gilde
@@ -583,6 +584,7 @@ TARGET_BUTTON_FRIEND	Amico
 TARGET_BUTTON_INVITE_GUILD	Invito Gilda.
 TARGET_BUTTON_INVITE_PARTY	Invito Gruppo.
 TARGET_BUTTON_LEAVE_PARTY	Lascia gruppo
+TARGET_BUTTON_REMOVE_GUILD	Espelli dalla gilda
 TARGET_BUTTON_REQUEST_ENTER_PARTY	Entra nel gruppo
 TARGET_BUTTON_VIEW_EQUIPMENT	Armatura
 TARGET_BUTTON_WHISPER	Chat privata
