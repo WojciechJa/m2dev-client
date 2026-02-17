@@ -95,7 +95,7 @@ window = {
 					)
 				},
 				{
-					## ĹřĆÁŔ» ¶çżě±â Ŕ§ÇŃ Ŕ©µµżě
+					## Window for displaying tooltip
 					"name" : "HPGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -141,7 +141,7 @@ window = {
 					),
 				},
 				{
-					## ĹřĆÁŔ» ¶çżě±â Ŕ§ÇŃ Ŕ©µµżě
+					## Window for displaying tooltip
 					"name" : "SPGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -187,7 +187,7 @@ window = {
 					),
 				},
 				{
-					## ĹřĆÁŔ» ¶çżě±â Ŕ§ÇŃ Ŕ©µµżě
+					## Window for displaying tooltip
 					"name" : "STGauge_Board",
 					"type" : "window",
 					"style" : ("ltr", ),
@@ -368,8 +368,8 @@ window = {
 			"children" :
 			(
 				{
-					# ExpandButtonŔş ±âÁ¸żˇ ChatButtonŔĚľúŔ¸łŞ, ChatButtonŔÇ ČżżëĽşŔĚ Ŕű´Ů ĆÇ´ÜÇĎż©
-					# ExpandButtonŔ¸·Î ąŮ˛ď °ÍŔĚ´Ů.
+					# ExpandButton was formerly ChatButton, but was changed as ChatButton's utility was deemed insufficient.
+					# It was changed to ExpandButton.
 					"name" : "ExpandButton",
 					"type" : "button",
 

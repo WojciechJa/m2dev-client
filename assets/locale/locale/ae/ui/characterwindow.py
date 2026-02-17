@@ -230,7 +230,7 @@ window = {
 								{
 									"name" : "Guild_Name",
 									"type":"text",
-									"text":"��� �̸�",
+									"text":"Guild Name",
 									"x":0,
 									"y":0,
 									"r":1.0,
@@ -255,7 +255,7 @@ window = {
 								{
 									"name" : "Character_Name",
 									"type":"text",
-									"text":"ĳ���� �̸�",
+									"text":"Guild Name",
 									"x":0,
 									"y":0,
 									"r":1.0,
@@ -307,16 +307,16 @@ window = {
 						{ "name" : "Face_Image", "type" : "image", "x" : 11, "y" : 11, "image" : "d:/ymir work/ui/game/windows/face_warrior.sub" },
 						{ "name" : "Face_Slot", "type" : "image", "x" : 7, "y" : 7, "image" : FACE_SLOT_FILE, },
 
-						## �⺻ �ɷ�
+						## Basic Stats
 						{
 							"name":"Status_Standard", "type":"window", "x":3, "y":100, "width":200, "height":250,
 							"children" :
 							(
-								## �⺻ �ɷ� ����
+								## Basic Stats Header
 								{ "name":"Character_Bar_01", "type":"horizontalbar", "x":12, "y":8, "width":223, },
 								{ "name":"Character_Bar_01_Text", "type" : "image", "x" : 13, "y" : 9, "image" : LOCALE_PATH+"label_std.sub", },
 								
-								## �ɷ� ���� ��ġ
+								## Training Points Value
 								{ 
 									"name":"Status_Plus_Label", 
 									"type":"image", 
@@ -329,7 +329,7 @@ window = {
 									),
 								},
 
-								## �⺻ �ɷ� ������ ����Ʈ
+								## Basic Stats Item List
 								{"name":"Status_Standard_ItemList1", "type" : "image", "x":17, "y":31, "image" : LOCALE_PATH+"label_std_item1.sub", },
 								{"name":"Status_Standard_ItemList2", "type" : "image", "x":100, "y":30, "image" : LOCALE_PATH+"label_std_item2.sub", },
 
@@ -420,21 +420,21 @@ window = {
 							),
 						},
 						
-						## �ΰ� �ɷ�
+						## Additional Stats
 						{ 
 							"name":"Status_Extent", "type":"window", "x":3, "y":221, "width":200, "height":50, 
 							"children" :
 							(
 
-								## �ΰ� �ɷ� ����
+								## Additional Stats Header
 								{ "name":"Status_Extent_Bar", "type":"horizontalbar", "x":12, "y":6, "width":223, },
 								{ "name":"Status_Extent_Label", "type" : "image", "x" : 13, "y" : 8, "image" : LOCALE_PATH+"label_ext.sub", },
 
-								## �⺻ �ɷ� ������ ����Ʈ
+								## Basic Stats Item List
 								{"name":"Status_Extent_ItemList1", "type" : "image", "x":11, "y":31, "image" : LOCALE_PATH+"label_ext_item1.sub", },
 								{"name":"Status_Extent_ItemList2", "type" : "image", "x":128, "y":32, "image" : LOCALE_PATH+"label_ext_item2.sub", },
 
-								## MSPD - �̵� �ӵ�
+								## MSPD - Movement Speed
 								{
 									"name":"MOV_Label", "type":"window", "x":66, "y":33, "width":50, "height":20, 
 									"children" :
@@ -444,7 +444,7 @@ window = {
 									)
 								},
 
-								## ASPD - ���� �ӵ�
+								## ASPD - Attack Speed
 								{
 									"name":"ASPD_Label", "type":"window", "x":66, "y":33+23, "width":50, "height":20, 
 									"children" :
@@ -454,7 +454,7 @@ window = {
 									)
 								},
 
-								## CSPD - �ֹ� �ӵ�
+								## CSPD - Cast Speed
 								{
 									"name":"CSPD_Label", "type":"window", "x":66, "y":33+23*2, "width":50, "height":20, 
 									"children" :
@@ -464,7 +464,7 @@ window = {
 									)
 								},
 
-								## MATT - ���� ���ݷ�
+								## MATT - Magic Attack
 								{
 									"name":"MATT_Label", "type":"window", "x":183, "y":33, "width":50, "height":20, 
 									"children" :
@@ -474,7 +474,7 @@ window = {
 									)
 								},
 
-								## MDEF - ���� ����
+								## MDEF - Magic Defense
 								{
 									"name":"MDEF_Label", "type":"window", "x":183, "y":33+23, "width":50, "height":20, 
 									"children" :
@@ -484,7 +484,7 @@ window = {
 									)
 								},
 
-								## ȸ����
+								## Evasion Rate
 								{
 									"name":"ER_Label", "type":"window", "x":183, "y":33+23*2, "width":50, "height":20, 
 									"children" :
@@ -697,7 +697,7 @@ window = {
 
 					"children" :
 					(
-						## �⺻ �׼� ����
+						## Basic Action Header
 						{ "name":"Action_Bar", "type":"horizontalbar", "x":12, "y":11, "width":223, },
 						{ "name":"Action_Bar_Text", "type":"text", "x":15, "y":13, "text":uiScriptLocale.CHARACTER_NORMAL_ACTION },
 
@@ -717,7 +717,7 @@ window = {
 							"image" : ICON_SLOT_FILE,
 						},
 
-						## ��ȣ �׼� ����
+						## Mutual Action Header
 						{ "name":"Reaction_Bar", "type":"horizontalbar", "x":12, "y":8+150, "width":223, },
 						{ "name":"Reaction_Bar_Text", "type":"text", "x":15, "y":10+150, "text":uiScriptLocale.CHARACTER_MUTUAL_ACTION },
 
@@ -775,25 +775,25 @@ window = {
 							"horizontal_align" : "right",
 						},
 
-						{ "name" : "Quest_Name_00", "type" : "text", "text" : "이름입니다", "x" : 60, "y" : 14 },
-						{ "name" : "Quest_LastTime_00", "type" : "text", "text" : "남은 시간 입니다", "x" : 60, "y" : 30 },
-						{ "name" : "Quest_LastCount_00", "type" : "text", "text" : "남은 개수 입니다", "x" : 60, "y" : 46 },
+						{ "name" : "Quest_Name_00", "type" : "text", "text" : "Name", "x" : 60, "y" : 14 },
+						{ "name" : "Quest_LastTime_00", "type" : "text", "text" : "Time Left", "x" : 60, "y" : 30 },
+						{ "name" : "Quest_LastCount_00", "type" : "text", "text" : "Count Left", "x" : 60, "y" : 46 },
 
-						{ "name" : "Quest_Name_01", "type" : "text", "text" : "이름입니다", "x" : 60, "y" : 74 },
-						{ "name" : "Quest_LastTime_01", "type" : "text", "text" : "남은 시간 입니다", "x" : 60, "y" : 90 },
-						{ "name" : "Quest_LastCount_01", "type" : "text", "text" : "남은 개수 입니다", "x" : 60, "y" : 106 },
+						{ "name" : "Quest_Name_01", "type" : "text", "text" : "Name", "x" : 60, "y" : 74 },
+						{ "name" : "Quest_LastTime_01", "type" : "text", "text" : "Time Left", "x" : 60, "y" : 90 },
+						{ "name" : "Quest_LastCount_01", "type" : "text", "text" : "Count Left", "x" : 60, "y" : 106 },
 
-						{ "name" : "Quest_Name_02", "type" : "text", "text" : "이름입니다", "x" : 60, "y" : 134 },
-						{ "name" : "Quest_LastTime_02", "type" : "text", "text" : "남은 시간 입니다", "x" : 60, "y" : 150 },
-						{ "name" : "Quest_LastCount_02", "type" : "text", "text" : "남은 개수 입니다", "x" : 60, "y" : 166 },
+						{ "name" : "Quest_Name_02", "type" : "text", "text" : "Name", "x" : 60, "y" : 134 },
+						{ "name" : "Quest_LastTime_02", "type" : "text", "text" : "Time Left", "x" : 60, "y" : 150 },
+						{ "name" : "Quest_LastCount_02", "type" : "text", "text" : "Count Left", "x" : 60, "y" : 166 },
 
-						{ "name" : "Quest_Name_03", "type" : "text", "text" : "이름입니다", "x" : 60, "y" : 194 },
-						{ "name" : "Quest_LastTime_03", "type" : "text", "text" : "남은 시간 입니다", "x" : 60, "y" : 210 },
-						{ "name" : "Quest_LastCount_03", "type" : "text", "text" : "남은 개수 입니다", "x" : 60, "y" : 226 },
+						{ "name" : "Quest_Name_03", "type" : "text", "text" : "Name", "x" : 60, "y" : 194 },
+						{ "name" : "Quest_LastTime_03", "type" : "text", "text" : "Time Left", "x" : 60, "y" : 210 },
+						{ "name" : "Quest_LastCount_03", "type" : "text", "text" : "Count Left", "x" : 60, "y" : 226 },
 
-						{ "name" : "Quest_Name_04", "type" : "text", "text" : "이름입니다", "x" : 60, "y" : 254 },
-						{ "name" : "Quest_LastTime_04", "type" : "text", "text" : "남은 시간 입니다", "x" : 60, "y" : 270 },
-						{ "name" : "Quest_LastCount_04", "type" : "text", "text" : "남은 개수 입니다", "x" : 60, "y" : 286 },
+						{ "name" : "Quest_Name_04", "type" : "text", "text" : "Name", "x" : 60, "y" : 254 },
+						{ "name" : "Quest_LastTime_04", "type" : "text", "text" : "Time Left", "x" : 60, "y" : 270 },
+						{ "name" : "Quest_LastCount_04", "type" : "text", "text" : "Count Left", "x" : 60, "y" : 286 },
 
 					),
 				},
