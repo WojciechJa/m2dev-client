@@ -16,6 +16,7 @@ import time
 import serverCommandParser
 import ime
 import uiScriptLocale
+import debugInfo
 
 # Multi-language hot-reload system
 from uilocaleselector import LocaleSelector
@@ -200,7 +201,8 @@ class LoginWindow(ui.ScriptWindow):
 			dbg.TraceError("SelectCharacterWindow.Open - __LoadScript Error")
 			return
 
-		self.__LoadLoginInfo("loginInfo.xml")
+		# Changed .xml -> .py because pack.Get does not allow .xml extension
+		self.__LoadLoginInfo("loginInfo.py")
 		
 		if app.loggined:
 			self.loginFailureFuncDict = {
@@ -324,7 +326,7 @@ class LoginWindow(ui.ScriptWindow):
 
 	def __LoadChannelInfo(self):
 		try:
-			with open("config/channel.inf") as file:
+			with open("config/channel.inf", "r") as file:
 				lines=file.readlines()
 
 				if len(lines)>0:
@@ -680,69 +682,72 @@ class LoginWindow(ui.ScriptWindow):
 		self.serverInfo.SetText(name)
 
 	def __LoadLoginInfo(self, loginInfoFileName):
+		# This should not work in production
+		if not debugInfo.IsDebugMode():
+			app.loggined = FALSE
+		else:
+			try:
+				loginInfo={}
+				exec(compile(open(loginInfoFileName, "rb").read(), loginInfoFileName, 'exec'), loginInfo)
+			except IOError:
+				print((\
+					"For automatic login, please create" + loginInfoFileName + "file\n"\
+					"\n"\
+					"Contents:\n"\
+					"================================================================\n"\
+					"addr=address\n"\
+					"port=port number\n"\
+					"id=user ID\n"\
+					"pwd=password\n"\
+					"slot=character selection index (if absent or -1, no auto-selection)\n"\
+					"autoLogin=enable auto login\n"
+					"autoSelect=enable auto select\n"
+					"locale=(ymir) works as ymir for LC_Ymir. Works as korea if not specified\n"
+				));
 
-		try:
-			loginInfo={}
-			exec(compile(open(loginInfoFileName, "rb").read(), loginInfoFileName, 'exec'), loginInfo)
-		except IOError:
-			print((\
-				"For automatic login, please create" + loginInfoFileName + "file\n"\
-				"\n"\
-				"Contents:\n"\
-				"================================================================\n"\
-				"addr=address\n"\
-				"port=port number\n"\
-				"id=user ID\n"\
-				"pwd=password\n"\
-				"slot=character selection index (if absent or -1, no auto-selection)\n"\
-				"autoLogin=enable auto login\n"
-				"autoSelect=enable auto select\n"
-				"locale=(ymir) works as ymir for LC_Ymir. Works as korea if not specified\n"
-			));
+			id=loginInfo.get("id", "")
+			pwd=loginInfo.get("pwd", "")
 
-		id=loginInfo.get("id", "")
-		pwd=loginInfo.get("pwd", "")
+			addr=loginInfo.get("addr", "")
+			port=loginInfo.get("port", 0)
+			account_addr=loginInfo.get("account_addr", addr)
+			account_port=loginInfo.get("account_port", port)
 
-		addr=loginInfo.get("addr", "")
-		port=loginInfo.get("port", 0)
-		account_addr=loginInfo.get("account_addr", addr)
-		account_port=loginInfo.get("account_port", port)
+			locale = loginInfo.get("locale", "")
 
-		locale = loginInfo.get("locale", "")
+			if addr and port:
+				net.SetMarkServer(addr, port)
 
-		if addr and port:
-			net.SetMarkServer(addr, port)
+				net.SetServerInfo(addr+":"+str(port))
+				self.serverInfo.SetText("K:"+addr+":"+str(port))
 
-			net.SetServerInfo(addr+":"+str(port))
-			self.serverInfo.SetText("K:"+addr+":"+str(port))
+			slot=loginInfo.get("slot", 0)
+			isAutoLogin=loginInfo.get("auto", 0)
+			isAutoLogin=loginInfo.get("autoLogin", 0)
+			isAutoSelect=loginInfo.get("autoSelect", 0)
 
-		slot=loginInfo.get("slot", 0)
-		isAutoLogin=loginInfo.get("auto", 0)
-		isAutoLogin=loginInfo.get("autoLogin", 0)
-		isAutoSelect=loginInfo.get("autoSelect", 0)
+			self.stream.SetCharacterSlot(slot)
+			self.stream.SetConnectInfo(addr, port, account_addr, account_port)
+			self.stream.isAutoLogin=isAutoLogin
+			self.stream.isAutoSelect=isAutoSelect
 
-		self.stream.SetCharacterSlot(slot)
-		self.stream.SetConnectInfo(addr, port, account_addr, account_port)
-		self.stream.isAutoLogin=isAutoLogin
-		self.stream.isAutoSelect=isAutoSelect
+			self.id = None
+			self.pwd = None		
+			self.loginnedServer = None
+			self.loginnedChannel = None			
+			app.loggined = FALSE
 
-		self.id = None
-		self.pwd = None		
-		self.loginnedServer = None
-		self.loginnedChannel = None			
-		app.loggined = FALSE
+			self.loginInfo = loginInfo
 
-		self.loginInfo = loginInfo
+			if self.id and self.pwd:
+				app.loggined = TRUE
 
-		if self.id and self.pwd:
-			app.loggined = TRUE
-
-		if isAutoLogin:
-			self.Connect(id, pwd)
-			
-			print("==================================================================================")
-			print(("Auto login: %s - %s:%d %s" % (loginInfoFileName, addr, port, id)))
-			print("==================================================================================")
+			if isAutoLogin:
+				self.Connect(id, pwd)
+				
+				print("==================================================================================")
+				print(("Auto login: %s - %s:%d %s" % (loginInfoFileName, addr, port, id)))
+				print("==================================================================================")
 
 		
 	def PopupDisplayMessage(self, msg):
