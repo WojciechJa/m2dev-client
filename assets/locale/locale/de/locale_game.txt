@@ -464,14 +464,16 @@ QUEST_UNLIMITED_TIME	Keine Zeitbeschränkung
 QUICKSLOT_REGISTER_DISABLE_ITEM	Dieser Gegenstand kann nicht zum Schnellzugriffsfeld hinzugefügt werden.
 RECEIVE_MESSAGE	%s hat dir eine Nachricht gesendet.
 REFINE_COST	Verbesserungskosten: %d Yang
-REFINE_DESTROY_WARNING	Der Gegenstand könnte beim Veredeln zerstört werden.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Dies erhöht die Verbesserungswahrscheinlichkeit,
+REFINE_DESTROY_WARNING	Der Gegenstand könnte beim \n Veredeln zerstört werden.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Möchtest du den Gegenstand wirklich upgraden?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	aber bei einem Fehlschlag wird der Gegenstand zerstört. Möchtest du fortfahren?
 REFINE_DOWN_GRADE_WARNING	Der Gegenstand könnte beim Veredeln schlechter werden.
 REFINE_DO_YOU_SEPARATE_METIN	Alle vorhandenen Geiststeine entfernen?
-REFINE_FAILURE	Tja, hat nicht geklappt! Wir haben versagt.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s kann diesem Gegenstand nicht beigefügt werden.
+REFINE_FAILURE_DEL_ITEM	Die Veredelung ist fehlgeschlagen. \n Der Gegenstand wurde zerstört.
 REFINE_FAILURE_EQUIP_ITEM	Du kannst keine ausgerüsteten Gegenstände verbessern.
+REFINE_FAILURE_GRADE_DOWN	Die Veredelung ist fehlgeschlagen. \n Der Grad des Gegenstands wurde gemindert.
+REFINE_FAILURE_KEEP_GRADE	Die Veredelung ist fehlgeschlagen.\nGlücklicherweise bleibt dein Gegenstand erhalten.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Es kann kein Geiststein entfernt werden.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Du benötigst eine bessere Verbesserungsschriftrolle.
 REFINE_FAILURE_NO_GOLD_SOCKET	Es gibt keine Goldfassung, um %s beizufügen.
@@ -479,6 +481,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Du kannst keine weiteren Fassungen hinzufügen.
 REFINE_FAILURE_NO_SOCKET0	Es gibt keine freie Fassung für den %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Auf diesem Gegenstand können keine Fassungen hinzugefügt werden.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Dieser Gegenstand kann nicht verbessert werden.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Der verbesserte Gegenstand kann weder \n zerstört noch verschlechtert werden.
 REFINE_SUCCESS	Die Gegenstandsverbesserung war erfolgreich.
 REFINE_SUCCESS_PROBALITY	Verbesserungschance: %d%%
 REFINE_WARNING2	Möchtest du fortfahren?

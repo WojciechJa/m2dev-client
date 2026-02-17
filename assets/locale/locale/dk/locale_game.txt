@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Ingen tidsbegrænsning.
 QUICKSLOT_REGISTER_DISABLE_ITEM	Denne genstand kan ikke aktiveres via hurtigmenuen.
 RECEIVE_MESSAGE	%s har sendt dig en meddelelse.
 REFINE_COST	Forbedringsomkostninger: %d Yang
-REFINE_DESTROY_WARNING	Denne genstand kan gå i stykker ved forbedring.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Dette øger forbedrings-sandsynligheden,
+REFINE_DESTROY_WARNING	Denne genstand kan gå i stykker \n ved forbedring.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Ønsker du virkelig at opgradere denne genstand?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	men hvis det mislykkes bliver genstanden ødelagt. Vil du fortsætte?
 REFINE_DOWN_GRADE_WARNING	Det kan ske at genstanden mister en level.
 REFINE_DO_YOU_SEPARATE_METIN	Vil du fjerne alle ånde-stenene?
-REFINE_FAILURE	Desværre... Det mislykkede!
 REFINE_FAILURE_CAN_NOT_ATTACH	%s kan ikke tilføjes til denne genstand.
+REFINE_FAILURE_DEL_ITEM	Forædlingen mislykkedes. \n Genstanden blev ødelagt.
 REFINE_FAILURE_EQUIP_ITEM	Du kan ikke forbedre den udvalgte genstand, da den er i brug.
+REFINE_FAILURE_GRADE_DOWN	Forædlingen mislykkedes. \n Genstandens karakter er blevet reduceret.
+REFINE_FAILURE_KEEP_GRADE	Forædlingen mislykkedes.\nHeldigvis, er genstanden forblevet uskadt.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Der kan ikke fjernes en ånde-sten.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Du har brug for et detaljeret forbedrings-dokument.
 REFINE_FAILURE_NO_GOLD_SOCKET	Der findes ingen guld-indfatning for at tilføje %s .
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Du kan ikke tilføje yderligere indfatninger.
 REFINE_FAILURE_NO_SOCKET0	Der findes ingen indfatning for at tilføje %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	På denne genstand der der ikke tilføjes en indfatning.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Denne genstand kan ikke blive forbedret.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Den opgraderede genstand kan ikke \n blive ødelagt eller nedgraderet.
 REFINE_SUCCESS	Succesfuld forbedringen!
 REFINE_SUCCESS_PROBALITY	Forbedrings-sandsynlighed: %d%%
 REFINE_WARNING2	Ønsker du at fortsætte?

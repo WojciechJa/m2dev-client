@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Geen tijd limiet.
 QUICKSLOT_REGISTER_DISABLE_ITEM	Dit Voorwerp kan niet toegevoegd worden in de Snelle Toegangs Gebied	
 RECEIVE_MESSAGE	%s heeft je een bericht gestuurd.	
 REFINE_COST	Kosten voor Bevordering: %d Yang
-REFINE_DESTROY_WARNING	Dit Voorwerp kan vernietigd worden tijden het opwaarderen.	
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Dit zal de kansen voor upwaarderen vergroten.
+REFINE_DESTROY_WARNING	Dit Voorwerp kan vernietigd worden \n tijden het opwaarderen.	
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Wil je dit item echt verbeteren?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	Als je niet slaagt dan kan het Voorwerp vernietigd worden. /n Wil je doorgaan?
 REFINE_DOWN_GRADE_WARNING	Dit Voorwerp kan gedegradeerd worden.	
 REFINE_DO_YOU_SEPARATE_METIN	Wil je alle beschikbare Zielenstenen verwijderen?
-REFINE_FAILURE	Je hebt gefaald.	
 REFINE_FAILURE_CAN_NOT_ATTACH	%s kan niet toegevoegd worden aan dat Voorwerp.	
+REFINE_FAILURE_DEL_ITEM	De verbetering is mislukt. \n Het item is vernietigd.
 REFINE_FAILURE_EQUIP_ITEM	Je kunt geen voorwerpen die je draagt upgraden.
+REFINE_FAILURE_GRADE_DOWN	De verbetering is mislukt. \n De itemklasse is verminderd.
+REFINE_FAILURE_KEEP_GRADE	De verbetering is mislukt.\nGelukkig is het item onbeschadigd gebleven.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Er kon geen Zielen Steen weggehaald worden.	
 REFINE_FAILURE_NEED_BETTER_SCROLL	Je hebt een betere Bevorderings Geschrift nodig.	
 REFINE_FAILURE_NO_GOLD_SOCKET	Er is geen Goud fitting om %s in te zetten.	
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Je kunt niet meer Fittingen maken.
 REFINE_FAILURE_NO_SOCKET0	Er is geen Fitting om %s in te zetten.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Je kunt geen Fitting maken in dit Voorwerp.	
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Dit Voorwerp kan niet geüpgrade worden.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Het verbeterde item kan niet \n vernietigd of verslechterd worden.
 REFINE_SUCCESS	Het bevorderen van het Voorwerp was successvol.	
 REFINE_SUCCESS_PROBALITY	Kans op Bevordering %d%%	
 REFINE_WARNING2	Wil je doorgaan?	

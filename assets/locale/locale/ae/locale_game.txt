@@ -570,9 +570,11 @@ REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	هل تريد بالفعل تحسي�
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	قد يتعرض هذا الشيء للتدمير عند الفشل. هل ترغب رغم ذلك في الاستمرار؟
 REFINE_DOWN_GRADE_WARNING	قد تتسبب عملية التحسين في التخفيض من قيمة هذا الشيء.
 REFINE_DO_YOU_SEPARATE_METIN	حذف جميع الأحجار الشّبحية؟
-REFINE_FAILURE	للأسف،لم ننجح! لقد فشلنا.
 REFINE_FAILURE_CAN_NOT_ATTACH0	لا يستطيع %s إضافة أي شيء لهذا البند.
+REFINE_FAILURE_DEL_ITEM	لقد فشلت عملية الصقل. \n لقد تم تدمير هذا الشيء.
 REFINE_FAILURE_EQUIP_ITEM	لا يمكنك تحسين الأشياء المُدرعة.
+REFINE_FAILURE_GRADE_DOWN	لقد فشلت عملية الصقل. \n لقد تم تخفيض مستوى هذا الشيء.
+REFINE_FAILURE_KEEP_GRADE	لقد فشلت عملية الصقل.\nلحسن الحظ، لقد تم الحفاظ على هذا الشيء.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	لا يمحنك حذف حجر الشبح.
 REFINE_FAILURE_NEED_BETTER_SCROLL	إنك بحاجة إلى لفيفة تحسين أحسن من هذه.
 REFINE_FAILURE_NO_GOLD_SOCKET	لا يوجد هناك مقبس ذهبي، لإضافة %s.
@@ -580,6 +582,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	لا يُمكنك إضافة مقابس جديدة
 REFINE_FAILURE_NO_SOCKET0	لا يوجد مقبس فارغ من أجل %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	لا يمكنك إضافة مقابس إضافية لهذا البند.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	لا يمكن تحسين هذا البند.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	لن يتعرض الشيء الذي تم تحسينه إلى \n التدمير أو التشويه.
 REFINE_SUCCESS	لقد تم تحسين هذا البند بنجاح.
 REFINE_SUCCESS_PROBALITY	فرص التحسين: %d%%
 REFINE_WARNING2	هل تريد الاستمرار بالتحسين؟
@@ -900,9 +903,9 @@ TOOLTIP_WRISTLET	سوار
 UI_ACCEPT	موافق
 UI_CANCEL	إلغاء
 UI_CLOSE	إغلاق
-UI_DEF_FONT	Tahoma:16
-UI_DEF_FONT_LARGE	Tahoma:16
-UI_DEF_FONT_SMALL	Tahoma:14
+UI_DEF_FONT	Tahoma:12
+UI_DEF_FONT_LARGE	Tahoma:14
+UI_DEF_FONT_SMALL	Tahoma:9
 UI_DENY	رفض
 UI_ITEM	شيء
 UI_LEFT_TIME	الوقت المتبقي: %d ثانية

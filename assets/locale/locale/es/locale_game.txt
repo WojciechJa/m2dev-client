@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Sin límite de tiempo.
 QUICKSLOT_REGISTER_DISABLE_ITEM	Este objeto no puede añadirse en el Campo de Acceso Rápido.
 RECEIVE_MESSAGE	%s te ha enviado un mensaje.
 REFINE_COST	Coste por Mejora: %d Yang
-REFINE_DESTROY_WARNING	Este objeto puede ser destruido en la mejora.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Esto aumentará la probabilidad de mejorar.
+REFINE_DESTROY_WARNING	Este objeto puede ser destruido \n en la mejora.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	¿De verdad quieres mejorar el objeto?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	pero si fallas el artículo será destruido. ¿Deseas continuar?
 REFINE_DOWN_GRADE_WARNING	El objeto puede ser degradado así.
 REFINE_DO_YOU_SEPARATE_METIN	¿Deseas eliminar todas las Piedras Espíritu disponibles?
-REFINE_FAILURE	Has fallado.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s no puede ser incluido en este objeto.
+REFINE_FAILURE_DEL_ITEM	El proceso de refinamiento no ha tenido éxito. \n Se ha destruido el objeto.
 REFINE_FAILURE_EQUIP_ITEM	No puedes mejorar ningún objeto equipado.
+REFINE_FAILURE_GRADE_DOWN	El proceso de refinamiento no ha tenido éxito. \n Se ha reducido el grado del objeto.
+REFINE_FAILURE_KEEP_GRADE	El proceso de refinamiento no ha tenido éxito.\nAfortunadamente, conservas el objeto.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	No hay ninguna piedra que pueda ser extraída.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Necesitas un mejor Pergamino de Avance.
 REFINE_FAILURE_NO_GOLD_SOCKET	No hay socket de oro para incluir %s .
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	No puedes crear más sockets.
 REFINE_FAILURE_NO_SOCKET0	No hay ningún socket libre para %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	No puedes hacer más sockets en este objeto.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Este objeto no puede ser mejorado.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	El objeto no resultará destruido ni \n bajará de nivel.
 REFINE_SUCCESS	La mejora del objeto se ha realizado con éxito.
 REFINE_SUCCESS_PROBALITY	Probabilidad de mejora %d%%
 REFINE_WARNING2	¿Deseas continuar?

@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Bez časového omezení
 QUICKSLOT_REGISTER_DISABLE_ITEM	Tento předmět nemůže být přidán k poli rychlého přístupu.
 RECEIVE_MESSAGE	%s ti poslal/a zprávu.
 REFINE_COST	Náklady na zlepšení: %d Yang
-REFINE_DESTROY_WARNING	Předmět by se mohl zušlechtěním zničit.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Toto zvyšuje pravděpodobnost zlepšení,
+REFINE_DESTROY_WARNING	Předmět by se mohl zušlechtěním \n zničit.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Opravdu chceš vylepšit tento předmět?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	ale v případě neúspěchu bude předmět zničen. Chceš pokračovat?
 REFINE_DOWN_GRADE_WARNING	Předmět by se mohl zušlechtěním zhoršit.
 REFINE_DO_YOU_SEPARATE_METIN	Chceš odstranit všechny kameny ducha?
-REFINE_FAILURE	Hmm, nojono - tak to neklaplo! Selhali jsme.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s nelze přidat k předmětu.
+REFINE_FAILURE_DEL_ITEM	Zušlechtění se nezdařilo. \n Předmět byl zničen.
 REFINE_FAILURE_EQUIP_ITEM	Nemůžeš vylepšovat používané předměty.
+REFINE_FAILURE_GRADE_DOWN	Zušlechtění se nezdařilo. \n Úroveň předmětu byla snížena.
+REFINE_FAILURE_KEEP_GRADE	Zušlechtění se nezdařilo.\nNaštěstí se předmětu nic nestalo.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Nelze odstranit kámen ducha.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Potřebuješ lepší pergamen zlepšování.
 REFINE_FAILURE_NO_GOLD_SOCKET	Neexistuje žádná úchytka ze zlata, do kterého lze přidat %s.
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Nemůžeš přidat žádné další úchytky.
 REFINE_FAILURE_NO_SOCKET0	Neexistuje žádná úchytka, do kterého lze přidat %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	K tomuto předmětu nelze přidat žádná úchytka.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Tento předmět nelze zlepšit.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Vylepšený předmět nelze zničit \n nebo snížit jeho úroveň.
 REFINE_SUCCESS	Toto zlepšení předmětu bylo úspěšné.
 REFINE_SUCCESS_PROBALITY	Šance na zlepšení: %d%%
 REFINE_WARNING2	Chceš pokračovat?

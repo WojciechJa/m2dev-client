@@ -2,7 +2,9 @@ import uiScriptLocale
 
 window = {
 	"name" : "LoginWindow",
-	"sytle" : ("movable", "ltr",),
+    # MR-15: FIx loading background for Arabic
+	"style" : ("movable", "ltr",),
+    # MR-15: -- END OF -- Fix loading background for Arabic
 
 	"x" : 0,
 	"y" : 0,

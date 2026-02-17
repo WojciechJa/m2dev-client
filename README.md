@@ -7,9 +7,14 @@ This repository contains all client-side data, including locale files, configura
 ## 📋 Changelog
 
 ### 🐛 Bug Fixes
- - **Fog update**: Adjusted fog settings to work with the updated official version using the 3 classic options.
- - **Fog levels**: Adjusted fog level settings for some maps.
- **Fix by Alaric 🙏**
+ - **Font**: Fixed font for Arabic and Brazilian
+ - **Loading**: Fixed loading background image for Arabic
+ - **Crashes**: Fixed crashes for Arabic and Brazilian
+
+### ⬆️ Improvements
+ - **Text hilighting**: Exposed text highlighting (selecting and clearing) to Python
+ - **Multiline dialog texts**: Question and Popup dialogs now support multiline translations! Translated strings containing `/n` or `\n` auto-break lines with trimming. Dialog height and position as well as inner element positions are auto-adjusting.
+ - **Refinement**: Updated translations for the refinement dialogs and added conditional failed messages (from official) 
 
 <br>
 <br>

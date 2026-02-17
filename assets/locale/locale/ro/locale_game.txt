@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Nici o limită de timp
 QUICKSLOT_REGISTER_DISABLE_ITEM	Acest obiect nu poate fi adăugat la câmpul de acces rapid.
 RECEIVE_MESSAGE	%s ți-a trimis un mesaj.
 REFINE_COST	Costuri de îmbunătățire: %d Yang
-REFINE_DESTROY_WARNING	Obiectul poate fi distrus prin înnobilare.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Crește probabilitatea de îmbunătățire,
+REFINE_DESTROY_WARNING	Obiectul poate fi distrus \n prin înnobilare.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Eşti sigur că doreşti să îmbunătăţeşti acest obiect?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	dar dacă nu îți reușește, obiectul va fi distrus. Continui?
 REFINE_DOWN_GRADE_WARNING	Obiectul poate fi distrus prin înnobilare.
 REFINE_DO_YOU_SEPARATE_METIN	Dorești să înlături toate Pietrele Spiritului disponibile?
-REFINE_FAILURE	Nu a funcționat. Am eșuat.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s nu poate fi adăugat obiectului.
+REFINE_FAILURE_DEL_ITEM	Rafinarea a eşuat. \n Obiectul a fost distrus.
 REFINE_FAILURE_EQUIP_ITEM	Nu poți îmbunătăți Obiectele echipate.
+REFINE_FAILURE_GRADE_DOWN	Rafinarea a eşuat. \n Gradul obiectului a fost redus.
+REFINE_FAILURE_KEEP_GRADE	Rafinarea a eşuat. \nDin fericire, obiectul a rămas în stare bună.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Nu poate fi indepartata nici o piatra stafie.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Ai nevoie de un pergament de îmbunătățire mai bun.
 REFINE_FAILURE_NO_GOLD_SOCKET	Nu există suport de aur pentru a adăuga %s.
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Nu poți să mai adaugi suporturi.
 REFINE_FAILURE_NO_SOCKET0	Nu există suport pentru a adăuga %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Acestui obiect nu îi poate fi adăugat un suport.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Acest obiect nu poate fi îmbunătățit.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Obiectul îmbunătăţit nu poate fi \n distrus sau scăzut în nivel.
 REFINE_SUCCESS	Îmbunătățirea obiectului a reușit.
 REFINE_SUCCESS_PROBALITY	Șansă de îmbunătățire: %d%%
 REFINE_WARNING2	Vrei să continui?

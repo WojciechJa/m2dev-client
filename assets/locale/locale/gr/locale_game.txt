@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Χωρίς χρονικό όριο.
 QUICKSLOT_REGISTER_DISABLE_ITEM	Το αντικείμενο δε μπορεί να προστεθεί στο ΠεδίοΓρήγορης Πρόσβασης.
 RECEIVE_MESSAGE	Ο %s σου έστειλε μήνυμα.
 REFINE_COST	Κόστος Προαγωγής: %d Yang
-REFINE_DESTROY_WARNING	Το Αντικείμενο μπορεί να καταστραφεί κατά τον εξευγενισμό.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Αυτό θα βελτιώσει τις πιθανότητες αναβάθμισης,
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	αλλά αν αποτύχεις, το αντικείμενο μπορεί να καταστραφεί. /n Θέλεις να συνεχίσεις;
-REFINE_DOWN_GRADE_WARNING	Το αντικείμενο μπορεί να υποβαθμιστεί κατά τον εξευγενισμό.
+REFINE_DESTROY_WARNING	Το Αντικείμενο μπορεί να καταστραφεί κατά τον \n εξευγενισμό.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Θέλεις να αναβαθμίσεις αυτό το αντικείμενο;
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	αλλά αν αποτύχεις, το αντικείμενο μπορεί να καταστραφεί. \n Θέλεις να συνεχίσεις;
+REFINE_DOWN_GRADE_WARNING	Το αντικείμενο μπορεί να υποβαθμιστεί κατά τον \n εξευγενισμό.
 REFINE_DO_YOU_SEPARATE_METIN	Να αφαιρεθούν όλοι οι Λίθοι Πνεύματος;
-REFINE_FAILURE	Απότυχες.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s δε μπορεί να περιληφθεί σε αυτό το αντικείμενο.
+REFINE_FAILURE_DEL_ITEM	Ο εξευγενισμός απέτυχε. \n Το αντικείμενο καταστράφηκε.
 REFINE_FAILURE_EQUIP_ITEM	Δεν μπορείς να βελτιώσεις αντικείμενα που φοράς.
+REFINE_FAILURE_GRADE_DOWN	Ο εξευγενισμός απέτυχε. \n Ο βαθμός του αντικειμένου μειώθηκε.
+REFINE_FAILURE_KEEP_GRADE	Ο εξευγενισμός απέτυχε.\nΕυτυχώς, το αντικείμενο διατηρήθηκε.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Δε μπορεί να αφαιρεθεί η Λίθος Metin.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Χρειάζεσαι καλύτερο Πάπυρο Προόδου.
 REFINE_FAILURE_NO_GOLD_SOCKET	Δεν υπάρχει Χρυσή υποδοχή για να περιλάβει το %s .
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Δε μπορείς να φτιάξεις άλλε
 REFINE_FAILURE_NO_SOCKET0	Δεν υπάρχει ελεύθερη υποδοχή για το %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Δε μπορείς να φτιάξεις υποδοχές σε αυτό το αντικείμενο.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Το αντικείμενο δε μπορεί να ανβαθμιστεί.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Το αναβαθμισμένο αντικείμενο δεν μπορεί ούτε να καταστραφεί ούτε \n να υποβαθμιστεί.
 REFINE_SUCCESS	Η αναβάθμιση ήταν επιτυχής.
 REFINE_SUCCESS_PROBALITY	Πιθανότητα Αναβάθμισης %d%%
 REFINE_WARNING2	Θέλεις να συνεχίσεις;

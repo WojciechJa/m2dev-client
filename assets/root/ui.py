@@ -443,6 +443,13 @@ class TextLine(Window):
 	def __init__(self):
 		Window.__init__(self)
 		self.max = 0
+
+		# MR-15: Multiline dialog messages
+		self.extraLines = []
+		self.textHAlign = None
+		self.textVAlign = None
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		self.SetFontName(localeInfo.UI_DEF_FONT)
 
 	def __del__(self):
@@ -464,21 +471,45 @@ class TextLine(Window):
 		wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_ARABIC)
 
 	def SetHorizontalAlignLeft(self):
+		# MR-15: Multiline dialog messages
+		self.textHAlign = "left"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_LEFT)
 
 	def SetHorizontalAlignRight(self):
+		# MR-15: Multiline dialog messages
+		self.textHAlign = "right"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_RIGHT)
 
 	def SetHorizontalAlignCenter(self):
+		# MR-15: Multiline dialog messages
+		self.textHAlign = "center"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_CENTER)
 
 	def SetVerticalAlignTop(self):
+		# MR-15: Multiline dialog messages
+		self.textVAlign = "top"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_TOP)
 
 	def SetVerticalAlignBottom(self):
+		# MR-15: Multiline dialog messages
+		self.textVAlign = "bottom"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_BOTTOM)
 
 	def SetVerticalAlignCenter(self):
+		# MR-15: Multiline dialog messages
+		self.textVAlign = "center"
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_CENTER)
 
 	def SetSecret(self, Value=True):
@@ -500,6 +531,10 @@ class TextLine(Window):
 		wndMgr.SetFeather(self.hWnd, value)
 
 	def SetFontName(self, fontName):
+		# MR-15: Multiline dialog messages
+		self.fontName = fontName
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		wndMgr.SetFontName(self.hWnd, fontName)
 
 	def SetDefaultFontName(self):
@@ -512,10 +547,55 @@ class TextLine(Window):
 		wndMgr.SetFontColor(self.hWnd, color)
 
 	def SetText(self, text):
-		wndMgr.SetText(self.hWnd, text)
+		# MR-15: Multiline dialog messages
+		for line in self.extraLines:
+			line.Hide()
+
+		self.extraLines = []
+
+		if not text:
+			wndMgr.SetText(self.hWnd, "")
+			return
+
+		if "\\n" in text or "/n" in text:
+			parts = text.replace("\\n", "\n").replace("/n", "\n").split("\n")
+			parts = [p.strip(" ") for p in parts]
+
+			wndMgr.SetText(self.hWnd, parts[0])
+
+			if len(parts) > 1:
+				LINE_HEIGHT = 20
+
+				for i, part in enumerate(parts[1:], 1):
+					extra = TextLine()
+					extra.SetParent(self)
+					extra.SetFontName(self.fontName)
+
+					if self.textHAlign == "center":
+						extra.SetHorizontalAlignCenter()
+					elif self.textHAlign == "right":
+						extra.SetHorizontalAlignRight()
+
+					if self.textVAlign == "center":
+						extra.SetVerticalAlignCenter()
+					elif self.textVAlign == "bottom":
+						extra.SetVerticalAlignBottom()
+
+					extra.SetPosition(0, LINE_HEIGHT * i)
+					extra.SetText(part)
+					extra.Show()
+					self.extraLines.append(extra)
+		else:
+			wndMgr.SetText(self.hWnd, text)
 
 	def GetText(self):
-		return wndMgr.GetText(self.hWnd)
+		text = wndMgr.GetText(self.hWnd)
+
+		for line in self.extraLines:
+			text += "\n" + wndMgr.GetText(line.hWnd)
+
+		return text
+	# MR-15: -- END OF -- Multiline dialog messages
 
 	def GetTextSize(self):
 		return wndMgr.GetTextSize(self.hWnd)

@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Без ограничения времени
 QUICKSLOT_REGISTER_DISABLE_ITEM	Этот предмет не может быть добавлен в поле быстрого доступа.
 RECEIVE_MESSAGE	%s отправил вам сообщение.
 REFINE_COST	Затраты на улучшение: %d янг
-REFINE_DESTROY_WARNING	Вероятность разрушения предмета при его улучшении.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Это повышает вероятность улучшения,
+REFINE_DESTROY_WARNING	Вероятность разрушения предмета \n при его улучшении.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Вы точно хотите улучшить предмет?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	но в случае неудачи предмет будет разрушен. Вы уверенны, что хотите продолжить?
 REFINE_DOWN_GRADE_WARNING	Вероятность потери некоторых свойств предмета при попытке его улучшить.
 REFINE_DO_YOU_SEPARATE_METIN	Вы хотите удалить Камень духа?
-REFINE_FAILURE	Да уж, не сработало. Мы не справились.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s нельзя приложить к этому предмету.
+REFINE_FAILURE_DEL_ITEM	Улучшение не удалось. \n Предмет уничтожен.
 REFINE_FAILURE_EQUIP_ITEM	Вы не можете улучшить снаряженный предмет.
+REFINE_FAILURE_GRADE_DOWN	Улучшение не удалось. \n Качество предмета ухудшено.
+REFINE_FAILURE_KEEP_GRADE	Улучшение не удалось.\nВам повезло, и предмет остался прежним.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Нет камня духа для удаления.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Вам необходим лучший Свиток улучшения.
 REFINE_FAILURE_NO_GOLD_SOCKET	Добавление %s невыполнимо из-за отсутствия золотой оправы.
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Добавление последующих яче
 REFINE_FAILURE_NO_SOCKET0	Добавление %s невыполнимо из-за отсутствия ячейки.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Добавление ячеек к этому предмету невозможно.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Этот предмет нельзя улучшить.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Улучшенный предмет нельзя ни \n ухудшить, ни уничтожить.
 REFINE_SUCCESS	Улучшение предмета прошло успешно.
 REFINE_SUCCESS_PROBALITY	Шанс на улучшение: %d%%
 REFINE_WARNING2	Продолжить?

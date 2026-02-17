@@ -19,6 +19,12 @@ import uiPhaseCurtain
 import localeInfo
 
 class PopupDialog(ui.ScriptWindow):
+	# MR-15: Multiline dialog messages
+	BASE_HEIGHT = 105
+	BASE_WIDTH = 280
+	BUTTON_Y = 63
+	LINE_HEIGHT = 12
+	# MR-15: -- END OF -- Multiline dialog messages
 
 	def __init__(self):
 		print("NEW POPUP DIALOG ----------------------------------------------------------------------------")
@@ -46,7 +52,19 @@ class PopupDialog(ui.ScriptWindow):
 		AcceptButton.SetText(ButtonName)
 		AcceptButton.SetEvent(ui.__mem_func__(self.Close))
 
-		self.GetChild("message").SetText(Message)
+		# MR-15: Multiline dialog messages
+		messageWidget = self.GetChild("message")
+		messageWidget.SetText(Message)
+
+		extraH = len(messageWidget.extraLines) * self.LINE_HEIGHT + 2
+		newH = self.BASE_HEIGHT + extraH
+		self.SetSize(self.BASE_WIDTH, newH)
+		self.GetChild("board").SetSize(self.BASE_WIDTH, newH)
+		AcceptButton.SetPosition(0, self.BUTTON_Y + extraH)
+
+		self.SetCenterPosition()
+		self.UpdateRect()
+		# MR-15: -- END OF -- Multiline dialog messages
 		self.Show()
 
 	def Close(self):

@@ -215,6 +215,12 @@ class InputDialogWithDescription2(InputDialog):
 		self.description2.SetText(text)
 
 class QuestionDialog(ui.ScriptWindow):
+	# MR-15: Multiline dialog messages
+	BASE_HEIGHT = 105
+	BASE_WIDTH = 340
+	BUTTON_Y = 63
+	LINE_HEIGHT = 12
+	# MR-15: -- END OF -- Multiline dialog messages
 
 	def __init__(self):
 		ui.ScriptWindow.__init__(self)
@@ -261,6 +267,9 @@ class QuestionDialog(ui.ScriptWindow):
 
 	def SetText(self, text):
 		self.textLine.SetText(text)
+		# MR-15: Multiline dialog messages
+		self.__UpdateLayout()
+		# MR-15: -- END OF -- Multiline dialog messages
 
 	def SetAcceptText(self, text):
 		self.acceptButton.SetText(text)
@@ -268,11 +277,30 @@ class QuestionDialog(ui.ScriptWindow):
 	def SetCancelText(self, text):
 		self.cancelButton.SetText(text)
 
+	# MR-15: Multiline dialog messages
+	def __UpdateLayout(self):
+		extraH = len(self.textLine.extraLines) * self.LINE_HEIGHT
+		newH = self.BASE_HEIGHT + extraH + 10
+		btnY = self.BUTTON_Y + extraH + 10
+
+		self.SetSize(self.BASE_WIDTH, newH)
+		self.board.SetSize(self.BASE_WIDTH, newH)
+		self.acceptButton.SetPosition(-40, btnY)
+		self.cancelButton.SetPosition(+40, btnY)
+		self.SetCenterPosition()
+		self.UpdateRect()
+	# MR-15: -- END OF -- Multiline dialog messages
+
 	def OnPressEscapeKey(self):
 		self.Close()
 		return True
 
 class QuestionDialog2(QuestionDialog):
+	# MR-15: Multiline dialog messages
+	BASE_HEIGHT = 105
+	BUTTON_Y = 68
+	LINE_HEIGHT = 12
+	# MR-15: -- END OF -- Multiline dialog messages
 
 	def __init__(self):
 		QuestionDialog.__init__(self)
@@ -291,11 +319,36 @@ class QuestionDialog2(QuestionDialog):
 		self.acceptButton = self.GetChild("accept")
 		self.cancelButton = self.GetChild("cancel")
 
+	# MR-15: Multiline dialog messages
 	def SetText1(self, text):
 		self.textLine1.SetText(text)
+		self.__UpdateLayout()
 
 	def SetText2(self, text):
 		self.textLine2.SetText(text)
+		self.__UpdateLayout()
+
+	def __UpdateLayout(self):
+		# Shift textLine2 down by the number of extra lines in textLine1
+		offset = len(self.textLine1.extraLines) * self.LINE_HEIGHT + 2
+
+		try:
+			x2, y2 = self.textLine2.GetLocalPosition()
+			self.textLine2.SetPosition(x2, y2 + offset)
+		except:
+			pass
+
+		extraH = (len(self.textLine1.extraLines) + len(self.textLine2.extraLines)) * self.LINE_HEIGHT
+		newH = self.BASE_HEIGHT + extraH + 10
+		btnY = self.BUTTON_Y + extraH + 10
+
+		self.SetSize(280, newH)
+		self.board.SetSize(280, newH)
+		self.acceptButton.SetPosition(-40, btnY)
+		self.cancelButton.SetPosition(+40, btnY)
+		self.SetCenterPosition()
+		self.UpdateRect()
+	# MR-15: -- END OF -- Multiline dialog messages
 
 class QuestionDialogWithTimeLimit(QuestionDialog2):
 

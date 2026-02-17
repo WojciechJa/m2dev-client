@@ -1972,13 +1972,28 @@ class GameWindow(ui.ScriptWindow):
 		self.interface.CommandCloseMall()
 	# END_OF_ITEM_MALL
 
-	def RefineSuceededMessage(self):
+	# MR-15: Update refine messages
+	def RefineSuceededMessage(self, arg = None):
 		snd.PlaySound("sound/ui/make_soket.wav")
 		self.PopupMessage(localeInfo.REFINE_SUCCESS)
 
-	def RefineFailedMessage(self):
+	def RefineFailedMessage(self, arg = None):
 		snd.PlaySound("sound/ui/jaeryun_fail.wav")
-		self.PopupMessage(localeInfo.REFINE_FAILURE)
+		# Use local refine_type and choose popup text similar to uirefine.OpenQuestionDialog
+		try:
+			refine_type = int(arg) if arg is not None else None
+		except Exception:
+			refine_type = None
+
+		if refine_type == 3:
+			# type 3: show first special destroy-with-bonus message
+			self.PopupMessage(localeInfo.REFINE_FAILURE_KEEP_GRADE)
+		elif refine_type == 2:
+			# type 2: downgrade warning
+			self.PopupMessage(localeInfo.REFINE_FAILURE_GRADE_DOWN)
+		else:
+			self.PopupMessage(localeInfo.REFINE_FAILURE_DEL_ITEM)
+	# MR-15: -- END OF -- Update refine messages
 
 	def CommandCloseSafebox(self):
 		self.interface.CommandCloseSafebox()

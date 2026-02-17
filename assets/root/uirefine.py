@@ -333,6 +333,11 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.Show()
 
 	def Close(self):
+		# MR-15: Multiline dialog messages
+		if self.dlgQuestion:
+			self.dlgQuestion.Hide()
+		# MR-15: -- END OF -- Multiline dialog messages
+
 		self.dlgQuestion = None
 		self.Hide()
 
@@ -413,7 +418,9 @@ class RefineDialogNew(ui.ScriptWindow):
 
 		if 3 == self.type: ## ��ö
 			dlgQuestion.SetText1(localeInfo.REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1)
-			dlgQuestion.SetText2(localeInfo.REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2)
+			# MR-15: Update refining messages
+			dlgQuestion.SetText2(localeInfo.REFINE_POPUP_NO_DOWNGRADE_MESSAGE)
+			# MR-15: -- END OF -- Update refining messages
 		elif 2 == self.type: ## �ູ��
 			dlgQuestion.SetText1(localeInfo.REFINE_DOWN_GRADE_WARNING)
 		else:

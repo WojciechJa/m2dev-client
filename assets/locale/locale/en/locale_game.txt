@@ -464,14 +464,16 @@ QUEST_UNLIMITED_TIME	No time limit.
 QUICKSLOT_REGISTER_DISABLE_ITEM	This Item cannot be added to the Fast Access Field.	
 RECEIVE_MESSAGE	%s sent you a message.	
 REFINE_COST	Costs for Advancement: %d Yang
-REFINE_DESTROY_WARNING	This Item could be destroyed while upgrading.	
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	This will improve the chance for upgrading,
+REFINE_DESTROY_WARNING	This Item could be destroyed \n while upgrading.	
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Do you really want to upgrade this item?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	but if you fail the Item could be destroyed. /n Do you want to continue?
 REFINE_DOWN_GRADE_WARNING	The Item could be down graded this way.	
 REFINE_DO_YOU_SEPARATE_METIN	Do you want to remove all available spirit stones?
-REFINE_FAILURE	You failed.	
 REFINE_FAILURE_CAN_NOT_ATTACH	%s cannot be included in that Item.	
+REFINE_FAILURE_DEL_ITEM	The refinement failed. \n The item was destroyed.
 REFINE_FAILURE_EQUIP_ITEM	You cannot upgrade equipped Items.
+REFINE_FAILURE_GRADE_DOWN	The refinement failed. \n The item grade was reduced.
+REFINE_FAILURE_KEEP_GRADE	The refinement failed.\nFortunately, the item remained unharmed.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	No spirit stone can be taken away.	
 REFINE_FAILURE_NEED_BETTER_SCROLL	You need a better Advancement Scroll.	
 REFINE_FAILURE_NO_GOLD_SOCKET	There is no Gold socket to include %s .	
@@ -479,6 +481,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	You cannot make more Sockets.
 REFINE_FAILURE_NO_SOCKET0	There is no Socket to include the %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	You cannot make any Sockets on this Item.	
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	This Item cannot be upgraded.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	The upgraded item cannot be destroyed \n or downgraded.
 REFINE_SUCCESS	The advancement of the Item was successful.	
 REFINE_SUCCESS_PROBALITY	Chance for Advancement %d%%	
 REFINE_WARNING2	Do you want to continue?	

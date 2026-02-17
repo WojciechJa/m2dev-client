@@ -478,14 +478,16 @@ QUEST_UNLIMITED_TIME	Sem Tempo Limite
 QUICKSLOT_REGISTER_DISABLE_ITEM	Este Item não pode ser adicionado ao campo de Acesso Rápido.
 RECEIVE_MESSAGE	%s enviou-te uma mensagem.
 REFINE_COST	Custos do melhoramento: %d Yang
-REFINE_DESTROY_WARNING	Este Item pode ser destruído enquanto é melhorado.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Isto vai aumentar a probabilidade de ser melhorado,
+REFINE_DESTROY_WARNING	Este Item pode ser destruído \n enquanto é melhorado.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Queres mesmo melhorar este item?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	mas se falhares o item pode ser destruído. Queres continuar?
 REFINE_DOWN_GRADE_WARNING	O Item pode ser piorado desta forma.
 REFINE_DO_YOU_SEPARATE_METIN	Queres mesmo retirar todas as Pedras Espíritas?
-REFINE_FAILURE	Melhoramento falhado!
 REFINE_FAILURE_CAN_NOT_ATTACH	Não podes incluir %s nesse Item.
+REFINE_FAILURE_DEL_ITEM	A refinação falhou. \n O item foi destruído.
 REFINE_FAILURE_EQUIP_ITEM	Não podes melhorar um Item equipado.
+REFINE_FAILURE_GRADE_DOWN	A refinação falhou. \n O grau do item foi reduzido.
+REFINE_FAILURE_KEEP_GRADE	A refinação falhou.\nFelizmente, o item saiu ileso.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	As Pedras Espíritas não podem ser retiradas.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Precisas de um tipo de Pergaminho diferente.
 REFINE_FAILURE_NO_GOLD_SOCKET	Não existe Socket para se adicionar %s.
@@ -493,6 +495,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Não podes abrir mais Sockets.
 REFINE_FAILURE_NO_SOCKET0	Não existe Socket para adicionar %s.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Não podes criar nenhum Socket neste item.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Este Item não pode ser melhorado.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	O item melhorado não pode ser destruído e \n não é possível reduzir o nível.
 REFINE_SUCCESS	O melhoramento do Item foi bem sucedido!
 REFINE_SUCCESS_PROBALITY	Probabilidade de Melhorar %d%%
 REFINE_WARNING2	Queres continuar?

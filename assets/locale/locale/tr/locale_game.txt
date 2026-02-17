@@ -466,14 +466,16 @@ QUEST_UNLIMITED_TIME	Zaman sınırı yok.
 QUICKSLOT_REGISTER_DISABLE_ITEM	Bu nesne hızlı erişim alanına eklenemez.
 RECEIVE_MESSAGE	%s mesaj gönderdi.
 REFINE_COST	Yükseltme bedeli: %d Yang
-REFINE_DESTROY_WARNING	Eşya arındırılırken yok olabilir.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Bunlar iyileştirme yapılarak yükseltilecek,
+REFINE_DESTROY_WARNING	Eşya arındırılırken yok \n olabilir.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Bu nesneyi gerçekten yükseltmek istiyor musun?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	fakat hata vermesi durumunda nesne yok olabilir. Devam etmek istiyor musunuz?
 REFINE_DOWN_GRADE_WARNING	Eşyanın arındırılırken değeri düşebilir.
 REFINE_DO_YOU_SEPARATE_METIN	Mevcut olan tüm Ruh Taşları çıkarılsın mı?
-REFINE_FAILURE	Başaramadın.
 REFINE_FAILURE_CAN_NOT_ATTACH	Bu nesneye %s katamazsın.
+REFINE_FAILURE_DEL_ITEM	Arındırma başarılı olmadı. \n Nesne yok oldu.
 REFINE_FAILURE_EQUIP_ITEM	Kullanılmakta olan nesneleri geliştiremezsin.
+REFINE_FAILURE_GRADE_DOWN	Arındırma başarılı olmadı. \n Nesnenin derecesi düştü.
+REFINE_FAILURE_KEEP_GRADE	Arındırma başarısız sonuçlandı.\nNeyse ki nesneye bir şey olmadı.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Çıkarabileceğiniz ruh taşı yok.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Daha iyi bir yükseltme Rolesine ihtiyacınız var.
 REFINE_FAILURE_NO_GOLD_SOCKET	Burada %s eklemek için altın yuva yok.
@@ -481,6 +483,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Daha fazla slot ekleyemezsin.
 REFINE_FAILURE_NO_SOCKET0	%s eklemek için boş slot yok.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Bu nesneye slot ekleyemezsin.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Bu nesne yükseltilemez.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	Geliştirilmiş olan eşya yok edilemez \n veya değeri düşürülemez.
 REFINE_SUCCESS	Nesnenin yükseltilmesi başarıyla tamamlandı.
 REFINE_SUCCESS_PROBALITY	Yükseltme şansı %%%d
 REFINE_WARNING2	Devam etmek istiyor musun?

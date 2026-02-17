@@ -464,14 +464,16 @@ QUEST_UNLIMITED_TIME	Nincs időkorlát
 QUICKSLOT_REGISTER_DISABLE_ITEM	Ez a tárgy nem adható a gyors elérésű mezőhöz.
 RECEIVE_MESSAGE	%s üzenetet küldött neked.
 REFINE_COST	Javítási költségek: %d Yang
-REFINE_DESTROY_WARNING	A tárgy megsérülhet a fejlesztés során.
-REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Növeli a javítás esélyét,
+REFINE_DESTROY_WARNING	A tárgy megsérülhet a \n fejlesztés során.
+REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	Valóban fejleszteni akarod ezt a tárgyat?
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	de ha nem sikerül, akkor a tárgy megsemmisülhet. Folytatod?
 REFINE_DOWN_GRADE_WARNING	A tárgy a javítás közben elromolhat.
 REFINE_DO_YOU_SEPARATE_METIN	Szeretnéd eltávolítani a Szellemkövet?
-REFINE_FAILURE	Nem sikerült. Elrontottuk.
 REFINE_FAILURE_CAN_NOT_ATTACH	%s nem tudja ezt a tárgyat hozzákapcsolni.
+REFINE_FAILURE_DEL_ITEM	A fejlesztés sikertelen \n volt. A tárgy megsemmisült.
 REFINE_FAILURE_EQUIP_ITEM	Felszerelt tárgyat nem tudsz fejleszteni.
+REFINE_FAILURE_GRADE_DOWN	A fejlesztés sikertelen volt. \n A tárgy szintje csökkent.
+REFINE_FAILURE_KEEP_GRADE	A fejlesztés sikertelen volt.\nSzerencsére a tárgy sérülés nélkül megúszta.
 REFINE_FAILURE_METIN_INSEPARABLE_ITEM	Nem lehet eltávolítani Szellemkövet.
 REFINE_FAILURE_NEED_BETTER_SCROLL	Egy jobb javító tekercsre van szükséged.
 REFINE_FAILURE_NO_GOLD_SOCKET	Nincs arany foglalat %s hozzáadásához.
@@ -479,6 +481,7 @@ REFINE_FAILURE_NO_MORE_SOCKET	Nem lehet több foglalatot hozzáadni.
 REFINE_FAILURE_NO_SOCKET0	Nincs foglalat %s felszereléséhez.
 REFINE_FAILURE_SOCKET_DISABLE_ITEM	Erre a tárgyra nem lehet foglalatokat készíteni.
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	Ez a tárgy nem javítható.
+REFINE_POPUP_NO_DOWNGRADE_MESSAGE	A fejlesztett tárgy nem semmisülhet \n meg és nem csökkenhet a szintje.
 REFINE_SUCCESS	A tárgy javítás sikeres volt.
 REFINE_SUCCESS_PROBALITY	Javítási esély: %d%%
 REFINE_WARNING2	Folytatod?
