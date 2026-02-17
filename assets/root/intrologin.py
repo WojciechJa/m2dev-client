@@ -493,6 +493,7 @@ class LoginWindow(ui.ScriptWindow):
 
 		self.pwdEditLine.SetReturnEvent(ui.__mem_func__(self.__OnClickLoginButton))
 		self.pwdEditLine.SetTabEvent(ui.__mem_func__(self.idEditLine.SetFocus))
+		self.pwdEditLine.SetSecretMode(1)
 		return 1
 
 	def __VirtualKeyboard_SetKeys(self, keyCodes):

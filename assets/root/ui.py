@@ -556,6 +556,7 @@ class EditLine(TextLine):
 		self.eventTab = None
 		self.numberMode = False
 		self.useIME = True
+		self.secretMode = False
 
 		self.candidateWindowClass = None
 		self.candidateWindow = None
@@ -617,6 +618,9 @@ class EditLine(TextLine):
 	def SetIMEFlag(self, flag):
 		self.useIME = flag
 
+	def SetSecretMode(self, flag):
+		self.secretMode = flag
+
 	def SetText(self, text):
 		wndMgr.SetText(self.hWnd, text)
 
@@ -642,6 +646,7 @@ class EditLine(TextLine):
 			ime.SetNumberMode()
 		else:
 			ime.SetStringMode()
+		ime.SetSecretMode(self.secretMode)
 		ime.EnableCaptureInput()
 		if self.useIME:
 			ime.EnableIME()
@@ -655,6 +660,7 @@ class EditLine(TextLine):
 		self.OnIMECloseReadingWnd()
 		ime.DisableIME()
 		ime.DisableCaptureInput()
+		ime.SetSecretMode(0)
 		wndMgr.HideCursor(self.hWnd)
 
 	def OnIMEOpenCandidateList(self):
