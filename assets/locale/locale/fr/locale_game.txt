@@ -250,7 +250,7 @@ MALL_PASSWORD_TITLE	Mot de passe
 MAP_A1	Région de Yongan
 MAP_A2	Vallée de Seungryong
 MAP_A3	Zone Jayan
-MAP_A2_1	
+MAP_A2_1	Valley of Seungryong (2)
 MAP_AG	Jungrang
 MAP_B1	Zone Joan
 MAP_B2	Vallée d'Imji
@@ -286,7 +286,7 @@ MAP_HOLYPLACE_DESERT	Bataille des empires : Terre du Désert
 MAP_HOLYPLACE_FLAME	Bataille des empires : Terre de Feu
 MAP_HOLYPLACE_ICE	Bataille des empires : Terre Glaciaire
 MAP_MILGYO	Temple de Hwang
-MAP_MILGYO_A	
+MAP_MILGYO_A	Hwang Temple
 MAP_MONKEY_DUNGEON	Hasung Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong
 MAP_MONKEY_DUNGEON3	Sangsun Dong
@@ -298,13 +298,13 @@ MAP_MT_TH_DUNGEON_01	Temple Ochao
 MAP_SKELTOWER	Tour de Gumsan
 MAP_NUSLUCK01	Terre des Ogres
 MAP_N_DESERT_01	Désert de Yongbi
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_N_FLAME_01	Terre de Feu
-MAP_N_FLAME_02	
+MAP_N_FLAME_02	Fireland (2)
 MAP_N_FLAME_DRAGON	Repaire de Meley
 MAP_N_FLAME_DUNGEON_01	Forteresse du dragon rouge
 MAP_N_SNOWM_01	Mont Sohan
-MAP_N_SNOWM_02	
+MAP_N_SNOWM_02	Mount Sohan (2)
 MAP_N_SNOW_DUNGEON_01	Observatoire de Nemere
 MAP_N_THREEWAY	Vallée de Seungryong
 MAP_OXEVENT	OX-contest
@@ -319,13 +319,13 @@ MAP_PATHWAY_ICE_02	Aire de jeux
 MAP_PATHWAY_ICE_03	Bataille des empires : Terre Glaciaire
 MAP_SNOW	Mont Sohan
 MAP_SKIPIA_DUNGEON_01	Grotte de l'Exil
-MAP_SKIPIA_DUNGEON_011	
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_02	Grotte de l'Exil 2
-MAP_SKIPIA_DUNGEON_021	
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_BOSS	Temple du dragon
 MAP_SKIPIA_DUNGEON_BOSS_1	Donjon des araignées 1
 MAP_SKIPIA_DUNGEON_BOSS_2	Donjon des araignées 2
@@ -358,7 +358,7 @@ MAP_WL	Grande Vallée
 MAP_TRENT	Bois enchanté
 MAP_TRENT02	Bois Rouge
 MAP_TRENT02_A	Bois Rouge
-MAP_TRENT_A	
+MAP_TRENT_A	Lungsam
 MAP_WEDDING_01	Carte de mariage
 MESSENGER_ADD_FRIEND	Ajouter un ami
 MAP_WL_01	Grande Vallée
@@ -829,3 +829,26 @@ USE_ITEM_FAILURE_PRIVATE_SHOP	Vous ne pouvez pas utiliser d'objet tant que votre
 ITEM_GET	Reçu: %s	SA
 ITEM_GET_FROM_PARTY	Reçu: %s de %s	SAA
 ITEM_DELIVER_TO_PARTY	Livré: %s à %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map

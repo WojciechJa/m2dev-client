@@ -251,7 +251,7 @@ MALL_CANNOT_INSERT	No puedes poner el objeto.
 MALL_PASSWORD_TITLE	Contraseña
 MAP_A1	Área Yongan
 MAP_A2	Valle de Seungryong
-MAP_A2_1	
+MAP_A2_1	Valley of Seungryong (2)
 MAP_A3	Área Yayang
 MAP_AG	Jungrang
 MAP_B1	Área Joan
@@ -280,7 +280,7 @@ MAP_E	Colonia
 MAP_EMPIREWAR01	Batalla por el castillo
 MAP_EMPIREWAR02	Batalla por el castillo
 MAP_EMPIREWAR03	Batalla por el castillo
-MAP_MILGYO_A	
+MAP_MILGYO_A	Hwang Temple
 MAP_GUILD_01	Jungrang
 MAP_GUILD_02	Waryong
 MAP_GUILD_03	Imha
@@ -297,12 +297,12 @@ MAP_MONKEY_DUNGEON_12	Hasun Dong
 MAP_MONKEY_DUNGEON_13	Hasun Dong
 MAP_MT_THUNDER	Montañas Trueno
 MAP_MT_TH_DUNGEON_01	Templo de los Ochao
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_NUSLUCK01	Tierra de Gigantes
 MAP_N_DESERT_01	Desierto Yongbi
-MAP_N_FLAME_02	
+MAP_N_FLAME_02	Fireland (2)
 MAP_N_FLAME_01	Tierra de Fuego
-MAP_N_SNOWM_02	
+MAP_N_SNOWM_02	Mount Sohan (2)
 MAP_N_FLAME_DRAGON	Refugio de Meley
 MAP_N_FLAME_DUNGEON_01	Fortaleza del Dragón Rojo
 MAP_N_SNOWM_01	Monte Sohan
@@ -319,14 +319,14 @@ MAP_PATHWAY_FLAME_03	Batalla de Reinos - Tierra de Fuego
 MAP_PATHWAY_ICE_01	Batalla de Reinos - Tierra de hielo
 MAP_PATHWAY_ICE_02	Parque
 MAP_PATHWAY_ICE_03	Batalla de Reinos - Tierra de hielo
-MAP_SKIPIA_DUNGEON_011	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_01	La Gruta del Exilio
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
-MAP_SKIPIA_DUNGEON_021	
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_02	La Gruta del Exilio 2
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SNOW	Monte Sohan
 MAP_SKIPIA_DUNGEON_BOSS	Templo del Dragón
 MAP_SKIPIA_DUNGEON_BOSS_1	Mazmorra de Arañas 1
@@ -356,7 +356,7 @@ MAP_T3	Terrenos de la Guerra de gremios
 MAP_T4	Terrenos de la Guerra de gremios
 MAP_THUNDER	Montañas Trueno
 MAP_TREE	Lungsam
-MAP_TRENT_A	
+MAP_TRENT_A	Lungsam
 MAP_TRENT	Bosque Fantasma
 MAP_TRENT02	Bosque Rojo
 MAP_TRENT02_A	Bosque Rojo
@@ -829,3 +829,26 @@ USE_ITEM_FAILURE_PRIVATE_SHOP	No puedes utilizar ningún objeto mientras tengas 
 ITEM_GET	Recibido: %s	SA
 ITEM_GET_FROM_PARTY	Recibido: %s de %s	SAA
 ITEM_DELIVER_TO_PARTY	Entregado: %s a %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map

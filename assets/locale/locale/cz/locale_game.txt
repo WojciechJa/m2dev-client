@@ -251,7 +251,7 @@ MALL_CANNOT_INSERT	Tento předmět nemůžeš umístit.
 MALL_PASSWORD_TITLE	Heslo
 MAP_A1	Oblast Yongan
 MAP_A2	Údolí Seungryong
-MAP_A2_1	
+MAP_A2_1	Valley of Seungryong (2)
 MAP_A3	Oblast Yayang
 MAP_AG	Jungrang
 MAP_B1	Oblast Joan
@@ -280,7 +280,7 @@ MAP_E	Kolonie
 MAP_EMPIREWAR01	Bitva na hradě
 MAP_EMPIREWAR02	Bitva na hradě
 MAP_EMPIREWAR03	Bitva na hradě
-MAP_MILGYO_A	
+MAP_MILGYO_A	Hwang Temple
 MAP_GUILD_01	Jungrang
 MAP_GUILD_02	Waryong
 MAP_GUILD_03	Imha
@@ -297,12 +297,12 @@ MAP_MONKEY_DUNGEON_12	Hasun Dong
 MAP_MONKEY_DUNGEON_13	Hasun Dong
 MAP_MT_THUNDER	Bouřné hory
 MAP_MT_TH_DUNGEON_01	Chrám Ochao
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_NUSLUCK01	Země obrů
 MAP_N_DESERT_01	Poušť Yongbi
-MAP_N_FLAME_02	
+MAP_N_FLAME_02	Fireland (2)
 MAP_N_FLAME_01	Ohnivá země
-MAP_N_SNOWM_02	
+MAP_N_SNOWM_02	Mount Sohan (2)
 MAP_N_FLAME_DRAGON	Doupě Meley
 MAP_N_FLAME_DUNGEON_01	Pevnost Červeného draka
 MAP_N_SNOWM_01	Hora Sohan
@@ -319,14 +319,14 @@ MAP_PATHWAY_FLAME_03	Bitva království - Ohnivá země
 MAP_PATHWAY_ICE_01	Bitva království - Ledová země
 MAP_PATHWAY_ICE_02	Země her
 MAP_PATHWAY_ICE_03	Bitva království - Ledová země
-MAP_SKIPIA_DUNGEON_011	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_01	Jeskyně vyhnanství
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
-MAP_SKIPIA_DUNGEON_021	
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_02	Jeskyně vyhnanství 2
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SNOW	Hora Sohan
 MAP_SKIPIA_DUNGEON_BOSS	Dračí chrám
 MAP_SKIPIA_DUNGEON_BOSS_1	Pavoučí bludiště 1
@@ -356,7 +356,7 @@ MAP_T3	Oblast cechovních válek
 MAP_T4	Oblast cechovních válek
 MAP_THUNDER	Bouřné hory
 MAP_TREE	Lungsam
-MAP_TRENT_A	
+MAP_TRENT_A	Lungsam
 MAP_TRENT	Les duchů
 MAP_TRENT02	Červený les
 MAP_TRENT02_A	Červený les
@@ -829,3 +829,26 @@ USE_ITEM_FAILURE_PRIVATE_SHOP	Pokud jsi otevřel soukromý stánek, nemůžeš p
 ITEM_GET	Získáno: %s	SA
 ITEM_GET_FROM_PARTY	Získáno: %s od %s	SAA
 ITEM_DELIVER_TO_PARTY	Doručeno: %s pro %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map

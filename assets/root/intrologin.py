@@ -48,6 +48,10 @@ def GetLoginDelay():
 
 app.SetGuildMarkPath("test")
 
+# Ensure attribute exists even when loginInfo is disabled
+if not hasattr(app, "loggined"):
+    app.loggined = False
+
 ###############################################################################
 # Multi-Language Hot-Reload System
 # All locale selector and hot-reload logic moved to:

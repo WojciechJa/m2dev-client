@@ -1,70 +1,170 @@
 AFF_LOVE_POINT	نقاط الحب: %d%%
 ALIGNMENT_NAME	نقاط الترتيب:
 alsoExportToCharset	
-CANNOT_ATTACK_DEST_IN_SAFE	إن الخصم بعيد جداً.
-CANNOT_ATTACK_SELF_IN_SAFE	لا استطيع مهاجمة الخصم من هنا.
-CANNOT_EQUIP_IN_EXCHANGE	لا يمكنك استبدال الدرع أثناء المتاجرة.
-CANNOT_EQUIP_IN_SHOP	لا يمكنك استبدال الدرع أثناء المتاجرة.
-CANNOT_OPEN_PRIVATE_SHOP_IN_SAFE_AREA	لا يمكنك فتح متجر خاص بك في مكان عام.
-CANNOT_SHOOT_DEST_IN_SAFE	إن الخصم بعيد جداً.
-CANNOT_SHOOT_EMPTY_ARROW	إنني بحاجة إلى سهم.
-CANNOT_SHOOT_SELF_IN_SAFE	لا يمكنني مهاجمة الخصم من هنا.
-CANNOT_SKILL_APPROACH	أنا متأكد بأنني لن اقترب منه.
-CANNOT_SKILL_ATTACK	لا يمكنني مهاجمتك.
-CANNOT_SKILL_DEST_IN_SAFE	إن الخصم بعيد جداً.
-CANNOT_SKILL_EQUIP_FISHING_ROD	دون إستخدام صنارة صيد مجهزة لا يمكنك صيد السمك.
-CANNOT_SKILL_HAVE_TO_RIDE	إنني بحاجة إلى حصان لاستعماله.
-CANNOT_SKILL_NEED_EMPTY_BOTTLE	إنني لا أملك قارورة فارغة.
-CANNOT_SKILL_NEED_POISON_BOTTLE	إنني لا أملك قارورة سم.
-CANNOT_SKILL_NEED_TARGET	منِ الهدف؟
-CANNOT_SKILL_NOT_ENOUGH_HP	إنني لا أملك ما يكفي من نقاط الحياة!
-CANNOT_SKILL_NOT_ENOUGH_SP	إنني لا أملك نقاط أسلوب كافية!
-CANNOT_SKILL_NOT_HORSE_SKILL	لا أستطيع استعماله أثناء ركوبي الحصان.
-CANNOT_SKILL_NOT_MATCHABLE_WEAPON	لا استطيع استعمال هذه المهارة بهذا السلاح.
-CANNOT_SKILL_NOT_YET_LEARN	إنني لم أتعلم هذه المهارة بعد.
+CANNOT_ATTACK_DEST_IN_SAFE	إن الخص�
+ بعيد جداً.
+CANNOT_ATTACK_SELF_IN_SAFE	لا استطيع �
+هاج�
+ة الخص�
+ �
+ن هنا.
+CANNOT_EQUIP_IN_EXCHANGE	لا ي�
+كنك استبدال الدرع أثناء ال�
+تاجرة.
+CANNOT_EQUIP_IN_SHOP	لا ي�
+كنك استبدال الدرع أثناء ال�
+تاجرة.
+CANNOT_OPEN_PRIVATE_SHOP_IN_SAFE_AREA	لا ي�
+كنك فتح �
+تجر خاص بك في �
+كان عا�
+.
+CANNOT_SHOOT_DEST_IN_SAFE	إن الخص�
+ بعيد جداً.
+CANNOT_SHOOT_EMPTY_ARROW	إنني بحاجة إلى سه�
+.
+CANNOT_SHOOT_SELF_IN_SAFE	لا ي�
+كنني �
+هاج�
+ة الخص�
+ �
+ن هنا.
+CANNOT_SKILL_APPROACH	أنا �
+تأكد بأنني لن اقترب �
+نه.
+CANNOT_SKILL_ATTACK	لا ي�
+كنني �
+هاج�
+تك.
+CANNOT_SKILL_DEST_IN_SAFE	إن الخص�
+ بعيد جداً.
+CANNOT_SKILL_EQUIP_FISHING_ROD	دون إستخدا�
+ صنارة صيد �
+جهزة لا ي�
+كنك صيد الس�
+ك.
+CANNOT_SKILL_HAVE_TO_RIDE	إنني بحاجة إلى حصان لاستع�
+اله.
+CANNOT_SKILL_NEED_EMPTY_BOTTLE	إنني لا أ�
+لك قارورة فارغة.
+CANNOT_SKILL_NEED_POISON_BOTTLE	إنني لا أ�
+لك قارورة س�
+.
+CANNOT_SKILL_NEED_TARGET	�
+نِ الهدف؟
+CANNOT_SKILL_NOT_ENOUGH_HP	إنني لا أ�
+لك �
+ا يكفي �
+ن نقاط الحياة!
+CANNOT_SKILL_NOT_ENOUGH_SP	إنني لا أ�
+لك نقاط أسلوب كافية!
+CANNOT_SKILL_NOT_HORSE_SKILL	لا أستطيع استع�
+اله أثناء ركوبي الحصان.
+CANNOT_SKILL_NOT_MATCHABLE_WEAPON	لا استطيع استع�
+ال هذه ال�
+هارة بهذا السلاح.
+CANNOT_SKILL_NOT_YET_LEARN	إنني ل�
+ أتعل�
+ هذه ال�
+هارة بعد.
 CANNOT_SKILL_ONLY_FOR_ALLIANCE	هذا يؤثر فقط على أعضاء الفريق.
-CANNOT_SKILL_ONLY_FOR_CORPSE	إن هذا يؤثر فقط على الموتى.
-CANNOT_SKILL_REMOVE_FISHING_ROD	لا يمكنني استعمال هذه المهارة مع صنارة صيد.
-CANNOT_SKILL_SELF_IN_SAFE	لا استطيع المهاجمة من هنا.
-CANNOT_SKILL_USE_SELF	لا يمكنني استعماله على نفسي.
-CANNOT_SKILL_WAIT_COOLTIME	لا يمكنني استعمال هذه المهارة بعد.
-CANNOT_USE	لا يمكنك استعماله.
-CANNOT_WHISPER_DEST_REFUSE	أغلق %s الهمس بالكامل.	SA
-CANNOT_WHISPER_NOT_LOGON	إن %s غير مُتصل	SA
-CANNOT_WHISPER_SELF_REFUSE	لا يمكنك الهمس لأحد إذا أغلقت الهمس بالكامل.	SNA
-CHANNEL_EMPTY_SERVER	لا وجود لخادم
+CANNOT_SKILL_ONLY_FOR_CORPSE	إن هذا يؤثر فقط على ال�
+وتى.
+CANNOT_SKILL_REMOVE_FISHING_ROD	لا ي�
+كنني استع�
+ال هذه ال�
+هارة �
+ع صنارة صيد.
+CANNOT_SKILL_SELF_IN_SAFE	لا استطيع ال�
+هاج�
+ة �
+ن هنا.
+CANNOT_SKILL_USE_SELF	لا ي�
+كنني استع�
+اله على نفسي.
+CANNOT_SKILL_WAIT_COOLTIME	لا ي�
+كنني استع�
+ال هذه ال�
+هارة بعد.
+CANNOT_USE	لا ي�
+كنك استع�
+اله.
+CANNOT_WHISPER_DEST_REFUSE	أغلق %s اله�
+س بالكا�
+ل.	SA
+CANNOT_WHISPER_NOT_LOGON	إن %s غير �
+ُتصل	SA
+CANNOT_WHISPER_SELF_REFUSE	لا ي�
+كنك اله�
+س لأحد إذا أغلقت اله�
+س بالكا�
+ل.	SNA
+CHANNEL_EMPTY_SERVER	لا وجود لخاد�
+
 CHANNEL_NORMAL	قناة %d
-CHANNEL_NOTIFY_FULL	إن هذه القناة ممتلئة! الرجاء اختيار قناة أخرى.
-CHANNEL_NOT_FIND_INFO	لا توجد هناك معلومات عن هذه القناة.
-CHANNEL_PVP	مبارزة حرة
+CHANNEL_NOTIFY_FULL	إن هذه القناة �
+�
+تلئة! الرجاء اختيار قناة أخرى.
+CHANNEL_NOT_FIND_INFO	لا توجد هناك �
+علو�
+ات عن هذه القناة.
+CHANNEL_PVP	�
+بارزة حرة
 CHANNEL_SELECT_CHANNEL	اختر القناة
-CHANNEL_SELECT_REGION	اختر مكان وضع الفاتورة
-CHANNEL_SELECT_SERVER	اختيار الخادم
-CHAT_ALL	الجميع
+CHANNEL_SELECT_REGION	اختر �
+كان وضع الفاتورة
+CHANNEL_SELECT_SERVER	اختيار الخاد�
+
+CHAT_ALL	الج�
+يع
 CHAT_GUILD	رابطة
-CHAT_INFORMATION	معلومة
-CHAT_INSULT_STRING	الجملة تحتوي على كلمات مُخلة بالأدب.
-CHAT_LOG	إظهار الرسائل القديمة [L]
+CHAT_INFORMATION	�
+علو�
+ة
+CHAT_INSULT_STRING	الج�
+لة تحتوي على كل�
+ات �
+ُخلة بالأدب.
+CHAT_LOG	إظهار الرسائل القدي�
+ة [L]
 CHAT_LOG_TITLE	سِجلُّ الدردشة
 CHAT_NORMAL	عادي
-CHAT_NOTICE	خادم
-CHAT_PARTY	مجموعة
+CHAT_NOTICE	خاد�
+
+CHAT_PARTY	�
+ج�
+وعة
 CHAT_SEND_CHAT	إرسال الدردشة
-CHAT_SEND_MEMO	إرسال همس [Shift+Enter]
+CHAT_SEND_MEMO	إرسال ه�
+س [Shift+Enter]
 CHAT_SHOUT	نداء
-CHAT_SHOUT_LIMIT	يُمكنك النداء كل 15 ثانية فقط
-CREATE_ERROR_GM_NAME	لا يسمح باستخدام حروف ’’GM’’ (سيد اللعبة) في اسم اللاعب.
-CREATE_ERROR_INSULT_NAME	الاسم غير صالح.
-CREATE_EXIST_SAME_NAME	هناك شخصية أخرى تحمل هذا الاسم.
-CREATE_FAILURE	لا يمكنك إنشاء هذه الشخصية.
-CREATE_GM_NAME	مشرف اللعبة
-CREATE_INPUT_NAME	ضع اسمك.
+CHAT_SHOUT_LIMIT	يُ�
+كنك النداء كل 15 ثانية فقط
+CREATE_ERROR_GM_NAME	لا يس�
+ح باستخدا�
+ حروف ’’GM’’ (سيد اللعبة) في اس�
+ اللاعب.
+CREATE_ERROR_INSULT_NAME	الاس�
+ غير صالح.
+CREATE_EXIST_SAME_NAME	هناك شخصية أخرى تح�
+ل هذا الاس�
+.
+CREATE_FAILURE	لا ي�
+كنك إنشاء هذه الشخصية.
+CREATE_GM_NAME	�
+شرف اللعبة
+CREATE_INPUT_NAME	ضع اس�
+ك.
 DAY	ي
-DO_YOU_BUY_ITEM1	هل ترغب في شراء %s مقابل %s يانغ؟
-DO_YOU_BUY_ITEM2	هل ترغب في شراء %s (%s قطعة) مقابل %s يانغ؟
+DO_YOU_BUY_ITEM1	هل ترغب في شراء %s �
+قابل %s يانغ؟
+DO_YOU_BUY_ITEM2	هل ترغب في شراء %s (%s قطعة) �
+قابل %s يانغ؟
 DO_YOU_DROP_MONEY	هل تريد إسقاط %d يانغ؟
-DO_YOU_SELL_ITEM1	هل ترغب في بيع %s مقابل %s يانغ؟
-DO_YOU_SELL_ITEM2	هل ترغب في بيع %s (%s قطعة) مقابل %s يانغ؟
+DO_YOU_SELL_ITEM1	هل ترغب في بيع %s �
+قابل %s يانغ؟
+DO_YOU_SELL_ITEM2	هل ترغب في بيع %s (%s قطعة) �
+قابل %s يانغ؟
 DRAGON_GATE_AUTO_REINFORCE_QUESTION	
 DRAGON_GATE_CLEAR	
 DRAGON_GATE_CLEAR_NOT_ENOUGH_MAX_REINFORCE	
@@ -139,35 +239,67 @@ DRAGON_GATE_TOOLTIP_LINE11
 DRAGON_GATE_TOOLTIP_NOT_ENOUGH_REINFORCE	
 DRAGON_GATE_TOOLTIP_TITLE	
 DRAGON_GATE_TUGWI	
-DRAGON_SOUL_CANNOT_REFINE	لا يمكنك صقل حجر التنين هذا.
-DRAGON_SOUL_CANNOT_REFINE_MORE	لقد وصل حجر التنين هذا أعلى مستوى يُمكن وصوله.
-DRAGON_SOUL_EQUIP_WARNING1	إن حذف حجر التنين من جديد في غاية الصعوبة.
-DRAGON_SOUL_EQUIP_WARNING2	هل ترغب رغم ذلك في الاستمرار؟
-DRAGON_SOUL_EXPIRED	حجر تنين مُنتهي الصلاحية
+DRAGON_SOUL_CANNOT_REFINE	لا ي�
+كنك صقل حجر التنين هذا.
+DRAGON_SOUL_CANNOT_REFINE_MORE	لقد وصل حجر التنين هذا أعلى �
+ستوى يُ�
+كن وصوله.
+DRAGON_SOUL_EQUIP_WARNING1	إن حذف حجر التنين �
+ن جديد في غاية الصعوبة.
+DRAGON_SOUL_EQUIP_WARNING2	هل ترغب رغ�
+ ذلك في الاست�
+رار؟
+DRAGON_SOUL_EXPIRED	حجر تنين �
+ُنتهي الصلاحية
 DRAGON_SOUL_INVALID_DRAGON_SOUL	إنه ليس حجر التنين الحقيقي.
 DRAGON_SOUL_IS_NOT_DRAGON_SOUL	إنه ليس بحجر تنين.
 DRAGON_SOUL_NOT_DRAGON_SOUL_REFINE_STONE	إن هذا ليس هو حجر التنين الحقيقي.
-DRAGON_SOUL_NOT_ENOUGH_MATERIAL	إنك لا تملك ما يكفي من المواد لتنفيذ عملية الصقل.
-DRAGON_SOUL_STEP_LEVEL1	صفاء: لامس،
+DRAGON_SOUL_NOT_ENOUGH_MATERIAL	إنك لا ت�
+لك �
+ا يكفي �
+ن ال�
+واد لتنفيذ ع�
+لية الصقل.
+DRAGON_SOUL_STEP_LEVEL1	صفاء: لا�
+س،
 DRAGON_SOUL_STEP_LEVEL2	صفاء: خالص،
 DRAGON_SOUL_STEP_LEVEL3	صفاء: ناصع،
-DRAGON_SOUL_STEP_LEVEL4	صفاء: لامع،
-DRAGON_SOUL_STEP_LEVEL5	صفاء: ممتاز،
-DRAGON_SOUL_STRENGTH	المستوى: +%d	SA
-DRAGON_SOUL_UNEQUIP_WARNING1	قد يُدمّر حجر التنين أثناءها.
-DRAGON_SOUL_UNEQUIP_WARNING2	هل ترغب رغم ذلك في الاستمرار؟
+DRAGON_SOUL_STEP_LEVEL4	صفاء: لا�
+ع،
+DRAGON_SOUL_STEP_LEVEL5	صفاء: �
+�
+تاز،
+DRAGON_SOUL_STRENGTH	ال�
+ستوى: +%d	SA
+DRAGON_SOUL_UNEQUIP_WARNING1	قد يُد�
+ّر حجر التنين أثناءها.
+DRAGON_SOUL_UNEQUIP_WARNING2	هل ترغب رغ�
+ ذلك في الاست�
+رار؟
 DRAGON_SOUL_UNMATCHED_SLOT	إنها ليست الفتحة الصحيحة.
-DRAGON_SOUL_UNQUALIFIED	لا يمكنك استعمال كيمياء حجر التنين بعد.
-DROP_ITEM_FAILURE_EQUIP_ITEM	لا تستطيع إسقاط الأشياء المجهزة.
-DROP_ITEM_FAILURE_PRIVATE_SHOP	لا يمكنك إسقاط أي شيء، طالما أنك تملك متجراً شخصياً.
-DROP_MONEY_FAILURE_1000_OVER	لا يمكنك إسقاط أكثر من 999 يانغ.
-EMOTION_ANGRY	مُغضب
+DRAGON_SOUL_UNQUALIFIED	لا ي�
+كنك استع�
+ال كي�
+ياء حجر التنين بعد.
+DROP_ITEM_FAILURE_EQUIP_ITEM	لا تستطيع إسقاط الأشياء ال�
+جهزة.
+DROP_ITEM_FAILURE_PRIVATE_SHOP	لا ي�
+كنك إسقاط أي شيء، طال�
+ا أنك ت�
+لك �
+تجراً شخصياً.
+DROP_MONEY_FAILURE_1000_OVER	لا ي�
+كنك إسقاط أكثر �
+ن 999 يانغ.
+EMOTION_ANGRY	�
+ُغضب
 EMOTION_ATTRACTIVE	إغراء
 EMOTION_BANTER	هازئ
 EMOTION_CHEERS_1	تهليل 1
 EMOTION_CHEERS_2	تهليل 2
 EMOTION_CHEERUP	تهليل
-EMOTION_CHOOSE_ONE	اختر هدفاً ما.
+EMOTION_CHOOSE_ONE	اختر هدفاً �
+ا.
 EMOTION_CLAP	تصفيق
 EMOTION_CLAP_KISS	قبلة
 EMOTION_CONGRATULATION	القبول
@@ -177,205 +309,389 @@ EMOTION_DANCE_3	رقصة 3
 EMOTION_DANCE_4	الرقصة 4
 EMOTION_DANCE_5	الرقصة 5
 EMOTION_DANCE_6	Gumsan Style
-EMOTION_FORGIVE	السماح
+EMOTION_FORGIVE	الس�
+اح
 EMOTION_FRENCH_KISS	قبلة حارة
 EMOTION_JOY	فرح
 EMOTION_SAD	حزين
 EMOTION_SHY	رفض
 EMOTION_SLAP	ضربة
-EMPIRE_A	امبراطورية الشينسو
-EMPIRE_B	امبراطورية الشونجو
-EMPIRE_C	امبراطورية الجينو
-EXCHANGE_CANNOT_GIVE	لا يمكن المتاجرة بهذا الشيء.
-EXCHANGE_CANT_EDIT_MONEY	لا يمكنك تغير المبلغ الآن.
-EXCHANGE_FAILURE_EQUIP_ITEM	لا يُمكنك استبدال المعدات المدججة.
-EXCHANGE_MONEY	مبلغ
-EXCHANGE_TITLE	تاجِرْ مع %s (%d)
-FISHING_FAILURE	لقد أضعت الطُّعم.
-FISHING_NOTIFY1	يبدو أن %s علِق في الطُّعم.
+EMPIRE_A	ا�
+براطورية الشينسو
+EMPIRE_B	ا�
+براطورية الشونجو
+EMPIRE_C	ا�
+براطورية الجينو
+EXCHANGE_CANNOT_GIVE	لا ي�
+كن ال�
+تاجرة بهذا الشيء.
+EXCHANGE_CANT_EDIT_MONEY	لا ي�
+كنك تغير ال�
+بلغ الآن.
+EXCHANGE_FAILURE_EQUIP_ITEM	لا يُ�
+كنك استبدال ال�
+عدات ال�
+دججة.
+EXCHANGE_MONEY	�
+بلغ
+EXCHANGE_TITLE	تاجِرْ �
+ع %s (%d)
+FISHING_FAILURE	لقد أضعت الطُّع�
+.
+FISHING_NOTIFY1	يبدو أن %s علِق في الطُّع�
+.
 FISHING_NOTIFY2	يبدو أن %s سُجن.
 FISHING_SUCCESS1	لقد نجحت في أسر %s!
-FISHING_SUCCESS2	لقد سحبت %s من الماء!
-FISHING_UNKNOWN	يبدو أن شيئاً ما عضّ السنارة، لكني أجهل ماهيته.
-FISHING_WRONG_PLACE	لا يمكنك الصيد هنا.
+FISHING_SUCCESS2	لقد سحبت %s �
+ن ال�
+اء!
+FISHING_UNKNOWN	يبدو أن شيئاً �
+ا عضّ السنارة، لكني أجهل �
+اهيته.
+FISHING_WRONG_PLACE	لا ي�
+كنك الصيد هنا.
 FOR_FEMALE	للإناث
 FOR_MALE	للذكور
-GAME_CANNOT_MINING	لا يمكنك استخراج المعدن الخام أثناء ركوب الخيل.
-GAME_CANNOT_PICK_ITEM	لا تستطيع الحصول على هذا الشيء لأن لاعباً آخر غنمه.
-GAME_INIT_ERROR_CURSOR	تعذر رسم مؤشر الماوس.
+GAME_CANNOT_MINING	لا ي�
+كنك استخراج ال�
+عدن الخا�
+ أثناء ركوب الخيل.
+GAME_CANNOT_PICK_ITEM	لا تستطيع الحصول على هذا الشيء لأن لاعباً آخر غن�
+ه.
+GAME_INIT_ERROR_CURSOR	تعذر رس�
+ �
+ؤشر ال�
+اوس.
 GAME_INIT_ERROR_DIRECTX	يجب تثبيت DirectX 8.1 لتشغيل اللعبة.\nتبِّث DirectX 8.1 أو أعلى.
-GAME_INIT_ERROR_GRAPHICS_BAD_PERFORMANCE	تعذر العثور على بطاقة صور لتشغيل اللعبة. \nالرجاء التأكد من أن بطاقة الصور في حاسوبك تشتغل بشكل صحيح VGA CARD.
-GAME_INIT_ERROR_GRAPHICS_NOT_EXIST	لقد تعذر العثور على بطاقة الصور. \nتحقق إذا لديك VGA-Card. \n يمكنك بدلا عن ذلك استعمال مسرع الأجهزة. \n(ضع مسرع الأجهزة في سرعتها القصوى \nلوحة التحكم -> عرض> الخيارات > متطور> بطاقة التسجيل استكشاف الأخطاء وإصلاحه)
-GAME_INIT_ERROR_GRAPHICS_NOT_SUPPORT_32BIT	لا تدعم بطاقة الرسومات للكمبيوتر نظام النافذة في مود 32 bit.\nاختر مود 16 bit أو استعمل نظام الشاشة الكاملة.
-GAME_INIT_ERROR_ITEM_PROTO	لا توجد هناك معلومات عن هذا الشيء.\nالرجاء إعادة تثبيت اللعبة.
+GAME_INIT_ERROR_GRAPHICS_BAD_PERFORMANCE	تعذر العثور على بطاقة صور لتشغيل اللعبة. \nالرجاء التأكد �
+ن أن بطاقة الصور في حاسوبك تشتغل بشكل صحيح VGA CARD.
+GAME_INIT_ERROR_GRAPHICS_NOT_EXIST	لقد تعذر العثور على بطاقة الصور. \nتحقق إذا لديك VGA-Card. \n ي�
+كنك بدلا عن ذلك استع�
+ال �
+سرع الأجهزة. \n(ضع �
+سرع الأجهزة في سرعتها القصوى \nلوحة التحك�
+ -> عرض> الخيارات > �
+تطور> بطاقة التسجيل استكشاف الأخطاء وإصلاحه)
+GAME_INIT_ERROR_GRAPHICS_NOT_SUPPORT_32BIT	لا تدع�
+ بطاقة الرسو�
+ات للك�
+بيوتر نظا�
+ النافذة في �
+ود 32 bit.\nاختر �
+ود 16 bit أو استع�
+ل نظا�
+ الشاشة الكا�
+لة.
+GAME_INIT_ERROR_ITEM_PROTO	لا توجد هناك �
+علو�
+ات عن هذا الشيء.\nالرجاء إعادة تثبيت اللعبة.
 GAME_INIT_ERROR_MAIN_WINDOW	تعذر عرض النافذة الرئيسية.
-GAME_INIT_ERROR_MOB_PROTO	لا توجد أي معلومات عن الوحش.\nالرجاء إعادة تثبيت اللعبة.
-GAME_INIT_ERROR_NETWORK	لا يمكن تسجيل بطاقة الاتصال.\nالرجاء التحقق من الاتصال عبر الإنترنت.
-GAME_PICK_MONEY	لقد حصلت على %s من اليانغ.
+GAME_INIT_ERROR_MOB_PROTO	لا توجد أي �
+علو�
+ات عن الوحش.\nالرجاء إعادة تثبيت اللعبة.
+GAME_INIT_ERROR_NETWORK	لا ي�
+كن تسجيل بطاقة الاتصال.\nالرجاء التحقق �
+ن الاتصال عبر الإنترنت.
+GAME_PICK_MONEY	لقد حصلت على %s �
+ن اليانغ.
 GUILDMARK_UPLOADER_ERROR_12_HEIGHT	العلو ليس 12 بكسل
 GUILDMARK_UPLOADER_ERROR_16_WIDTH	العرض  ليس 16 بكسل
-GUILDMARK_UPLOADER_ERROR_64_WIDTH	إن العرض أقل من 64 بيكسل
+GUILDMARK_UPLOADER_ERROR_64_WIDTH	إن العرض أقل �
+ن 64 بيكسل
 GUILDMARK_UPLOADER_ERROR_128_HEIGHT	نسبة العلو ليست 128 بكسل
-GUILDMARK_UPLOADER_ERROR_FILE_FORMAT	إن هذه اللعبة لا تدعم هذه الصورة.
-GUILDMARK_UPLOADER_ERROR_PATH	الرجاء نقل المعطيات إلى الملف في metin2/upload.
-GUILDMARK_UPLOADER_ERROR_SELECT	لم يتم اختيار أي ملف للصورة.
-GUILDWAR_CTF_TITLE	قتال الأعلام
-GUILDWAR_NORMAL_TITLE	ميدان القتال
+GUILDMARK_UPLOADER_ERROR_FILE_FORMAT	إن هذه اللعبة لا تدع�
+ هذه الصورة.
+GUILDMARK_UPLOADER_ERROR_PATH	الرجاء نقل ال�
+عطيات إلى ال�
+لف في metin2/upload.
+GUILDMARK_UPLOADER_ERROR_SELECT	ل�
+ يت�
+ اختيار أي �
+لف للصورة.
+GUILDWAR_CTF_TITLE	قتال الأعلا�
+
+GUILDWAR_NORMAL_TITLE	�
+يدان القتال
 GUILDWAR_WARP_TITLE	ساحة الحرب
 GUILD_BATTLE_CANNOT_GUILD_ACTION_MESSAGE	
 GUILD_BOARD_ID	عضو
 GUILD_BOARD_TEXT	رسالة
 GUILD_BUILDING_GRADE	رتبة
-GUILD_BUILDING_NAME	اسم المبنى
-GUILD_CANNOT_HEAL_GSP_ANYMORE	امتلأت طاقة شبح التنين إلى آخرها.
+GUILD_BUILDING_NAME	اس�
+ ال�
+بنى
+GUILD_CANNOT_HEAL_GSP_ANYMORE	ا�
+تلأت طاقة شبح التنين إلى آخرها.
 GUILD_COMMENT	اكتب
-GUILD_CREATE_ERROR_INSULT_NAME	اسم الرابطة غير مسموح به.
+GUILD_CREATE_ERROR_INSULT_NAME	اس�
+ الرابطة غير �
+س�
+وح به.
 GUILD_DEFAULT_GRADE	أعضاء الرابطة
 GUILD_DELETE	احذف
 GUILD_DEPOSIT	ودائع
-GUILD_DO_YOU_HEAL_GSP	هل ترغب مقابل %d من اليانغ في استرجاع %d من شبح التنين؟
-GUILD_DO_YOU_JOIN	 قامت بدعوتك. هل ترغب في الانضمام إلى الرابطة؟
+GUILD_DO_YOU_HEAL_GSP	هل ترغب �
+قابل %d �
+ن اليانغ في استرجاع %d �
+ن شبح التنين؟
+GUILD_DO_YOU_JOIN	 قا�
+ت بدعوتك. هل ترغب في الانض�
+ا�
+ إلى الرابطة؟
 GUILD_EMPTY_AREA	أرض خالية
-GUILD_FACILITY	مبنى جانبي
-GUILD_GEM	حجر كريم
-GUILD_HEADQUARTER	المبنى الرئيسي
+GUILD_FACILITY	�
+بنى جانبي
+GUILD_GEM	حجر كري�
+
+GUILD_HEADQUARTER	ال�
+بنى الرئيسي
 GUILD_HEAL_GSP	إعادة شبح التنين
 GUILD_INFO_ENEMY_GUILD_EMPTY	لا يوجد
-GUILD_MARK_NOT_ENOUGH_LEVEL	أدنى مستوى مطلوب 3
+GUILD_MARK_NOT_ENOUGH_LEVEL	أدنى �
+ستوى �
+طلوب 3
 GUILD_MEMBER_JOB	طبقة
-GUILD_MEMBER_KNIGHT	مقاتل
-GUILD_MEMBER_LEVEL	مستوى
+GUILD_MEMBER_KNIGHT	�
+قاتل
+GUILD_MEMBER_LEVEL	�
+ستوى
 GUILD_MEMBER_NAME	عضو
 GUILD_MEMBER_RANK	رتبة
-GUILD_MEMBER_SPECIFIC_GRAVITY	نقاط الخبرة EXP المُتبرّع بها
-GUILD_NAME	اسم الرابطة
-GUILD_NOT_ENOUGH_MATERIAL	لا تملك مواد بناء كافية لهذا المبنى.
-GUILD_NOT_ENOUGH_MONEY	لا تملك يانغ كافٍ لبناء هذا المبنى.
-GUILD_NO_NOTICE_PERMISSION	إنك غير مُؤهل لتقديم إعلانٍ ما.
+GUILD_MEMBER_SPECIFIC_GRAVITY	نقاط الخبرة EXP ال�
+ُتبرّع بها
+GUILD_NAME	اس�
+ الرابطة
+GUILD_NOT_ENOUGH_MATERIAL	لا ت�
+لك �
+واد بناء كافية لهذا ال�
+بنى.
+GUILD_NOT_ENOUGH_MONEY	لا ت�
+لك يانغ كافٍ لبناء هذا ال�
+بنى.
+GUILD_NO_NOTICE_PERMISSION	إنك غير �
+ُؤهل لتقدي�
+ إعلانٍ �
+ا.
 GUILD_OBJECT	أشياء
-GUILD_OFFER_EXP	استثمار الخبرة
+GUILD_OFFER_EXP	استث�
+ار الخبرة
 GUILD_SHORT_EXP	عدد نقاط الخبرة غير كافٍ.
-GUILD_TILE_BASEINFO	معلومات عن الأرض
-GUILD_TILE_BOARD	مذكرات خاصة بالرابطة
+GUILD_TILE_BASEINFO	�
+علو�
+ات عن الأرض
+GUILD_TILE_BOARD	�
+ذكرات خاصة بالرابطة
 GUILD_TILE_GRADE	إدارة الحقوق
-GUILD_TILE_INFO	معلومات الرابطة
+GUILD_TILE_INFO	�
+علو�
+ات الرابطة
 GUILD_TILE_MEMBER	الأعضاء
-GUILD_TILE_SKILL	مهارات الروابط
+GUILD_TILE_SKILL	�
+هارات الروابط
 GUILD_REMOVE_MEMBER_QUESTION	هل تريد إزالة هذا العضو؟
-GUILD_VILLAGE_01	ميريانغ
+GUILD_VILLAGE_01	�
+يريانغ
 GUILD_VILLAGE_02	سونغبا
-GUILD_VILLAGE_03	دايامي
-GUILD_WAR1	منطقة حرب الرابطة
-GUILD_WAR2	منطقة حرب الرابطة
-GUILD_WAR3	منطقة حرب الرابطة
-GUILD_WAR4	منطقة حرب الرابطة
+GUILD_VILLAGE_03	دايا�
+ي
+GUILD_WAR1	�
+نطقة حرب الرابطة
+GUILD_WAR2	�
+نطقة حرب الرابطة
+GUILD_WAR3	�
+نطقة حرب الرابطة
+GUILD_WAR4	�
+نطقة حرب الرابطة
 GUILD_WAR_LIMIT_30MIN	الوقت: 30 دقيقة
-GUILD_WAR_REWARD_POTION	مكافأة: سيحصل الفائز على جرع
-GUILD_WAR_USE_BATTLE_MAP	المكان: ساحة الحرب للرابطة
-GUILD_WAR_USE_NORMAL_MAP	مكان: خريطة عادية
-GUILD_WAR_WIN_CHECK_SCORE	ستفوز الرابطة التي حصلت على أكبر عدد من الانتصارات بالحرب.
-GUILD_WAR_WIN_TAKE_AWAY_FLAG1	استولي على علم الخصم
-GUILD_WAR_WIN_TAKE_AWAY_FLAG2	وخذه إلى مقرك.
-GUILD_WAR_WIN_WIPE_OUT_GUILD	عليك القضاء على جميع الخصوم لكي تفوز.
+GUILD_WAR_REWARD_POTION	�
+كافأة: سيحصل الفائز على جرع
+GUILD_WAR_USE_BATTLE_MAP	ال�
+كان: ساحة الحرب للرابطة
+GUILD_WAR_USE_NORMAL_MAP	�
+كان: خريطة عادية
+GUILD_WAR_WIN_CHECK_SCORE	ستفوز الرابطة التي حصلت على أكبر عدد �
+ن الانتصارات بالحرب.
+GUILD_WAR_WIN_TAKE_AWAY_FLAG1	استولي على عل�
+ الخص�
+
+GUILD_WAR_WIN_TAKE_AWAY_FLAG2	وخذه إلى �
+قرك.
+GUILD_WAR_WIN_WIPE_OUT_GUILD	عليك القضاء على ج�
+يع الخصو�
+ لكي تفوز.
 GUILD_WITHDRAW	انسحاب
-GUILD_YOU_DO_NOT_JOIN	إنك لا تنتمي إلى أي رابطة.
-HORSE_HEALTH0	ميت
-HORSE_HEALTH1	يموت جوعاً
+GUILD_YOU_DO_NOT_JOIN	إنك لا تنت�
+ي إلى أي رابطة.
+HORSE_HEALTH0	�
+يت
+HORSE_HEALTH1	ي�
+وت جوعاً
 HORSE_HEALTH2	جائع
-HORSE_HEALTH3	مملوء
+HORSE_HEALTH3	�
+�
+لوء
 HORSE_LEVEL1	حصان عادي
-HORSE_LEVEL2	حصان مدرع
+HORSE_LEVEL2	حصان �
+درع
 HORSE_LEVEL3	حصان الجيش
 HOUR	س
 HOW_MANY_ITEM_DO_YOU_DROP1	هل ترغب في إسقاط  %s؟
 HOW_MANY_ITEM_DO_YOU_DROP2	هل ترغب في إسقاط %s لـ%d؟
-INPUT_PRIVATE_CODE_DIALOG_DESCRIPTION	أدخل شفرة الحذف من خيار إدارة الحساب.
+INPUT_PRIVATE_CODE_DIALOG_DESCRIPTION	أدخل شفرة الحذف �
+ن خيار إدارة الحساب.
 INPUT_PRIVATE_CODE_DIALOG_TITLE	حذف الشخصية
 INVENTORY_REALLY_USE_ITEM	هل ترغب في تفعيل هذا البند على هذا الشيء؟
 JOB_ASSASSIN	نينجا
 JOB_ASSASSIN0	لا شيء
 JOB_ASSASSIN1	نينجا القتال عن قرب
 JOB_ASSASSIN2	نينجا القتال عن بعد
-JOB_SHAMAN	شامان
+JOB_SHAMAN	شا�
+ان
 JOB_SHAMAN0	لا شيء
-JOB_SHAMAN1	شامان التنين
-JOB_SHAMAN2	شامان الشفاء
+JOB_SHAMAN1	شا�
+ان التنين
+JOB_SHAMAN2	شا�
+ان الشفاء
 JOB_SURA	سورا
 JOB_SURA0	لا شيء
 JOB_SURA1	سورا القتال السحري
 JOB_SURA2	سورا السّحر الأسود
-JOB_WARRIOR	محارب
+JOB_WARRIOR	�
+حارب
 JOB_WARRIOR0	لا شيء
-JOB_WARRIOR1	مصارع
-JOB_WARRIOR2	مقاتل ذهني
+JOB_WARRIOR1	�
+صارع
+JOB_WARRIOR2	�
+قاتل ذهني
 JOB_WOLFMAN0	ليكانر هاوي
 JOB_WOLFMAN1	غريزة
-JOB_WOLFMAN2	غير متاح
-LEFT_TIME	الوقت المتبقي
-LOCALE_CHANGE_CONFIRM	غيّر اللغة إلى %s وأعد تحميل اللعبة
-LOGIN_CONNECT_FAILURE	حصل خطأ عند الاتصال بالخادم.
-LOGIN_CONNECT_SUCCESS	تم ربط الاتصال بالخادم.
-LOGIN_CONNETING	انتظر من فضلك. سيتم ربط الاتصال بالخادم.
-LOGIN_FAILURE_ALREAY	حسابك متصل بالفعل.
+JOB_WOLFMAN2	غير �
+تاح
+LEFT_TIME	الوقت ال�
+تبقي
+LOCALE_CHANGE_CONFIRM	غيّر اللغة إلى %s وأعد تح�
+يل اللعبة
+LOGIN_CONNECT_FAILURE	حصل خطأ عند الاتصال بالخاد�
+.
+LOGIN_CONNECT_SUCCESS	ت�
+ ربط الاتصال بالخاد�
+.
+LOGIN_CONNETING	انتظر �
+ن فضلك. سيت�
+ ربط الاتصال بالخاد�
+.
+LOGIN_FAILURE_ALREAY	حسابك �
+تصل بالفعل.
 LOGIN_FAILURE_BE_SAME_KEY	خطأ في التسجيل
-LOGIN_FAILURE_BLOCK_ID	تم حظر هذا الحساب.
-LOGIN_FAILURE_BLOCK_LOGIN	خادم مغلق: الرجاء اختيار خادم آخر!
-LOGIN_FAILURE_NOBILL	لم يُسجل في هذا الحساب وقتُ لعب بعد.
-LOGIN_FAILURE_NOT_AVAIL	هذا الحساب ليس متاحًا.
-LOGIN_FAILURE_NOT_EXIST_ID	خطأ في اسم الحساب أو في كلمة السر.
-LOGIN_FAILURE_REPAIR_ID	سيتم إرجاع المعدات لهذا الحساب.
+LOGIN_FAILURE_BLOCK_ID	ت�
+ حظر هذا الحساب.
+LOGIN_FAILURE_BLOCK_LOGIN	خاد�
+ �
+غلق: الرجاء اختيار خاد�
+ آخر!
+LOGIN_FAILURE_NOBILL	ل�
+ يُسجل في هذا الحساب وقتُ لعب بعد.
+LOGIN_FAILURE_NOT_AVAIL	هذا الحساب ليس �
+تاحًا.
+LOGIN_FAILURE_NOT_EXIST_ID	خطأ في اس�
+ الحساب أو في كل�
+ة السر.
+LOGIN_FAILURE_REPAIR_ID	سيت�
+ إرجاع ال�
+عدات لهذا الحساب.
 LOGIN_FAILURE_SAMELOGIN	سجل أحد الأشخاص الدخول بحسابك.
-LOGIN_FAILURE_SHUTDOWN	الخادم غير متوفر.
+LOGIN_FAILURE_SHUTDOWN	الخاد�
+ غير �
+توفر.
 LOGIN_FAILURE_TOO_MANY_USER	لقد تعذر ربط الاتصال بسبب العدد الكبير للاعبين.
-LOGIN_FAILURE_UNKNOWN	إنك لم تنجح في تسجيل الدخول نظراً لأسباب مجهولة.
-LOGIN_FAILURE_WEB_BLOCK	لقد تم فرض حظر عليك في هذه الصفحة. الرجاء مراجعة صندوق بريدك الإلكتروني.
-LOGIN_FAILURE_WRONG_PASSWORD	خطأ في اسم الحساب أو في كلمة السر.
-LOGIN_INPUT_ID	الرجاء إدخال المُعرِّف.
-LOGIN_INPUT_PASSWORD	الرجاء إدخال كلمة السّر.
+LOGIN_FAILURE_UNKNOWN	إنك ل�
+ تنجح في تسجيل الدخول نظراً لأسباب �
+جهولة.
+LOGIN_FAILURE_WEB_BLOCK	لقد ت�
+ فرض حظر عليك في هذه الصفحة. الرجاء �
+راجعة صندوق بريدك الإلكتروني.
+LOGIN_FAILURE_WRONG_PASSWORD	خطأ في اس�
+ الحساب أو في كل�
+ة السر.
+LOGIN_INPUT_ID	الرجاء إدخال ال�
+ُعرِّف.
+LOGIN_INPUT_PASSWORD	الرجاء إدخال كل�
+ة السّر.
 LOGIN_PROCESSING	جاري التسجيل...
-MALL_CANNOT_INSERT	لا يمكنك وضع الشيء.
-MALL_PASSWORD_TITLE	كلمة السّر
-MAP_A1	منطقة يونغان
+MALL_CANNOT_INSERT	لا ي�
+كنك وضع الشيء.
+MALL_PASSWORD_TITLE	كل�
+ة السّر
+MAP_A1	�
+نطقة يونغان
 MAP_A2	وادي سوينغريونغ
-MAP_A2_1	
-MAP_A2_1	
-MAP_A3	منطقة يايانغ
+MAP_A2_1	Valley of Seungryong (2)
+MAP_A2_1	Valley of Seungryong (2)
+MAP_A3	�
+نطقة يايانغ
 MAP_AG	جونغرانغ
-MAP_B1	منطقة جوان
-MAP_B2	وادي إمجي
-MAP_B3	إقليم بوكيونغ
-MAP_BATTLE_FIELD	منطقة المعركة
+MAP_B1	�
+نطقة جوان
+MAP_B2	وادي إ�
+جي
+MAP_B3	إقلي�
+ بوكيونغ
+MAP_BATTLE_FIELD	�
+نطقة ال�
+عركة
 MAP_BAY	خليج نيفريت
 MAP_BAYBLACKSAND	خليج نيفريت
 MAP_BG	واريونغ
-MAP_C1	منطقة بيونغمو
+MAP_C1	�
+نطقة بيونغ�
+و
 MAP_C2	وادي بانغسان
-MAP_C3	منطقة باكرا
+MAP_C3	�
+نطقة باكرا
 MAP_CAPE	رأس نار التنين
 MAP_CAPEDRAGONHEAD	رأس نار التنين
-MAP_CG	إمها
-MAP_CZ_DUNGEON	معبد زودياك
-MAP_DAWN	جرف غواتاما
-MAP_DAWNMISTWOOD	جرف غواتاما
-MAP_DAWNMIST_DUNGEON_01	غابة مسحورة
+MAP_CG	إ�
+ها
+MAP_CZ_DUNGEON	�
+عبد زودياك
+MAP_DAWN	جرف غواتا�
+ا
+MAP_DAWNMISTWOOD	جرف غواتا�
+ا
+MAP_DAWNMIST_DUNGEON_01	غابة �
+سحورة
 MAP_DESERT	صحراء يونغبي
-MAP_DEVILCATACOMB	سرداب الموت
+MAP_DEVILCATACOMB	سرداب ال�
+وت
 MAP_DEVILTOWER1	برج الشياطين
 MAP_DUEL	ساحة تداريب القتال
-MAP_E	منطقة الليكانر
-MAP_EMPIREWAR01	معركة الحصن
-MAP_EMPIREWAR02	معركة الحصن
-MAP_EMPIREWAR03	معركة الحصن
-MAP_FLAME	دويومهوان
-MAP_MILGYO_A	
+MAP_E	�
+نطقة الليكانر
+MAP_EMPIREWAR01	�
+عركة الحصن
+MAP_EMPIREWAR02	�
+عركة الحصن
+MAP_EMPIREWAR03	�
+عركة الحصن
+MAP_FLAME	دويو�
+هوان
+MAP_MILGYO_A	Hwang Temple
 MAP_GUILD_01	جونغرانغ
 MAP_GUILD_02	واريونغ
-MAP_GUILD_03	إمها
-MAP_HOLYPLACE_DESERT	معركة الإمبراطورية-أرض الصحراء
-MAP_HOLYPLACE_FLAME	معركة الإمبراطورية-أرض النار
-MAP_HOLYPLACE_ICE	معركة الإمبراطورية الأرض الجليدية
-MAP_MILGYO	معبد هوانغ
-MAP_MILGYO_A	
+MAP_GUILD_03	إ�
+ها
+MAP_HOLYPLACE_DESERT	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_HOLYPLACE_FLAME	�
+عركة الإ�
+براطورية-أرض النار
+MAP_HOLYPLACE_ICE	�
+عركة الإ�
+براطورية الأرض الجليدية
+MAP_MILGYO	�
+عبد هوانغ
+MAP_MILGYO_A	Hwang Temple
 MAP_MONKEY_DUNGEON	هاسون دونغ
 MAP_MONKEY_DUNGEON2	جانغسون دونغ
 MAP_MONKEY_DUNGEON3	سانغسون دونغ
@@ -383,189 +699,376 @@ MAP_MONKEY_DUNGEON_11	هاسون دونغ
 MAP_MONKEY_DUNGEON_12	هاسون دونغ
 MAP_MONKEY_DUNGEON_13	هاسون دونغ
 MAP_MT_THUNDER	جبال الرعد
-MAP_MT_TH_DUNGEON_01	معبد الآشاو
-MAP_NUSLUCK	أرض العمالقة
-MAP_N_DESERT_02	
-MAP_N_FLAME_02	
-MAP_N_SNOWM_02	
-MAP_NUSLUCK01	أرض العمالقة
+MAP_MT_TH_DUNGEON_01	�
+عبد الآشاو
+MAP_NUSLUCK	أرض الع�
+القة
+MAP_N_DESERT_02	Yongbi Desert (2)
+MAP_N_FLAME_02	Fireland (2)
+MAP_N_SNOWM_02	Mount Sohan (2)
+MAP_NUSLUCK01	أرض الع�
+القة
 MAP_N_DESERT_01	صحراء يونغبي
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_N_FLAME_01	أرض النار
-MAP_N_FLAME_02	
-MAP_N_FLAME_DRAGON	كهف ميلي
-MAP_N_FLAME_DUNGEON_01	قلعة التنين الأحمر
+MAP_N_FLAME_02	Fireland (2)
+MAP_N_FLAME_DRAGON	كهف �
+يلي
+MAP_N_FLAME_DUNGEON_01	قلعة التنين الأح�
+ر
 MAP_N_SNOWM_01	جبل سوهان
-MAP_N_SNOWM_02	
-MAP_N_SNOW_DUNGEON_01	بُرج النمير
+MAP_N_SNOWM_02	Mount Sohan (2)
+MAP_N_SNOW_DUNGEON_01	بُرج الن�
+ير
 MAP_N_THREEWAY	وادي سوينغريونغ
-MAP_OXEVENT	مسابقة OX
-MAP_PATHWAY_DESERT_01	معركة الإمبراطورية-أرض الصحراء
-MAP_PATHWAY_DESERT_02	معركة الإمبراطورية-أرض الصحراء
-MAP_PATHWAY_DESERT_03	معركة الإمبراطورية-أرض الصحراء
-MAP_PATHWAY_FLAME_01	معركة الإمبراطورية-أرض النار
-MAP_PATHWAY_FLAME_02	معركة الإمبراطورية-أرض النار
-MAP_PATHWAY_FLAME_03	معركة الإمبراطورية-أرض النار
-MAP_PATHWAY_ICE_01	معركة الإمبراطورية-الأرض الجليدية
+MAP_OXEVENT	�
+سابقة OX
+MAP_PATHWAY_DESERT_01	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_PATHWAY_DESERT_02	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_PATHWAY_DESERT_03	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_PATHWAY_FLAME_01	�
+عركة الإ�
+براطورية-أرض النار
+MAP_PATHWAY_FLAME_02	�
+عركة الإ�
+براطورية-أرض النار
+MAP_PATHWAY_FLAME_03	�
+عركة الإ�
+براطورية-أرض النار
+MAP_PATHWAY_ICE_01	�
+عركة الإ�
+براطورية-الأرض الجليدية
 MAP_PATHWAY_ICE_02	ساحة اللعب
-MAP_PATHWAY_ICE_03	معركة الإمبراطورية-الأرض الجليدية
-MAP_SKELTOWER	برج غومسان
-MAP_SKIPIA_DUNGEON_011	
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
-MAP_SKIPIA_DUNGEON_021	
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_PATHWAY_ICE_03	�
+عركة الإ�
+براطورية-الأرض الجليدية
+MAP_SKELTOWER	برج غو�
+سان
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_01	كهف اللعنة
-MAP_SKIPIA_DUNGEON_011	
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_02	كهف اللعنة 2
-MAP_SKIPIA_DUNGEON_021	
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
-MAP_SKIPIA_DUNGEON_BOSS	معبد التنين
-MAP_SKIPIA_DUNGEON_BOSS_1	برج العناكب المحصن 1
-MAP_SKIPIA_DUNGEON_BOSS_2	برج العناكب المحصن 2
-MAP_SKIPIA_DUNGEON_BOSS_3	برج العناكب المحصن 3
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_BOSS	�
+عبد التنين
+MAP_SKIPIA_DUNGEON_BOSS_1	برج العناكب ال�
+حصن 1
+MAP_SKIPIA_DUNGEON_BOSS_2	برج العناكب ال�
+حصن 2
+MAP_SKIPIA_DUNGEON_BOSS_3	برج العناكب ال�
+حصن 3
 MAP_SNOW	جبل سوهان
 MAP_SPIDER	كواهلو دونغ
-MAP_SPIDERDUNGEON	برج العناكب المحصن 1
-MAP_SPIDERDUNGEON_02	برج العناكب المحصن 2
-MAP_SPIDERDUNGEON_02_1	برج العناكب المحصن 2
-MAP_SPIDERDUNGEON_03	برج العناكب المحصن 3
-MAP_SUNGZI	معركة الإمبراطورية
-MAP_SUNGZI_DESERT_01	معركة الإمبراطورية-أرض الصحراء
-MAP_SUNGZI_DESERT_HILL_01	معركة الإمبراطورية-أرض الصحراء
-MAP_SUNGZI_DESERT_HILL_02	معركة الإمبراطورية-أرض الصحراء
-MAP_SUNGZI_DESERT_HILL_03	معركة الإمبراطورية-أرض الصحراء
-MAP_SUNGZI_FLAME_HILL_01	معركة الإمبراطورية-أرض النار
-MAP_SUNGZI_FLAME_HILL_02	معركة الإمبراطورية-أرض النار
-MAP_SUNGZI_FLAME_HILL_03	معركة الإمبراطورية-أرض النار
-MAP_SUNGZI_SNOW	معركة الإمبراطورية-الأرض الجليدية
-MAP_SUNGZI_SNOW_PASS01	معركة الإمبراطورية-الأرض الجليدية
-MAP_SUNGZI_SNOW_PASS02	معركة الإمبراطورية-الأرض الجليدية
-MAP_SUNGZI_SNOW_PASS03	معركة الإمبراطورية-الأرض الجليدية
-MAP_T1	منطقة حرب الرابطة
-MAP_T2	منطقة حرب الرابطة
-MAP_T3	منطقة حرب الرابطة
-MAP_T4	منطقة حرب الرابطة
-MAP_TEMPLE	معبد هوانغ
+MAP_SPIDERDUNGEON	برج العناكب ال�
+حصن 1
+MAP_SPIDERDUNGEON_02	برج العناكب ال�
+حصن 2
+MAP_SPIDERDUNGEON_02_1	برج العناكب ال�
+حصن 2
+MAP_SPIDERDUNGEON_03	برج العناكب ال�
+حصن 3
+MAP_SUNGZI	�
+عركة الإ�
+براطورية
+MAP_SUNGZI_DESERT_01	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_SUNGZI_DESERT_HILL_01	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_SUNGZI_DESERT_HILL_02	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_SUNGZI_DESERT_HILL_03	�
+عركة الإ�
+براطورية-أرض الصحراء
+MAP_SUNGZI_FLAME_HILL_01	�
+عركة الإ�
+براطورية-أرض النار
+MAP_SUNGZI_FLAME_HILL_02	�
+عركة الإ�
+براطورية-أرض النار
+MAP_SUNGZI_FLAME_HILL_03	�
+عركة الإ�
+براطورية-أرض النار
+MAP_SUNGZI_SNOW	�
+عركة الإ�
+براطورية-الأرض الجليدية
+MAP_SUNGZI_SNOW_PASS01	�
+عركة الإ�
+براطورية-الأرض الجليدية
+MAP_SUNGZI_SNOW_PASS02	�
+عركة الإ�
+براطورية-الأرض الجليدية
+MAP_SUNGZI_SNOW_PASS03	�
+عركة الإ�
+براطورية-الأرض الجليدية
+MAP_T1	�
+نطقة حرب الرابطة
+MAP_T2	�
+نطقة حرب الرابطة
+MAP_T3	�
+نطقة حرب الرابطة
+MAP_T4	�
+نطقة حرب الرابطة
+MAP_TEMPLE	�
+عبد هوانغ
 MAP_THUNDER	جبال الرعد
-MAP_TREE	لونغسام (غابة الأشباح)
-MAP_TRENT_A	
+MAP_TREE	لونغسا�
+ (غابة الأشباح)
+MAP_TRENT_A	Lungsam
 MAP_TRENT	غابة الأشباح
-MAP_TRENT02	الغابة الحمراء
-MAP_TRENT02_A	الغابة الحمراء
-MAP_TRENT_A	
+MAP_TRENT02	الغابة الح�
+راء
+MAP_TRENT02_A	الغابة الح�
+راء
+MAP_TRENT_A	Lungsam
 MAP_WEDDING_01	خريطة الزواج
-MAP_WL	ميدان الأفاعي
-MAP_WL_01	ميدان الأفاعي
+MAP_WL	�
+يدان الأفاعي
+MAP_WL_01	�
+يدان الأفاعي
 MESSENGER_ADD_FRIEND	إضافة صديق
 MESSENGER_DO_YOU_ACCEPT_ADD_FRIEND_1	لقد اتخذك %s صديقاً له.
-MESSENGER_DO_YOU_ACCEPT_ADD_FRIEND_2	موافق؟
+MESSENGER_DO_YOU_ACCEPT_ADD_FRIEND_2	�
+وافق؟
 MESSENGER_DO_YOU_DELETE	هل تريد حذفه؟
-MESSENGER_DO_YOU_DELETE_PHONE_NUMBER	هل ترغب حذف رقم الهاتف المحمول؟
+MESSENGER_DO_YOU_DELETE_PHONE_NUMBER	هل ترغب حذف رق�
+ الهاتف ال�
+ح�
+ول؟
 MESSENGER_EMPTY_LIST	فارغ
 MESSENGER_FAMILY	عائلة
 MESSENGER_FRIEND	أصدقاء
 MESSENGER_GUILD	رابطة
-MESSENGER_INPUT_MOBILE_AUTHORITY_DESCRIPTION	أدخل رقم الشفرة الذي توصلت بها على هاتفك المحمول.
-MESSENGER_INPUT_MOBILE_AUTHORITY_TITLE	أدخل رقم الشفرة
-MESSENGER_INPUT_MOBILE_PHONE_NUMBER_1	الرجاء إدخال رقم هاتفك المحمول لإرسال الرسائل القصيرة.
-MESSENGER_INPUT_MOBILE_PHONE_NUMBER_2	هل ترغب في إدخال الرقم الآن؟
-MESSENGER_INPUT_MOBILE_PHONE_NUMBER_TITLE	أدخل رقم الهاتف المحمول
+MESSENGER_INPUT_MOBILE_AUTHORITY_DESCRIPTION	أدخل رق�
+ الشفرة الذي توصلت بها على هاتفك ال�
+ح�
+ول.
+MESSENGER_INPUT_MOBILE_AUTHORITY_TITLE	أدخل رق�
+ الشفرة
+MESSENGER_INPUT_MOBILE_PHONE_NUMBER_1	الرجاء إدخال رق�
+ هاتفك ال�
+ح�
+ول لإرسال الرسائل القصيرة.
+MESSENGER_INPUT_MOBILE_PHONE_NUMBER_2	هل ترغب في إدخال الرق�
+ الآن؟
+MESSENGER_INPUT_MOBILE_PHONE_NUMBER_TITLE	أدخل رق�
+ الهاتف ال�
+ح�
+ول
 MESSENGER_SEND_MOBILE_MESSAGE_TITLE	إرسال الرسالة
 METIN_TEST	
 MINIMAP	فتح الخريطة الصغيرة
-MINIMAP_CANNOT_SEE	لا يمكن إظهار الخريطة الصغيرة.
-MINIMAP_CAN_NOT_SHOW_AREAMAP	لا يمكن عرض الخريطة الكبيرة.
+MINIMAP_CANNOT_SEE	لا ي�
+كن إظهار الخريطة الصغيرة.
+MINIMAP_CAN_NOT_SHOW_AREAMAP	لا ي�
+كن عرض الخريطة الكبيرة.
 MINIMAP_DEC_SCALE	تصغير
 MINIMAP_INC_SCALE	تكبير
-MINIMAP_OBSERVER_COUNT	مُشاهد %d
+MINIMAP_OBSERVER_COUNT	�
+ُشاهد %d
 MINIMAP_SHOW_AREAMAP	فتح الخريطة الكبيرة
 MINUTE	د
 MONETARY_UNIT0	يانغ
 MONEY_INPUT_DIALOG_SELLPRICE	سعر البيع:
-MOVE_ITEM_FAILURE_PRIVATE_SHOP	لا يمكنك تغيير مكان أي شيء، طالما أنك تملك متجراً شخصياً.
-MUSIC_EMPTY_MUSIC_LIST	بدون موسيقى مرافقة.
-MUSIC_METIN2_DEFAULT_THEMA	موسيقى Metin2
-MUSIC_NOT_SELECT_MUSIC	لم يتم اختيار ملف موسيقي.
+MOVE_ITEM_FAILURE_PRIVATE_SHOP	لا ي�
+كنك تغيير �
+كان أي شيء، طال�
+ا أنك ت�
+لك �
+تجراً شخصياً.
+MUSIC_EMPTY_MUSIC_LIST	بدون �
+وسيقى �
+رافقة.
+MUSIC_METIN2_DEFAULT_THEMA	�
+وسيقى Metin2
+MUSIC_NOT_SELECT_MUSIC	ل�
+ يت�
+ اختيار �
+لف �
+وسيقي.
 NEEFD_REST	عليك أولاً الاستراحة.
-NOT_YET_SUPPORT	لا يتم دعمه.
-OPTION_PVPMODE_CANNOT_SET_GUILD_MODE	لا يمكنك تفعيل خدمة الرابطة إذا لم تكُن عضواً فيها.
-OPTION_PVPMODE_NOT_SUPPORT	لا يمكنك استعمال خيار لاعب ضد لاعب.
-OPTION_PVPMODE_PROTECT	يجب أن يصل مستواك %d كأدنى حد لكي تتمكن من تغيير نظام لاعب ضد لاعب.
-PARTY_BONUS_ATTACKER	قيمة الهجوم: +%d	SA
-PARTY_BONUS_BERSERKER	سرعة الهجوم: +%d	SA
-PARTY_BONUS_BUFFER	مدة المهارة: +%d	SA
+NOT_YET_SUPPORT	لا يت�
+ دع�
+ه.
+OPTION_PVPMODE_CANNOT_SET_GUILD_MODE	لا ي�
+كنك تفعيل خد�
+ة الرابطة إذا ل�
+ تكُن عضواً فيها.
+OPTION_PVPMODE_NOT_SUPPORT	لا ي�
+كنك استع�
+ال خيار لاعب ضد لاعب.
+OPTION_PVPMODE_PROTECT	يجب أن يصل �
+ستواك %d كأدنى حد لكي تت�
+كن �
+ن تغيير نظا�
+ لاعب ضد لاعب.
+PARTY_BONUS_ATTACKER	قي�
+ة الهجو�
+: +%d	SA
+PARTY_BONUS_BERSERKER	سرعة الهجو�
+: +%d	SA
+PARTY_BONUS_BUFFER	�
+دة ال�
+هارة: +%d	SA
 PARTY_BONUS_DEFENDER	الدفاع +%d%%	SA
 PARTY_BONUS_EXP	نقاط إضافية في الخبرة: %d%%	SA
 PARTY_BONUS_SKILL_MASTER	إستعادة نقاط الحياة عند القتل +%d%%	SA
 PARTY_BONUS_TANKER	نقاط حياة قصوى:+%d	SA
-PARTY_BREAK_UP	حذف المجموعة
-PARTY_DO_YOU_ACCEPT	 يرغب في الانضمام إلى المجموعة.
-PARTY_DO_YOU_JOIN	 دعاك إلى المجموعة. هل تريد قبول الدعوة؟
-PARTY_EXP_DISTRIBUTION_MODE	تقسيم نقاط الخبرة
-PARTY_EXP_DISTRIBUTION_MODE_LEVEL	حسب المستوى
-PARTY_EXP_DISTRIBUTION_MODE_LEVEL_TOOLTIP	سيحصل أعضاء المجموعة ذوي المستويات المرتفعة على نقاط خبرة إضافية.
-PARTY_EXP_DISTRIBUTION_MODE_PARITY	مُتساو
-PARTY_EXP_DISTRIBUTION_MODE_PARITY_TOOLTIP	ينال جميع أعضاء المجموعة نقاط الأسلوب بالتساوي.
-PARTY_HEAL_ALL_MEMBER	استرجاع الوضع الأولي للجميع
-PARTY_INCREASE_AREA_150	ارتفاع مدى المجموعة بعامل 1,5.	SNA
-PARTY_INCREASE_AREA_200	ارتفاع مدى المجموعة بعامل 2	SNA
-PARTY_LEAVE	مغادرة المجموعة
-PARTY_MEMBER_OFFLINE	[غير متصل]
-PARTY_RECALL_MEMBER	استدعاء  أعضاء المجموعة.
+PARTY_BREAK_UP	حذف ال�
+ج�
+وعة
+PARTY_DO_YOU_ACCEPT	 يرغب في الانض�
+ا�
+ إلى ال�
+ج�
+وعة.
+PARTY_DO_YOU_JOIN	 دعاك إلى ال�
+ج�
+وعة. هل تريد قبول الدعوة؟
+PARTY_EXP_DISTRIBUTION_MODE	تقسي�
+ نقاط الخبرة
+PARTY_EXP_DISTRIBUTION_MODE_LEVEL	حسب ال�
+ستوى
+PARTY_EXP_DISTRIBUTION_MODE_LEVEL_TOOLTIP	سيحصل أعضاء ال�
+ج�
+وعة ذوي ال�
+ستويات ال�
+رتفعة على نقاط خبرة إضافية.
+PARTY_EXP_DISTRIBUTION_MODE_PARITY	�
+ُتساو
+PARTY_EXP_DISTRIBUTION_MODE_PARITY_TOOLTIP	ينال ج�
+يع أعضاء ال�
+ج�
+وعة نقاط الأسلوب بالتساوي.
+PARTY_HEAL_ALL_MEMBER	استرجاع الوضع الأولي للج�
+يع
+PARTY_INCREASE_AREA_150	ارتفاع �
+دى ال�
+ج�
+وعة بعا�
+ل 1,5.	SNA
+PARTY_INCREASE_AREA_200	ارتفاع �
+دى ال�
+ج�
+وعة بعا�
+ل 2	SNA
+PARTY_LEAVE	�
+غادرة ال�
+ج�
+وعة
+PARTY_MEMBER_OFFLINE	[غير �
+تصل]
+PARTY_RECALL_MEMBER	استدعاء  أعضاء ال�
+ج�
+وعة.
 PARTY_REQUEST_DENIED	لقد رُفض طلبك.
-PARTY_SET_ATTACKER	وظِّفهُ كمهاجم.
+PARTY_SET_ATTACKER	وظِّفهُ ك�
+هاج�
+.
 PARTY_SET_BERSERKER	تعيينه كهائج.
-PARTY_SET_BUFFER	وظِّفه كمُتصدِّي.
-PARTY_SET_DEFENDER	وظفه كمدافع.
+PARTY_SET_BUFFER	وظِّفه ك�
+ُتصدِّي.
+PARTY_SET_DEFENDER	وظفه ك�
+دافع.
 PARTY_SET_NORMAL	إلغاء التعديل.
-PARTY_SET_SKILL_MASTER	تعينه بصفته سيد المهارات.
-PARTY_SET_TANKER	تعيين كمحارب في القتال عن قرب.
-PARTY_SKILL_ATTACKER	قيمة الهجوم الأساسية مهاجم +%.0f
-PARTY_SKILL_BERSERKER	سرعة هجوم الهائج +%.0f
-PARTY_SKILL_BUFFER	مدة مهارة المتصدي +%.0f
-PARTY_SKILL_DEFENDER	الدفاع كمُدافع +%.0f%%
-PARTY_SKILL_SKILL_MASTER	استعادة نقاط الحياة سيد المهارة+: %.0f%%
-PARTY_SKILL_TANKER	نقاط الحياة القصوى للمقاتل عن قرب +%.0f.
-PASSWORD_TITLE	كلمة سر المستودع
+PARTY_SET_SKILL_MASTER	تعينه بصفته سيد ال�
+هارات.
+PARTY_SET_TANKER	تعيين ك�
+حارب في القتال عن قرب.
+PARTY_SKILL_ATTACKER	قي�
+ة الهجو�
+ الأساسية �
+هاج�
+ +%.0f
+PARTY_SKILL_BERSERKER	سرعة هجو�
+ الهائج +%.0f
+PARTY_SKILL_BUFFER	�
+دة �
+هارة ال�
+تصدي +%.0f
+PARTY_SKILL_DEFENDER	الدفاع ك�
+ُدافع +%.0f%%
+PARTY_SKILL_SKILL_MASTER	استعادة نقاط الحياة سيد ال�
+هارة+: %.0f%%
+PARTY_SKILL_TANKER	نقاط الحياة القصوى لل�
+قاتل عن قرب +%.0f.
+PASSWORD_TITLE	كل�
+ة سر ال�
+ستودع
 PET_TOOLTIP_COSTUME_BONUS	
-PICK_ITEM_TITLE	رقم الشيء
-PICK_MONEY_TITLE	المبلغ
-PRIVATE_SHOP_CANNOT_SELL_ITEM	لا يُمكنك بيع هذا الشيء في متجر خاص.
-PRIVATE_SHOP_CLOSE_QUESTION	هل تريد إغلاق المتجر الخاص؟
-PRIVATE_SHOP_INPUT_NAME_DIALOG_TITLE	اسم المتجر الخاص
+PICK_ITEM_TITLE	رق�
+ الشيء
+PICK_MONEY_TITLE	ال�
+بلغ
+PRIVATE_SHOP_CANNOT_SELL_ITEM	لا يُ�
+كنك بيع هذا الشيء في �
+تجر خاص.
+PRIVATE_SHOP_CLOSE_QUESTION	هل تريد إغلاق ال�
+تجر الخاص؟
+PRIVATE_SHOP_INPUT_NAME_DIALOG_TITLE	اس�
+ ال�
+تجر الخاص
 PRIVATE_SHOP_INPUT_PRICE_DIALOG_TITLE	سعر
 PVP_LEVEL0	فارسي
 PVP_LEVEL1	نَبِيل
 PVP_LEVEL2	جَيِّد
 PVP_LEVEL3	لطيف
-PVP_LEVEL4	محايد
+PVP_LEVEL4	�
+حايد
 PVP_LEVEL5	عدائي
-PVP_LEVEL6	ماكر
+PVP_LEVEL6	�
+اكر
 PVP_LEVEL7	خبيث
 PVP_LEVEL8	فَظِيع
-PVP_MODE_GUILD	تفعيل الرابطة - نظام لاعب ضد لاعب
-PVP_MODE_KILL	نظام لاعب ضد لاعب - بدون قيد
-PVP_MODE_NORMAL	نظام لاعب ضد لاعب - تشغيل السلام
-PVP_MODE_PROTECT	لاعب ضد لاعب - تفعيل الحماية
-PVP_MODE_REVENGE	لاعب ضد لاعب - نظام عدائي
+PVP_MODE_GUILD	تفعيل الرابطة - نظا�
+ لاعب ضد لاعب
+PVP_MODE_KILL	نظا�
+ لاعب ضد لاعب - بدون قيد
+PVP_MODE_NORMAL	نظا�
+ لاعب ضد لاعب - تشغيل السلا�
+
+PVP_MODE_PROTECT	لاعب ضد لاعب - تفعيل الح�
+اية
+PVP_MODE_REVENGE	لاعب ضد لاعب - نظا�
+ عدائي
 PVP_OPTION_KILL	بدون قيد
-PVP_OPTION_NORMAL	السلام
-PVP_OPTION_PROTECT	الحماية
+PVP_OPTION_NORMAL	السلا�
+
+PVP_OPTION_PROTECT	الح�
+اية
 PVP_OPTION_REVENGE	عدائي
-QUEST_APPEND	تم تسجيل أمر جديد.
+QUEST_APPEND	ت�
+ تسجيل أ�
+ر جديد.
 QUEST_MIN	دقيقة
 QUEST_SEC	ثانية
 QUEST_TIMEOVER	انتهى الوقت
-QUEST_UNLIMITED_TIME	بدون قيدٍ زمني
-QUICKSLOT_REGISTER_DISABLE_ITEM	لا يمكن زيادة هذا الغرض إلى ساحة الهجوم السريع.
+QUEST_UNLIMITED_TIME	بدون قيدٍ ز�
+ني
+QUICKSLOT_REGISTER_DISABLE_ITEM	لا ي�
+كن زيادة هذا الغرض إلى ساحة الهجو�
+ السريع.
 RECEIVE_MESSAGE	%s أرسل لك رسالة.
 REFINE_COST	تكاليف التحسين: %d يانغ
-REFINE_DESTROY_WARNING	قد يؤدي تحسين هذا الشيء إلى تدميره.
+REFINE_DESTROY_WARNING	قد يؤدي تحسين هذا الشيء إلى تد�
+يره.
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_1	هل تريد بالفعل تحسين هذا الشئ؟
 REFINE_DESTROY_WARNING_WITH_BONUS_PERCENT_2	قد يتعرض هذا الشيء للتدمير عند الفشل. هل ترغب رغم ذلك في الاستمرار؟
 REFINE_DOWN_GRADE_WARNING	قد تتسبب عملية التحسين في التخفيض من قيمة هذا الشيء.
@@ -584,48 +1087,116 @@ REFINE_FAILURE_SOCKET_DISABLE_ITEM	لا يمكنك إضافة مقابس إضا�
 REFINE_FAILURE_UPGRADE_DISABLE_ITEM	لا يمكن تحسين هذا البند.
 REFINE_POPUP_NO_DOWNGRADE_MESSAGE	لن يتعرض الشيء الذي تم تحسينه إلى \n التدمير أو التشويه.
 REFINE_SUCCESS	لقد تم تحسين هذا البند بنجاح.
+REFINE_FAILURE	للأسف،ل�
+ير عند الفشل. هل ترغب رغ�
+ ذلك في الاست�
+رار؟
+لية التحسين في التخفيض �
+ن قي�
+ة هذا الشيء.
+يع الأحجار الشّبحية؟
+ ننجح! لقد فشلنا.
+كنك تحسين الأشياء ال�
+ُدرعة.
+حنك حذف حجر الشبح.
+ن هذه.
+قبس ذهبي، لإضافة %s.
+كنك إضافة �
+قابس جديدة.
+قبس فارغ �
+ن أجل %s.
+قابس إضافية لهذا البند.
+كن تحسين هذا البند.
+ تحسين هذا البند بنجاح.
 REFINE_SUCCESS_PROBALITY	فرص التحسين: %d%%
-REFINE_WARNING2	هل تريد الاستمرار بالتحسين؟
-SAFEBOX_ERROR	إن كلمة السر غير صحيحة.
-SAFEBOX_SELL_DISABLE_SAFEITEM	لا يُمكنك بيع أي من الأشياء المَحفُوظة.
-SAFEBOX_WRONG_PASSWORD	يجب أن تكون كلمات السر متطابقة.
+REFINE_WARNING2	هل تريد الاست�
+رار بالتحسين؟
+SAFEBOX_ERROR	إن كل�
+ة السر غير صحيحة.
+SAFEBOX_SELL_DISABLE_SAFEITEM	لا يُ�
+كنك بيع أي �
+ن الأشياء ال�
+َحفُوظة.
+SAFEBOX_WRONG_PASSWORD	يجب أن تكون كل�
+ات السر �
+تطابقة.
 SCREENSHOT_SAVE1	حُفظت في
-SCREENSHOT_SAVE2	ملف صور اللعبة
+SCREENSHOT_SAVE2	�
+لف صور اللعبة
 SCREENSHOT_SAVE_FAILURE	فشِل حِفظ صور اللعبة
 SECOND	ثانية
-SELECT_CAN_NOT_DELETE	لا يُمكنك حذف هذه الشخصية.
-SELECT_CHANGED_NAME	لقد قُمت بتغيير اسم هذه الشخصية.
-SELECT_CHANGE_FAILURE_ALREADY_EXIST_NAME	إن اسم الشخصية المختار مُستعمل.
-SELECT_CHANGE_FAILURE_STRANGE_INDEX	حاول مجدداً.
-SELECT_CHANGE_FAILURE_STRANGE_NAME	اسم الشخصية غير صحيح.
-SELECT_CHANGE_NAME_TITLE	تغيير اسم الشخصية
-SELECT_DELEING	بدأت عملية الحذف ...
-SELECT_DELETED	تم الحذف بنجاح.
-SELECT_DO_YOU_DELETE_REALLY	هل ترغب في المتابعة؟
+SELECT_CAN_NOT_DELETE	لا يُ�
+كنك حذف هذه الشخصية.
+SELECT_CHANGED_NAME	لقد قُ�
+ت بتغيير اس�
+ هذه الشخصية.
+SELECT_CHANGE_FAILURE_ALREADY_EXIST_NAME	إن اس�
+ الشخصية ال�
+ختار �
+ُستع�
+ل.
+SELECT_CHANGE_FAILURE_STRANGE_INDEX	حاول �
+جدداً.
+SELECT_CHANGE_FAILURE_STRANGE_NAME	اس�
+ الشخصية غير صحيح.
+SELECT_CHANGE_NAME_TITLE	تغيير اس�
+ الشخصية
+SELECT_DELEING	بدأت ع�
+لية الحذف ...
+SELECT_DELETED	ت�
+ الحذف بنجاح.
+SELECT_DO_YOU_DELETE_REALLY	هل ترغب في ال�
+تابعة؟
 SELECT_EMPTY_SLOT	إن هذه الخانة فارغة.
-SELECT_INPUT_CHANGING_NAME	الرجاء إدخال اسم جديد للشخصية.
+SELECT_INPUT_CHANGING_NAME	الرجاء إدخال اس�
+ جديد للشخصية.
 SELECT_NOT_JOIN_GUILD	بدون رابطة
-SHOP_BUY_INFO	اختر في نافذة المتجر الشيء الذي ترغب في شرائه.
-SHOP_CANNOT_SELL_ITEM	هذا الشيء غير معروض للبيع.
-SHOP_ERROR_UNKNOWN	عطب مجهول في المتجر: %s
-SHOP_INVALID_POS	إن هذا الشيء غير مناسب.
-SHOP_INVENTORY_FULL	لم يعُد هناك مكان فارغ في قائمة الجرد.
-SHOP_NOT_ENOUGH_MONEY	لا تملك ما يكفي من الوون أو اليانغ
-SHOP_NOT_ENOUGH_MONEY_EX	إنك لا تملك ما يكفي من اليانغ.
-SHOP_SELL_INFO	اختر في جدول قائمة الجرد الشيء الذي ترغب في بيعه.
-SHOP_SOLDOUT	تم بيعه
-SHOT_ERROR_UNKNOWN	خطأ مجهول أثناء الهجوم عن بعد: %s
+SHOP_BUY_INFO	اختر في نافذة ال�
+تجر الشيء الذي ترغب في شرائه.
+SHOP_CANNOT_SELL_ITEM	هذا الشيء غير �
+عروض للبيع.
+SHOP_ERROR_UNKNOWN	عطب �
+جهول في ال�
+تجر: %s
+SHOP_INVALID_POS	إن هذا الشيء غير �
+ناسب.
+SHOP_INVENTORY_FULL	ل�
+ يعُد هناك �
+كان فارغ في قائ�
+ة الجرد.
+SHOP_NOT_ENOUGH_MONEY	لا ت�
+لك �
+ا يكفي �
+ن الوون أو اليانغ
+SHOP_NOT_ENOUGH_MONEY_EX	إنك لا ت�
+لك �
+ا يكفي �
+ن اليانغ.
+SHOP_SELL_INFO	اختر في جدول قائ�
+ة الجرد الشيء الذي ترغب في بيعه.
+SHOP_SOLDOUT	ت�
+ بيعه
+SHOT_ERROR_UNKNOWN	خطأ �
+جهول أثناء الهجو�
+ عن بعد: %s
 SKILL_BOHO	انعكاس
 SKILL_CHEONGEUN	جسد قوي
-SKILL_EUNHYEONG	غير مرئي
+SKILL_EUNHYEONG	غير �
+رئي
 SKILL_FIRE	إحراق
-SKILL_FISHMIND	تم تفعيل كرة السمك
+SKILL_FISHMIND	ت�
+ تفعيل كرة الس�
+ك
 SKILL_GEOMGYEONG	هالة السيف
-SKILL_GICHEON	مساعدة التنين
+SKILL_GICHEON	�
+ساعدة التنين
 SKILL_GONGPO	خوف
-SKILL_GRADE_NAME_GRAND_MASTER	%s الخبير المحترف
+SKILL_GRADE_NAME_GRAND_MASTER	%s الخبير ال�
+حترف
 SKILL_GRADE_NAME_MASTER	%s سيد
-SKILL_GRADE_NAME_PERFECT_MASTER	%s سيد متكامل
+SKILL_GRADE_NAME_PERFECT_MASTER	%s سيد �
+تكا�
+ل
 SKILL_GROUP_ASSASSIN_1	شفرة
 SKILL_GROUP_ASSASSIN_2	قوس
 SKILL_GROUP_HORSE	فن الفروسية
@@ -635,73 +1206,134 @@ SKILL_GROUP_SURA_1	سلاح
 SKILL_GROUP_SURA_2	سحر
 SKILL_GROUP_WARRIOR_1	جسد
 SKILL_GROUP_WARRIOR_2	ذهني
-SKILL_GWIGEOM	شفرة مسحورة
-SKILL_GYEONGGONG	مشي الريش
-SKILL_HEUKSIN	الحماية الظلامية
+SKILL_GWIGEOM	شفرة �
+سحورة
+SKILL_GYEONGGONG	�
+شي الريش
+SKILL_HEUKSIN	الح�
+اية الظلا�
+ية
 SKILL_HOSIN	بركة
-SKILL_INC_ATKSPD	ارتفاع سرعة الهجوم
+SKILL_INC_ATKSPD	ارتفاع سرعة الهجو�
+
 SKILL_INC_MOVSPD	ارتفاع سرعة التحرك
 SKILL_JEONGWI	نشوة القتال
-SKILL_JEUNGRYEOK	هجوم +
-SKILL_JUMAGAP	درع مسحور
+SKILL_JEUNGRYEOK	هجو�
+ +
+SKILL_JUMAGAP	درع �
+سحور
 SKILL_KWAESOK	سرعة
 SKILL_MUYEONG	شبح اللهب
-SKILL_NEED_EMPTY_BOTTLE	لا أملك قارورة فارغة.
-SKILL_NEED_POISON_BOTTLE	لا أملك قارورة سم.
-SKILL_ONLY_FOR_GUILD_WAR	لا يمكنك استعمال هذه المهارة إلاّ في حروب الروابط.
+SKILL_NEED_EMPTY_BOTTLE	لا أ�
+لك قارورة فارغة.
+SKILL_NEED_POISON_BOTTLE	لا أ�
+لك قارورة س�
+.
+SKILL_ONLY_FOR_GUILD_WAR	لا ي�
+كنك استع�
+ال هذه ال�
+هارة إلاّ في حروب الروابط.
 SKILL_PABEOP	إزالة السحر
-SKILL_POWERFUL_STRIKE	هجوم مُخدِّر
+SKILL_POWERFUL_STRIKE	هجو�
+ �
+ُخدِّر
 SKILL_SLOW	بطيء
 SKILL_STUN	تخدير
 SKILL_SUMMON_DESCRIPTION	فرصة للشعوذة: %d%%
 SKILL_TOOLTIP_INT	ذكاء
-SKILL_TOOLTIP_LEVEL	مستوى
-SKILL_TOXICDIE	تسمم
-STAT_MINUS_CON	تعديل طاقة الحياة (الوقت المتبقي: %d)
-STAT_MINUS_DEX	تعديل المناورة (الفرص المتبقية: %d)
-STAT_MINUS_INT	تعديل الذكاء (الفرص المتبقية: %d)
-STAT_MINUS_STR	تعديل القوة (الفرص المتبقية: %d)
+SKILL_TOOLTIP_LEVEL	�
+ستوى
+SKILL_TOXICDIE	تس�
+�
+
+STAT_MINUS_CON	تعديل طاقة الحياة (الوقت ال�
+تبقي: %d)
+STAT_MINUS_DEX	تعديل ال�
+ناورة (الفرص ال�
+تبقية: %d)
+STAT_MINUS_INT	تعديل الذكاء (الفرص ال�
+تبقية: %d)
+STAT_MINUS_STR	تعديل القوة (الفرص ال�
+تبقية: %d)
 STAT_TOOLTIP_CON	يرفع نقاط الحياة و الدفاع
-STAT_TOOLTIP_DEX	ارتفاع الهجوم والمناورة
-STAT_TOOLTIP_INT	يرفع من نقاط الأسلوب، وقوة الهجوم السحري والدفاع السحري.
-STAT_TOOLTIP_STR	يرفع من قيمة الهجوم والضرر
-SYMBOLLIST_TITLE	تسجيل علم الرابطة
+STAT_TOOLTIP_DEX	ارتفاع الهجو�
+ وال�
+ناورة
+STAT_TOOLTIP_INT	يرفع �
+ن نقاط الأسلوب، وقوة الهجو�
+ السحري والدفاع السحري.
+STAT_TOOLTIP_STR	يرفع �
+ن قي�
+ة الهجو�
+ والضرر
+SYMBOLLIST_TITLE	تسجيل عل�
+ الرابطة
 TARGET_BUTTON_ACCEPT_FIGHT	وافَق
 TARGET_BUTTON_AVENGE	ثأر
-TARGET_BUTTON_BUILDING_DESTROY	تدمير
+TARGET_BUTTON_BUILDING_DESTROY	تد�
+ير
 TARGET_BUTTON_DISMOUNT	تَرَجَّلَ
-TARGET_BUTTON_EMOTION_ALLOW	مشاعر
-TARGET_BUTTON_EXCHANGE	متاجرة
+TARGET_BUTTON_EMOTION_ALLOW	�
+شاعر
+TARGET_BUTTON_EXCHANGE	�
+تاجرة
 TARGET_BUTTON_EXCLUDE	استبعاد
-TARGET_BUTTON_EXIT_OBSERVER	إنهاء المشاهدة
-TARGET_BUTTON_FIGHT	مُبَارَزة
+TARGET_BUTTON_EXIT_OBSERVER	إنهاء ال�
+شاهدة
+TARGET_BUTTON_FIGHT	�
+ُبَارَزة
 TARGET_BUTTON_FRIEND	صديق
 TARGET_BUTTON_INVITE_GUILD	دعوة الرابطة.
 TARGET_BUTTON_INVITE_PARTY	دعوة ج.
-TARGET_BUTTON_LEAVE_PARTY	غادر المجموعة
+TARGET_BUTTON_LEAVE_PARTY	غادر ال�
+ج�
+وعة
 TARGET_BUTTON_REMOVE_GUILD	إبعاده عن الرابطة
-TARGET_BUTTON_REQUEST_ENTER_PARTY	الانضمام إلى المجموعة
+TARGET_BUTTON_REQUEST_ENTER_PARTY	الانض�
+ا�
+ إلى ال�
+ج�
+وعة
 TARGET_BUTTON_VIEW_EQUIPMENT	دروع
-TARGET_BUTTON_WHISPER	همس
-TARGET_LEVEL_BOSS	زَعِيم
-TARGET_LEVEL_KING	مرتبة 5
-TARGET_LEVEL_KNIGHT	مرتبة 3
-TARGET_LEVEL_PAWN	مرتبة 1
-TARGET_LEVEL_S_KNIGHT	مرتبة 4
-TARGET_LEVEL_S_PAWN	مستوى 2
-TASKBAR_ATTACK	هاجم
-TASKBAR_AUTO	هجوم تلقائي
-TASKBAR_CAMERA	كاميرا
+TARGET_BUTTON_WHISPER	ه�
+س
+TARGET_LEVEL_BOSS	زَعِي�
+
+TARGET_LEVEL_KING	�
+رتبة 5
+TARGET_LEVEL_KNIGHT	�
+رتبة 3
+TARGET_LEVEL_PAWN	�
+رتبة 1
+TARGET_LEVEL_S_KNIGHT	�
+رتبة 4
+TARGET_LEVEL_S_PAWN	�
+ستوى 2
+TASKBAR_ATTACK	هاج�
+
+TASKBAR_AUTO	هجو�
+ تلقائي
+TASKBAR_CAMERA	كا�
+يرا
 TASKBAR_EXP	خبرة
 TASKBAR_HP	نقاط الحياة
 TASKBAR_MOVE	تحرك
-TASKBAR_SKILL	مهارة
+TASKBAR_SKILL	�
+هارة
 TASKBAR_SP	نقاط الأسلوب
-TASKBAR_ST	نقاط التحمل
-THING_COUNT	الجميع
-TOOLTIP_ANTI_CRITICAL_PCT	مقاومة ضد الضربات الحرجة +%d%%	SA
-TOOLTIP_ANTI_PENETRATE_PCT	مقاومة ضد الضربات الخارقة +%d%%	SA
-TOOLTIP_ANTI_SELL	لا يمكنك بيعه في المتجر.
+TASKBAR_ST	نقاط التح�
+ل
+THING_COUNT	الج�
+يع
+TOOLTIP_ANTI_CRITICAL_PCT	�
+قاو�
+ة ضد الضربات الحرجة +%d%%	SA
+TOOLTIP_ANTI_PENETRATE_PCT	�
+قاو�
+ة ضد الضربات الخارقة +%d%%	SA
+TOOLTIP_ANTI_SELL	لا ي�
+كنك بيعه في ال�
+تجر.
 TOOLTIP_APPLY_ATTBONUS_ANIMAL	قوي ضد الحيوانات +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_ASSASSIN	قوي ضد النينجا +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DEVIL	قوي ضد الشيطان +%d%%	SA
@@ -709,91 +1341,158 @@ TOOLTIP_APPLY_ATTBONUS_HUMAN	قوي ضد نصف بشر +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_MILGYO	قوي ضد الطائفة السرية +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_MONSTER	قوي ضد الوحوش +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_ORC	قوي ضد الغيلان +%d%%	SA
-TOOLTIP_APPLY_ATTBONUS_SHAMAN	قوي ضد شامان +%d%%	SA
+TOOLTIP_APPLY_ATTBONUS_SHAMAN	قوي ضد شا�
+ان +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_SURA	قوي ضد سورا +%d%%	SA
-TOOLTIP_APPLY_ATTBONUS_UNDEAD	قوي ضد الزومبي +%d%%	SA
-TOOLTIP_APPLY_ATTBONUS_WARRIOR	قوي ضد المحارب +%d%%	SA
-TOOLTIP_APPLY_BLOCK	فرصة صَد الهجوم عن قرب %d%%	SA
+TOOLTIP_APPLY_ATTBONUS_UNDEAD	قوي ضد الزو�
+بي +%d%%	SA
+TOOLTIP_APPLY_ATTBONUS_WARRIOR	قوي ضد ال�
+حارب +%d%%	SA
+TOOLTIP_APPLY_BLOCK	فرصة صَد الهجو�
+ عن قرب %d%%	SA
 TOOLTIP_APPLY_CRITICAL_PCT	فرص الإصابة بضربة حرجة +%d%%	SA
 TOOLTIP_APPLY_DAMAGE_SP_RECOVER	%d%% فرص استعادة نقاط الأسلوب عند الإصابة	SA
-TOOLTIP_APPLY_DODGE	%d%% فرص تفادي الهجوم بالسهام	SA
+TOOLTIP_APPLY_DODGE	%d%% فرص تفادي الهجو�
+ بالسها�
+	SA
 TOOLTIP_APPLY_EXP_DOUBLE_BONUS	%d%% فرص الحصول على نقاط خبرة إضافية	SA
-TOOLTIP_APPLY_GOLD_DOUBLE_BONUS	%d%% فرص إسقاط ضعف كمية اليانغ.	SA
-TOOLTIP_APPLY_IMMUNE_FALL	مُحصن ضد الوقوع	SNA
+TOOLTIP_APPLY_GOLD_DOUBLE_BONUS	%d%% فرص إسقاط ضعف ك�
+ية اليانغ.	SA
+TOOLTIP_APPLY_IMMUNE_FALL	�
+ُحصن ضد الوقوع	SNA
 TOOLTIP_APPLY_IMMUNE_SLOW	الدفاع ضد التباطؤ	SNA
-TOOLTIP_APPLY_IMMUNE_STUN	دفاع ضد الإغماء	SNA
-TOOLTIP_APPLY_ITEM_DROP_BONUS	%d%% فرص إسقاط ضعف كمية الأشياء.	SA
+TOOLTIP_APPLY_IMMUNE_STUN	دفاع ضد الإغ�
+اء	SNA
+TOOLTIP_APPLY_ITEM_DROP_BONUS	%d%% فرص إسقاط ضعف ك�
+ية الأشياء.	SA
 TOOLTIP_APPLY_KILL_HP_RECOVER	%d%% فرص استعادة نقاط الحياة	SA
 TOOLTIP_APPLY_KILL_SP_RECOVER	%d%% فرص استعادة نقاط الأسلوب	SA
 TOOLTIP_APPLY_MANA_BURN_PCT	فرص نهب نقاط الأسلوب %d%%	SA
 TOOLTIP_APPLY_MAX_HP_PCT	نقاط الحياة القصوى HP +%d%%	SA
 TOOLTIP_APPLY_MAX_SP_PCT	أقصى MP نقاط الأسلوب +%d%%	SA
 TOOLTIP_APPLY_NOAFFECT	بدون تأثير
-TOOLTIP_APPLY_NO_DEATH_PENALTY	بعد إعادة إحياء اللاعب في مكان الموت، لن يتم خصم أي نقاط للخبرة.	SNA
+TOOLTIP_APPLY_NO_DEATH_PENALTY	بعد إعادة إحياء اللاعب في �
+كان ال�
+وت، لن يت�
+ خص�
+ أي نقاط للخبرة.	SNA
 TOOLTIP_APPLY_PENETRATE_PCT	%d%% فرص تحصيل ضربة خارقة	SA
-TOOLTIP_APPLY_POISON_PCT	فرصة التسمم: %d%%	SA
-TOOLTIP_APPLY_POISON_REDUCE	مقاومة السموم %d%%	SA
+TOOLTIP_APPLY_POISON_PCT	فرصة التس�
+�
+: %d%%	SA
+TOOLTIP_APPLY_POISON_REDUCE	�
+قاو�
+ة الس�
+و�
+ %d%%	SA
 TOOLTIP_APPLY_POTION_BONUS	زيادة في تأثير الجرعة بنسبة %d%%	SA
 TOOLTIP_APPLY_REFLECT_CURSE	%d%% فرص عكس اللعنة	SA
-TOOLTIP_APPLY_REFLECT_MELEE	%d%% فرصُ عكس ضربات الهجمات عن قرب.	SA
-TOOLTIP_APPLY_RESIST_ASSASSIN	فرص الدفاع ضد هجوم النينجا %d%%	SA
+TOOLTIP_APPLY_REFLECT_MELEE	%d%% فرصُ عكس ضربات الهج�
+ات عن قرب.	SA
+TOOLTIP_APPLY_RESIST_ASSASSIN	فرص الدفاع ضد هجو�
+ النينجا %d%%	SA
 TOOLTIP_APPLY_RESIST_BELL	دفاع جرسي %d%%	SA
 TOOLTIP_APPLY_RESIST_DAGGER	دفاع خنجري %d%%	SA
-TOOLTIP_APPLY_RESIST_FAN	دفاع مروحي %d%%	SA
-TOOLTIP_APPLY_RESIST_SHAMAN	فرص الدفاع ضد هجوم الشامان %d%%	SA
-TOOLTIP_APPLY_RESIST_SURA	فرص الدفاع ضد هجوم السورا %d%%	SA
+TOOLTIP_APPLY_RESIST_FAN	دفاع �
+روحي %d%%	SA
+TOOLTIP_APPLY_RESIST_SHAMAN	فرص الدفاع ضد هجو�
+ الشا�
+ان %d%%	SA
+TOOLTIP_APPLY_RESIST_SURA	فرص الدفاع ضد هجو�
+ السورا %d%%	SA
 TOOLTIP_APPLY_RESIST_SWORD	دفاع سيفي %d%%	SA
 TOOLTIP_APPLY_RESIST_TWOHAND	دفاع سيف اليدين %d%%	SA
-TOOLTIP_APPLY_RESIST_WARRIOR	فرص الدفاع ضد هجوم المحاربين %d%%	SA
-TOOLTIP_APPLY_RESIST_WIND	مقاومة الرياح %d%%	SA
-TOOLTIP_APPLY_SKILL_BOOK_BONUS	فرصة الاستفادة من الكتب ترتفع بعامل 2,5	SNA
-TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY	ستحصل إذا فشل التّعلم الحصول على فرصة إضافية لإعادة المحاولة.	SNA
+TOOLTIP_APPLY_RESIST_WARRIOR	فرص الدفاع ضد هجو�
+ ال�
+حاربين %d%%	SA
+TOOLTIP_APPLY_RESIST_WIND	�
+قاو�
+ة الرياح %d%%	SA
+TOOLTIP_APPLY_SKILL_BOOK_BONUS	فرصة الاستفادة �
+ن الكتب ترتفع بعا�
+ل 2,5	SNA
+TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY	ستحصل إذا فشل التّعل�
+ الحصول على فرصة إضافية لإعادة ال�
+حاولة.	SNA
 TOOLTIP_APPLY_SLOW_PCT	فرص التبطيء: %d%%	SA
-TOOLTIP_APPLY_STEAL_HP	تستوعب نقاط الحياة %d%% من الضرر.	SA
-TOOLTIP_APPLY_STEAL_SP	تستوعب نقاط الأسلوب %d%% من الضرر.	SA
-TOOLTIP_APPLY_STUN_PCT	فرص الإغماء %d%%	SA
+TOOLTIP_APPLY_STEAL_HP	تستوعب نقاط الحياة %d%% �
+ن الضرر.	SA
+TOOLTIP_APPLY_STEAL_SP	تستوعب نقاط الأسلوب %d%% �
+ن الضرر.	SA
+TOOLTIP_APPLY_STUN_PCT	فرص الإغ�
+اء %d%%	SA
 TOOLTIP_ARMOR	دروع
-TOOLTIP_ARROW	سهم
+TOOLTIP_ARROW	سه�
+
 TOOLTIP_ASSASSIN	نينجا
-TOOLTIP_ATT_GRADE	قيمة الهجوم +%d	SA
-TOOLTIP_ATT_SPEED	سرعة الهجوم +%d%%	SA
-TOOLTIP_AUTO_POTION_HP	إكسير الشمس
-TOOLTIP_AUTO_POTION_REST	الكمية المتبقية: %.2f%%
-TOOLTIP_AUTO_POTION_SP	إكسير القمر
-TOOLTIP_AUTO_POTION_USING	مُفعّل
-TOOLTIP_BOW_DISTANCE	مدى الرماية +%dm	SA
+TOOLTIP_ATT_GRADE	قي�
+ة الهجو�
+ +%d	SA
+TOOLTIP_ATT_SPEED	سرعة الهجو�
+ +%d%%	SA
+TOOLTIP_AUTO_POTION_HP	إكسير الش�
+س
+TOOLTIP_AUTO_POTION_REST	الك�
+ية ال�
+تبقية: %.2f%%
+TOOLTIP_AUTO_POTION_SP	إكسير الق�
+ر
+TOOLTIP_AUTO_POTION_USING	�
+ُفعّل
+TOOLTIP_BOW_DISTANCE	�
+دى الر�
+اية +%dm	SA
 TOOLTIP_BUYPRICE	السعر: %s
 TOOLTIP_CAST_SPEED	سرعة السحر: +%d%%	SA
 TOOLTIP_CON	قوة الحياة +%d	SA
 TOOLTIP_COSTUME_ATTR_BONUS	علاوة الزي %d%%	SA
 TOOLTIP_DEF_GRADE	دفاع +%d	SA
-TOOLTIP_DEX	المناورة +%d	SA
-TOOLTIP_DRAGON_SOUL_DECK1	سماء	SNA
+TOOLTIP_DEX	ال�
+ناورة +%d	SA
+TOOLTIP_DRAGON_SOUL_DECK1	س�
+اء	SNA
 TOOLTIP_DRAGON_SOUL_DECK2	أرض	SNA
 TOOLTIP_EAR	حلق
 TOOLTIP_ENERGY	طاقة %d	SA
 TOOLTIP_FISHINGROD_EXP	نقاط: %d / %d
-TOOLTIP_FISHINGROD_LEVEL	مستوى: %d
-TOOLTIP_FISHINGROD_UPGRADE1	امنحه للصياد
+TOOLTIP_FISHINGROD_LEVEL	�
+ستوى: %d
+TOOLTIP_FISHINGROD_UPGRADE1	ا�
+نحه للصياد
 TOOLTIP_FISHINGROD_UPGRADE2	لكي تحصل على
 TOOLTIP_FISHINGROD_UPGRADE3	صنارة صيد أفضل بكثير.
 TOOLTIP_FISH_LEN	الطول: %.2fcm
 TOOLTIP_HELMET	خوذة
 TOOLTIP_HP_REGEN	تجديد نقاط الحياة +%d%%	SA
 TOOLTIP_INT	ذكاء +%d	SA
-TOOLTIP_ITEM_ATT_GRADE	قيمة الهجوم %d
-TOOLTIP_ITEM_ATT_POWER	قيمة الهجوم %d - %d
-TOOLTIP_ITEM_ATT_POWER_ONE_ARG	قيمة الهجوم %d
-TOOLTIP_ITEM_ATT_SPEED	سرعة الهجوم %s
+TOOLTIP_ITEM_ATT_GRADE	قي�
+ة الهجو�
+ %d
+TOOLTIP_ITEM_ATT_POWER	قي�
+ة الهجو�
+ %d - %d
+TOOLTIP_ITEM_ATT_POWER_ONE_ARG	قي�
+ة الهجو�
+ %d
+TOOLTIP_ITEM_ATT_SPEED	سرعة الهجو�
+ %s
 TOOLTIP_ITEM_DEF_GRADE	دفاع %d
 TOOLTIP_ITEM_FAST	سريع
-TOOLTIP_ITEM_LIMIT_CON	الحد الأقصى من قوة الحياة: %d
-TOOLTIP_ITEM_LIMIT_DEX	الحد الأقصى للمناورة: %d
+TOOLTIP_ITEM_LIMIT_CON	الحد الأقصى �
+ن قوة الحياة: %d
+TOOLTIP_ITEM_LIMIT_DEX	الحد الأقصى لل�
+ناورة: %d
 TOOLTIP_ITEM_LIMIT_INT	الحد الأقصى للذكاء: %d
-TOOLTIP_ITEM_LIMIT_LEVEL	ابتداء من المستوى: %d
+TOOLTIP_ITEM_LIMIT_LEVEL	ابتداء �
+ن ال�
+ستوى: %d
 TOOLTIP_ITEM_LIMIT_STR	الحد الأقصى للقوة: %d
-TOOLTIP_ITEM_MAGIC_ATT_POWER	قيمة الهجوم السحري %d - %d
-TOOLTIP_ITEM_MAGIC_ATT_POWER_ONE_ARG	قيمة الهجوم السحري %d
+TOOLTIP_ITEM_MAGIC_ATT_POWER	قي�
+ة الهجو�
+ السحري %d - %d
+TOOLTIP_ITEM_MAGIC_ATT_POWER_ONE_ARG	قي�
+ة الهجو�
+ السحري %d
 TOOLTIP_ITEM_MAGIC_DEF_POWER	الدفاع السحري %d
 TOOLTIP_ITEM_NORMAL	طبيعي
 TOOLTIP_ITEM_SLOW	بطيء
@@ -801,106 +1500,191 @@ TOOLTIP_ITEM_VERY_FAST	سريع جداً
 TOOLTIP_ITEM_VERY_SLOW	بطيء جداً
 TOOLTIP_ITEM_WEARABLE_JOB	[قابل للتجهيز]
 TOOLTIP_LOTTERY_STEP_NUMBER	%d
-TOOLTIP_LOTTO_NUMBER	رقم الحظ: %d
-TOOLTIP_MAGIC_ATTBONUS_PER	هجوم سحري +%d%%	SA
-TOOLTIP_MAGIC_ATT_GRADE	قيمة الهجوم السحري +%d	SA
+TOOLTIP_LOTTO_NUMBER	رق�
+ الحظ: %d
+TOOLTIP_MAGIC_ATTBONUS_PER	هجو�
+ سحري +%d%%	SA
+TOOLTIP_MAGIC_ATT_GRADE	قي�
+ة الهجو�
+ السحري +%d	SA
 TOOLTIP_MAGIC_DEF_GRADE	دفاع سحري +%d	SA
-TOOLTIP_MALL_ATTBONUS	قيمة الهجوم +%d%%	SA
-TOOLTIP_MALL_ATTBONUS_STATIC	قيمة الهجوم	SNA
-TOOLTIP_MALL_ATT_SPEED	ارتفاع سرعة الهجوم +%d%%	SA
-TOOLTIP_MALL_AUTOLOOT	سيتم تلقائياً تسجيل اليانغ.	SNA
+TOOLTIP_MALL_ATTBONUS	قي�
+ة الهجو�
+ +%d%%	SA
+TOOLTIP_MALL_ATTBONUS_STATIC	قي�
+ة الهجو�
+	SNA
+TOOLTIP_MALL_ATT_SPEED	ارتفاع سرعة الهجو�
+ +%d%%	SA
+TOOLTIP_MALL_AUTOLOOT	سيت�
+ تلقائياً تسجيل اليانغ.	SNA
 TOOLTIP_MALL_DEFBONUS	الدفاع +%d%%	SA
 TOOLTIP_MALL_DEFBONUS_STATIC	دفاع	SNA
 TOOLTIP_MALL_EXPBONUS	نقاط الخبرة +%d%%	SA
-TOOLTIP_MALL_EXPBONUS_P_STATIC	نقاط الخبرة لمقهى الإنترنت الإضافية +%d%%	SA
+TOOLTIP_MALL_EXPBONUS_P_STATIC	نقاط الخبرة ل�
+قهى الإنترنت الإضافية +%d%%	SA
 TOOLTIP_MALL_EXPBONUS_STATIC	50 % خبرة إضافية	SNA
-TOOLTIP_MALL_FISH_MIND	ارتفاع نجاح فرص صيد السمك.	SNA
-TOOLTIP_MALL_GOLDBONUS	إرتفعت فرص إسقاط اليانغ بمقدار %d%%	SA
-TOOLTIP_MALL_GOLDBONUS_STATIC	فرص مضاعفة في إسقاط اليانغ	SNA
-TOOLTIP_MALL_ITEMBONUS	إرتفعت فرص إسقاط الأشياء بمقدار %d%%	SA
-TOOLTIP_MALL_ITEMBONUS_P_STATIC	مقهى إنترنت فرص غنم بنود زائد %.1f%%	SA
+TOOLTIP_MALL_FISH_MIND	ارتفاع نجاح فرص صيد الس�
+ك.	SNA
+TOOLTIP_MALL_GOLDBONUS	إرتفعت فرص إسقاط اليانغ ب�
+قدار %d%%	SA
+TOOLTIP_MALL_GOLDBONUS_STATIC	فرص �
+ضاعفة في إسقاط اليانغ	SNA
+TOOLTIP_MALL_ITEMBONUS	إرتفعت فرص إسقاط الأشياء ب�
+قدار %d%%	SA
+TOOLTIP_MALL_ITEMBONUS_P_STATIC	�
+قهى إنترنت فرص غن�
+ بنود زائد %.1f%%	SA
 TOOLTIP_MALL_ITEMBONUS_STATIC	إرتفعت فرص إسقاط الأشياء بنسبة 200%.	SNA
 TOOLTIP_MALL_MARRIAGE_FAST	زيادة نقاط الحب بسرعة أكبر.	SNA
-TOOLTIP_MALL_SAFEBOX	توفير مساحة أكبر للتخزين.	SNA
+TOOLTIP_MALL_SAFEBOX	توفير �
+ساحة أكبر للتخزين.	SNA
 TOOLTIP_MAX_HP	نقاط الحياة القصوى +%d	SA
 TOOLTIP_MAX_HP_PCT	نقاط الحياة القصوى +%d%%	SA
 TOOLTIP_MAX_SP	نقاط الأسلوب القصوى +%d	SA
 TOOLTIP_MAX_SP_PCT	نقاط الأسلوب القصوى +%d%%	SA
-TOOLTIP_MAX_STAMINA	مدة التحمل القصوى +%d	SA
-TOOLTIP_MELEE_MAGIC_ATTBONUS_PER	هجوم سحري/قتال عن قرب +%d%%	SA
+TOOLTIP_MAX_STAMINA	�
+دة التح�
+ل القصوى +%d	SA
+TOOLTIP_MELEE_MAGIC_ATTBONUS_PER	هجو�
+ سحري/قتال عن قرب +%d%%	SA
 TOOLTIP_MEMORIZED_POSITION	%s (%d، %d)
 TOOLTIP_MEMORIZED_POSITION_ERROR	خطأ GPS(%d, %d)
 TOOLTIP_MOV_SPEED	سرعة التحرك %d%%	SA
 TOOLTIP_NECK	قلادة
-TOOLTIP_NEED_ALL_SP	نقاط الأسلوب المطلوبة: الحد الأقصى
-TOOLTIP_NEED_GSP	شبح التنين المطلوب: %d
-TOOLTIP_NEED_HP	نقاط الحياة المطلوبة: %d
+TOOLTIP_NEED_ALL_SP	نقاط الأسلوب ال�
+طلوبة: الحد الأقصى
+TOOLTIP_NEED_GSP	شبح التنين ال�
+طلوب: %d
+TOOLTIP_NEED_HP	نقاط الحياة ال�
+طلوبة: %d
 TOOLTIP_NEED_HP_PER_SEC	نقاط الحياة / في الثانية: %d
-TOOLTIP_NEED_SP	نقاط الأسلوب المطلوبة: %d
+TOOLTIP_NEED_SP	نقاط الأسلوب ال�
+طلوبة: %d
 TOOLTIP_NEED_SP_PER_SEC	نقاط الأسلوب / الثانية: %d
-TOOLTIP_NEXT_SKILL_LEVEL_1	المستوى التالي: %d (الحد الأقصى %d)
-TOOLTIP_NORMAL_HIT_DAMAGE_BONUS	معدل الضرر %d%%	SA
-TOOLTIP_NORMAL_HIT_DEFEND_BONUS	معدل مقاومة الأضرار %d%%	SA
-TOOLTIP_PARTY_SKILL_LEVEL	المستوى الحالي: %d
+TOOLTIP_NEXT_SKILL_LEVEL_1	ال�
+ستوى التالي: %d (الحد الأقصى %d)
+TOOLTIP_NORMAL_HIT_DAMAGE_BONUS	�
+عدل الضرر %d%%	SA
+TOOLTIP_NORMAL_HIT_DEFEND_BONUS	�
+عدل �
+قاو�
+ة الأضرار %d%%	SA
+TOOLTIP_PARTY_SKILL_LEVEL	ال�
+ستوى الحالي: %d
 TOOLTIP_PICK_EXP	نقاط: %d / %d
-TOOLTIP_PICK_LEVEL	المستوى: %d
-TOOLTIP_PICK_UPGRADE1	قدّمها للحطاب
+TOOLTIP_PICK_LEVEL	ال�
+ستوى: %d
+TOOLTIP_PICK_UPGRADE1	قدّ�
+ها للحطاب
 TOOLTIP_PICK_UPGRADE2	لكي تحصل
-TOOLTIP_PICK_UPGRADE3	على منكاش أفضل منه.
+TOOLTIP_PICK_UPGRADE3	على �
+نكاش أفضل �
+نه.
 TOOLTIP_POTION_CURE	إعادة التأثيرات السلبية.
 TOOLTIP_POTION_MIN	دقيقة
-TOOLTIP_POTION_PLUS_ATTACK_SPEED	سرعة الهجوم +%d
+TOOLTIP_POTION_PLUS_ATTACK_SPEED	سرعة الهجو�
+ +%d
 TOOLTIP_POTION_PLUS_HP_PERCENT	نقاط الحياة +%d%%
 TOOLTIP_POTION_PLUS_HP_POINT	نقاط الحياة +%d
 TOOLTIP_POTION_PLUS_MOVING_SPEED	سرعة التحرك +%d
 TOOLTIP_POTION_PLUS_SP_PERCENT	نقاط الأسلوب +%d%%
 TOOLTIP_POTION_PLUS_SP_POINT	نقاط الأسلوب +%d
 TOOLTIP_POTION_SEC	ثانية
-TOOLTIP_POTION_TIME	مدة:
-TOOLTIP_REQUIREMENT_SKILL_LEVEL	%s مستوى %d مطلوب
-TOOLTIP_REQUIREMENT_STAT_LEVEL	%s %d مطلوبة
-TOOLTIP_RESIST_BOW	مقاومة السهم %d%%	SA
-TOOLTIP_RESIST_DARK	مقاومة ضد الظلام +%d%%	SA
-TOOLTIP_RESIST_EARTH	مقاومة الأرض +%d%%	SA
-TOOLTIP_RESIST_ELEC	مقاومة البرق %d%%	SA
-TOOLTIP_RESIST_FIRE	مقاومة النار %d%%	SA
-TOOLTIP_RESIST_ICE	مقاومة الثلج +%d%%	SA
-TOOLTIP_RESIST_MAGIC	مقاومة السحر %d%%	SA
-TOOLTIP_REST_USABLE_COUNT	متبقي: %d
+TOOLTIP_POTION_TIME	�
+دة:
+TOOLTIP_REQUIREMENT_SKILL_LEVEL	%s �
+ستوى %d �
+طلوب
+TOOLTIP_REQUIREMENT_STAT_LEVEL	%s %d �
+طلوبة
+TOOLTIP_RESIST_BOW	�
+قاو�
+ة السه�
+ %d%%	SA
+TOOLTIP_RESIST_DARK	�
+قاو�
+ة ضد الظلا�
+ +%d%%	SA
+TOOLTIP_RESIST_EARTH	�
+قاو�
+ة الأرض +%d%%	SA
+TOOLTIP_RESIST_ELEC	�
+قاو�
+ة البرق %d%%	SA
+TOOLTIP_RESIST_FIRE	�
+قاو�
+ة النار %d%%	SA
+TOOLTIP_RESIST_ICE	�
+قاو�
+ة الثلج +%d%%	SA
+TOOLTIP_RESIST_MAGIC	�
+قاو�
+ة السحر %d%%	SA
+TOOLTIP_REST_USABLE_COUNT	�
+تبقي: %d
 TOOLTIP_SELLPRICE	سعر: %s
-TOOLTIP_SHAMAN	شامان
+TOOLTIP_SHAMAN	شا�
+ان
 TOOLTIP_SHIELD	درع
 TOOLTIP_SHOES	حذاء
-TOOLTIP_SKILLBOOK_NAME	كتاب المهارات
-TOOLTIP_SKILL_AFFECT_ATT_GRADE	قيمة الهجوم: +
-TOOLTIP_SKILL_AFFECT_ATT_POWER	قيمة الهجوم:
-TOOLTIP_SKILL_AFFECT_ATT_SPEED	سرعة الهجوم: +
+TOOLTIP_SKILLBOOK_NAME	كتاب ال�
+هارات
+TOOLTIP_SKILL_AFFECT_ATT_GRADE	قي�
+ة الهجو�
+: +
+TOOLTIP_SKILL_AFFECT_ATT_POWER	قي�
+ة الهجو�
+:
+TOOLTIP_SKILL_AFFECT_ATT_SPEED	سرعة الهجو�
+: +
 TOOLTIP_SKILL_AFFECT_DEF_GRADE	دفاع:
-TOOLTIP_SKILL_AFFECT_DODGE	قيمة هجوم العدو: -
+TOOLTIP_SKILL_AFFECT_DODGE	قي�
+ة هجو�
+ العدو: -
 TOOLTIP_SKILL_AFFECT_HEAL	استعادة نقاط الحياة:
 TOOLTIP_SKILL_AFFECT_MOV_SPEED	سرعة التحرك: +
-TOOLTIP_SKILL_AFFECT_REFLECT_MELEE	فرصة عكس هجوم عن قرب:
-TOOLTIP_SKILL_AFFECT_RESIST_NORMAL	مقاومة ضد الأضرار الجسدية:
-TOOLTIP_SKILL_COOL_TIME	مدة الشحن: 
-TOOLTIP_SKILL_DAMAGE_BONUS	أضرار المهارة %d%%	SA
-TOOLTIP_SKILL_DEFEND_BONUS	مقاومة ضد أضرار المهارة %d%%	SA
-TOOLTIP_SKILL_DURATION	المدة: %d ثانية
+TOOLTIP_SKILL_AFFECT_REFLECT_MELEE	فرصة عكس هجو�
+ عن قرب:
+TOOLTIP_SKILL_AFFECT_RESIST_NORMAL	�
+قاو�
+ة ضد الأضرار الجسدية:
+TOOLTIP_SKILL_COOL_TIME	�
+دة الشحن: 
+TOOLTIP_SKILL_DAMAGE_BONUS	أضرار ال�
+هارة %d%%	SA
+TOOLTIP_SKILL_DEFEND_BONUS	�
+قاو�
+ة ضد أضرار ال�
+هارة %d%%	SA
+TOOLTIP_SKILL_DURATION	ال�
+دة: %d ثانية
 TOOLTIP_SKILL_FORGET_BOOK_NAME	كتاب النسيان
-TOOLTIP_SKILL_LEVEL	المستوى الحالي: %d
-TOOLTIP_SKILL_LEVEL_MASTER	المستوى الحالي: %d (الخبير)
-TOOLTIP_SKILL_LEVEL_WITH_MAX	المستوى الحالي: %d (الحد الأقصى %d)
+TOOLTIP_SKILL_LEVEL	ال�
+ستوى الحالي: %d
+TOOLTIP_SKILL_LEVEL_MASTER	ال�
+ستوى الحالي: %d (الخبير)
+TOOLTIP_SKILL_LEVEL_WITH_MAX	ال�
+ستوى الحالي: %d (الحد الأقصى %d)
 TOOLTIP_SOCKET_EMPTY	فارغ
-TOOLTIP_SOCKET_REFINABLE_ITEM	[شيء مع مقبس]
+TOOLTIP_SOCKET_REFINABLE_ITEM	[شيء �
+ع �
+قبس]
 TOOLTIP_SP_REGEN	تجديد نقاط الأسلوب +%d%%	SA
 TOOLTIP_STR	قوة +%d	SA
 TOOLTIP_SURA	سورا
-TOOLTIP_TIME_CHARGER_FIX	مدة الشحن %d ثانية.	SA
-TOOLTIP_TIME_CHARGER_PER	مدة الشحن %d%%	SA
-TOOLTIP_UNIQUE	فريد من نوعه
-TOOLTIP_WARRIOR	محارب
+TOOLTIP_TIME_CHARGER_FIX	�
+دة الشحن %d ثانية.	SA
+TOOLTIP_TIME_CHARGER_PER	�
+دة الشحن %d%%	SA
+TOOLTIP_UNIQUE	فريد �
+ن نوعه
+TOOLTIP_WARRIOR	�
+حارب
 TOOLTIP_WEAPON	سلاح
 TOOLTIP_WRISTLET	سوار
-UI_ACCEPT	موافق
+UI_ACCEPT	�
+وافق
 UI_CANCEL	إلغاء
 UI_CLOSE	إغلاق
 UI_DEF_FONT	Tahoma:12
@@ -908,16 +1692,57 @@ UI_DEF_FONT_LARGE	Tahoma:14
 UI_DEF_FONT_SMALL	Tahoma:9
 UI_DENY	رفض
 UI_ITEM	شيء
-UI_LEFT_TIME	الوقت المتبقي: %d ثانية
+UI_LEFT_TIME	الوقت ال�
+تبقي: %d ثانية
 UI_NEXT	التالي
 UI_NEXTPAGE	تابع
-UI_NOCONTENTS	بدون مُحتوى
-UI_NONAME	لا يوجد اسم
-UI_OK	موافق
-UI_POS_UNKNOWN	مكان غير معروف
+UI_NOCONTENTS	بدون �
+ُحتوى
+UI_NONAME	لا يوجد اس�
+
+UI_OK	�
+وافق
+UI_POS_UNKNOWN	�
+كان غير �
+عروف
 UI_PREVPAGE	الخلف
 UPLOAD_MARK_UPLOAD_NEED_RECONNECT	عليك إعادة التحميل من جديد.
 USE_ITEM_FAILURE_PRIVATE_SHOP	لا يمكنك استعمال أي شيء، طالما أنك تملك متجراً شخصياً.
 ITEM_GET	تم الحصول على: %s	SA
 ITEM_GET_FROM_PARTY	تم الحصول على: %s من %s	SAA
 ITEM_DELIVER_TO_PARTY	تم التسليم: %s إلى %s	SAA
+ الحصول على: %s	SA
+ن %s	SAA
+: %s إلى %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map
+يل �
+ن جديد.
+كنك استع�
+ال أي شيء، طال�
+ا أنك ت�
+لك �
+تجراً شخصياً.
+ الحصول على: %s �
+ التسلي�

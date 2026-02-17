@@ -251,7 +251,7 @@ MALL_CANNOT_INSERT	Je kunt het Voorwerp niet plaatsen.
 MALL_PASSWORD_TITLE	Wachtwoord	
 MAP_A1	Yongan Gebied
 MAP_A2	Vallei van Seungryong	
-MAP_A2_1	
+MAP_A2_1	Valley of Seungryong (2)
 MAP_A3	Yayang Gebied
 MAP_AG	Jungrang	
 MAP_B1	Joan Gebied	
@@ -287,7 +287,7 @@ MAP_HOLYPLACE_DESERT	Woestijnland Koninkrijk Gevecht
 MAP_GUILD_03	Imha
 MAP_GUILD_02	Waryong
 MAP_GUILD_01	Jungrang
-MAP_MILGYO_A	
+MAP_MILGYO_A	Hwang Temple
 MAP_MT_TH_DUNGEON_01	Tempel van de Ochao
 MAP_MT_THUNDER	Donder Gebergte
 MAP_MONKEY_DUNGEON_13	Hasun Dong
@@ -299,13 +299,13 @@ MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_NUSLUCK	Reuzen Land
 MAP_N_DESERT_01	Yongbi Woestijn
 MAP_NUSLUCK01	Reuzen Land
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_N_FLAME_01	Vuurland
-MAP_N_FLAME_02	
+MAP_N_FLAME_02	Fireland (2)
 MAP_N_SNOWM_01	Berg Sohan
 MAP_N_FLAME_DUNGEON_01	Rode Draken Fort
 MAP_N_FLAME_DRAGON	Meley's Hol
-MAP_N_SNOWM_02	
+MAP_N_SNOWM_02	Mount Sohan (2)
 MAP_PATHWAY_ICE_03	IJsland Koninkrijk Gevecht
 MAP_PATHWAY_ICE_02	Speelland
 MAP_PATHWAY_ICE_01	IJsland Koninkrijk Gevecht
@@ -320,13 +320,13 @@ MAP_N_THREEWAY	Vallei van Seungryong
 MAP_N_SNOW_DUNGEON_01	Nemeres Uitkijktoren
 MAP_SKELTOWER	Gumsan Toren
 MAP_SKIPIA_DUNGEON_01	Grot der Verbanning
-MAP_SKIPIA_DUNGEON_011	
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_02	Grot der Verbanning 2
-MAP_SKIPIA_DUNGEON_021	
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_BOSS_3	Spinnenkerker 3
 MAP_SKIPIA_DUNGEON_BOSS_2	Spinnenkerker 2
 MAP_SKIPIA_DUNGEON_BOSS_1	Spinnenkerker 1
@@ -359,7 +359,7 @@ MAP_TREE	Lungsam
 MAP_TRENT02_A	Rood Bos
 MAP_TRENT02	Rode Bos
 MAP_TRENT	Spoken Woud
-MAP_TRENT_A	
+MAP_TRENT_A	Lungsam
 MAP_WEDDING_01	Trouwkaart
 MAP_WL	Slangenveld
 MAP_WL_01	Slangenveld
@@ -829,3 +829,26 @@ USE_ITEM_FAILURE_PRIVATE_SHOP	Je kunt voorwerpen niet gebruiken terwijl je priv√
 ITEM_GET	Ontvangen: %s	SA
 ITEM_GET_FROM_PARTY	Ontvangen: %s van %s	SAA
 ITEM_DELIVER_TO_PARTY	Afgeleverd: %s aan %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map

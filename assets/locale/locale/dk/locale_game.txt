@@ -241,7 +241,8 @@ LOGIN_FAILURE_REPAIR_ID	For denne konto bliver der gendannet nogle genstande.
 LOGIN_FAILURE_SAMELOGIN	En person har forbundet sig til din konto.
 LOGIN_FAILURE_SHUTDOWN	Denne server er ikke åben.
 LOGIN_FAILURE_TOO_MANY_USER	Du kan ikke få forbindelse med serveren, da der er for mange spillere online.
-LOGIN_FAILURE_UNKNOWN	Du kunne ikke logge på. Årsagen er ukendt.
+LOGIN_FAILURE_UNKNOWN	Du kunne ikke logge på. �
+rsagen er ukendt.
 LOGIN_FAILURE_WEB_BLOCK	Du blev blokeret på websiden. Tjek venligst din e-mail.
 LOGIN_FAILURE_WRONG_PASSWORD	Forkert brugernavn eller password.
 LOGIN_INPUT_ID	Angiv ID.
@@ -251,7 +252,7 @@ MALL_CANNOT_INSERT	Du kan ikke placere den genstand.
 MALL_PASSWORD_TITLE	Kodeord
 MAP_A1	Område Yongan
 MAP_A2	Seungryong Dal
-MAP_A2_1	
+MAP_A2_1	Valley of Seungryong (2)
 MAP_A3	Område Yayang
 MAP_AG	Jungrang
 MAP_B1	Område Joan
@@ -280,7 +281,7 @@ MAP_E	Koloni
 MAP_EMPIREWAR01	Slots-kamp
 MAP_EMPIREWAR02	Slots-kamp
 MAP_EMPIREWAR03	Slots-kamp
-MAP_MILGYO_A	
+MAP_MILGYO_A	Hwang Temple
 MAP_GUILD_01	Jungrang
 MAP_GUILD_02	Waryong
 MAP_GUILD_03	Imha
@@ -297,12 +298,12 @@ MAP_MONKEY_DUNGEON_12	Hasun Dong
 MAP_MONKEY_DUNGEON_13	Hasun Dong
 MAP_MT_THUNDER	Tordenbjergene
 MAP_MT_TH_DUNGEON_01	Ochao Tempel
-MAP_N_DESERT_02	
+MAP_N_DESERT_02	Yongbi Desert (2)
 MAP_NUSLUCK01	Kæmpernes land
 MAP_N_DESERT_01	Yongbi-Ørken
-MAP_N_FLAME_02	
+MAP_N_FLAME_02	Fireland (2)
 MAP_N_FLAME_01	Ildland
-MAP_N_SNOWM_02	
+MAP_N_SNOWM_02	Mount Sohan (2)
 MAP_N_FLAME_DRAGON	Meleys Grotte
 MAP_N_FLAME_DUNGEON_01	Rød Drageborg
 MAP_N_SNOWM_01	Bjerget Sohan
@@ -319,14 +320,14 @@ MAP_PATHWAY_FLAME_03	Ildland Nationskrig
 MAP_PATHWAY_ICE_01	Island Nationskrig
 MAP_PATHWAY_ICE_02	Legeplads
 MAP_PATHWAY_ICE_03	Island Nationskrig
-MAP_SKIPIA_DUNGEON_011	
+MAP_SKIPIA_DUNGEON_011	Grotto of Exile (1)
 MAP_SKIPIA_DUNGEON_01	Forbandelsens grotte
-MAP_SKIPIA_DUNGEON_012	
-MAP_SKIPIA_DUNGEON_013	
-MAP_SKIPIA_DUNGEON_021	
+MAP_SKIPIA_DUNGEON_012	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_013	Grotto of Exile (1)
+MAP_SKIPIA_DUNGEON_021	Grotto of Exile 2 (1)
 MAP_SKIPIA_DUNGEON_02	Forbandelsens grotte 2
-MAP_SKIPIA_DUNGEON_022	
-MAP_SKIPIA_DUNGEON_023	
+MAP_SKIPIA_DUNGEON_022	Grotto of Exile 2 (1)
+MAP_SKIPIA_DUNGEON_023	Grotto of Exile 2 (1)
 MAP_SNOW	Bjerget Sohan
 MAP_SKIPIA_DUNGEON_BOSS	Dragens tempel
 MAP_SKIPIA_DUNGEON_BOSS_1	Edderkoppe grotte 1
@@ -356,8 +357,9 @@ MAP_T3	Ordenskrigs område
 MAP_T4	Ordenskrigs område
 MAP_THUNDER	Tordenbjergene
 MAP_TREE	Lungsam
-MAP_TRENT_A	
-MAP_TRENT	Åndeskov
+MAP_TRENT_A	Lungsam
+MAP_TRENT	�
+ndeskov
 MAP_TRENT02	Rød skov
 MAP_TRENT02_A	Rød skov
 MAP_WL	Slangeområde
@@ -379,13 +381,15 @@ MESSENGER_INPUT_MOBILE_PHONE_NUMBER_2	Vil du indtaste dette nr.?
 MESSENGER_INPUT_MOBILE_PHONE_NUMBER_TITLE	Angiv mobilnr.
 MESSENGER_SEND_MOBILE_MESSAGE_TITLE	Afsend meddelelse.
 METIN_TEST	
-MINIMAP	Åben Minimap
+MINIMAP	�
+ben Minimap
 MINIMAP_CANNOT_SEE	Minikort kan ikke vises.
 MINIMAP_CAN_NOT_SHOW_AREAMAP	Kortet kan ikke vises.
 MINIMAP_DEC_SCALE	Minimer
 MINIMAP_INC_SCALE	Maximer
 MINIMAP_OBSERVER_COUNT	%d tilskuer
-MINIMAP_SHOW_AREAMAP	Åben stort kort
+MINIMAP_SHOW_AREAMAP	�
+ben stort kort
 MINUTE	Min
 MONETARY_UNIT0	Yang
 MONEY_INPUT_DIALOG_SELLPRICE	Salgspris:
@@ -829,3 +833,26 @@ USE_ITEM_FAILURE_PRIVATE_SHOP	Du kan ikke bruge den genstand mens du har åbnet 
 ITEM_GET	Modtaget: %s	SA
 ITEM_GET_FROM_PARTY	Modtaget: %s fra %s	SAA
 ITEM_DELIVER_TO_PARTY	Leveret: %s til %s	SAA
+MAP_TREE2	Red Forest
+MAP_AD4	metin2_ad4
+MAP_BATTLEARENA_01	Battle Arena 1
+MAP_BATTLEARENA_02	Battle Arena 2
+MAP_BATTLEARENA_03	Battle Arena 3
+MAP_DD	metin2_map_dd
+MAP_DRAGON_TIMEATTACK_01	Dragon Time Attack 1
+MAP_DRAGON_TIMEATTACK_02	Dragon Time Attack 2
+MAP_DRAGON_TIMEATTACK_03	Dragon Time Attack 3
+MAP_EW02	metin2_map_ew02
+MAP_FOOTBALL	Football Field
+MAP_GUILD_INSIDE01	Guild Inside
+MAP_NAGA1	Naga 1
+MAP_PVP_ARENA	PVP Arena
+MAP_SHINSUTEST_01	Shinsu Test Map
+MAP_SIEGE_01	Siege Map 1
+MAP_SIEGE_02	Siege Map 2
+MAP_SIEGE_03	Siege Map 3
+MAP_SUNGZI_MILGYO	Milgyo Kingdom Battle
+MAP_SUNGZI_MILGYO_PASS_01	Milgyo Kingdom Battle (1)
+MAP_SUNGZI_MILGYO_PASS_02	Milgyo Kingdom Battle (2)
+MAP_SUNGZI_MILGYO_PASS_03	Milgyo Kingdom Battle (3)
+MAP_TEST	Test Map
