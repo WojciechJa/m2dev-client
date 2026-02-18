@@ -13,36 +13,61 @@ import uiCommon
 
 class TargetBoard(ui.ThinBoard):
 
-	BUTTON_NAME_LIST = ( 
-		localeInfo.TARGET_BUTTON_WHISPER, 
-		localeInfo.TARGET_BUTTON_EXCHANGE, 
-		localeInfo.TARGET_BUTTON_FIGHT, 
-		localeInfo.TARGET_BUTTON_ACCEPT_FIGHT, 
-		localeInfo.TARGET_BUTTON_AVENGE, 
-		localeInfo.TARGET_BUTTON_FRIEND, 
-		localeInfo.TARGET_BUTTON_INVITE_PARTY, 
-		localeInfo.TARGET_BUTTON_LEAVE_PARTY, 
-		localeInfo.TARGET_BUTTON_EXCLUDE, 
-		localeInfo.TARGET_BUTTON_INVITE_GUILD,
-		localeInfo.TARGET_BUTTON_REMOVE_GUILD,
-		localeInfo.TARGET_BUTTON_DISMOUNT,
-		localeInfo.TARGET_BUTTON_EXIT_OBSERVER,
-		localeInfo.TARGET_BUTTON_VIEW_EQUIPMENT,
-		localeInfo.TARGET_BUTTON_REQUEST_ENTER_PARTY,
-		localeInfo.TARGET_BUTTON_BUILDING_DESTROY,
-		localeInfo.TARGET_BUTTON_EMOTION_ALLOW,
-		"VOTE_BLOCK_CHAT",
+	# Locale-independent button identifiers (never use translated strings as dict keys)
+	BTN_WHISPER = 0
+	BTN_EXCHANGE = 1
+	BTN_FIGHT = 2
+	BTN_ACCEPT_FIGHT = 3
+	BTN_AVENGE = 4
+	BTN_FRIEND = 5
+	BTN_INVITE_PARTY = 6
+	BTN_LEAVE_PARTY = 7
+	BTN_EXCLUDE = 8
+	BTN_INVITE_GUILD = 9
+	BTN_REMOVE_GUILD = 10
+	BTN_DISMOUNT = 11
+	BTN_EXIT_OBSERVER = 12
+	BTN_VIEW_EQUIPMENT = 13
+	BTN_REQUEST_ENTER_PARTY = 14
+	BTN_BUILDING_DESTROY = 15
+	BTN_EMOTION_ALLOW = 16
+	BTN_VOTE_BLOCK_CHAT = 17
+
+	# (buttonId, localeInfo attribute name) — text resolved at __init__ time
+	BUTTON_CONFIG = (
+		(BTN_WHISPER, "TARGET_BUTTON_WHISPER"),
+		(BTN_EXCHANGE, "TARGET_BUTTON_EXCHANGE"),
+		(BTN_FIGHT, "TARGET_BUTTON_FIGHT"),
+		(BTN_ACCEPT_FIGHT, "TARGET_BUTTON_ACCEPT_FIGHT"),
+		(BTN_AVENGE, "TARGET_BUTTON_AVENGE"),
+		(BTN_FRIEND, "TARGET_BUTTON_FRIEND"),
+		(BTN_INVITE_PARTY, "TARGET_BUTTON_INVITE_PARTY"),
+		(BTN_LEAVE_PARTY, "TARGET_BUTTON_LEAVE_PARTY"),
+		(BTN_EXCLUDE, "TARGET_BUTTON_EXCLUDE"),
+		(BTN_INVITE_GUILD, "TARGET_BUTTON_INVITE_GUILD"),
+		(BTN_REMOVE_GUILD, "TARGET_BUTTON_REMOVE_GUILD"),
+		(BTN_DISMOUNT, "TARGET_BUTTON_DISMOUNT"),
+		(BTN_EXIT_OBSERVER, "TARGET_BUTTON_EXIT_OBSERVER"),
+		(BTN_VIEW_EQUIPMENT, "TARGET_BUTTON_VIEW_EQUIPMENT"),
+		(BTN_REQUEST_ENTER_PARTY, "TARGET_BUTTON_REQUEST_ENTER_PARTY"),
+		(BTN_BUILDING_DESTROY, "TARGET_BUTTON_BUILDING_DESTROY"),
+		(BTN_EMOTION_ALLOW, "TARGET_BUTTON_EMOTION_ALLOW"),
+		(BTN_VOTE_BLOCK_CHAT, "VOTE_BLOCK_CHAT"),
 	)
 
-	GRADE_NAME =	{
-						nonplayer.PAWN : localeInfo.TARGET_LEVEL_PAWN,
-						nonplayer.S_PAWN : localeInfo.TARGET_LEVEL_S_PAWN,
-						nonplayer.KNIGHT : localeInfo.TARGET_LEVEL_KNIGHT,
-						nonplayer.S_KNIGHT : localeInfo.TARGET_LEVEL_S_KNIGHT,
-						nonplayer.BOSS : localeInfo.TARGET_LEVEL_BOSS,
-						nonplayer.KING : localeInfo.TARGET_LEVEL_KING,
-					}
+	GRADE_NAME = {}
 	EXCHANGE_LIMIT_RANGE = 3000
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		TargetBoard.GRADE_NAME = {
+			nonplayer.PAWN : localeInfo.TARGET_LEVEL_PAWN,
+			nonplayer.S_PAWN : localeInfo.TARGET_LEVEL_S_PAWN,
+			nonplayer.KNIGHT : localeInfo.TARGET_LEVEL_KNIGHT,
+			nonplayer.S_KNIGHT : localeInfo.TARGET_LEVEL_S_KNIGHT,
+			nonplayer.BOSS : localeInfo.TARGET_LEVEL_BOSS,
+			nonplayer.KING : localeInfo.TARGET_LEVEL_KING,
+		}
 
 	def __init__(self):
 		ui.ThinBoard.__init__(self)
@@ -80,7 +105,7 @@ class TargetBoard(ui.ThinBoard):
 		self.buttonDict = {}
 		self.showingButtonList = []
 
-		for buttonName in self.BUTTON_NAME_LIST:
+		for btnId, localeAttr in self.BUTTON_CONFIG:
 			button = ui.Button()
 			button.SetParent(self)
 
@@ -94,32 +119,31 @@ class TargetBoard(ui.ThinBoard):
 				button.SetDownVisual("d:/ymir work/ui/public/small_thin_button_03.sub")
 
 			button.SetWindowHorizontalAlignCenter()
-			button.SetText(buttonName)
+			button.SetText(getattr(localeInfo, localeAttr, localeAttr))
 			button.Hide()
-			self.buttonDict[buttonName] = button
+			self.buttonDict[btnId] = button
 			self.showingButtonList.append(button)
 
-		self.buttonDict[localeInfo.TARGET_BUTTON_WHISPER].SetEvent(ui.__mem_func__(self.OnWhisper))
-		self.buttonDict[localeInfo.TARGET_BUTTON_EXCHANGE].SetEvent(ui.__mem_func__(self.OnExchange))
-		self.buttonDict[localeInfo.TARGET_BUTTON_FIGHT].SetEvent(ui.__mem_func__(self.OnPVP))
-		self.buttonDict[localeInfo.TARGET_BUTTON_ACCEPT_FIGHT].SetEvent(ui.__mem_func__(self.OnPVP))
-		self.buttonDict[localeInfo.TARGET_BUTTON_AVENGE].SetEvent(ui.__mem_func__(self.OnPVP))
-		self.buttonDict[localeInfo.TARGET_BUTTON_FRIEND].SetEvent(ui.__mem_func__(self.OnAppendToMessenger))
-		self.buttonDict[localeInfo.TARGET_BUTTON_FRIEND].SetEvent(ui.__mem_func__(self.OnAppendToMessenger))
-		self.buttonDict[localeInfo.TARGET_BUTTON_INVITE_PARTY].SetEvent(ui.__mem_func__(self.OnPartyInvite))
-		self.buttonDict[localeInfo.TARGET_BUTTON_LEAVE_PARTY].SetEvent(ui.__mem_func__(self.OnPartyExit))
-		self.buttonDict[localeInfo.TARGET_BUTTON_EXCLUDE].SetEvent(ui.__mem_func__(self.OnPartyRemove))
+		self.buttonDict[self.BTN_WHISPER].SetEvent(ui.__mem_func__(self.OnWhisper))
+		self.buttonDict[self.BTN_EXCHANGE].SetEvent(ui.__mem_func__(self.OnExchange))
+		self.buttonDict[self.BTN_FIGHT].SetEvent(ui.__mem_func__(self.OnPVP))
+		self.buttonDict[self.BTN_ACCEPT_FIGHT].SetEvent(ui.__mem_func__(self.OnPVP))
+		self.buttonDict[self.BTN_AVENGE].SetEvent(ui.__mem_func__(self.OnPVP))
+		self.buttonDict[self.BTN_FRIEND].SetEvent(ui.__mem_func__(self.OnAppendToMessenger))
+		self.buttonDict[self.BTN_INVITE_PARTY].SetEvent(ui.__mem_func__(self.OnPartyInvite))
+		self.buttonDict[self.BTN_LEAVE_PARTY].SetEvent(ui.__mem_func__(self.OnPartyExit))
+		self.buttonDict[self.BTN_EXCLUDE].SetEvent(ui.__mem_func__(self.OnPartyRemove))
 
-		self.buttonDict[localeInfo.TARGET_BUTTON_INVITE_GUILD].SAFE_SetEvent(self.__OnGuildAddMember)
-		self.buttonDict[localeInfo.TARGET_BUTTON_REMOVE_GUILD].SAFE_SetEvent(self.__OnGuildRemoveMember)
-		self.buttonDict[localeInfo.TARGET_BUTTON_DISMOUNT].SAFE_SetEvent(self.__OnDismount)
-		self.buttonDict[localeInfo.TARGET_BUTTON_EXIT_OBSERVER].SAFE_SetEvent(self.__OnExitObserver)
-		self.buttonDict[localeInfo.TARGET_BUTTON_VIEW_EQUIPMENT].SAFE_SetEvent(self.__OnViewEquipment)
-		self.buttonDict[localeInfo.TARGET_BUTTON_REQUEST_ENTER_PARTY].SAFE_SetEvent(self.__OnRequestParty)
-		self.buttonDict[localeInfo.TARGET_BUTTON_BUILDING_DESTROY].SAFE_SetEvent(self.__OnDestroyBuilding)
-		self.buttonDict[localeInfo.TARGET_BUTTON_EMOTION_ALLOW].SAFE_SetEvent(self.__OnEmotionAllow)
-		
-		self.buttonDict["VOTE_BLOCK_CHAT"].SetEvent(ui.__mem_func__(self.__OnVoteBlockChat))
+		self.buttonDict[self.BTN_INVITE_GUILD].SAFE_SetEvent(self.__OnGuildAddMember)
+		self.buttonDict[self.BTN_REMOVE_GUILD].SAFE_SetEvent(self.__OnGuildRemoveMember)
+		self.buttonDict[self.BTN_DISMOUNT].SAFE_SetEvent(self.__OnDismount)
+		self.buttonDict[self.BTN_EXIT_OBSERVER].SAFE_SetEvent(self.__OnExitObserver)
+		self.buttonDict[self.BTN_VIEW_EQUIPMENT].SAFE_SetEvent(self.__OnViewEquipment)
+		self.buttonDict[self.BTN_REQUEST_ENTER_PARTY].SAFE_SetEvent(self.__OnRequestParty)
+		self.buttonDict[self.BTN_BUILDING_DESTROY].SAFE_SetEvent(self.__OnDestroyBuilding)
+		self.buttonDict[self.BTN_EMOTION_ALLOW].SAFE_SetEvent(self.__OnEmotionAllow)
+
+		self.buttonDict[self.BTN_VOTE_BLOCK_CHAT].SetEvent(ui.__mem_func__(self.__OnVoteBlockChat))
 
 		self.name = name
 		self.hpGauge = hpGauge
@@ -182,8 +206,8 @@ class TargetBoard(ui.ThinBoard):
 				self.Show()
 		else:
 			self.HideAllButton()
-			self.__ShowButton(localeInfo.TARGET_BUTTON_WHISPER)
-			self.__ShowButton("VOTE_BLOCK_CHAT")
+			self.__ShowButton(self.BTN_WHISPER)
+			self.__ShowButton(self.BTN_VOTE_BLOCK_CHAT)
 			self.__ArrangeButtonPosition()
 			self.SetTargetName(name)
 			self.Show()
@@ -207,11 +231,11 @@ class TargetBoard(ui.ThinBoard):
 		self.HideAllButton()
 
 		if player.IsMountingHorse():
-			self.__ShowButton(localeInfo.TARGET_BUTTON_DISMOUNT)
+			self.__ShowButton(self.BTN_DISMOUNT)
 			canShow=1
 
 		if player.IsObserverMode():
-			self.__ShowButton(localeInfo.TARGET_BUTTON_EXIT_OBSERVER)
+			self.__ShowButton(self.BTN_EXIT_OBSERVER)
 			canShow=1
 
 		if canShow:
@@ -291,10 +315,10 @@ class TargetBoard(ui.ThinBoard):
 	def ShowDefaultButton(self):
 
 		self.isShowButton = True
-		self.showingButtonList.append(self.buttonDict[localeInfo.TARGET_BUTTON_WHISPER])
-		self.showingButtonList.append(self.buttonDict[localeInfo.TARGET_BUTTON_EXCHANGE])
-		self.showingButtonList.append(self.buttonDict[localeInfo.TARGET_BUTTON_FIGHT])
-		self.showingButtonList.append(self.buttonDict[localeInfo.TARGET_BUTTON_EMOTION_ALLOW])
+		self.showingButtonList.append(self.buttonDict[self.BTN_WHISPER])
+		self.showingButtonList.append(self.buttonDict[self.BTN_EXCHANGE])
+		self.showingButtonList.append(self.buttonDict[self.BTN_FIGHT])
+		self.showingButtonList.append(self.buttonDict[self.BTN_EMOTION_ALLOW])
 		for button in self.showingButtonList:
 			button.Show()
 
@@ -399,7 +423,7 @@ class TargetBoard(ui.ThinBoard):
 		self.HideAllButton()
 
 		if chr.INSTANCE_TYPE_BUILDING == chr.GetInstanceType(self.vid):
-			#self.__ShowButton(localeInfo.TARGET_BUTTON_BUILDING_DESTROY)
+			#self.__ShowButton(self.BTN_BUILDING_DESTROY)
 			#self.__ArrangeButtonPosition()
 			return
 		
@@ -424,11 +448,11 @@ class TargetBoard(ui.ThinBoard):
   
 		guildAuthorityButtons = {
 			guild.AUTH_ADD_MEMBER: {
-				"text": localeInfo.TARGET_BUTTON_INVITE_GUILD,
+				"btn": self.BTN_INVITE_GUILD,
 				"condition": lambda: isNotGuildMember(self.nameString, self.vid),
 			},
 			guild.AUTH_REMOVE_MEMBER: {
-				"text": localeInfo.TARGET_BUTTON_REMOVE_GUILD,
+				"btn": self.BTN_REMOVE_GUILD,
 				"condition": lambda: isGuildMember(self.nameString, self.vid) and not isGuildMaster(self.nameString),
 			},
 		}
@@ -437,47 +461,47 @@ class TargetBoard(ui.ThinBoard):
 			hasAuthority = guild.MainPlayerHasAuthority(guildAuthority)
 			satisfiesCondition = guildButton["condition"]()
 			if hasAuthority and satisfiesCondition:
-				self.__ShowButton(guildButton["text"])
+				self.__ShowButton(guildButton["btn"])
 
 		if not messenger.IsFriendByName(self.nameString):
-			self.__ShowButton(localeInfo.TARGET_BUTTON_FRIEND)
+			self.__ShowButton(self.BTN_FRIEND)
 
 		if player.IsPartyMember(self.vid):
 
-			self.__HideButton(localeInfo.TARGET_BUTTON_FIGHT)
+			self.__HideButton(self.BTN_FIGHT)
 
 			if player.IsPartyLeader(self.vid):
-				self.__ShowButton(localeInfo.TARGET_BUTTON_LEAVE_PARTY)
+				self.__ShowButton(self.BTN_LEAVE_PARTY)
 			elif player.IsPartyLeader(player.GetMainCharacterIndex()):
-				self.__ShowButton(localeInfo.TARGET_BUTTON_EXCLUDE)
+				self.__ShowButton(self.BTN_EXCLUDE)
 
 		else:
 			if player.IsPartyMember(player.GetMainCharacterIndex()):
 				if player.IsPartyLeader(player.GetMainCharacterIndex()):
-					self.__ShowButton(localeInfo.TARGET_BUTTON_INVITE_PARTY)
+					self.__ShowButton(self.BTN_INVITE_PARTY)
 			else:
 				if chr.IsPartyMember(self.vid):
-					self.__ShowButton(localeInfo.TARGET_BUTTON_REQUEST_ENTER_PARTY)
+					self.__ShowButton(self.BTN_REQUEST_ENTER_PARTY)
 				else:
-					self.__ShowButton(localeInfo.TARGET_BUTTON_INVITE_PARTY)
+					self.__ShowButton(self.BTN_INVITE_PARTY)
 
 			if player.IsRevengeInstance(self.vid):
-				self.__HideButton(localeInfo.TARGET_BUTTON_FIGHT)
-				self.__ShowButton(localeInfo.TARGET_BUTTON_AVENGE)
+				self.__HideButton(self.BTN_FIGHT)
+				self.__ShowButton(self.BTN_AVENGE)
 			elif player.IsChallengeInstance(self.vid):
-				self.__HideButton(localeInfo.TARGET_BUTTON_FIGHT)
-				self.__ShowButton(localeInfo.TARGET_BUTTON_ACCEPT_FIGHT)
+				self.__HideButton(self.BTN_FIGHT)
+				self.__ShowButton(self.BTN_ACCEPT_FIGHT)
 			elif player.IsCantFightInstance(self.vid):
-				self.__HideButton(localeInfo.TARGET_BUTTON_FIGHT)
+				self.__HideButton(self.BTN_FIGHT)
 
 			if not player.IsSameEmpire(self.vid):
-				self.__HideButton(localeInfo.TARGET_BUTTON_INVITE_PARTY)
-				self.__HideButton(localeInfo.TARGET_BUTTON_FRIEND)
-				self.__HideButton(localeInfo.TARGET_BUTTON_FIGHT)
+				self.__HideButton(self.BTN_INVITE_PARTY)
+				self.__HideButton(self.BTN_FRIEND)
+				self.__HideButton(self.BTN_FIGHT)
 
 		distance = player.GetCharacterDistance(self.vid)
 		if distance > self.EXCHANGE_LIMIT_RANGE:
-			self.__HideButton(localeInfo.TARGET_BUTTON_EXCHANGE)
+			self.__HideButton(self.BTN_EXCHANGE)
 			self.__ArrangeButtonPosition()
 
 		self.__ArrangeButtonPosition()
@@ -500,7 +524,7 @@ class TargetBoard(ui.ThinBoard):
 	def OnUpdate(self):
 		if self.isShowButton:
 
-			exchangeButton = self.buttonDict[localeInfo.TARGET_BUTTON_EXCHANGE]
+			exchangeButton = self.buttonDict[self.BTN_EXCHANGE]
 			distance = player.GetCharacterDistance(self.vid)
 
 			if distance < 0:
@@ -513,3 +537,6 @@ class TargetBoard(ui.ThinBoard):
 			else:
 				if distance < self.EXCHANGE_LIMIT_RANGE:
 					self.RefreshButton()
+
+TargetBoard._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(TargetBoard._RebuildLocaleStrings)

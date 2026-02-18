@@ -83,8 +83,8 @@ class LocaleSelector(ui.Window):
 			self.confirmDialog = None
 
 		for btn in self.flagButtons:
+			btn.SetEvent(None)
 			btn.Hide()
-			btn = None
 		self.flagButtons = []
 
 		if self.background:

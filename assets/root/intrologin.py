@@ -590,6 +590,9 @@ class LoginWindow(ui.ScriptWindow):
 		"""Handle locale change - save config, reload, and refresh UI"""
 		import dbg
 
+		# Remember old RTL state to detect direction change
+		wasRTL = app.IsRTL()
+
 		# 1) Save locale code to config/locale.cfg
 		try:
 			import os
@@ -609,7 +612,37 @@ class LoginWindow(ui.ScriptWindow):
 
 		dbg.TraceError("Locale changed successfully, refreshing UI...")
 
-		# 3) Refresh all UI text elements with new locale
+		# 3) If RTL/LTR direction changed, reload UI script in-place
+		#    (different UI scripts, element positioning, text alignment)
+		if wasRTL != app.IsRTL():
+			dbg.TraceError("RTL/LTR direction changed, reloading UI script...")
+
+			# Save current state before Close() destroys references
+			wasOnLoginBoard = self.connectBoard and self.connectBoard.IsShow()
+			savedId = self.idEditLine.GetText() if self.idEditLine else ""
+			savedPwd = self.pwdEditLine.GetText() if self.pwdEditLine else ""
+
+			# Rebuild popup dialog for new direction
+			self.stream.popupWindow.Destroy()
+			self.stream.CreatePopupDialog()
+
+			# Close and reopen with correct RTL/LTR script
+			self.Close()
+			self.Open()
+
+			# Restore the board the user was on
+			if wasOnLoginBoard:
+				self.__OpenLoginBoard()
+				if savedId:
+					self.idEditLine.SetText(savedId)
+				if savedPwd:
+					self.pwdEditLine.SetText(savedPwd)
+			else:
+				self.__RefreshServerList()
+				self.__OpenServerBoard()
+			return
+
+		# 4) Same direction - just refresh text elements
 		self.__RefreshLocaleUI()
 
 	def __RefreshLocaleUI(self):
@@ -673,10 +706,8 @@ class LoginWindow(ui.ScriptWindow):
 			self.localeSelector.Show()
 			self.localeSelector.SetTop()
 
-		except:
-			# import dbg
-			# dbg.TraceError("LoginWindow.__RefreshLocaleUI failed")
-			pass
+		except Exception as e:
+			dbg.TraceError("LoginWindow.__RefreshLocaleUI failed: %s" % str(e))
 
 	def __SetServerInfo(self, name):
 		net.SetServerInfo(name.strip())

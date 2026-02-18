@@ -55,9 +55,11 @@ class Console(object):
 
 	def ReloadLocale(self):
 		"Reload Locale"
-		reload(localeInfo)
-		reload(uiScriptLocale)
-		self.Print("RELOAD LOCALE")
+		import app
+		if app.ReloadLocale():
+			self.Print("RELOAD LOCALE OK")
+		else:
+			self.Print("RELOAD LOCALE FAILED")
 
 	def ReloadDevel(self):
 		"ReloadDevel"

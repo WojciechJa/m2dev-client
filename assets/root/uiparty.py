@@ -28,15 +28,7 @@ class PartyMemberInfoBoard(ui.ScriptWindow):
 	#PARTY_AFFECT_REGEN_BONUS		= 6
 	PARTY_AFFECT_INCREASE_AREA_150	= 7
 	PARTY_AFFECT_INCREASE_AREA_200	= 8
-	AFFECT_STRING_DICT = {	PARTY_AFFECT_EXPERIENCE : localeInfo.PARTY_BONUS_EXP,
-							PARTY_AFFECT_ATTACKER : localeInfo.PARTY_BONUS_ATTACKER,
-							PARTY_AFFECT_TANKER : localeInfo.PARTY_BONUS_TANKER,
-							PARTY_AFFECT_BUFFER : localeInfo.PARTY_BONUS_BUFFER,
-							PARTY_AFFECT_SKILL_MASTER : localeInfo.PARTY_BONUS_SKILL_MASTER,
-							PARTY_AFFECT_BERSERKER : localeInfo.PARTY_BONUS_BERSERKER,
-							PARTY_AFFECT_DEFENDER : localeInfo.PARTY_BONUS_DEFENDER,
-							PARTY_AFFECT_INCREASE_AREA_150 : localeInfo.PARTY_INCREASE_AREA_150,
-							PARTY_AFFECT_INCREASE_AREA_200 : localeInfo.PARTY_INCREASE_AREA_200, }
+	AFFECT_STRING_DICT = {}
 
 	PARTY_SKILL_HEAL = 1
 	PARTY_SKILL_WARP = 2
@@ -55,12 +47,29 @@ class PartyMemberInfoBoard(ui.ScriptWindow):
 											MEMBER_BUTTON_WARP : "party_skill_warp",
 											MEMBER_BUTTON_EXPEL : "party_expel", }
 
-	STATE_NAME_DICT =	{	player.PARTY_STATE_ATTACKER : localeInfo.PARTY_SET_ATTACKER,
-							player.PARTY_STATE_BERSERKER : localeInfo.PARTY_SET_BERSERKER,
-							player.PARTY_STATE_TANKER : localeInfo.PARTY_SET_TANKER,
-							player.PARTY_STATE_DEFENDER : localeInfo.PARTY_SET_DEFENDER,
-							player.PARTY_STATE_BUFFER : localeInfo.PARTY_SET_BUFFER,
-							player.PARTY_STATE_SKILL_MASTER : localeInfo.PARTY_SET_SKILL_MASTER, }
+	STATE_NAME_DICT = {}
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		PartyMemberInfoBoard.AFFECT_STRING_DICT = {
+			PartyMemberInfoBoard.PARTY_AFFECT_EXPERIENCE : localeInfo.PARTY_BONUS_EXP,
+			PartyMemberInfoBoard.PARTY_AFFECT_ATTACKER : localeInfo.PARTY_BONUS_ATTACKER,
+			PartyMemberInfoBoard.PARTY_AFFECT_TANKER : localeInfo.PARTY_BONUS_TANKER,
+			PartyMemberInfoBoard.PARTY_AFFECT_BUFFER : localeInfo.PARTY_BONUS_BUFFER,
+			PartyMemberInfoBoard.PARTY_AFFECT_SKILL_MASTER : localeInfo.PARTY_BONUS_SKILL_MASTER,
+			PartyMemberInfoBoard.PARTY_AFFECT_BERSERKER : localeInfo.PARTY_BONUS_BERSERKER,
+			PartyMemberInfoBoard.PARTY_AFFECT_DEFENDER : localeInfo.PARTY_BONUS_DEFENDER,
+			PartyMemberInfoBoard.PARTY_AFFECT_INCREASE_AREA_150 : localeInfo.PARTY_INCREASE_AREA_150,
+			PartyMemberInfoBoard.PARTY_AFFECT_INCREASE_AREA_200 : localeInfo.PARTY_INCREASE_AREA_200,
+		}
+		PartyMemberInfoBoard.STATE_NAME_DICT = {
+			player.PARTY_STATE_ATTACKER : localeInfo.PARTY_SET_ATTACKER,
+			player.PARTY_STATE_BERSERKER : localeInfo.PARTY_SET_BERSERKER,
+			player.PARTY_STATE_TANKER : localeInfo.PARTY_SET_TANKER,
+			player.PARTY_STATE_DEFENDER : localeInfo.PARTY_SET_DEFENDER,
+			player.PARTY_STATE_BUFFER : localeInfo.PARTY_SET_BUFFER,
+			player.PARTY_STATE_SKILL_MASTER : localeInfo.PARTY_SET_SKILL_MASTER,
+		}
 
 	def __init__(self):
 		ui.ScriptWindow.__init__(self)
@@ -117,6 +126,9 @@ class PartyMemberInfoBoard(ui.ScriptWindow):
 		self.nameTextLine = None
 		self.gauge = None
 		self.stateButton = None
+		for img in self.partyAffectImageList:
+			img.OnMouseOverIn = None
+			img.OnMouseOverOut = None
 		self.partyAffectImageList = []
 		self.stateButtonDict = {}
 
@@ -388,7 +400,10 @@ class PartyMemberInfoBoard(ui.ScriptWindow):
 
 class PartyMenu(ui.ThinBoard):
 
-	BUTTON_NAME = ( localeInfo.PARTY_HEAL_ALL_MEMBER, localeInfo.PARTY_BREAK_UP, localeInfo.PARTY_LEAVE )
+	# Locale-independent button identifiers (never use translated strings as dict keys)
+	BTN_HEAL_ALL = 0
+	BTN_BREAK_UP = 1
+	BTN_LEAVE = 2
 
 	def __init__(self):
 		ui.ThinBoard.__init__(self)
@@ -441,28 +456,28 @@ class PartyMenu(ui.ThinBoard):
 		self.ChangePartyParameter(self.distributionMode)
 
 	def __CreateButtons(self):
+		buttonConfig = (
+			(self.BTN_HEAL_ALL, "PARTY_HEAL_ALL_MEMBER",
+				"d:/ymir work/ui/game/windows/Party_Skill_Heal",
+				ui.__mem_func__(self.OnPartyUseSkill)),
+			(self.BTN_BREAK_UP, "PARTY_BREAK_UP",
+				"d:/ymir work/ui/game/windows/Party_Disband",
+				net.SendPartyExitPacket),
+			(self.BTN_LEAVE, "PARTY_LEAVE",
+				"d:/ymir work/ui/game/windows/Party_Exit",
+				net.SendPartyExitPacket),
+		)
 
-		for name in self.BUTTON_NAME:
+		for btnId, localeAttr, imgBase, event in buttonConfig:
 			button = ui.Button()
 			button.SetParent(self)
 			button.SetWindowHorizontalAlignCenter()
-			button.SetToolTipText(name)
-			self.buttonDict[name] = button
-
-		self.buttonDict[localeInfo.PARTY_HEAL_ALL_MEMBER].SetEvent(ui.__mem_func__(self.OnPartyUseSkill))
-		self.buttonDict[localeInfo.PARTY_HEAL_ALL_MEMBER].SetUpVisual("d:/ymir work/ui/game/windows/Party_Skill_Heal_01.sub")
-		self.buttonDict[localeInfo.PARTY_HEAL_ALL_MEMBER].SetOverVisual("d:/ymir work/ui/game/windows/Party_Skill_Heal_02.sub")
-		self.buttonDict[localeInfo.PARTY_HEAL_ALL_MEMBER].SetDownVisual("d:/ymir work/ui/game/windows/Party_Skill_Heal_03.sub")
-
-		self.buttonDict[localeInfo.PARTY_BREAK_UP].SetEvent(net.SendPartyExitPacket)
-		self.buttonDict[localeInfo.PARTY_BREAK_UP].SetUpVisual("d:/ymir work/ui/game/windows/Party_Disband_01.sub")
-		self.buttonDict[localeInfo.PARTY_BREAK_UP].SetOverVisual("d:/ymir work/ui/game/windows/Party_Disband_02.sub")
-		self.buttonDict[localeInfo.PARTY_BREAK_UP].SetDownVisual("d:/ymir work/ui/game/windows/Party_Disband_03.sub")
-
-		self.buttonDict[localeInfo.PARTY_LEAVE].SetEvent(net.SendPartyExitPacket)
-		self.buttonDict[localeInfo.PARTY_LEAVE].SetUpVisual("d:/ymir work/ui/game/windows/Party_Exit_01.sub")
-		self.buttonDict[localeInfo.PARTY_LEAVE].SetOverVisual("d:/ymir work/ui/game/windows/Party_Exit_02.sub")
-		self.buttonDict[localeInfo.PARTY_LEAVE].SetDownVisual("d:/ymir work/ui/game/windows/Party_Exit_03.sub")
+			button.SetToolTipText(getattr(localeInfo, localeAttr))
+			button.SetUpVisual(imgBase + "_01.sub")
+			button.SetOverVisual(imgBase + "_02.sub")
+			button.SetDownVisual(imgBase + "_03.sub")
+			button.SetEvent(event)
+			self.buttonDict[btnId] = button
 
 	def __ClearShowingButtons(self):
 		self.showingButtonList = []
@@ -507,19 +522,19 @@ class PartyMenu(ui.ThinBoard):
 	def ShowLeaderButton(self):
 		self.isLeader = True
 		self.__ClearShowingButtons()
-		self.__ShowButton(localeInfo.PARTY_BREAK_UP)
+		self.__ShowButton(self.BTN_BREAK_UP)
 
 	def ShowMemberButton(self):
 		self.isLeader = False
 		self.__ClearShowingButtons()
-		self.__ShowButton(localeInfo.PARTY_LEAVE)
+		self.__ShowButton(self.BTN_LEAVE)
 
 	def OnPartyUseSkill(self):
 		net.SendPartyUseSkillPacket(PartyMemberInfoBoard.PARTY_SKILL_HEAL, 0)
-		self.__HideButton(localeInfo.PARTY_HEAL_ALL_MEMBER)
+		self.__HideButton(self.BTN_HEAL_ALL)
 
 	def PartyHealReady(self):
-		self.__ShowButton(localeInfo.PARTY_HEAL_ALL_MEMBER)
+		self.__ShowButton(self.BTN_HEAL_ALL)
 
 	def __UpAllModeButtons(self):
 		for button in list(self.modeButtonList.values()):
@@ -735,3 +750,6 @@ class PartyWindow(ui.Window):
 			self.partyMenuButton.SetOverVisual("d:/ymir work/ui/game/windows/Party_Menu_Close_02.sub")
 			self.partyMenuButton.SetDownVisual("d:/ymir work/ui/game/windows/Party_Menu_Close_03.sub")
 			self.partyMenu.Show()
+
+PartyMemberInfoBoard._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(PartyMemberInfoBoard._RebuildLocaleStrings)

@@ -42,22 +42,25 @@ class CharacterWindow(ui.ScriptWindow):
 
 	PAGE_HORSE = 3
 
-	SKILL_GROUP_NAME_DICT = {
-		playerSettingModule.JOB_WARRIOR	: { 1 : localeInfo.SKILL_GROUP_WARRIOR_1,	2 : localeInfo.SKILL_GROUP_WARRIOR_2, },
-		playerSettingModule.JOB_ASSASSIN	: { 1 : localeInfo.SKILL_GROUP_ASSASSIN_1,	2 : localeInfo.SKILL_GROUP_ASSASSIN_2, },
-		playerSettingModule.JOB_SURA		: { 1 : localeInfo.SKILL_GROUP_SURA_1,		2 : localeInfo.SKILL_GROUP_SURA_2, },
-		playerSettingModule.JOB_SHAMAN		: { 1 : localeInfo.SKILL_GROUP_SHAMAN_1,	2 : localeInfo.SKILL_GROUP_SHAMAN_2, },
-	}
+	SKILL_GROUP_NAME_DICT = {}
+	STAT_DESCRIPTION = {}
+	STAT_MINUS_DESCRIPTION = ""
 
-	STAT_DESCRIPTION =	{
-		"HTH" : localeInfo.STAT_TOOLTIP_CON,
-		"INT" : localeInfo.STAT_TOOLTIP_INT,
-		"STR" : localeInfo.STAT_TOOLTIP_STR,
-		"DEX" : localeInfo.STAT_TOOLTIP_DEX,
-	}
-
-
-	STAT_MINUS_DESCRIPTION = localeInfo.STAT_MINUS_DESCRIPTION
+	@staticmethod
+	def _RebuildLocaleStrings():
+		CharacterWindow.SKILL_GROUP_NAME_DICT = {
+			playerSettingModule.JOB_WARRIOR	: { 1 : localeInfo.SKILL_GROUP_WARRIOR_1,	2 : localeInfo.SKILL_GROUP_WARRIOR_2, },
+			playerSettingModule.JOB_ASSASSIN	: { 1 : localeInfo.SKILL_GROUP_ASSASSIN_1,	2 : localeInfo.SKILL_GROUP_ASSASSIN_2, },
+			playerSettingModule.JOB_SURA		: { 1 : localeInfo.SKILL_GROUP_SURA_1,		2 : localeInfo.SKILL_GROUP_SURA_2, },
+			playerSettingModule.JOB_SHAMAN		: { 1 : localeInfo.SKILL_GROUP_SHAMAN_1,	2 : localeInfo.SKILL_GROUP_SHAMAN_2, },
+		}
+		CharacterWindow.STAT_DESCRIPTION = {
+			"HTH" : localeInfo.STAT_TOOLTIP_CON,
+			"INT" : localeInfo.STAT_TOOLTIP_INT,
+			"STR" : localeInfo.STAT_TOOLTIP_STR,
+			"DEX" : localeInfo.STAT_TOOLTIP_DEX,
+		}
+		CharacterWindow.STAT_MINUS_DESCRIPTION = localeInfo.STAT_MINUS_DESCRIPTION
 
 	def __init__(self):
 		ui.ScriptWindow.__init__(self)
@@ -1341,3 +1344,6 @@ class CharacterWindow(ui.ScriptWindow):
 		if startIndex != self.questShowingStartIndex:
 			self.questShowingStartIndex = startIndex
 			self.RefreshQuest()
+
+CharacterWindow._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(CharacterWindow._RebuildLocaleStrings)
