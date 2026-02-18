@@ -683,10 +683,16 @@ class CommentSlot(ui.Window):
 
 class GuildWindow(ui.ScriptWindow):
 
-	JOB_NAME = {	0 : localeInfo.JOB_WARRIOR,
+	JOB_NAME = {}
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		GuildWindow.JOB_NAME = {
+			0 : localeInfo.JOB_WARRIOR,
 			1 : localeInfo.JOB_ASSASSIN,
 			2 : localeInfo.JOB_SURA,
-			3 : localeInfo.JOB_SHAMAN, }
+			3 : localeInfo.JOB_SHAMAN,
+		}
 
 	GUILD_SKILL_PASSIVE_SLOT = 0
 	GUILD_SKILL_ACTIVE_SLOT = 1
@@ -2876,3 +2882,5 @@ Destroy building:
 		net.SendChatPacket("/build d vid")
 	"""
 
+GuildWindow._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(GuildWindow._RebuildLocaleStrings)

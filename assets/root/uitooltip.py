@@ -2215,25 +2215,31 @@ class SkillToolTip(ToolTip):
 											( 26, 1, ),
 											( 32, 2, ), )
 
-	SKILL_GRADE_NAME = {	player.SKILL_GRADE_MASTER : localeInfo.SKILL_GRADE_NAME_MASTER,
-							player.SKILL_GRADE_GRAND_MASTER : localeInfo.SKILL_GRADE_NAME_GRAND_MASTER,
-							player.SKILL_GRADE_PERFECT_MASTER : localeInfo.SKILL_GRADE_NAME_PERFECT_MASTER, }
-
-	AFFECT_NAME_DICT =	{
-							"HP" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_POWER,
-							"ATT_GRADE" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_GRADE,
-							"DEF_GRADE" : localeInfo.TOOLTIP_SKILL_AFFECT_DEF_GRADE,
-							"ATT_SPEED" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_SPEED,
-							"MOV_SPEED" : localeInfo.TOOLTIP_SKILL_AFFECT_MOV_SPEED,
-							"DODGE" : localeInfo.TOOLTIP_SKILL_AFFECT_DODGE,
-							"RESIST_NORMAL" : localeInfo.TOOLTIP_SKILL_AFFECT_RESIST_NORMAL,
-							"REFLECT_MELEE" : localeInfo.TOOLTIP_SKILL_AFFECT_REFLECT_MELEE,
-						}
+	SKILL_GRADE_NAME = {}
+	AFFECT_NAME_DICT = {}
 	AFFECT_APPEND_TEXT_DICT =	{
 									"DODGE" : "%",
 									"RESIST_NORMAL" : "%",
 									"REFLECT_MELEE" : "%",
 								}
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		SkillToolTip.SKILL_GRADE_NAME = {
+			player.SKILL_GRADE_MASTER : localeInfo.SKILL_GRADE_NAME_MASTER,
+			player.SKILL_GRADE_GRAND_MASTER : localeInfo.SKILL_GRADE_NAME_GRAND_MASTER,
+			player.SKILL_GRADE_PERFECT_MASTER : localeInfo.SKILL_GRADE_NAME_PERFECT_MASTER,
+		}
+		SkillToolTip.AFFECT_NAME_DICT = {
+			"HP" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_POWER,
+			"ATT_GRADE" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_GRADE,
+			"DEF_GRADE" : localeInfo.TOOLTIP_SKILL_AFFECT_DEF_GRADE,
+			"ATT_SPEED" : localeInfo.TOOLTIP_SKILL_AFFECT_ATT_SPEED,
+			"MOV_SPEED" : localeInfo.TOOLTIP_SKILL_AFFECT_MOV_SPEED,
+			"DODGE" : localeInfo.TOOLTIP_SKILL_AFFECT_DODGE,
+			"RESIST_NORMAL" : localeInfo.TOOLTIP_SKILL_AFFECT_RESIST_NORMAL,
+			"REFLECT_MELEE" : localeInfo.TOOLTIP_SKILL_AFFECT_REFLECT_MELEE,
+		}
 
 	def __init__(self):
 		ToolTip.__init__(self, self.SKILL_TOOL_TIP_WIDTH)
@@ -2705,5 +2711,8 @@ if __name__ == "__main__":
 
 	toolTip.AddItemData_Offline(10, desc, summ, 0, 0) 
 	toolTip.Show()
-	
+
 	app.Loop()
+
+SkillToolTip._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(SkillToolTip._RebuildLocaleStrings)

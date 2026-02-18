@@ -47,7 +47,7 @@ EMPIREDESC_B = "%s/empiredesc_b.txt" % (name)
 EMPIREDESC_C = "%s/empiredesc_c.txt" % (name)
 
 LOCALE_INTERFACE_FILE_NAME = "%s/locale_interface.txt" % (name)
-LoadLocaleFile(LOCALE_INTERFACE_FILE_NAME, locals())
+LoadLocaleFile(LOCALE_INTERFACE_FILE_NAME, globals())
 
 def LoadLocaleData():
 	"""
@@ -55,6 +55,10 @@ def LoadLocaleData():
 
 	Called by app.ReloadLocale() when the user changes language.
 	Updates all locale-dependent paths and reloads locale_interface.txt.
+
+	This is the LAST Python module reloaded by the C++ reload chain,
+	so it fires localeInfo.FireReloadCallbacks() at the end to notify
+	all modules that both localeInfo and uiScriptLocale are fully loaded.
 
 	Returns:
 		True on success, False on failure
@@ -88,8 +92,12 @@ def LoadLocaleData():
 		# Reload locale_interface.txt - this updates all UI strings
 		LoadLocaleFile(LOCALE_INTERFACE_FILE_NAME, globals())
 
+		# Fire reload callbacks now that BOTH modules are fully loaded
+		import localeInfo
+		localeInfo.FireReloadCallbacks()
+
 		return True
-	except:
-		# import dbg
-		# dbg.TraceError("uiScriptLocale.LoadLocaleData failed")
+	except Exception as e:
+		import dbg
+		dbg.TraceError("uiScriptLocale.LoadLocaleData failed: %s" % str(e))
 		return False
