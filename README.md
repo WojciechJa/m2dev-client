@@ -7,14 +7,8 @@ This repository contains all client-side data, including locale files, configura
 ## 📋 Changelog
 
 ### 🐛 Bug Fixes
- - **Font**: Fixed font for Arabic and Brazilian
- - **Loading**: Fixed loading background image for Arabic
- - **Crashes**: Fixed crashes for Arabic and Brazilian
-
-### ⬆️ Improvements
- - **Text hilighting**: Exposed text highlighting (selecting and clearing) to Python
- - **Multiline dialog texts**: Question and Popup dialogs now support multiline translations! Translated strings containing `/n` or `\n` auto-break lines with trimming. Dialog height and position as well as inner element positions are auto-adjusting.
- - **Refinement**: Updated translations for the refinement dialogs and added conditional failed messages (from official) 
+ - **Affect tooltips**: ALL affects now display realtime countdowns, titles and are wrapped in tooltips! Realtime countdowns does not apply to infinite affects such as the Exorcism Scroll, the Concentrated Reading and the Medal of the Dragon (Death penalty prevention)
+ - **AFFECT_FIRE**: The Continuous Fire debuff has been added to the affects dictionary by name.
 
 <br>
 <br>

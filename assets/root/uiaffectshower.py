@@ -269,6 +269,14 @@ class AutoPotionImage(ui.ExpandedImageBox):
 
 class AffectImage(ui.ExpandedImageBox):
 
+	# MR-16: Canonical item vnum for each infinite-duration affect (proto lookup, no inventory)
+	INFINITE_AFFECT_ITEM_VNUM = {
+		chr.NEW_AFFECT_NO_DEATH_PENALTY    : 71004,
+		chr.NEW_AFFECT_SKILL_BOOK_BONUS    : 71094,
+		chr.NEW_AFFECT_SKILL_BOOK_NO_DELAY : 71001,
+	}
+	# MR-16: -- END OF -- Canonical item vnum for each infinite-duration affect
+
 	def __init__(self):
 		ui.ExpandedImageBox.__init__(self)
 
@@ -407,9 +415,14 @@ class AffectImage(ui.ExpandedImageBox):
 					self.toolTip.ShowToolTip()
 			return
 
+		# MR-16: Classic affect duration countdown
+		if self.__ShouldShowInfiniteToolTip():
+			return
+		# MR-16: -- END OF -- Classic affect duration countdown
+
 		self.SetToolTipText(self.description, 0, 40)
 		
-	#독일버전에서 시간을 제거하기 위해서 사용 
+	# Used to suppress the time countdown display (German version)
 	def __UpdateDescription2(self):
 		if not self.description:
 			return
@@ -428,6 +441,12 @@ class AffectImage(ui.ExpandedImageBox):
 	def __ShouldShowTimedToolTip(self):
 		return self.isClocked and self.endTime > 0 and not self.__IsAutoPotionAffect()
 
+	# MR-16: Classic affect duration countdown
+	def __ShouldShowInfiniteToolTip(self):
+		return (self.isClocked and self.description and self.endTime == 0
+			and not self.__IsAutoPotionAffect() and not self.__IsDragonSoulAffect())
+	# MR-16: -- END OF -- Classic affect duration countdown
+
 	def __UpdateTimedDescription(self, remainSec):
 		if not self.description:
 			return
@@ -438,6 +457,34 @@ class AffectImage(ui.ExpandedImageBox):
 		self.toolTip.SetTitle(self.description)
 		self.toolTip.AppendTextLine("(%s : %s)" % (localeInfo.LEFT_TIME, localeInfo.RTSecondToDHMS(remainSec)))
 		self.toolTip.ResizeToolTip()
+
+	# MR-16: Classic affect duration countdown
+	def __GetInfiniteAffectItemName(self):
+		vnum = self.INFINITE_AFFECT_ITEM_VNUM.get(self.affect)
+
+		if not vnum:
+			return None
+
+		item.SelectItem(vnum)
+
+		return item.GetItemName()
+
+	def __UpdateInfiniteDescription(self):
+		if not self.description:
+			return
+
+		self.__EnsureToolTip()
+
+		self.toolTip.ClearToolTip()
+
+		itemName = self.__GetInfiniteAffectItemName()
+
+		if itemName:
+			self.toolTip.SetTitle(itemName)
+
+		self.toolTip.AppendTextLine(self.description)
+		self.toolTip.ResizeToolTip()
+	# MR-16: -- END OF -- Classic affect duration countdown
 
 	def __IsDragonSoulAffect(self):
 		return self.affect in (chr.NEW_AFFECT_DRAGON_SOUL_DECK1, chr.NEW_AFFECT_DRAGON_SOUL_DECK2)
@@ -520,12 +567,14 @@ class AffectImage(ui.ExpandedImageBox):
 			if self.toolTip:
 				self.toolTip.ShowToolTip()
 			return
+
 		if self.__IsDragonSoulAffect():
 			self.__UpdateDragonSoulDescription()
 
 			if self.toolTip:
 				self.toolTip.ShowToolTip()
 			return
+
 		if self.__ShouldShowTimedToolTip():
 			remainSec = max(0, self.endTime - app.GetGlobalTimeStamp())
 			self.__UpdateTimedDescription(remainSec)
@@ -533,6 +582,16 @@ class AffectImage(ui.ExpandedImageBox):
 			if self.toolTip:
 				self.toolTip.ShowToolTip()
 			return
+
+		# MR-16: Classic affect duration countdown
+		if self.__ShouldShowInfiniteToolTip():
+			self.__UpdateInfiniteDescription()
+
+			if self.toolTip:
+				self.toolTip.ShowToolTip()
+			return
+		# MR-16: -- END OF -- Classic affect duration countdown
+
 		if self.toolTipText:
 			self.toolTipText.Show()
 
@@ -580,7 +639,9 @@ class AffectShower(ui.Window):
 		chr.AFFECT_JEUNGRYEOK : (localeInfo.SKILL_JEUNGRYEOK, "d:/ymir work/ui/skill/shaman/jeungryeok_03.sub",),
 		chr.AFFECT_PABEOP : (localeInfo.SKILL_PABEOP, "d:/ymir work/ui/skill/sura/pabeop_03.sub",),
 		chr.AFFECT_FALLEN_CHEONGEUN : (localeInfo.SKILL_CHEONGEUN, "d:/ymir work/ui/skill/warrior/cheongeun_03.sub",),
-		28 : (localeInfo.SKILL_FIRE, "d:/ymir work/ui/skill/sura/hwayeom_03.sub",),
+		# MR-16: Added AFFECT_FIRE to Affects Shower
+		chr.AFFECT_FIRE : (localeInfo.SKILL_FIRE, "d:/ymir work/ui/skill/sura/hwayeom_03.sub",),
+		# MR-16: -- END OF -- Added AFFECT_FIRE to Affects Shower
 		chr.AFFECT_CHINA_FIREWORK : (localeInfo.SKILL_POWERFUL_STRIKE, "d:/ymir work/ui/skill/common/affect/powerfulstrike.sub",),
 
 		#64 - END
@@ -597,7 +658,7 @@ class AffectShower(ui.Window):
 		chr.NEW_AFFECT_SKILL_BOOK_BONUS : (localeInfo.TOOLTIP_APPLY_SKILL_BOOK_BONUS, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
 		chr.NEW_AFFECT_SKILL_BOOK_NO_DELAY : (localeInfo.TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
 		
-		# �ڵ����� hp, sp
+		# Auto HP/SP recovery affects
 		chr.NEW_AFFECT_AUTO_HP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/pattern/auto_hpgauge/05.dds"),			
 		chr.NEW_AFFECT_AUTO_SP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/pattern/auto_spgauge/05.dds"),
 		#chr.NEW_AFFECT_AUTO_HP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),			
@@ -621,7 +682,7 @@ class AffectShower(ui.Window):
 	}
 
 	if app.ENABLE_DRAGON_SOUL_SYSTEM:
-		# ��ȥ�� õ, �� ��.
+		# Dragon Soul Sky Deck, Ground Deck.
 		AFFECT_DATA_DICT[chr.NEW_AFFECT_DRAGON_SOUL_DECK1] = (localeInfo.TOOLTIP_DRAGON_SOUL_DECK1, "d:/ymir work/ui/dragonsoul/buff_ds_sky1.tga")
 		AFFECT_DATA_DICT[chr.NEW_AFFECT_DRAGON_SOUL_DECK2] = (localeInfo.TOOLTIP_DRAGON_SOUL_DECK2, "d:/ymir work/ui/dragonsoul/buff_ds_land1.tga")
 
@@ -630,13 +691,16 @@ class AffectShower(ui.Window):
 
 		self.serverPlayTime = 0
 		self.clientPlayTime = 0
-		
+
 		self.lastUpdateTime = 0
 		self.affectImageDict = {}
 		self.horseImage = None
 		self.lovePointImage = None
 		self.autoPotionImageHP = AutoPotionImage()
 		self.autoPotionImageSP = AutoPotionImage()
+		# MR-16: Classic affect duration countdown
+		self.pendingClassicDurations = {}
+		# MR-16: -- END OF -- Classic affect duration countdown
 
 		self.SetPosition(10, 10)
 		self.Show()
@@ -645,21 +709,46 @@ class AffectShower(ui.Window):
 		self.horseImage = None
 		self.lovePointImage = None
 		self.affectImageDict = {}
+		# MR-16: Classic affect duration countdown
+		self.pendingClassicDurations = {}
+		# MR-16: -- END OF -- Classic affect duration countdown
 
 		self.__ArrangeImageList()
 
-	def ClearAffects(self): ## ��ų ����Ʈ�� ���۴ϴ�.
-		self.living_affectImageDict={}
+	def ClearAffects(self): ## Clears skill affects on death; MALL (non-skill) affects survive.
+		self.living_affectImageDict = {}
+
 		for key, image in list(self.affectImageDict.items()):
 			if not image.IsSkillAffect():
 				self.living_affectImageDict[key] = image
+
 		self.affectImageDict = self.living_affectImageDict
+		# MR-16: Classic affect duration countdown
+		self.pendingClassicDurations = {}
+		# MR-16: -- END OF -- Classic affect duration countdown
+
 		self.__ArrangeImageList()
 
-	def BINARY_NEW_AddAffect(self, type, pointIdx, value, duration):
-		print(("BINARY_NEW_AddAffect", type, pointIdx, value, duration))
+	def BINARY_NEW_AddAffect(self, type, pointIdx, value, duration, affFlag = 0):
+		print(("BINARY_NEW_AddAffect", type, pointIdx, value, duration, affFlag))
 
 		if type < 500:
+			# MR-16: Classic affect duration countdown
+			# affFlag is the server-side AFF_* enum value (1-based).
+			# The client's chr.AFFECT_* enum is 0-based, so affBit = affFlag - 1.
+			# This covers all classic affects without any static mapping.
+			if 0 < duration <= self.INFINITE_AFFECT_DURATION and affFlag > 0:
+				affBit = affFlag - 1
+
+				if affBit in self.AFFECT_DATA_DICT:
+					if affBit in self.affectImageDict:
+						# Icon already exists (CHARACTER_UPDATE arrived first) - update directly
+						self.__ApplyClassicDuration(affBit, duration)
+					else:
+						# Icon not yet created - store for when __AppendAffect fires
+						self.pendingClassicDurations[affBit] = duration
+			# MR-16: -- END OF -- Classic affect duration countdown
+
 			return
 
 		if type == chr.NEW_AFFECT_MALL:
@@ -673,7 +762,7 @@ class AffectShower(ui.Window):
 		if affect not in self.AFFECT_DATA_DICT:
 			return
 
-		## ����� ��ȣ, ������ ������ Duration �� 0 ���� �����Ѵ�.
+		## As an exception, the following affects have their Duration forced to 0.
 		if affect == chr.NEW_AFFECT_NO_DEATH_PENALTY or\
 		   affect == chr.NEW_AFFECT_SKILL_BOOK_BONUS or\
 		   affect == chr.NEW_AFFECT_AUTO_SP_RECOVERY or\
@@ -846,6 +935,32 @@ class AffectShower(ui.Window):
 		image.Show()
 		self.affectImageDict[affect] = image
 
+		# MR-16: Classic affect duration countdown
+		# Apply pending duration if AFFECT_ADD arrived before CHARACTER_UPDATE
+		if affect in self.pendingClassicDurations:
+			duration = self.pendingClassicDurations.pop(affect)
+			self.__ApplyClassicDuration(affect, duration)
+		# MR-16: -- END OF -- Classic affect duration countdown
+
+	# MR-16: Classic affect duration countdown
+	def __ApplyClassicDuration(self, affBit, duration):
+		image = self.affectImageDict.get(affBit)
+		if not image:
+			return
+
+		affectData = self.AFFECT_DATA_DICT.get(affBit)
+		if not affectData:
+			return
+
+		name = affectData[0]
+		skillIndex = player.AffectIndexToSkillIndex(affBit)
+		if 0 != skillIndex:
+			name = skill.GetSkillName(skillIndex)
+
+		image.SetDescription(name)
+		image.SetDuration(duration)
+	# MR-16: -- END OF -- Classic affect duration countdown
+
 	def __RemoveAffect(self, affect):
 		"""
 		if affect == chr.NEW_AFFECT_AUTO_SP_RECOVERY:
@@ -890,15 +1005,23 @@ class AffectShower(ui.Window):
 			xPos += self.IMAGE_STEP
 
 	# MR-12: Fix realtime countdown auto-start
-	def OnUpdate(self):		
+	def OnUpdate(self):
 		try:
 			for image in list(self.affectImageDict.values()):
 				if image.GetAffect() == chr.NEW_AFFECT_AUTO_HP_RECOVERY or image.GetAffect() == chr.NEW_AFFECT_AUTO_SP_RECOVERY:
 					image.UpdateAutoPotionDescription()
 					continue
-					
+
+				# MR-16: Classic affect duration countdown
 				if not image.IsSkillAffect():
 					image.UpdateDescription()
+					continue
+
+				# Classic (skill) affects also need UpdateDescription when they
+				# carry a timed duration captured from the AFFECT_ADD packet.
+				if image.endTime > 0:
+					image.UpdateDescription()
+				# MR-16: -- END OF -- Classic affect duration countdown
 		except Exception as e:
 			print(("AffectShower::OnUpdate error : ", e))
 	# MR-12: -- END OF -- Fix realtime countdown auto-start
