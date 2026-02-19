@@ -585,26 +585,29 @@ class MainWindow(ui.ScriptWindow):
             else:
                 chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_COORDS_OK)
 
-        # BUILD COMMAND BASED ON MODE
+        # BUILD COMMAND BASED ON MODE (existing server commands only)
         if self.spawnMode == 0 and self.isCoordModeSelected:
-            # Point mode with coordinates selected - FORMAT: vnum count x y
-            cmd_string = "/adminpanel_spawn_mob %d %d %d %d" % (mob_vnum, count, self.selectedSpawnX,
-                                                                self.selectedSpawnY)
+            # /mob_ld has no count argument, so send it multiple times.
+            cmd_string = "/mob_ld %d %d %d 1" % (mob_vnum, self.selectedSpawnX, self.selectedSpawnY)
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_COORD_CMD % cmd_string)
+            for _ in range(count):
+                net.SendChatPacket(cmd_string)
         elif self.spawnMode == 0:
-            # Point mode without coordinates - spawn around player
-            cmd_string = "/adminpanel_spawn_mob %d %d" % (mob_vnum, count)
+            # Point mode without selected coordinates behaves like regular /mob around player.
+            cmd_string = "/mob %d %d" % (mob_vnum, count)
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_POINT_CMD % cmd_string)
+            net.SendChatPacket(cmd_string)
         elif self.spawnMode == 1:
-            # Random mode - spawn around player
-            cmd_string = "/adminpanel_spawn_mob %d %d" % (mob_vnum, count)
+            # Random mode around player also uses /mob.
+            cmd_string = "/mob %d %d" % (mob_vnum, count)
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_RANDOM_CMD % cmd_string)
+            net.SendChatPacket(cmd_string)
         elif self.spawnMode == 2:
-            # Map mode - use separate command
-            cmd_string = "/adminpanel_spawn_mob_map %d %d" % (mob_vnum, count)
+            # /mob_map has no count argument, so send it multiple times.
+            cmd_string = "/mob_map %d" % mob_vnum
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_MAP_CMD % cmd_string)
-
-        net.SendChatPacket(cmd_string)
+            for _ in range(count):
+                net.SendChatPacket(cmd_string)
 
         # Success message
         try:
