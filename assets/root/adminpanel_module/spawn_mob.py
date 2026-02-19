@@ -29,6 +29,18 @@ NORMAL_COLOR = grp.GenerateColor(0.7607, 0.7607, 0.7607, 1.0)
 POSITIVE_COLOR = grp.GenerateColor(0.5411, 0.7254, 0.5568, 1.0)
 NEGATIVE_COLOR = grp.GenerateColor(0.9, 0.4745, 0.4627, 1.0)
 
+try:
+    _now = time.perf_counter
+except AttributeError:
+    _now = time.time
+
+try:
+    _INTEGER_TYPES = (int, long)
+except NameError:
+    _INTEGER_TYPES = (int,)
+
+_ADMINPANEL_MOB_VNUM_CACHE = None
+
 
 class MobSpawnMapWindow(ui.ScriptWindow):
 
@@ -245,9 +257,18 @@ class MainWindow(ui.ScriptWindow):
 
     def __init__(self):
         self.isMoblistLoaded = False
+        self.isMoblistLoading = False
+        self.deferMobLoad = False
         self.mobList = None
         self.mobDestCount = 0
         self.mobCurCount = 0
+        self.lazyMobsPerFrame = 250
+        self.scanMobsFallback = False
+        self.scanCurrentVnum = 1
+        self.scanMaxVnum = 200000
+        self.scanEmptyStreak = 0
+        self.scanMinStopVnum = 10000
+        self.scanEmptyStopThreshold = 25000
 
         self.selectedMobVnum = 0
 
@@ -287,13 +308,15 @@ class MainWindow(ui.ScriptWindow):
 
     def __del__(self):
         self.isMoblistLoaded = False
+        self.isMoblistLoading = False
+        self.deferMobLoad = False
         self.mobList = None
         #self.__ModelPreviewClose()
         ui.ScriptWindow.__del__(self)
 
     def Show(self):
-        if not self.isMoblistLoaded:
-            self.LoadMobList()
+        if not self.isMoblistLoaded and not self.isMoblistLoading:
+            self.deferMobLoad = True
         ui.ScriptWindow.Show(self)
 
     def Close(self):
@@ -463,6 +486,9 @@ class MainWindow(ui.ScriptWindow):
 
     def SortMobList(self):
         if not self.mobList:
+            self.totalPages = 0
+            self.currentPage = 0
+            self.UpdatePageInfo()
             return
 
         if self.sortMode == 0:  # Sort by vnum
@@ -513,7 +539,7 @@ class MainWindow(ui.ScriptWindow):
         self.selectedMobVnum = 0
         self.GetChild("editline_set_count").SetText("1")
         self.spawnMode = 1
-        self.selectSortMode.SetCurrentItem("Vnum")
+        self.selectSortMode.SetCurrentItem(localeInfo.ADMINPANEL_SPAWN_MOB_SORT_VNUM)
         self.sortMode = 0
 
         # RESET COORDINATE SELECTION
@@ -593,21 +619,119 @@ class MainWindow(ui.ScriptWindow):
         except Exception as e:
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_CMD_SENT)
 
-    def LoadMobList(self):
-        try:
-            self.mobList = nonplayer.AdminPanelGetMobList()
-            self.mobCurCount = 0
-            self.mobDestCount = len(self.mobList)
-            self.totalPages = (len(self.mobList) + self.MOBS_PER_PAGE - 1) // self.MOBS_PER_PAGE
-            self.currentPage = 0
-            self.isPageLoaded = False
-            self.SortMobList()
-            self.LoadCurrentPage()
-            self.isMoblistLoaded = True
-        except Exception as e:
-            self.mobList = []
-            self.totalPages = 0
+    def _NormalizeMobList(self, mob_list):
+        normalized = []
+        for vnum in mob_list:
+            if isinstance(vnum, _INTEGER_TYPES):
+                if vnum > 0:
+                    normalized.append(vnum)
+                continue
+
+            try:
+                parsed = int(vnum)
+            except:
+                continue
+
+            if parsed > 0:
+                normalized.append(parsed)
+
+        return normalized
+
+    def _FinalizeMobLoad(self):
+        self.isMoblistLoading = False
+        self.scanMobsFallback = False
+        self.deferMobLoad = False
+        self.mobCurCount = 0
+        self.mobDestCount = len(self.mobList) if self.mobList else 0
+        self.SortMobList()
+        self.LoadCurrentPage()
+        self.isMoblistLoaded = True
+
+    def _StartFallbackMobScan(self):
+        self.mobList = []
+        self.mobCurCount = 0
+        self.mobDestCount = self.scanMaxVnum
+        self.totalPages = 0
+        self.currentPage = 0
+        self.isPageLoaded = False
+        self.scanCurrentVnum = 1
+        self.scanEmptyStreak = 0
+        self.scanMobsFallback = True
+        self.isMoblistLoading = True
+        self.isMoblistLoaded = False
+        self.deferMobLoad = False
+        self.UpdatePageInfo()
+
+    def _UpdateFallbackMobScan(self):
+        if not self.scanMobsFallback:
+            return
+
+        step = self.lazyMobsPerFrame
+        loaded = 0
+
+        while loaded < step and self.scanCurrentVnum <= self.scanMaxVnum:
+            vnum = self.scanCurrentVnum
+            self.scanCurrentVnum += 1
+            loaded += 1
+
+            try:
+                mob_name = nonplayer.GetMonsterName(vnum)
+            except:
+                mob_name = ""
+
+            if mob_name and len(mob_name) > 1:
+                self.mobList.append(vnum)
+                self.scanEmptyStreak = 0
+            else:
+                self.scanEmptyStreak += 1
+
+            if self.scanCurrentVnum > self.scanMinStopVnum and self.scanEmptyStreak >= self.scanEmptyStopThreshold:
+                self.scanCurrentVnum = self.scanMaxVnum + 1
+                break
+
+        self.mobCurCount = min(self.scanCurrentVnum, self.scanMaxVnum) - 1
+
+        if self.scanCurrentVnum > self.scanMaxVnum:
+            global _ADMINPANEL_MOB_VNUM_CACHE
+            _ADMINPANEL_MOB_VNUM_CACHE = list(self.mobList)
+            self._FinalizeMobLoad()
+            return
+
+        if self.mobCurCount % 2000 < step:
             self.UpdatePageInfo()
+
+    def LoadMobList(self):
+        global _ADMINPANEL_MOB_VNUM_CACHE
+
+        if self.isMoblistLoading:
+            return
+
+        if _ADMINPANEL_MOB_VNUM_CACHE:
+            self.mobList = list(_ADMINPANEL_MOB_VNUM_CACHE)
+            self._FinalizeMobLoad()
+            return
+
+        self.deferMobLoad = False
+        self.isMoblistLoading = True
+        self.isMoblistLoaded = False
+
+        try:
+            if hasattr(nonplayer, "AdminPanelGetMobList"):
+                mob_list = nonplayer.AdminPanelGetMobList()
+                normalized = self._NormalizeMobList(mob_list)
+                if normalized:
+                    self.mobList = normalized
+                    _ADMINPANEL_MOB_VNUM_CACHE = list(normalized)
+                    self._FinalizeMobLoad()
+                    return
+                dbg.TraceError("SpawnMobWindow: AdminPanelGetMobList returned empty list, switching to fallback scan.")
+            else:
+                dbg.TraceError("SpawnMobWindow: nonplayer.AdminPanelGetMobList is not available, switching to fallback scan.")
+        except Exception as e:
+            dbg.TraceError("SpawnMobWindow: AdminPanelGetMobList failed: %s" % str(e))
+
+        self.isMoblistLoading = False
+        self._StartFallbackMobScan()
 
     def LoadCurrentPage(self):
         """Load mobs from current page"""
@@ -635,10 +759,21 @@ class MainWindow(ui.ScriptWindow):
     def UpdatePageInfo(self):
         """Update page information"""
         if self.pageInfoText:
-            page_text = "%d/%d" % (self.currentPage + 1, max(1, self.totalPages))
+            if self.isMoblistLoading:
+                progress = int((float(self.mobCurCount) / float(max(1, self.mobDestCount))) * 100.0)
+                if progress > 99:
+                    progress = 99
+                page_text = "Loading... %d%%" % progress
+            else:
+                page_text = "%d/%d" % (self.currentPage + 1, max(1, self.totalPages))
             self.pageInfoText.SetText(page_text)
 
         try:
+            if self.isMoblistLoading:
+                self.GetChild("prev_page_btn").Disable()
+                self.GetChild("next_page_btn").Disable()
+                return
+
             if self.currentPage <= 0:
                 self.GetChild("prev_page_btn").Disable()
             else:
@@ -754,6 +889,12 @@ class MainWindow(ui.ScriptWindow):
         renderTarget.ChangeMotion(1)
 
     def OnUpdate(self):
+        if self.deferMobLoad:
+            self.LoadMobList()
+
+        if self.isMoblistLoading and self.scanMobsFallback:
+            self._UpdateFallbackMobScan()
+
 
         if self.GetChild("editline_set_count").GetText() != "":
             try:
@@ -936,9 +1077,9 @@ class ListBoxSearch(ui.ListBox):
                 if self.overLine >= self.GetItemCount():
                     self.overLine = -1
 
-        if self.lastSearchTime < time.perf_counter():
-            searchText = self.editLine.GetText()
+        if self.lastSearchTime < _now():
+            searchText = self.editLine.GetText() if self.editLine else ""
             if self.lastSearchText != searchText:
                 self.lastSearchText = searchText
                 self._SearchItems(searchText)
-            self.lastSearchTime = time.perf_counter() + self.SEARCH_UPDATE_TIME
+            self.lastSearchTime = _now() + self.SEARCH_UPDATE_TIME
