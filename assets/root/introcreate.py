@@ -37,12 +37,7 @@ class CreateCharacterWindow(ui.Window):
 	STAT_STR = 2
 	STAT_DEX = 3
 
-	STAT_DESCRIPTION =	{
-							STAT_CON : localeInfo.STAT_TOOLTIP_CON,
-							STAT_INT : localeInfo.STAT_TOOLTIP_INT,
-							STAT_STR : localeInfo.STAT_TOOLTIP_STR,
-							STAT_DEX : localeInfo.STAT_TOOLTIP_DEX,
-						}
+	STAT_DESCRIPTION = {}  # populated by _RebuildLocaleStrings()
 
 	START_STAT =	(  ## CON INT STR DEX
 						[ 4, 3, 6, 3, ], ## Warrior
@@ -55,12 +50,22 @@ class CreateCharacterWindow(ui.Window):
 						[ 4, 6, 3, 3, ], ## Shaman
 					)
 
-	DESCRIPTION_FILE_NAME =	(
-		uiScriptLocale.JOBDESC_WARRIOR_PATH,
-		uiScriptLocale.JOBDESC_ASSASSIN_PATH,
-		uiScriptLocale.JOBDESC_SURA_PATH,
-		uiScriptLocale.JOBDESC_SHAMAN_PATH,
-	)
+	DESCRIPTION_FILE_NAME = ()  # populated by _RebuildLocaleStrings()
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		CreateCharacterWindow.STAT_DESCRIPTION = {
+			CreateCharacterWindow.STAT_CON : localeInfo.STAT_TOOLTIP_CON,
+			CreateCharacterWindow.STAT_INT : localeInfo.STAT_TOOLTIP_INT,
+			CreateCharacterWindow.STAT_STR : localeInfo.STAT_TOOLTIP_STR,
+			CreateCharacterWindow.STAT_DEX : localeInfo.STAT_TOOLTIP_DEX,
+		}
+		CreateCharacterWindow.DESCRIPTION_FILE_NAME = (
+			uiScriptLocale.JOBDESC_WARRIOR_PATH,
+			uiScriptLocale.JOBDESC_ASSASSIN_PATH,
+			uiScriptLocale.JOBDESC_SURA_PATH,
+			uiScriptLocale.JOBDESC_SHAMAN_PATH,
+		)
 
 	class DescriptionBox(ui.Window):
 		def __init__(self):
@@ -638,6 +643,9 @@ class CreateCharacterWindow(ui.Window):
 
 	def OverOutStatButton(self):
 		self.toolTip.Hide()
+
+CreateCharacterWindow._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(CreateCharacterWindow._RebuildLocaleStrings)
 
 if __name__ == "__main__":
 
