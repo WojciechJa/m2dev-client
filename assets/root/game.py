@@ -753,8 +753,8 @@ class GameWindow(ui.ScriptWindow):
         self.affectShower.ResetAffect(affect)
 
     # UNKNOWN_UPDATE
-    def BINARY_NEW_AddAffect(self, type, pointIdx, value, duration):
-        self.affectShower.BINARY_NEW_AddAffect(type, pointIdx, value, duration)
+    def BINARY_NEW_AddAffect(self, type, pointIdx, value, duration, affFlag=0):
+        self.affectShower.BINARY_NEW_AddAffect(type, pointIdx, value, duration, affFlag)
 
         if chr.NEW_AFFECT_DRAGON_SOUL_DECK1 == type or chr.NEW_AFFECT_DRAGON_SOUL_DECK2 == type:
             self.interface.DragonSoulActivate(type - chr.NEW_AFFECT_DRAGON_SOUL_DECK1)

@@ -102,10 +102,16 @@ class ChatModeButton(ui.Window):
 ## ChatLine
 class ChatLine(ui.EditLine):
 
-	CHAT_MODE_NAME = {	chat.CHAT_TYPE_TALKING : localeInfo.CHAT_NORMAL,
-						chat.CHAT_TYPE_PARTY : localeInfo.CHAT_PARTY,
-						chat.CHAT_TYPE_GUILD : localeInfo.CHAT_GUILD,
-						chat.CHAT_TYPE_SHOUT : localeInfo.CHAT_SHOUT, }
+	CHAT_MODE_NAME = {}
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		ChatLine.CHAT_MODE_NAME = {
+			chat.CHAT_TYPE_TALKING : localeInfo.CHAT_NORMAL,
+			chat.CHAT_TYPE_PARTY : localeInfo.CHAT_PARTY,
+			chat.CHAT_TYPE_GUILD : localeInfo.CHAT_GUILD,
+			chat.CHAT_TYPE_SHOUT : localeInfo.CHAT_SHOUT,
+		}
 
 	def __init__(self):
 		ui.EditLine.__init__(self)
@@ -1163,3 +1169,5 @@ class ChatLogWindow(ui.Window):
 			else:
 				self.interface.MakeHyperlinkTooltip(hyperlink)
 
+ChatLine._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(ChatLine._RebuildLocaleStrings)

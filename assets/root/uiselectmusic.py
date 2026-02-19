@@ -3,8 +3,15 @@ import ui
 import localeInfo
 import uiScriptLocale
 
-FILE_NAME_LEN = 20 
-DEFAULT_THEMA = localeInfo.MUSIC_METIN2_DEFAULT_THEMA
+FILE_NAME_LEN = 20
+DEFAULT_THEMA = ""
+
+def _RebuildLocaleStrings():
+	global DEFAULT_THEMA
+	DEFAULT_THEMA = localeInfo.MUSIC_METIN2_DEFAULT_THEMA
+
+_RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(_RebuildLocaleStrings)
 
 class Item(ui.ListBoxEx.Item):
 	def __init__(self, fileName):
