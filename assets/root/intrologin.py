@@ -35,6 +35,19 @@ ENABLE_VIRTUAL_KEYBOARD = False
 VIRTUAL_KEYBOARD_NUM_KEYS = 46
 VIRTUAL_KEYBOARD_RAND_KEY = True
 
+def Suffle(src):
+    if VIRTUAL_KEYBOARD_RAND_KEY:
+        items = [item for item in src]
+
+        itemCount = len(items)
+        for oldPos in range(itemCount):
+            newPos = app.GetRandom(0, itemCount - 1)
+            items[newPos], items[oldPos] = items[oldPos], items[newPos]
+
+        return "".join(items)
+    else:
+        return src
+
 def IsLoginDelay():
     global LOGIN_DELAY_SEC
     if LOGIN_DELAY_SEC > 0.0:
