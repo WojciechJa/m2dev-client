@@ -4,6 +4,7 @@ import dbg
 import grp
 import item
 import background
+import miniMap
 import chr
 import chrmgr
 import player
@@ -80,6 +81,8 @@ class GameWindow(ui.ScriptWindow):
         self.mapNameShower = None
         self.affectShower = None
         self.playerGauge = None
+        self.adminpanelSpawnMapMarkers = {}
+        self.adminpanelSpawnMapMarkerNextID = 900000
 
         self.stream = stream
         self.interface = interfaceModule.Interface()
@@ -221,6 +224,7 @@ class GameWindow(ui.ScriptWindow):
 
     def Close(self):
         self.Hide()
+        self.__ClearAdminpanelSpawnMapMarkers()
 
         global cameraDistance, cameraPitch, cameraRotation, cameraHeight
         (cameraDistance, cameraPitch, cameraRotation, cameraHeight) = app.GetCamera()
@@ -1466,6 +1470,7 @@ class GameWindow(ui.ScriptWindow):
 
     def OnUpdate(self):
         app.UpdateGame()
+        self.__UpdateAdminpanelSpawnMapMarkers()
 
         if self.mapNameShower.IsShow():
             self.mapNameShower.Update()
@@ -1932,6 +1937,7 @@ class GameWindow(ui.ScriptWindow):
             #Admin Panel
 
             "AdminpanelGetPlayerCount": self.__AdminpanelRecivePlayerCount,
+            "AdminpanelSpawnMapSignal": self.__AdminpanelSpawnMapSignal,
 
             # FAKE PLAYER ADMIN PANEL
             "AdminpanelFakeplayerList": self.__AdminpanelFakeplayerList,
@@ -2232,6 +2238,54 @@ class GameWindow(ui.ScriptWindow):
 
     def	SkillClearCoolTime(self, slotIndex):
         self.interface.SkillClearCoolTime(slotIndex)
+
+    def __AdminpanelSpawnMapSignal(self, x, y):
+        try:
+            posX = int(x)
+            posY = int(y)
+        except:
+            return
+
+        if posX <= 0 or posY <= 0:
+            return
+
+        markerID = self.adminpanelSpawnMapMarkerNextID
+        self.adminpanelSpawnMapMarkerNextID += 1
+        if self.adminpanelSpawnMapMarkerNextID >= 2147483000:
+            self.adminpanelSpawnMapMarkerNextID = 900000
+
+        try:
+            miniMap.AddWayPoint(markerID, float(posX), float(posY), "")
+            self.adminpanelSpawnMapMarkers[markerID] = app.GetTime() + 5.0
+        except:
+            pass
+
+    def __UpdateAdminpanelSpawnMapMarkers(self):
+        if not self.adminpanelSpawnMapMarkers:
+            return
+
+        now = app.GetTime()
+        expired = [markerID for markerID, expireAt in self.adminpanelSpawnMapMarkers.items() if now >= expireAt]
+        if not expired:
+            return
+
+        for markerID in expired:
+            try:
+                miniMap.RemoveWayPoint(markerID)
+            except:
+                pass
+            self.adminpanelSpawnMapMarkers.pop(markerID, None)
+
+    def __ClearAdminpanelSpawnMapMarkers(self):
+        if not self.adminpanelSpawnMapMarkers:
+            return
+
+        for markerID in list(self.adminpanelSpawnMapMarkers.keys()):
+            try:
+                miniMap.RemoveWayPoint(markerID)
+            except:
+                pass
+        self.adminpanelSpawnMapMarkers = {}
 
     if app.ENABLE_ASLAN_MODULAR_ADMIN_PANEL:
         def __AdminpanelRecivePlayerCount(self, red, yellow, blue, total):
