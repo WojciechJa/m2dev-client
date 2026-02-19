@@ -2243,11 +2243,30 @@ class GameWindow(ui.ScriptWindow):
         try:
             posX = int(x)
             posY = int(y)
-        except:
+        except Exception as e:
+            dbg.TraceError("AdminpanelSpawnMapSignal invalid args x=%s y=%s err=%s" % (str(x), str(y), str(e)))
             return
 
         if posX <= 0 or posY <= 0:
+            dbg.TraceError("AdminpanelSpawnMapSignal ignored non-positive coords: %d %d" % (posX, posY))
             return
+
+        # Server may send global world coordinates; convert to current map-local coordinates when possible.
+        try:
+            currentMapName = background.GetCurrentMapName()
+            mapName, baseX, baseY = background.GlobalPositionToMapInfo(posX, posY)
+            if mapName and currentMapName == mapName:
+                convertedX = posX - int(baseX)
+                convertedY = posY - int(baseY)
+                if convertedX > 0 and convertedY > 0:
+                    dbg.TraceError(
+                        "AdminpanelSpawnMapSignal convert global->local map=%s global=%d,%d base=%d,%d local=%d,%d"
+                        % (mapName, posX, posY, int(baseX), int(baseY), convertedX, convertedY)
+                    )
+                    posX = convertedX
+                    posY = convertedY
+        except Exception as e:
+            dbg.TraceError("AdminpanelSpawnMapSignal conversion failed for %d,%d err=%s" % (posX, posY, str(e)))
 
         markerID = self.adminpanelSpawnMapMarkerNextID
         self.adminpanelSpawnMapMarkerNextID += 1
@@ -2255,10 +2274,14 @@ class GameWindow(ui.ScriptWindow):
             self.adminpanelSpawnMapMarkerNextID = 900000
 
         try:
+            if not hasattr(miniMap, "AddWayPoint"):
+                dbg.TraceError("AdminpanelSpawnMapSignal miniMap.AddWayPoint not found")
+                return
             miniMap.AddWayPoint(markerID, float(posX), float(posY), "")
             self.adminpanelSpawnMapMarkers[markerID] = app.GetTime() + 5.0
-        except:
-            pass
+            dbg.TraceError("AdminpanelSpawnMapSignal marker added id=%d pos=%d,%d" % (markerID, posX, posY))
+        except Exception as e:
+            dbg.TraceError("AdminpanelSpawnMapSignal AddWayPoint failed id=%d pos=%d,%d err=%s" % (markerID, posX, posY, str(e)))
 
     def __UpdateAdminpanelSpawnMapMarkers(self):
         if not self.adminpanelSpawnMapMarkers:
