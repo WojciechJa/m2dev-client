@@ -34,11 +34,12 @@ MODULES_LOCALE_PATH = "%s/adminpanel/" % app.GetLocalePath()
 
 MODULES_DICT = {
     0	: { "modulename" : "startpage" ,							"button_text" : "Strona Glowna",						"access" : GM_LOW_WIZARD,},
-    #10	: { "modulename" : "TEMPLATE_with_uiscript" ,		        "button_text" : "Templ. UiScript",				    "access" : GM_LOW_WIZARD,},
-    #11	: { "modulename" : "TEMPLATE_without_uiscript" ,	        "button_text" : "Templ. without UiScript",		    "access" : GM_LOW_WIZARD,},
-    12  : { "modulename" : "create_item",		                "button_text" : "Tworzenie przedmiotów", "access" : GM_IMPLEMENTOR,},
-    20  : { "modulename" : "fakeplayer",		                "button_text" : "Fake Players", "access" : GM_IMPLEMENTOR,},
-    30  : { "modulename" : "gm_commands",			                "button_text" : "GM Commands", "access" : GM_IMPLEMENTOR,},
+    #10	: { "modulename" : "TEMPLATE_with_uiscript" ,		        "button_text" : "Templ. UiScript",				        "access" : GM_LOW_WIZARD,},
+    #11	: { "modulename" : "TEMPLATE_without_uiscript" ,	        "button_text" : "Templ. without UiScript",		        "access" : GM_LOW_WIZARD,},
+    12  : { "modulename" : "create_item",		                    "button_text" : "Tworzenie przedmiotów",                "access" : GM_IMPLEMENTOR,},
+    20  : { "modulename" : "fakeplayer",		                    "button_text" : "Fake Players",                         "access" : GM_IMPLEMENTOR,},
+    30  : { "modulename" : "gm_commands",			                "button_text" : "GM Commands",                          "access" : GM_IMPLEMENTOR,},
+    40  : { "modulename" : "spawn_mob",			                    "button_text" : "SpawnMob",                             "access" : GM_IMPLEMENTOR,},
 }
 
 UI_PATH = "d:/ymir work/ui/adminpanel/"

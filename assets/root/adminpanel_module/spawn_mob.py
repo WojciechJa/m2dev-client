@@ -20,10 +20,10 @@ import item
 import dbg
 import uiToolTip
 import miniMap
-import renderTarget
+#import renderTarget
 
 IMG_PATH = "d:/ymir work/ui/adminpanel/create_item/"
-BUTTON_PATH = "d:/ymir work/ui/game/monster_card/button/"
+#BUTTON_PATH = "d:/ymir work/ui/game/monster_card/button/"
 
 NORMAL_COLOR = grp.GenerateColor(0.7607, 0.7607, 0.7607, 1.0)
 POSITIVE_COLOR = grp.GenerateColor(0.5411, 0.7254, 0.5568, 1.0)
@@ -288,7 +288,7 @@ class MainWindow(ui.ScriptWindow):
     def __del__(self):
         self.isMoblistLoaded = False
         self.mobList = None
-        self.__ModelPreviewClose()
+        #self.__ModelPreviewClose()
         ui.ScriptWindow.__del__(self)
 
     def Show(self):
@@ -297,18 +297,18 @@ class MainWindow(ui.ScriptWindow):
         ui.ScriptWindow.Show(self)
 
     def Close(self):
-        self.__ModelPreviewClose()
+        #self.__ModelPreviewClose()
         self.Hide()
 
     def Destroy(self):
-        self.__ModelPreviewClose()
+        #self.__ModelPreviewClose()
         self.Hide()
         self.ClearDictionary()
 
     def __LoadWindow(self):
         try:
             pyScrLoader = ui.PythonScriptLoader()
-            pyScrLoader.LoadScriptFile(self, "adminpanel_module/uiscript/uispawn_mob.py")
+            pyScrLoader.LoadScriptFile(self, "adminpanel_module/uiscript/spawn_mob.py")
         except:
             import exception
             exception.Abort("SpawnMobWindow.LoadWindow.LoadObject")
@@ -521,7 +521,7 @@ class MainWindow(ui.ScriptWindow):
         self.selectedSpawnY = 0
         self.isCoordModeSelected = False
 
-        self.__ModelPreviewClose()
+        #self.__ModelPreviewClose()
 
         # Reset button text
         try:
@@ -671,7 +671,7 @@ class MainWindow(ui.ScriptWindow):
         self.GetChild("editline_set_count").SetFocus()
         self.GetChild("editline_set_count").SetEndPosition()
 
-        self.__ModelPreviewShow()
+        #self.__ModelPreviewShow()
 
     def OnRunMouseWheel(self, nLen):
         if nLen > 0:
@@ -679,7 +679,7 @@ class MainWindow(ui.ScriptWindow):
         else:
             self.listBoxSearch.scrollBar.OnDown()
 
-    def __ModelPreviewShow(self):
+    """def __ModelPreviewShow(self):
         if self.selectedMobVnum == 0:
             return
 
@@ -727,7 +727,7 @@ class MainWindow(ui.ScriptWindow):
                 self.ModelPreview = None
 
         except Exception as e:
-            chat.AppendChat(chat.CHAT_TYPE_INFO, "Błąd zamykania 3D preview: %s" % str(e))
+            chat.AppendChat(chat.CHAT_TYPE_INFO, "Błąd zamykania 3D preview: %s" % str(e))"""
 
     def OnMoveUp(self):
         renderTarget.MoveCamera(1, 1)

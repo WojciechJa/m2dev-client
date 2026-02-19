@@ -49,9 +49,9 @@ window = {
                          "type": "button",
                          "x": 225,
                          "y": 422,
-                         "default_image": "icon/button/tp1.png",
-                         "over_image": "icon/button/tp2.png",
-                         "down_image": "icon/button/tp3.png",
+                         #"default_image": "icon/button/tp1.png",
+                         #"over_image": "icon/button/tp2.png",
+                         #"down_image": "icon/button/tp3.png",
                      },
 
                      # Search box for mobs
