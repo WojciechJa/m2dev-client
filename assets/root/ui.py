@@ -760,7 +760,7 @@ class EditLine(TextLine):
 
     def OnIMEUpdate(self):
         snd.PlaySound("sound/ui/type.wav")
-        TextLine.SetText(self, ime.GetText())
+        self.SetText(ime.GetText())
 
     def OnIMETab(self):
         if self.eventTab:

@@ -349,3 +349,10 @@ class LoadingWindow(ui.ScriptWindow):
 		app.SetGlobalCenterPosition(self.playerX, self.playerY)
 
 		net.StartGame()
+
+def _ReloadTitleNames():
+	for i in range(len(localeInfo.TITLE_NAME_LIST)):
+		chrmgr.RegisterTitleName(i, localeInfo.TITLE_NAME_LIST[i])
+	chrmgr.RefreshAllPCTextTail()
+
+localeInfo.RegisterReloadCallback(_ReloadTitleNames)

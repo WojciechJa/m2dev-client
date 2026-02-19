@@ -48,11 +48,15 @@ class SelectCharacterWindow(ui.Window):
     SLOT_COUNT = 4
     CHARACTER_TYPE_COUNT = 4
 
-    EMPIRE_NAME = {
-        net.EMPIRE_A : localeInfo.EMPIRE_A,
-        net.EMPIRE_B : localeInfo.EMPIRE_B,
-        net.EMPIRE_C : localeInfo.EMPIRE_C
-    }
+    EMPIRE_NAME = {}  # populated by _RebuildLocaleStrings()
+
+    @staticmethod
+    def _RebuildLocaleStrings():
+        SelectCharacterWindow.EMPIRE_NAME = {
+            net.EMPIRE_A : localeInfo.EMPIRE_A,
+            net.EMPIRE_B : localeInfo.EMPIRE_B,
+            net.EMPIRE_C : localeInfo.EMPIRE_C,
+        }
 
     class CharacterRenderer(ui.Window):
         def OnRender(self):
@@ -773,3 +777,5 @@ class SelectCharacterWindow(ui.Window):
         self.ExitSelect()
         return True
 
+SelectCharacterWindow._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(SelectCharacterWindow._RebuildLocaleStrings)

@@ -8,6 +8,7 @@ import player
 import uiToolTip
 import math
 import dbg
+import weakref
 
 # WEDDING
 class LovePointImage(ui.ExpandedImageBox):
@@ -79,22 +80,22 @@ class HorseImage(ui.ExpandedImageBox):
 	FILE_PATH = "d:/ymir work/ui/pattern/HorseState/"
 
 	FILE_DICT = {
-		00 : FILE_PATH+"00.dds",
-		0o1 : FILE_PATH+"00.dds",
-		0o2 : FILE_PATH+"00.dds",
-		0o3 : FILE_PATH+"00.dds",
-		10 : FILE_PATH+"10.dds",
-		11 : FILE_PATH+"11.dds",
-		12 : FILE_PATH+"12.dds",
-		13 : FILE_PATH+"13.dds",
-		20 : FILE_PATH+"20.dds",
-		21 : FILE_PATH+"21.dds",
-		22 : FILE_PATH+"22.dds",
-		23 : FILE_PATH+"23.dds",
-		30 : FILE_PATH+"30.dds",
-		31 : FILE_PATH+"31.dds",
-		32 : FILE_PATH+"32.dds",
-		33 : FILE_PATH+"33.dds",
+		00 : FILE_PATH + "00.dds",
+		0o1 : FILE_PATH + "00.dds",
+		0o2 : FILE_PATH + "00.dds",
+		0o3 : FILE_PATH + "00.dds",
+		10 : FILE_PATH + "10.dds",
+		11 : FILE_PATH + "11.dds",
+		12 : FILE_PATH + "12.dds",
+		13 : FILE_PATH + "13.dds",
+		20 : FILE_PATH + "20.dds",
+		21 : FILE_PATH + "21.dds",
+		22 : FILE_PATH + "22.dds",
+		23 : FILE_PATH + "23.dds",
+		30 : FILE_PATH + "30.dds",
+		31 : FILE_PATH + "31.dds",
+		32 : FILE_PATH + "32.dds",
+		33 : FILE_PATH + "33.dds",
 	}
 
 	def __init__(self):
@@ -114,8 +115,7 @@ class HorseImage(ui.ExpandedImageBox):
 		#self.textLineList=[]
 		self.toolTip.ClearToolTip()
 
-		if level>0:
-
+		if level > 0:
 			try:
 				grade = self.__GetHorseGrade(level)
 				self.__AppendText(localeInfo.LEVEL_LIST[int(grade)])
@@ -124,19 +124,19 @@ class HorseImage(ui.ExpandedImageBox):
 				return
 
 			try:
-				healthName=localeInfo.HEALTH_LIST[health]
-				if len(healthName)>0:
+				healthName = localeInfo.HEALTH_LIST[health]
+				if len(healthName) > 0:
 					self.__AppendText(healthName)
 			except IndexError:
 				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - Unknown Index" % (level, health, battery)))
 				return
 
-			if health>0:
-				if battery==0:
+			if health > 0:
+				if battery == 0:
 					self.__AppendText(localeInfo.NEEFD_REST)
 
 			try:
-				fileName=self.FILE_DICT[health*10+battery]
+				fileName = self.FILE_DICT[health*10 + battery]
 			except KeyError:
 				print(("HorseImage.SetState(level=%d, health=%d, battery=%d) - KeyError" % (level, health, battery)))
 
@@ -611,83 +611,100 @@ class AffectShower(ui.Window):
 	IMAGE_STEP = 25
 	AFFECT_MAX_NUM = 32
 
-	INFINITE_AFFECT_DURATION = 0x1FFFFFFF 
+	INFINITE_AFFECT_DURATION = 0x1FFFFFFF
+	_liveInstances = weakref.WeakSet()
 	
-	AFFECT_DATA_DICT =	{
-		chr.AFFECT_POISON : (localeInfo.SKILL_TOXICDIE, "d:/ymir work/ui/skill/common/affect/poison.sub"),
-		chr.AFFECT_SLOW : (localeInfo.SKILL_SLOW, "d:/ymir work/ui/skill/common/affect/slow.sub"),
-		chr.AFFECT_STUN : (localeInfo.SKILL_STUN, "d:/ymir work/ui/skill/common/affect/stun.sub"),
-
-		chr.AFFECT_ATT_SPEED_POTION : (localeInfo.SKILL_INC_ATKSPD, "d:/ymir work/ui/skill/common/affect/Increase_Attack_Speed.sub"),
-		chr.AFFECT_MOV_SPEED_POTION : (localeInfo.SKILL_INC_MOVSPD, "d:/ymir work/ui/skill/common/affect/Increase_Move_Speed.sub"),
-		chr.AFFECT_FISH_MIND : (localeInfo.SKILL_FISHMIND, "d:/ymir work/ui/skill/common/affect/fishmind.sub"),
-
-		chr.AFFECT_JEONGWI : (localeInfo.SKILL_JEONGWI, "d:/ymir work/ui/skill/warrior/jeongwi_03.sub",),
-		chr.AFFECT_GEOMGYEONG : (localeInfo.SKILL_GEOMGYEONG, "d:/ymir work/ui/skill/warrior/geomgyeong_03.sub",),
-		chr.AFFECT_CHEONGEUN : (localeInfo.SKILL_CHEONGEUN, "d:/ymir work/ui/skill/warrior/cheongeun_03.sub",),
-		chr.AFFECT_GYEONGGONG : (localeInfo.SKILL_GYEONGGONG, "d:/ymir work/ui/skill/assassin/gyeonggong_03.sub",),
-		chr.AFFECT_EUNHYEONG : (localeInfo.SKILL_EUNHYEONG, "d:/ymir work/ui/skill/assassin/eunhyeong_03.sub",),
-		chr.AFFECT_GWIGEOM : (localeInfo.SKILL_GWIGEOM, "d:/ymir work/ui/skill/sura/gwigeom_03.sub",),
-		chr.AFFECT_GONGPO : (localeInfo.SKILL_GONGPO, "d:/ymir work/ui/skill/sura/gongpo_03.sub",),
-		chr.AFFECT_JUMAGAP : (localeInfo.SKILL_JUMAGAP, "d:/ymir work/ui/skill/sura/jumagap_03.sub"),
-		chr.AFFECT_HOSIN : (localeInfo.SKILL_HOSIN, "d:/ymir work/ui/skill/shaman/hosin_03.sub",),
-		chr.AFFECT_BOHO : (localeInfo.SKILL_BOHO, "d:/ymir work/ui/skill/shaman/boho_03.sub",),
-		chr.AFFECT_KWAESOK : (localeInfo.SKILL_KWAESOK, "d:/ymir work/ui/skill/shaman/kwaesok_03.sub",),
-		chr.AFFECT_HEUKSIN : (localeInfo.SKILL_HEUKSIN, "d:/ymir work/ui/skill/sura/heuksin_03.sub",),
-		chr.AFFECT_MUYEONG : (localeInfo.SKILL_MUYEONG, "d:/ymir work/ui/skill/sura/muyeong_03.sub",),
-		chr.AFFECT_GICHEON : (localeInfo.SKILL_GICHEON, "d:/ymir work/ui/skill/shaman/gicheon_03.sub",),
-		chr.AFFECT_JEUNGRYEOK : (localeInfo.SKILL_JEUNGRYEOK, "d:/ymir work/ui/skill/shaman/jeungryeok_03.sub",),
-		chr.AFFECT_PABEOP : (localeInfo.SKILL_PABEOP, "d:/ymir work/ui/skill/sura/pabeop_03.sub",),
-		chr.AFFECT_FALLEN_CHEONGEUN : (localeInfo.SKILL_CHEONGEUN, "d:/ymir work/ui/skill/warrior/cheongeun_03.sub",),
+	# Maps affect key -> (localeInfo attribute name, image path).
+	# AFFECT_DATA_DICT is built from this by _RebuildLocaleStrings().
+	_AFFECT_TEMPLATE = {
+		chr.AFFECT_POISON : ("SKILL_TOXICDIE", "d:/ymir work/ui/skill/common/affect/poison.sub"),
+		chr.AFFECT_SLOW : ("SKILL_SLOW", "d:/ymir work/ui/skill/common/affect/slow.sub"),
+		chr.AFFECT_STUN : ("SKILL_STUN", "d:/ymir work/ui/skill/common/affect/stun.sub"),
+		chr.AFFECT_ATT_SPEED_POTION : ("SKILL_INC_ATKSPD", "d:/ymir work/ui/skill/common/affect/Increase_Attack_Speed.sub"),
+		chr.AFFECT_MOV_SPEED_POTION : ("SKILL_INC_MOVSPD", "d:/ymir work/ui/skill/common/affect/Increase_Move_Speed.sub"),
+		chr.AFFECT_FISH_MIND : ("SKILL_FISHMIND", "d:/ymir work/ui/skill/common/affect/fishmind.sub"),
+		chr.AFFECT_JEONGWI : ("SKILL_JEONGWI", "d:/ymir work/ui/skill/warrior/jeongwi_03.sub"),
+		chr.AFFECT_GEOMGYEONG : ("SKILL_GEOMGYEONG", "d:/ymir work/ui/skill/warrior/geomgyeong_03.sub"),
+		chr.AFFECT_CHEONGEUN : ("SKILL_CHEONGEUN", "d:/ymir work/ui/skill/warrior/cheongeun_03.sub"),
+		chr.AFFECT_GYEONGGONG : ("SKILL_GYEONGGONG", "d:/ymir work/ui/skill/assassin/gyeonggong_03.sub"),
+		chr.AFFECT_EUNHYEONG : ("SKILL_EUNHYEONG", "d:/ymir work/ui/skill/assassin/eunhyeong_03.sub"),
+		chr.AFFECT_GWIGEOM : ("SKILL_GWIGEOM", "d:/ymir work/ui/skill/sura/gwigeom_03.sub"),
+		chr.AFFECT_GONGPO : ("SKILL_GONGPO", "d:/ymir work/ui/skill/sura/gongpo_03.sub"),
+		chr.AFFECT_JUMAGAP : ("SKILL_JUMAGAP", "d:/ymir work/ui/skill/sura/jumagap_03.sub"),
+		chr.AFFECT_HOSIN : ("SKILL_HOSIN", "d:/ymir work/ui/skill/shaman/hosin_03.sub"),
+		chr.AFFECT_BOHO : ("SKILL_BOHO", "d:/ymir work/ui/skill/shaman/boho_03.sub"),
+		chr.AFFECT_KWAESOK : ("SKILL_KWAESOK", "d:/ymir work/ui/skill/shaman/kwaesok_03.sub"),
+		chr.AFFECT_HEUKSIN : ("SKILL_HEUKSIN", "d:/ymir work/ui/skill/sura/heuksin_03.sub"),
+		chr.AFFECT_MUYEONG : ("SKILL_MUYEONG", "d:/ymir work/ui/skill/sura/muyeong_03.sub"),
+		chr.AFFECT_GICHEON : ("SKILL_GICHEON", "d:/ymir work/ui/skill/shaman/gicheon_03.sub"),
+		chr.AFFECT_JEUNGRYEOK : ("SKILL_JEUNGRYEOK", "d:/ymir work/ui/skill/shaman/jeungryeok_03.sub"),
+		chr.AFFECT_PABEOP : ("SKILL_PABEOP", "d:/ymir work/ui/skill/sura/pabeop_03.sub"),
+		chr.AFFECT_FALLEN_CHEONGEUN : ("SKILL_CHEONGEUN", "d:/ymir work/ui/skill/warrior/cheongeun_03.sub"),
 		# MR-16: Added AFFECT_FIRE to Affects Shower
-		chr.AFFECT_FIRE : (localeInfo.SKILL_FIRE, "d:/ymir work/ui/skill/sura/hwayeom_03.sub",),
+		chr.AFFECT_FIRE : ("SKILL_FIRE", "d:/ymir work/ui/skill/sura/hwayeom_03.sub"),
 		# MR-16: -- END OF -- Added AFFECT_FIRE to Affects Shower
-		chr.AFFECT_CHINA_FIREWORK : (localeInfo.SKILL_POWERFUL_STRIKE, "d:/ymir work/ui/skill/common/affect/powerfulstrike.sub",),
-
-		#64 - END
-		chr.NEW_AFFECT_EXP_BONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/exp_bonus.sub",),
-
-		chr.NEW_AFFECT_ITEM_BONUS : (localeInfo.TOOLTIP_MALL_ITEMBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/item_bonus.sub",),
-		chr.NEW_AFFECT_SAFEBOX : (localeInfo.TOOLTIP_MALL_SAFEBOX, "d:/ymir work/ui/skill/common/affect/safebox.sub",),
-		chr.NEW_AFFECT_AUTOLOOT : (localeInfo.TOOLTIP_MALL_AUTOLOOT, "d:/ymir work/ui/skill/common/affect/autoloot.sub",),
-		chr.NEW_AFFECT_FISH_MIND : (localeInfo.TOOLTIP_MALL_FISH_MIND, "d:/ymir work/ui/skill/common/affect/fishmind.sub",),
-		chr.NEW_AFFECT_MARRIAGE_FAST : (localeInfo.TOOLTIP_MALL_MARRIAGE_FAST, "d:/ymir work/ui/skill/common/affect/marriage_fast.sub",),
-		chr.NEW_AFFECT_GOLD_BONUS : (localeInfo.TOOLTIP_MALL_GOLDBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/gold_bonus.sub",),
-
-		chr.NEW_AFFECT_NO_DEATH_PENALTY : (localeInfo.TOOLTIP_APPLY_NO_DEATH_PENALTY, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-		chr.NEW_AFFECT_SKILL_BOOK_BONUS : (localeInfo.TOOLTIP_APPLY_SKILL_BOOK_BONUS, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-		chr.NEW_AFFECT_SKILL_BOOK_NO_DELAY : (localeInfo.TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-		
-		# Auto HP/SP recovery affects
-		chr.NEW_AFFECT_AUTO_HP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/pattern/auto_hpgauge/05.dds"),			
-		chr.NEW_AFFECT_AUTO_SP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/pattern/auto_spgauge/05.dds"),
-		#chr.NEW_AFFECT_AUTO_HP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),			
-		#chr.NEW_AFFECT_AUTO_SP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/skill/common/affect/gold_bonus.sub"),			
-
-		MALL_DESC_IDX_START + player.POINT_MALL_ATTBONUS : (localeInfo.TOOLTIP_MALL_ATTBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/att_bonus.sub",),
-		MALL_DESC_IDX_START + player.POINT_MALL_DEFBONUS : (localeInfo.TOOLTIP_MALL_DEFBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/def_bonus.sub",),
-		MALL_DESC_IDX_START + player.POINT_MALL_EXPBONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS, "d:/ymir work/ui/skill/common/affect/exp_bonus.sub",),
-		MALL_DESC_IDX_START + player.POINT_MALL_ITEMBONUS : (localeInfo.TOOLTIP_MALL_ITEMBONUS, "d:/ymir work/ui/skill/common/affect/item_bonus.sub",),
-		MALL_DESC_IDX_START + player.POINT_MALL_GOLDBONUS : (localeInfo.TOOLTIP_MALL_GOLDBONUS, "d:/ymir work/ui/skill/common/affect/gold_bonus.sub",),
-		MALL_DESC_IDX_START + player.POINT_CRITICAL_PCT : (localeInfo.TOOLTIP_APPLY_CRITICAL_PCT,"d:/ymir work/ui/skill/common/affect/critical.sub"),
-		MALL_DESC_IDX_START + player.POINT_PENETRATE_PCT : (localeInfo.TOOLTIP_APPLY_PENETRATE_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-		MALL_DESC_IDX_START + player.POINT_MAX_HP_PCT : (localeInfo.TOOLTIP_MAX_HP_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-		MALL_DESC_IDX_START + player.POINT_MAX_SP_PCT : (localeInfo.TOOLTIP_MAX_SP_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),	
-
-		MALL_DESC_IDX_START + player.POINT_PC_BANG_EXP_BONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS_P_STATIC, "d:/ymir work/ui/skill/common/affect/EXP_Bonus_p_on.sub",),
-		MALL_DESC_IDX_START + player.POINT_PC_BANG_DROP_BONUS: (localeInfo.TOOLTIP_MALL_ITEMBONUS_P_STATIC, "d:/ymir work/ui/skill/common/affect/Item_Bonus_p_on.sub",),
+		chr.AFFECT_CHINA_FIREWORK : ("SKILL_POWERFUL_STRIKE", "d:/ymir work/ui/skill/common/affect/powerfulstrike.sub"),
+		chr.NEW_AFFECT_EXP_BONUS : ("TOOLTIP_MALL_EXPBONUS_STATIC", "d:/ymir work/ui/skill/common/affect/exp_bonus.sub"),
+		chr.NEW_AFFECT_ITEM_BONUS : ("TOOLTIP_MALL_ITEMBONUS_STATIC", "d:/ymir work/ui/skill/common/affect/item_bonus.sub"),
+		chr.NEW_AFFECT_SAFEBOX : ("TOOLTIP_MALL_SAFEBOX", "d:/ymir work/ui/skill/common/affect/safebox.sub"),
+		chr.NEW_AFFECT_AUTOLOOT : ("TOOLTIP_MALL_AUTOLOOT", "d:/ymir work/ui/skill/common/affect/autoloot.sub"),
+		chr.NEW_AFFECT_FISH_MIND : ("TOOLTIP_MALL_FISH_MIND", "d:/ymir work/ui/skill/common/affect/fishmind.sub"),
+		chr.NEW_AFFECT_MARRIAGE_FAST : ("TOOLTIP_MALL_MARRIAGE_FAST", "d:/ymir work/ui/skill/common/affect/marriage_fast.sub"),
+		chr.NEW_AFFECT_GOLD_BONUS : ("TOOLTIP_MALL_GOLDBONUS_STATIC", "d:/ymir work/ui/skill/common/affect/gold_bonus.sub"),
+		chr.NEW_AFFECT_NO_DEATH_PENALTY : ("TOOLTIP_APPLY_NO_DEATH_PENALTY", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		chr.NEW_AFFECT_SKILL_BOOK_BONUS : ("TOOLTIP_APPLY_SKILL_BOOK_BONUS", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		chr.NEW_AFFECT_SKILL_BOOK_NO_DELAY : ("TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		chr.NEW_AFFECT_AUTO_HP_RECOVERY : ("TOOLTIP_AUTO_POTION_REST", "d:/ymir work/ui/pattern/auto_hpgauge/05.dds"),
+		chr.NEW_AFFECT_AUTO_SP_RECOVERY : ("TOOLTIP_AUTO_POTION_REST", "d:/ymir work/ui/pattern/auto_spgauge/05.dds"),
+		# Mall point affects
+		MALL_DESC_IDX_START + player.POINT_MALL_ATTBONUS : ("TOOLTIP_MALL_ATTBONUS_STATIC", "d:/ymir work/ui/skill/common/affect/att_bonus.sub"),
+		MALL_DESC_IDX_START + player.POINT_MALL_DEFBONUS : ("TOOLTIP_MALL_DEFBONUS_STATIC", "d:/ymir work/ui/skill/common/affect/def_bonus.sub"),
+		MALL_DESC_IDX_START + player.POINT_MALL_EXPBONUS : ("TOOLTIP_MALL_EXPBONUS", "d:/ymir work/ui/skill/common/affect/exp_bonus.sub"),
+		MALL_DESC_IDX_START + player.POINT_MALL_ITEMBONUS : ("TOOLTIP_MALL_ITEMBONUS", "d:/ymir work/ui/skill/common/affect/item_bonus.sub"),
+		MALL_DESC_IDX_START + player.POINT_MALL_GOLDBONUS : ("TOOLTIP_MALL_GOLDBONUS", "d:/ymir work/ui/skill/common/affect/gold_bonus.sub"),
+		MALL_DESC_IDX_START + player.POINT_CRITICAL_PCT : ("TOOLTIP_APPLY_CRITICAL_PCT", "d:/ymir work/ui/skill/common/affect/critical.sub"),
+		MALL_DESC_IDX_START + player.POINT_PENETRATE_PCT : ("TOOLTIP_APPLY_PENETRATE_PCT", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		MALL_DESC_IDX_START + player.POINT_MAX_HP_PCT : ("TOOLTIP_MAX_HP_PCT", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		MALL_DESC_IDX_START + player.POINT_MAX_SP_PCT : ("TOOLTIP_MAX_SP_PCT", "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+		MALL_DESC_IDX_START + player.POINT_PC_BANG_EXP_BONUS : ("TOOLTIP_MALL_EXPBONUS_P_STATIC", "d:/ymir work/ui/skill/common/affect/EXP_Bonus_p_on.sub"),
+		MALL_DESC_IDX_START + player.POINT_PC_BANG_DROP_BONUS : ("TOOLTIP_MALL_ITEMBONUS_P_STATIC", "d:/ymir work/ui/skill/common/affect/Item_Bonus_p_on.sub"),
 		# MR-12: Add Mall Attack speed affect
-		MALL_DESC_IDX_START + player.POINT_ATT_SPEED : (localeInfo.TOOLTIP_MALL_ATT_SPEED, "d:/ymir work/ui/skill/common/affect/Increase_Attack_Speed.sub",),
+		MALL_DESC_IDX_START + player.POINT_ATT_SPEED : ("TOOLTIP_MALL_ATT_SPEED", "d:/ymir work/ui/skill/common/affect/Increase_Attack_Speed.sub"),
 		# MR-12: -- END OF -- Add Mall Attack speed affect
 	}
 
 	if app.ENABLE_DRAGON_SOUL_SYSTEM:
-		# Dragon Soul Sky Deck, Ground Deck.
-		AFFECT_DATA_DICT[chr.NEW_AFFECT_DRAGON_SOUL_DECK1] = (localeInfo.TOOLTIP_DRAGON_SOUL_DECK1, "d:/ymir work/ui/dragonsoul/buff_ds_sky1.tga")
-		AFFECT_DATA_DICT[chr.NEW_AFFECT_DRAGON_SOUL_DECK2] = (localeInfo.TOOLTIP_DRAGON_SOUL_DECK2, "d:/ymir work/ui/dragonsoul/buff_ds_land1.tga")
+		_AFFECT_TEMPLATE[chr.NEW_AFFECT_DRAGON_SOUL_DECK1] = ("TOOLTIP_DRAGON_SOUL_DECK1", "d:/ymir work/ui/dragonsoul/buff_ds_sky1.tga")
+		_AFFECT_TEMPLATE[chr.NEW_AFFECT_DRAGON_SOUL_DECK2] = ("TOOLTIP_DRAGON_SOUL_DECK2", "d:/ymir work/ui/dragonsoul/buff_ds_land1.tga")
+
+	AFFECT_DATA_DICT = {}  # populated by _RebuildLocaleStrings()
+
+	@staticmethod
+	def _RebuildLocaleStrings():
+		d = {}
+		for key, (attrName, path) in AffectShower._AFFECT_TEMPLATE.items():
+			d[key] = (getattr(localeInfo, attrName), path)
+		AffectShower.AFFECT_DATA_DICT = d
+		for inst in AffectShower._liveInstances:
+			inst.RefreshLocale()
+
+	def RefreshLocale(self):
+		for affect, image in list(self.affectImageDict.items()):
+			if affect not in self.AFFECT_DATA_DICT:
+				continue
+			name = self.AFFECT_DATA_DICT[affect][0]
+			skillIndex = player.AffectIndexToSkillIndex(affect)
+			if 0 != skillIndex:
+				name = skill.GetSkillName(skillIndex)
+			if image.IsSkillAffect():
+				image.SetToolTipText(name, 0, 40)
+			else:
+				image.SetDescription(name)
+				image.UpdateDescription()
 
 	def __init__(self):
 		ui.Window.__init__(self)
+		AffectShower._liveInstances.add(self)
 
 		self.serverPlayTime = 0
 		self.clientPlayTime = 0
@@ -888,7 +905,7 @@ class AffectShower(ui.Window):
 			self.lovePointImage.OnUpdateLovePoint(lovePoint)
 
 	def SetHorseState(self, level, health, battery):
-		if level==0:
+		if level == 0:
 			self.horseImage=None
 		else:
 			image = HorseImage()
@@ -896,8 +913,11 @@ class AffectShower(ui.Window):
 			image.SetState(level, health, battery)
 			image.Show()
 
-			self.horseImage=image
-			self.__ArrangeImageList()
+			self.horseImage = image
+
+		# MR-17: Fix icons not re-arranging after horse state changes
+		self.__ArrangeImageList()
+		# MR-17: -- END OF -- Fix icons not re-arranging after horse state changes
 
 	def SetPlayTime(self, playTime):
 		self.serverPlayTime = playTime
@@ -1026,3 +1046,5 @@ class AffectShower(ui.Window):
 			print(("AffectShower::OnUpdate error : ", e))
 	# MR-12: -- END OF -- Fix realtime countdown auto-start
 
+AffectShower._RebuildLocaleStrings()
+localeInfo.RegisterReloadCallback(AffectShower._RebuildLocaleStrings)
