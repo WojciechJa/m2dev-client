@@ -28,6 +28,28 @@ VIRTUAL_KEY_SYMBOLS					= "!@#$%^&*()_+|{}:'<>?~"
 VIRTUAL_KEY_NUMBERS					= "1234567890-=\\[];',./`"
 VIRTUAL_KEY_SYMBOLS_BR				= "!@#$%^&*()_+|{}:'<>?~aaaaeeeiioooouuc"
 
+# Hot-reload callback registry
+_reloadCallbacks = []
+
+def RegisterReloadCallback(callback):
+    """Register callback executed after locale reload."""
+    if callback not in _reloadCallbacks:
+        _reloadCallbacks.append(callback)
+
+def FireReloadCallbacks():
+    for cb in _reloadCallbacks:
+        try:
+            cb()
+        except Exception as e:
+            dbg.TraceError("localeInfo reload callback failed: %s" % str(e))
+
+# Compatibility aliases for callers using legacy lowercase names.
+def registerreloadcallback(callback):
+    RegisterReloadCallback(callback)
+
+def firereloadcallbacks():
+    FireReloadCallbacks()
+
 # Multi-language hot-reload support
 def LoadLocaleData():
     """
