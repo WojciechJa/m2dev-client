@@ -449,6 +449,10 @@ class TextLine(Window):
     def __init__(self):
         Window.__init__(self)
         self.max = 0
+        self.fontName = localeInfo.UI_DEF_FONT
+        self.extraLines = []
+        self.textHAlign = None
+        self.textVAlign = None
         self.SetFontName(localeInfo.UI_DEF_FONT)
 
     def __del__(self):
@@ -470,21 +474,27 @@ class TextLine(Window):
         wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_ARABIC)
 
     def SetHorizontalAlignLeft(self):
+        self.textHAlign = "left"
         wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_LEFT)
 
     def SetHorizontalAlignRight(self):
+        self.textHAlign = "right"
         wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_RIGHT)
 
     def SetHorizontalAlignCenter(self):
+        self.textHAlign = "center"
         wndMgr.SetHorizontalAlign(self.hWnd, wndMgr.TEXT_HORIZONTAL_ALIGN_CENTER)
 
     def SetVerticalAlignTop(self):
+        self.textVAlign = "top"
         wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_TOP)
 
     def SetVerticalAlignBottom(self):
+        self.textVAlign = "bottom"
         wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_BOTTOM)
 
     def SetVerticalAlignCenter(self):
+        self.textVAlign = "center"
         wndMgr.SetVerticalAlign(self.hWnd, wndMgr.TEXT_VERTICAL_ALIGN_CENTER)
 
     def SetSecret(self, Value=True):
@@ -506,6 +516,7 @@ class TextLine(Window):
         wndMgr.SetFeather(self.hWnd, value)
 
     def SetFontName(self, fontName):
+        self.fontName = fontName
         wndMgr.SetFontName(self.hWnd, fontName)
 
     def SetDefaultFontName(self):
@@ -518,10 +529,53 @@ class TextLine(Window):
         wndMgr.SetFontColor(self.hWnd, color)
 
     def SetText(self, text):
-        wndMgr.SetText(self.hWnd, text)
+        for line in self.extraLines:
+            line.Hide()
+
+        self.extraLines = []
+
+        if not text:
+            wndMgr.SetText(self.hWnd, "")
+            return
+
+        if "\\n" in text or "/n" in text:
+            parts = text.replace("\\n", "\n").replace("/n", "\n").split("\n")
+            parts = [p.strip(" ") for p in parts]
+
+            wndMgr.SetText(self.hWnd, parts[0] if parts else "")
+
+            if len(parts) > 1:
+                line_height = 20
+
+                for i, part in enumerate(parts[1:], 1):
+                    extra = TextLine()
+                    extra.SetParent(self)
+                    extra.SetFontName(self.fontName)
+
+                    if self.textHAlign == "center":
+                        extra.SetHorizontalAlignCenter()
+                    elif self.textHAlign == "right":
+                        extra.SetHorizontalAlignRight()
+
+                    if self.textVAlign == "center":
+                        extra.SetVerticalAlignCenter()
+                    elif self.textVAlign == "bottom":
+                        extra.SetVerticalAlignBottom()
+
+                    extra.SetPosition(0, line_height * i)
+                    extra.SetText(part)
+                    extra.Show()
+                    self.extraLines.append(extra)
+        else:
+            wndMgr.SetText(self.hWnd, text)
 
     def GetText(self):
-        return wndMgr.GetText(self.hWnd)
+        text = wndMgr.GetText(self.hWnd)
+
+        for line in self.extraLines:
+            text += "\n" + wndMgr.GetText(line.hWnd)
+
+        return text
 
     def GetTextSize(self):
         return wndMgr.GetTextSize(self.hWnd)
