@@ -51,6 +51,8 @@ class MobSpawnMapWindow(ui.ScriptWindow):
             self.AddFlag("not_pick")
             self.AddFlag("attach")
             self.isAtlasActive = False
+            self.wasAtlasVisible = False
+            self.hasSavedAtlasState = False
 
         def OnUpdate(self):
             if self.isAtlasActive:
@@ -64,10 +66,35 @@ class MobSpawnMapWindow(ui.ScriptWindow):
                 miniMap.RenderAtlas(fx, fy)
 
         def ShowIndependentAtlas(self):
+            if self.isAtlasActive:
+                return
+            try:
+                if hasattr(miniMap, "isShowAtlas"):
+                    self.wasAtlasVisible = bool(miniMap.isShowAtlas())
+                    self.hasSavedAtlasState = True
+            except:
+                self.wasAtlasVisible = False
+                self.hasSavedAtlasState = False
+            try:
+                if hasattr(miniMap, "ShowAtlas"):
+                    miniMap.ShowAtlas()
+            except:
+                pass
             self.isAtlasActive = True
 
         def HideIndependentAtlas(self):
+            if not self.isAtlasActive:
+                return
             self.isAtlasActive = False
+            try:
+                if self.hasSavedAtlasState:
+                    if self.wasAtlasVisible:
+                        miniMap.ShowAtlas()
+                    else:
+                        miniMap.HideAtlas()
+            except:
+                pass
+            self.hasSavedAtlasState = False
 
     def __init__(self, parentWindow):
         self.board = None
@@ -302,6 +329,13 @@ class MainWindow(ui.ScriptWindow):
         self.selectedSpawnY = 0
         self.isCoordModeSelected = False
         self.mobSpawnMapWindow = None
+        self.isCoordMapExpanded = False
+        self.coordMapBoard = None
+        self.coordMapAtlasWindow = None
+        self.coordMapHoverText = None
+        self.coordMapSelectedText = None
+        self.coordMapAtlasWidth = 400
+        self.coordMapAtlasHeight = 300
 
         ui.ScriptWindow.__init__(self)
         self.__LoadWindow()
@@ -320,10 +354,12 @@ class MainWindow(ui.ScriptWindow):
         ui.ScriptWindow.Show(self)
 
     def Close(self):
+        self.__HideEmbeddedCoordinateMap()
         #self.__ModelPreviewClose()
         self.Hide()
 
     def Destroy(self):
+        self.__HideEmbeddedCoordinateMap()
         #self.__ModelPreviewClose()
         self.Hide()
         self.ClearDictionary()
@@ -408,6 +444,7 @@ class MainWindow(ui.ScriptWindow):
 
             self.tooltipItem = uiToolTip.ItemToolTip()
             self.tooltipItem.Hide()
+            self.__CreateEmbeddedCoordinateMap()
 
         except:
             self.pageInfoText = None
@@ -423,18 +460,21 @@ class MainWindow(ui.ScriptWindow):
         coord_btn = self.GetChild("coord_select_btn")
         if mode == 0:
             coord_btn.Show()
+            self.__ShowEmbeddedCoordinateMap()
         else:  # Random or Map mode - hide coordinate selection
             coord_btn.Hide()
             self.isCoordModeSelected = False
+            self.__HideEmbeddedCoordinateMap()
 
     def OnOpenCoordinateMap(self):
         try:
-            if self.mobSpawnMapWindow:
-                self.mobSpawnMapWindow.Close()
-                self.mobSpawnMapWindow = None
+            if self.spawnMode != 0:
+                return
 
-            self.mobSpawnMapWindow = MobSpawnMapWindow(self)
-            self.mobSpawnMapWindow.Show()
+            if self.isCoordMapExpanded:
+                self.__HideEmbeddedCoordinateMap()
+            else:
+                self.__ShowEmbeddedCoordinateMap()
         except Exception as e:
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_COORD_ERROR % str(e))
 
@@ -442,6 +482,79 @@ class MainWindow(ui.ScriptWindow):
         self.selectedSpawnX = x
         self.selectedSpawnY = y
         self.isCoordModeSelected = True
+        if self.coordMapSelectedText:
+            self.coordMapSelectedText.SetText("(%d, %d)" % (x, y))
+            self.coordMapSelectedText.SetPackedFontColor(0xFF00FF00)
+
+    def __CreateEmbeddedCoordinateMap(self):
+        try:
+            (bGet, iSizeX, iSizeY) = miniMap.GetAtlasSize()
+            if bGet and iSizeX > 0 and iSizeY > 0:
+                self.coordMapAtlasWidth = iSizeX
+                self.coordMapAtlasHeight = iSizeY
+        except:
+            pass
+
+        self.animWindowWidth = [490, 490 + self.coordMapAtlasWidth + 25]
+        self.curWindowWidth = float(self.animWindowWidth[0])
+        self.destWindowWidth = float(self.animWindowWidth[0])
+
+        board = self.GetChild("board")
+
+        self.coordMapBoard = ui.ThinBoardCircle()
+        self.coordMapBoard.SetParent(board)
+        self.coordMapBoard.SetPosition(490, 40)
+        self.coordMapBoard.SetSize(self.coordMapAtlasWidth + 10, self.coordMapAtlasHeight + 42)
+        self.coordMapBoard.SetOnMouseLeftButtonUpEvent(ui.__mem_func__(self.OnCoordinateMapClick))
+        self.coordMapBoard.Hide()
+
+        self.coordMapAtlasWindow = MobSpawnMapWindow.IndependentAtlasRenderer()
+        self.coordMapAtlasWindow.SetParent(self.coordMapBoard)
+        self.coordMapAtlasWindow.SetPosition(5, 5)
+        self.coordMapAtlasWindow.SetSize(self.coordMapAtlasWidth, self.coordMapAtlasHeight)
+        self.coordMapAtlasWindow.Hide()
+
+        self.coordMapHoverText = ui.TextLine()
+        self.coordMapHoverText.SetParent(self.coordMapBoard)
+        self.coordMapHoverText.SetPosition(6, self.coordMapAtlasHeight + 9)
+        self.coordMapHoverText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_SELECT_COORDS_ON_MAP)
+        self.coordMapHoverText.Show()
+
+        self.coordMapSelectedText = ui.TextLine()
+        self.coordMapSelectedText.SetParent(self.coordMapBoard)
+        self.coordMapSelectedText.SetPosition(6, self.coordMapAtlasHeight + 23)
+        self.coordMapSelectedText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_NO_CORDS_SELECTED)
+        self.coordMapSelectedText.Show()
+
+    def __ShowEmbeddedCoordinateMap(self):
+        if not self.coordMapBoard or not self.coordMapAtlasWindow:
+            return
+        self.isCoordMapExpanded = True
+        self.destWindowWidth = float(self.animWindowWidth[1])
+        self.coordMapBoard.Show()
+        self.coordMapAtlasWindow.ShowIndependentAtlas()
+        self.coordMapAtlasWindow.Show()
+
+    def __HideEmbeddedCoordinateMap(self):
+        self.isCoordMapExpanded = False
+        self.destWindowWidth = float(self.animWindowWidth[0])
+        if self.coordMapAtlasWindow:
+            self.coordMapAtlasWindow.HideIndependentAtlas()
+            self.coordMapAtlasWindow.Hide()
+        if self.coordMapBoard:
+            self.coordMapBoard.Hide()
+
+    def OnCoordinateMapClick(self):
+        (mouseX, mouseY) = wndMgr.GetMousePosition()
+        (bFind, sName, iPosX, iPosY, dwTextColor, dwGuildID) = miniMap.GetAtlasInfo(mouseX, mouseY)
+
+        if (bFind and iPosX != 0 and iPosY != 0) or (iPosX != 0 or iPosY != 0):
+            self.SetSelectedCoordinates(iPosX, iPosY)
+        else:
+            if self.coordMapSelectedText:
+                self.coordMapSelectedText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_INVALID_COORDS)
+                self.coordMapSelectedText.SetPackedFontColor(0xFFFF0000)
+            self.isCoordModeSelected = False
 
     def OnSelectSortMode(self, mode):
         self.sortMode = mode
@@ -539,6 +652,7 @@ class MainWindow(ui.ScriptWindow):
         self.selectedMobVnum = 0
         self.GetChild("editline_set_count").SetText("1")
         self.spawnMode = 1
+        self.spawnModeRadioButtonGroup.OnClick(1)
         self.selectSortMode.SetCurrentItem(localeInfo.ADMINPANEL_SPAWN_MOB_SORT_VNUM)
         self.sortMode = 0
 
@@ -546,6 +660,10 @@ class MainWindow(ui.ScriptWindow):
         self.selectedSpawnX = 0
         self.selectedSpawnY = 0
         self.isCoordModeSelected = False
+        self.__HideEmbeddedCoordinateMap()
+        if self.coordMapSelectedText:
+            self.coordMapSelectedText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_NO_CORDS_SELECTED)
+            self.coordMapSelectedText.SetPackedFontColor(0xFFFFFFFF)
 
         #self.__ModelPreviewClose()
 
@@ -587,11 +705,9 @@ class MainWindow(ui.ScriptWindow):
 
         # BUILD COMMAND BASED ON MODE (existing server commands only)
         if self.spawnMode == 0 and self.isCoordModeSelected:
-            # /mob_ld has no count argument, so send it multiple times.
-            cmd_string = "/mob_ld %d %d %d 1" % (mob_vnum, self.selectedSpawnX, self.selectedSpawnY)
+            cmd_string = "/m %d %d %d %d" % (mob_vnum, count, self.selectedSpawnX, self.selectedSpawnY)
             chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ADMINPANEL_SPAWN_MOB_COORD_CMD % cmd_string)
-            for _ in range(count):
-                net.SendChatPacket(cmd_string)
+            net.SendChatPacket(cmd_string)
         elif self.spawnMode == 0:
             # Point mode without selected coordinates behaves like regular /mob around player.
             cmd_string = "/mob %d %d" % (mob_vnum, count)
@@ -914,6 +1030,20 @@ class MainWindow(ui.ScriptWindow):
                 self.curWindowWidth = self.destWindowWidth
             self.GetChild("board").SetSize(int(self.curWindowWidth), 510)
             self.SetSize(int(self.curWindowWidth), 510)
+
+        if self.isCoordMapExpanded and self.coordMapHoverText:
+            (mouseX, mouseY) = wndMgr.GetMousePosition()
+            try:
+                (bFind, sName, iPosX, iPosY, dwTextColor, dwGuildID) = miniMap.GetAtlasInfo(mouseX, mouseY)
+                if bFind and (iPosX != 0 or iPosY != 0):
+                    if sName and sName != "":
+                        self.coordMapHoverText.SetText("%s (%d, %d)" % (sName, iPosX, iPosY))
+                    else:
+                        self.coordMapHoverText.SetText("(%d, %d)" % (iPosX, iPosY))
+                else:
+                    self.coordMapHoverText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_SELECT_COORDS_ON_MAP)
+            except:
+                self.coordMapHoverText.SetText(localeInfo.ADMINPANEL_SPAWN_MOB_SELECT_COORDS_ON_MAP)
 
     def OnPressEscapeKey(self):
         self.Close()

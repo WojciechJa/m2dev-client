@@ -2274,6 +2274,13 @@ class GameWindow(ui.ScriptWindow):
             self.adminpanelSpawnMapMarkerNextID = 900000
 
         try:
+            if self.interface and self.interface.wndMiniMap:
+                self.interface.wndMiniMap.Show()
+                self.interface.wndMiniMap.ShowMiniMap()
+        except Exception as e:
+            dbg.TraceError("AdminpanelSpawnMapSignal minimap show failed: %s" % str(e))
+
+        try:
             if not hasattr(miniMap, "AddWayPoint"):
                 dbg.TraceError("AdminpanelSpawnMapSignal miniMap.AddWayPoint not found")
                 return
