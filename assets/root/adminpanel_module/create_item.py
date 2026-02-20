@@ -17,6 +17,8 @@ import item
 import dbg
 import uiToolTip
 
+ITEM_FLAG_STACKABLE = getattr(item, "ITEM_FLAG_STACKABLE", 1 << 2)
+
 try:
     _now = time.perf_counter
 except AttributeError:
@@ -187,7 +189,7 @@ class MainWindow(ui.ScriptWindow):
         if item.ITEM_TYPE_WEAPON == item.GetItemType() or item.ITEM_TYPE_ARMOR == item.GetItemType() or item.ITEM_TYPE_BELT == item.GetItemType():
             return
 
-        if not item.IsFlag(item.ITEM_FLAG_STACKABLE):
+        if not item.IsFlag(ITEM_FLAG_STACKABLE):
             return
 
         editLines[index].SetFocus()
@@ -303,7 +305,7 @@ class MainWindow(ui.ScriptWindow):
             self.destWindowWidth = self.animWindowWidth[0]
             self.destConfigWndPos = self.animConfigWndPos[0]
             self.destResetBtnPos = self.animResetBtnPos[0]
-            if item.IsFlag(item.ITEM_FLAG_STACKABLE):
+            if item.IsFlag(ITEM_FLAG_STACKABLE):
                 self.GetChild("editline_set_count").SetText("1")
                 self.GetChild("editline_set_count").SetFocus()
                 self.GetChild("editline_set_count").SetEndPosition()
