@@ -1452,11 +1452,29 @@ class DragButton(Button):
 
         self.eventMove = lambda: None
 
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            self.upVisual = None
+            self.overVisual = None
+            self.downVisual = None
+
     def RegisterWindow(self, layer):
         self.hWnd = wndMgr.RegisterDragButton(self, layer)
 
     def SetMoveEvent(self, event):
         self.eventMove = event
+
+    if app.ENABLE_EXTENDED_SLIDERBAR:
+        def SetUpVisual(self, filename):
+            self.upVisual = filename
+            Button.SetUpVisual(self, filename)
+
+        def SetOverVisual(self, filename):
+            self.overVisual = filename
+            Button.SetOverVisual(self, filename)
+
+        def SetDownVisual(self, filename):
+            self.downVisual = filename
+            Button.SetDownVisual(self, filename)
 
     def SetRestrictMovementArea(self, x, y, width, height):
         wndMgr.SetRestrictMovementArea(self.hWnd, x, y, width, height)
@@ -1470,6 +1488,23 @@ class DragButton(Button):
     def OnMove(self):
         if self.callbackEnable:
             self.eventMove()
+
+    if app.ENABLE_EXTENDED_SLIDERBAR:
+        def OnMouseOverIn(self):
+            if self.overVisual:
+                self.SetOverVisual(self.overVisual)
+
+        def OnMouseOverOut(self):
+            if self.upVisual:
+                self.SetUpVisual(self.upVisual)
+
+        def OnMouseLeftButtonDown(self):
+            if self.downVisual:
+                self.SetDownVisual(self.downVisual)
+
+        def OnMouseLeftButtonUp(self):
+            if self.overVisual:
+                self.SetUpVisual(self.overVisual)
 
 class NumberLine(Window):
 
@@ -2537,13 +2572,24 @@ class SliderBar(Window):
         self.__CreateBackGroundImage()
         self.__CreateCursor()
 
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            # Let child controls (reset/cursor) be clickable even when they are
+            # visually outside the slider rectangle.
+            self.AddFlag("ignore_size")
+            self.AddFlag("not_pick")
+            self.__CreateResetButton()
+            self.OnTextButtonReset()
+
     def __del__(self):
         Window.__del__(self)
 
     def __CreateBackGroundImage(self):
         img = ImageBox()
         img.SetParent(self)
-        img.LoadImage("d:/ymir work/ui/game/windows/sliderbar.sub")
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            img.LoadImage("d:/ymir work/ui/game/slider/slidebar01.tga")
+        else:
+            img.LoadImage("d:/ymir work/ui/game/windows/sliderbar.sub")
         img.Show()
         self.backGroundImage = img
 
@@ -2556,15 +2602,42 @@ class SliderBar(Window):
         cursor.AddFlag("restrict_y")
         cursor.SetParent(self)
         cursor.SetMoveEvent(__mem_func__(self.__OnMove))
-        cursor.SetUpVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
-        cursor.SetOverVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
-        cursor.SetDownVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            cursor.SetUpVisual("d:/ymir work/ui/game/slider/slidebar_button01.tga")
+            cursor.SetOverVisual("d:/ymir work/ui/game/slider/slidebar_button02.tga")
+            cursor.SetDownVisual("d:/ymir work/ui/game/slider/slidebar_button01.tga")
+        else:
+            cursor.SetUpVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
+            cursor.SetOverVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
+            cursor.SetDownVisual("d:/ymir work/ui/game/windows/sliderbar_cursor.sub")
         cursor.Show()
         self.cursor = cursor
 
         ##
         self.cursor.SetRestrictMovementArea(0, 0, self.backGroundImage.GetWidth(), 0)
         self.pageSize = self.backGroundImage.GetWidth() - self.cursor.GetWidth()
+
+    if app.ENABLE_EXTENDED_SLIDERBAR:
+        def __CreateResetButton(self):
+            resetButton = Button()
+            resetButton.SetParent(self)
+            resetButton.AddFlag("float")
+            resetButton.SetPosition(self.backGroundImage.GetWidth() - 16, -13)
+            resetButton.SetUpVisual("d:/ymir work/ui/game/slider/reset01.tga")
+            resetButton.SetOverVisual("d:/ymir work/ui/game/slider/reset02.tga")
+            resetButton.SetDownVisual("d:/ymir work/ui/game/slider/reset03.tga")
+            resetButton.SetEvent(__mem_func__(self.OnReset))
+            resetButton.Show()
+            self.resetButton = resetButton
+
+        def OnReset(self, pos=0.5):
+            self.SetSliderPos(pos)
+
+            if self.eventChange:
+                self.eventChange()
+
+        def OnTextButtonReset(self, text="RESET", x=0, y=-19):
+            self.resetButton.SetToolTipText(text, x, y)
 
     def __OnMove(self):
         (xLocal, yLocal) = self.cursor.GetLocalPosition()
@@ -2585,9 +2658,13 @@ class SliderBar(Window):
 
     def Enable(self):
         self.cursor.Show()
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            self.resetButton.Show()
 
     def Disable(self):
         self.cursor.Hide()
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            self.resetButton.Hide()
 
 class ListBox(Window):
 
