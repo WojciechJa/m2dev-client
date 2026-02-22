@@ -15,7 +15,7 @@ window = {
 	"y" : 0,
 
 	"width" : 305,
-	"height" : 255,
+	"height" : 305,
 
 	"children" :
 	(
@@ -27,7 +27,7 @@ window = {
 			"y" : 0,
 
 			"width" : 305,
-			"height" : 255,
+			"height" : 305,
 
 			"children" :
 			(
@@ -259,6 +259,81 @@ window = {
 					"default_image" : ROOT_PATH + "middle_Button_01.sub",
 					"over_image" : ROOT_PATH + "middle_Button_02.sub",
 					"down_image" : ROOT_PATH + "middle_Button_03.sub",
+				},
+
+				{
+					"name" : "fps_mode",
+					"type" : "text",
+
+					"x" : 30,
+					"y" : 210 + 2,
+
+					"text" : "FPS",
+				},
+				{
+					"name" : "fps_60",
+					"type" : "radio_button",
+
+					"x" : 110,
+					"y" : 210,
+
+					"text" : "60",
+
+					"default_image" : ROOT_PATH + "small_Button_01.sub",
+					"over_image" : ROOT_PATH + "small_Button_02.sub",
+					"down_image" : ROOT_PATH + "small_Button_03.sub",
+				},
+				{
+					"name" : "fps_90",
+					"type" : "radio_button",
+
+					"x" : 160,
+					"y" : 210,
+
+					"text" : "90",
+
+					"default_image" : ROOT_PATH + "small_Button_01.sub",
+					"over_image" : ROOT_PATH + "small_Button_02.sub",
+					"down_image" : ROOT_PATH + "small_Button_03.sub",
+				},
+				{
+					"name" : "fps_120",
+					"type" : "radio_button",
+
+					"x" : 210,
+					"y" : 210,
+
+					"text" : "120",
+
+					"default_image" : ROOT_PATH + "small_Button_01.sub",
+					"over_image" : ROOT_PATH + "small_Button_02.sub",
+					"down_image" : ROOT_PATH + "small_Button_03.sub",
+				},
+				{
+					"name" : "fps_unlimited",
+					"type" : "radio_button",
+
+					"x" : 110,
+					"y" : 235,
+
+					"text" : "Unlimited",
+
+					"default_image" : ROOT_PATH + "Middle_Button_01.sub",
+					"over_image" : ROOT_PATH + "Middle_Button_02.sub",
+					"down_image" : ROOT_PATH + "Middle_Button_03.sub",
+				},
+				{
+					"name" : "vsync_toggle",
+					"type" : "toggle_button",
+
+					"x" : 210,
+					"y" : 235,
+
+					"text" : "VSync",
+
+					"default_image" : ROOT_PATH + "Middle_Button_01.sub",
+					"over_image" : ROOT_PATH + "Middle_Button_02.sub",
+					"down_image" : ROOT_PATH + "Middle_Button_03.sub",
 				},
 
 

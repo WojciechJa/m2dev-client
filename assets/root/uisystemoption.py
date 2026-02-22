@@ -42,6 +42,9 @@ class OptionDialog(ui.ScriptWindow):
 		self.fogModeButtonList = []
 		self.tilingModeButtonList = []
 		self.ctrlShadowQuality = 0
+		self.fpsLimitButtonList = []
+		self.fpsLimitValues = [60, 90, 120, 0]
+		self.vsyncToggle = 0
 		
 	def Destroy(self):
 		self.ClearDictionary()
@@ -73,6 +76,11 @@ class OptionDialog(ui.ScriptWindow):
 			self.tilingModeButtonList.append(GetObject("tiling_cpu"))
 			self.tilingModeButtonList.append(GetObject("tiling_gpu"))
 			self.tilingApplyButton=GetObject("tiling_apply")
+			self.fpsLimitButtonList.append(GetObject("fps_60"))
+			self.fpsLimitButtonList.append(GetObject("fps_90"))
+			self.fpsLimitButtonList.append(GetObject("fps_120"))
+			self.fpsLimitButtonList.append(GetObject("fps_unlimited"))
+			self.vsyncToggle = GetObject("vsync_toggle")
 			#self.ctrlShadowQuality = GetObject("shadow_bar")
 		except:
 			import exception
@@ -106,10 +114,18 @@ class OptionDialog(ui.ScriptWindow):
 
 		self.tilingModeButtonList[0].SAFE_SetEvent(self.__OnClickTilingModeCPUButton)
 		self.tilingModeButtonList[1].SAFE_SetEvent(self.__OnClickTilingModeGPUButton)
+		self.fpsLimitButtonList[0].SAFE_SetEvent(self.__OnClickFPS60Button)
+		self.fpsLimitButtonList[1].SAFE_SetEvent(self.__OnClickFPS90Button)
+		self.fpsLimitButtonList[2].SAFE_SetEvent(self.__OnClickFPS120Button)
+		self.fpsLimitButtonList[3].SAFE_SetEvent(self.__OnClickFPSUnlimitedButton)
 
 		self.tilingApplyButton.SAFE_SetEvent(self.__OnClickTilingApplyButton)
+		self.vsyncToggle.SetToggleDownEvent(self.__OnToggleVSyncOn)
+		self.vsyncToggle.SetToggleUpEvent(self.__OnToggleVSyncOff)
 
 		self.__SetCurTilingMode()
+		self.__SetCurFPSLimit()
+		self.__SetCurVSync()
 
 		# MR-14: Fog update by Alaric
 		self.__ClickRadioButton(self.fogModeButtonList, systemSetting.GetFogLevel())
@@ -179,6 +195,45 @@ class OptionDialog(ui.ScriptWindow):
 
 		self.__ClickRadioButton(self.fogModeButtonList, index)
 
+	def __SetFPSLimit(self, index):
+		if index < 0 or index >= len(self.fpsLimitValues):
+			return
+
+		self.__ClickRadioButton(self.fpsLimitButtonList, index)
+		fpsLimit = self.fpsLimitValues[index]
+		systemSetting.SetRenderFPSLimit(fpsLimit)
+
+	def __SetCurFPSLimit(self):
+		try:
+			current = systemSetting.GetRenderFPSLimit()
+		except:
+			current = 60
+
+		try:
+			index = self.fpsLimitValues.index(current)
+		except ValueError:
+			index = 0
+
+		self.__ClickRadioButton(self.fpsLimitButtonList, index)
+
+	def __SetVSync(self, enabled):
+		applyResult = systemSetting.SetVSync(1 if enabled else 0)
+		if not applyResult:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "VSync apply failed")
+
+		self.__SetCurVSync()
+
+	def __SetCurVSync(self):
+		try:
+			isEnabled = systemSetting.GetVSync()
+		except:
+			isEnabled = 1
+
+		if isEnabled:
+			self.vsyncToggle.Down()
+		else:
+			self.vsyncToggle.SetUp()
+
 	def __OnClickCameraModeShortButton(self):
 		self.__SetCameraMode(0)
 
@@ -193,6 +248,24 @@ class OptionDialog(ui.ScriptWindow):
 
 	def __OnClickFogModeLevel2Button(self):
 		self.__SetFogLevel(2)
+
+	def __OnClickFPS60Button(self):
+		self.__SetFPSLimit(0)
+
+	def __OnClickFPS90Button(self):
+		self.__SetFPSLimit(1)
+
+	def __OnClickFPS120Button(self):
+		self.__SetFPSLimit(2)
+
+	def __OnClickFPSUnlimitedButton(self):
+		self.__SetFPSLimit(3)
+
+	def __OnToggleVSyncOn(self):
+		self.__SetVSync(True)
+
+	def __OnToggleVSyncOff(self):
+		self.__SetVSync(False)
 
 	def __OnChangeMusic(self, fileName):
 		self.selectMusicFile.SetText(fileName[:MUSIC_FILENAME_MAX_LEN])
