@@ -165,6 +165,8 @@ class MainWindow(ui.ScriptWindow):
 			3: page1.GetChild("Empire_Jinno"),
 		}
 		for value, btn in self.empireButtons.items():
+			btn.SetToggleDownEvent(lambda value=value: self.SelectEmpire(value))
+			btn.SetToggleUpEvent(lambda value=value: self.SelectEmpire(value))
 			btn.SetEvent(self.SelectEmpire, value)
 
 		self.typeButtons = {
@@ -174,6 +176,8 @@ class MainWindow(ui.ScriptWindow):
 			4: page1.GetChild("Type_Exp"),
 		}
 		for value, btn in self.typeButtons.items():
+			btn.SetToggleDownEvent(lambda value=value: self.SelectType(value))
+			btn.SetToggleUpEvent(lambda value=value: self.SelectType(value))
 			btn.SetEvent(self.SelectType, value)
 
 		self.SelectEmpire(0)
