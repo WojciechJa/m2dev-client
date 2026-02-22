@@ -1,0 +1,7 @@
+title subImage
+version 1.0
+image "event_icon.dds"
+left 1
+top 1
+right 36
+bottom 35
