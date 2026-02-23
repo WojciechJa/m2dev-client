@@ -15,6 +15,8 @@ import uiSelectMusic
 import background
 
 MUSIC_FILENAME_MAX_LEN = 25
+TEXTTAIL_RANGE_MIN = 1500
+TEXTTAIL_RANGE_MAX = 9000
 
 blockMode = 0
 
@@ -45,6 +47,13 @@ class OptionDialog(ui.ScriptWindow):
 		self.fpsLimitButtonList = []
 		self.fpsLimitValues = [60, 90, 120, 0]
 		self.vsyncToggle = 0
+		self.perfProfileButtonList = []
+		self.shadowCadenceButtonList = []
+		self.fxAdaptiveToggle = 0
+		self.animLodToggle = 0
+		self.textTailOptToggle = 0
+		self.textTailRangeController = 0
+		self.textTailRangeValue = 0
 		
 	def Destroy(self):
 		self.ClearDictionary()
@@ -81,6 +90,17 @@ class OptionDialog(ui.ScriptWindow):
 			self.fpsLimitButtonList.append(GetObject("fps_120"))
 			self.fpsLimitButtonList.append(GetObject("fps_unlimited"))
 			self.vsyncToggle = GetObject("vsync_toggle")
+			self.perfProfileButtonList.append(GetObject("profile_quality"))
+			self.perfProfileButtonList.append(GetObject("profile_balanced"))
+			self.perfProfileButtonList.append(GetObject("profile_performance"))
+			self.fxAdaptiveToggle = GetObject("fx_adaptive_toggle")
+			self.animLodToggle = GetObject("anim_lod_toggle")
+			self.textTailOptToggle = GetObject("texttail_opt_toggle")
+			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_1"))
+			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_2"))
+			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_3"))
+			self.textTailRangeController = GetObject("texttail_range_controller")
+			self.textTailRangeValue = GetObject("texttail_range_value")
 			#self.ctrlShadowQuality = GetObject("shadow_bar")
 		except:
 			import exception
@@ -118,14 +138,31 @@ class OptionDialog(ui.ScriptWindow):
 		self.fpsLimitButtonList[1].SAFE_SetEvent(self.__OnClickFPS90Button)
 		self.fpsLimitButtonList[2].SAFE_SetEvent(self.__OnClickFPS120Button)
 		self.fpsLimitButtonList[3].SAFE_SetEvent(self.__OnClickFPSUnlimitedButton)
+		self.perfProfileButtonList[0].SAFE_SetEvent(self.__OnClickPerfProfileQualityButton)
+		self.perfProfileButtonList[1].SAFE_SetEvent(self.__OnClickPerfProfileBalancedButton)
+		self.perfProfileButtonList[2].SAFE_SetEvent(self.__OnClickPerfProfilePerformanceButton)
+		self.shadowCadenceButtonList[0].SAFE_SetEvent(self.__OnClickShadowCadence1Button)
+		self.shadowCadenceButtonList[1].SAFE_SetEvent(self.__OnClickShadowCadence2Button)
+		self.shadowCadenceButtonList[2].SAFE_SetEvent(self.__OnClickShadowCadence3Button)
 
 		self.tilingApplyButton.SAFE_SetEvent(self.__OnClickTilingApplyButton)
 		self.vsyncToggle.SetToggleDownEvent(self.__OnToggleVSyncOn)
 		self.vsyncToggle.SetToggleUpEvent(self.__OnToggleVSyncOff)
+		self.fxAdaptiveToggle.SetToggleDownEvent(self.__OnToggleFXAdaptiveOn)
+		self.fxAdaptiveToggle.SetToggleUpEvent(self.__OnToggleFXAdaptiveOff)
+		self.animLodToggle.SetToggleDownEvent(self.__OnToggleAnimLODOn)
+		self.animLodToggle.SetToggleUpEvent(self.__OnToggleAnimLODOff)
+		self.textTailOptToggle.SetToggleDownEvent(self.__OnToggleTextTailOptOn)
+		self.textTailOptToggle.SetToggleUpEvent(self.__OnToggleTextTailOptOff)
+		self.textTailRangeController.SetEvent(ui.__mem_func__(self.OnChangeTextTailOptRange))
 
 		self.__SetCurTilingMode()
 		self.__SetCurFPSLimit()
 		self.__SetCurVSync()
+		self.__SetCurPerfProfile()
+		self.__SetCurPerformanceToggles()
+		self.__SetCurShadowCadence()
+		self.__SetCurTextTailOptRange()
 
 		# MR-14: Fog update by Alaric
 		self.__ClickRadioButton(self.fogModeButtonList, systemSetting.GetFogLevel())
@@ -234,6 +271,117 @@ class OptionDialog(ui.ScriptWindow):
 		else:
 			self.vsyncToggle.SetUp()
 
+	def __SetPerfProfile(self, index):
+		if index < 0 or index > 2:
+			return
+
+		self.__ClickRadioButton(self.perfProfileButtonList, index)
+		systemSetting.SetPerfProfile(index)
+
+	def __SetCurPerfProfile(self):
+		try:
+			current = systemSetting.GetPerfProfile()
+		except:
+			current = 1
+
+		if current < 0 or current > 2:
+			current = 1
+
+		self.__ClickRadioButton(self.perfProfileButtonList, current)
+
+	def __SetShadowCadence(self, cadence):
+		if cadence < 1 or cadence > 3:
+			return
+
+		self.__ClickRadioButton(self.shadowCadenceButtonList, cadence - 1)
+		systemSetting.SetShadowCadence(cadence)
+
+	def __SetCurShadowCadence(self):
+		try:
+			cadence = systemSetting.GetShadowCadence()
+		except:
+			cadence = 2
+
+		if cadence < 1 or cadence > 3:
+			cadence = 2
+
+		self.__ClickRadioButton(self.shadowCadenceButtonList, cadence - 1)
+
+	def __SetPerfToggle(self, setter, enabled):
+		setter(1 if enabled else 0)
+		self.__SetCurPerformanceToggles()
+
+	def __SliderPosToTextTailRange(self, sliderPos):
+		if sliderPos < 0.0:
+			sliderPos = 0.0
+		elif sliderPos > 1.0:
+			sliderPos = 1.0
+
+		value = int(TEXTTAIL_RANGE_MIN + (TEXTTAIL_RANGE_MAX - TEXTTAIL_RANGE_MIN) * sliderPos + 0.5)
+		value = int((value + 50) / 100) * 100
+		if value < TEXTTAIL_RANGE_MIN:
+			value = TEXTTAIL_RANGE_MIN
+		elif value > TEXTTAIL_RANGE_MAX:
+			value = TEXTTAIL_RANGE_MAX
+		return value
+
+	def __TextTailRangeToSliderPos(self, value):
+		if value < TEXTTAIL_RANGE_MIN:
+			value = TEXTTAIL_RANGE_MIN
+		elif value > TEXTTAIL_RANGE_MAX:
+			value = TEXTTAIL_RANGE_MAX
+		return float(value - TEXTTAIL_RANGE_MIN) / float(TEXTTAIL_RANGE_MAX - TEXTTAIL_RANGE_MIN)
+
+	def __SetCurTextTailOptRange(self):
+		try:
+			value = systemSetting.GetTextTailOptRange()
+		except:
+			value = 3500
+
+		if value < TEXTTAIL_RANGE_MIN:
+			value = TEXTTAIL_RANGE_MIN
+		elif value > TEXTTAIL_RANGE_MAX:
+			value = TEXTTAIL_RANGE_MAX
+
+		self.textTailRangeController.SetSliderPos(self.__TextTailRangeToSliderPos(value))
+		self.textTailRangeValue.SetText(str(value))
+
+	def __SetCurPerformanceToggles(self):
+		try:
+			fxAdaptive = systemSetting.GetFXAdaptive()
+		except:
+			fxAdaptive = 1
+
+		try:
+			animLod = systemSetting.GetAnimLOD()
+		except:
+			animLod = 1
+
+		try:
+			textTailOpt = systemSetting.GetTextTailOpt()
+		except:
+			textTailOpt = 1
+
+		if fxAdaptive:
+			self.fxAdaptiveToggle.Down()
+		else:
+			self.fxAdaptiveToggle.SetUp()
+
+		if animLod:
+			self.animLodToggle.Down()
+		else:
+			self.animLodToggle.SetUp()
+
+		if textTailOpt:
+			self.textTailOptToggle.Down()
+		else:
+			self.textTailOptToggle.SetUp()
+
+	def OnChangeTextTailOptRange(self):
+		value = self.__SliderPosToTextTailRange(self.textTailRangeController.GetSliderPos())
+		self.textTailRangeValue.SetText(str(value))
+		systemSetting.SetTextTailOptRange(value)
+
 	def __OnClickCameraModeShortButton(self):
 		self.__SetCameraMode(0)
 
@@ -266,6 +414,42 @@ class OptionDialog(ui.ScriptWindow):
 
 	def __OnToggleVSyncOff(self):
 		self.__SetVSync(False)
+
+	def __OnClickPerfProfileQualityButton(self):
+		self.__SetPerfProfile(0)
+
+	def __OnClickPerfProfileBalancedButton(self):
+		self.__SetPerfProfile(1)
+
+	def __OnClickPerfProfilePerformanceButton(self):
+		self.__SetPerfProfile(2)
+
+	def __OnToggleFXAdaptiveOn(self):
+		self.__SetPerfToggle(systemSetting.SetFXAdaptive, True)
+
+	def __OnToggleFXAdaptiveOff(self):
+		self.__SetPerfToggle(systemSetting.SetFXAdaptive, False)
+
+	def __OnToggleAnimLODOn(self):
+		self.__SetPerfToggle(systemSetting.SetAnimLOD, True)
+
+	def __OnToggleAnimLODOff(self):
+		self.__SetPerfToggle(systemSetting.SetAnimLOD, False)
+
+	def __OnToggleTextTailOptOn(self):
+		self.__SetPerfToggle(systemSetting.SetTextTailOpt, True)
+
+	def __OnToggleTextTailOptOff(self):
+		self.__SetPerfToggle(systemSetting.SetTextTailOpt, False)
+
+	def __OnClickShadowCadence1Button(self):
+		self.__SetShadowCadence(1)
+
+	def __OnClickShadowCadence2Button(self):
+		self.__SetShadowCadence(2)
+
+	def __OnClickShadowCadence3Button(self):
+		self.__SetShadowCadence(3)
 
 	def __OnChangeMusic(self, fileName):
 		self.selectMusicFile.SetText(fileName[:MUSIC_FILENAME_MAX_LEN])
