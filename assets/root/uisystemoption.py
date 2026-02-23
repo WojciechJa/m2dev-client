@@ -49,9 +49,12 @@ class OptionDialog(ui.ScriptWindow):
 		self.vsyncToggle = 0
 		self.perfProfileButtonList = []
 		self.shadowCadenceButtonList = []
+		self.fxStrideBiasButtonList = []
 		self.fxAdaptiveToggle = 0
 		self.animLodToggle = 0
 		self.textTailOptToggle = 0
+		self.shadowDynamicBoostToggle = 0
+		self.textTailGridOptToggle = 0
 		self.textTailRangeController = 0
 		self.textTailRangeValue = 0
 		
@@ -99,6 +102,11 @@ class OptionDialog(ui.ScriptWindow):
 			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_1"))
 			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_2"))
 			self.shadowCadenceButtonList.append(GetObject("shadow_cadence_3"))
+			self.fxStrideBiasButtonList.append(GetObject("fx_stride_bias_0"))
+			self.fxStrideBiasButtonList.append(GetObject("fx_stride_bias_1"))
+			self.fxStrideBiasButtonList.append(GetObject("fx_stride_bias_2"))
+			self.shadowDynamicBoostToggle = GetObject("shadow_dynamic_boost_toggle")
+			self.textTailGridOptToggle = GetObject("texttail_grid_opt_toggle")
 			self.textTailRangeController = GetObject("texttail_range_controller")
 			self.textTailRangeValue = GetObject("texttail_range_value")
 			#self.ctrlShadowQuality = GetObject("shadow_bar")
@@ -144,6 +152,9 @@ class OptionDialog(ui.ScriptWindow):
 		self.shadowCadenceButtonList[0].SAFE_SetEvent(self.__OnClickShadowCadence1Button)
 		self.shadowCadenceButtonList[1].SAFE_SetEvent(self.__OnClickShadowCadence2Button)
 		self.shadowCadenceButtonList[2].SAFE_SetEvent(self.__OnClickShadowCadence3Button)
+		self.fxStrideBiasButtonList[0].SAFE_SetEvent(self.__OnClickFXStrideBiasConservativeButton)
+		self.fxStrideBiasButtonList[1].SAFE_SetEvent(self.__OnClickFXStrideBiasBalancedButton)
+		self.fxStrideBiasButtonList[2].SAFE_SetEvent(self.__OnClickFXStrideBiasAggressiveButton)
 
 		self.tilingApplyButton.SAFE_SetEvent(self.__OnClickTilingApplyButton)
 		self.vsyncToggle.SetToggleDownEvent(self.__OnToggleVSyncOn)
@@ -154,6 +165,10 @@ class OptionDialog(ui.ScriptWindow):
 		self.animLodToggle.SetToggleUpEvent(self.__OnToggleAnimLODOff)
 		self.textTailOptToggle.SetToggleDownEvent(self.__OnToggleTextTailOptOn)
 		self.textTailOptToggle.SetToggleUpEvent(self.__OnToggleTextTailOptOff)
+		self.shadowDynamicBoostToggle.SetToggleDownEvent(self.__OnToggleShadowDynamicBoostOn)
+		self.shadowDynamicBoostToggle.SetToggleUpEvent(self.__OnToggleShadowDynamicBoostOff)
+		self.textTailGridOptToggle.SetToggleDownEvent(self.__OnToggleTextTailGridOptOn)
+		self.textTailGridOptToggle.SetToggleUpEvent(self.__OnToggleTextTailGridOptOff)
 		self.textTailRangeController.SetEvent(ui.__mem_func__(self.OnChangeTextTailOptRange))
 
 		self.__SetCurTilingMode()
@@ -162,6 +177,8 @@ class OptionDialog(ui.ScriptWindow):
 		self.__SetCurPerfProfile()
 		self.__SetCurPerformanceToggles()
 		self.__SetCurShadowCadence()
+		self.__SetCurFXStrideBias()
+		self.__SetCurExpertToggles()
 		self.__SetCurTextTailOptRange()
 
 		# MR-14: Fog update by Alaric
@@ -307,6 +324,24 @@ class OptionDialog(ui.ScriptWindow):
 
 		self.__ClickRadioButton(self.shadowCadenceButtonList, cadence - 1)
 
+	def __SetFXStrideBias(self, index):
+		if index < 0 or index > 2:
+			return
+
+		self.__ClickRadioButton(self.fxStrideBiasButtonList, index)
+		systemSetting.SetFXStrideBias(index)
+
+	def __SetCurFXStrideBias(self):
+		try:
+			iBias = systemSetting.GetFXStrideBias()
+		except:
+			iBias = 1
+
+		if iBias < 0 or iBias > 2:
+			iBias = 1
+
+		self.__ClickRadioButton(self.fxStrideBiasButtonList, iBias)
+
 	def __SetPerfToggle(self, setter, enabled):
 		setter(1 if enabled else 0)
 		self.__SetCurPerformanceToggles()
@@ -376,6 +411,27 @@ class OptionDialog(ui.ScriptWindow):
 			self.textTailOptToggle.Down()
 		else:
 			self.textTailOptToggle.SetUp()
+
+	def __SetCurExpertToggles(self):
+		try:
+			shadowBoost = systemSetting.GetShadowDynamicBoost()
+		except:
+			shadowBoost = 1
+
+		try:
+			textTailGrid = systemSetting.GetTextTailGridOpt()
+		except:
+			textTailGrid = 1
+
+		if shadowBoost:
+			self.shadowDynamicBoostToggle.Down()
+		else:
+			self.shadowDynamicBoostToggle.SetUp()
+
+		if textTailGrid:
+			self.textTailGridOptToggle.Down()
+		else:
+			self.textTailGridOptToggle.SetUp()
 
 	def OnChangeTextTailOptRange(self):
 		value = self.__SliderPosToTextTailRange(self.textTailRangeController.GetSliderPos())
@@ -450,6 +506,31 @@ class OptionDialog(ui.ScriptWindow):
 
 	def __OnClickShadowCadence3Button(self):
 		self.__SetShadowCadence(3)
+
+	def __OnClickFXStrideBiasConservativeButton(self):
+		self.__SetFXStrideBias(0)
+
+	def __OnClickFXStrideBiasBalancedButton(self):
+		self.__SetFXStrideBias(1)
+
+	def __OnClickFXStrideBiasAggressiveButton(self):
+		self.__SetFXStrideBias(2)
+
+	def __OnToggleShadowDynamicBoostOn(self):
+		systemSetting.SetShadowDynamicBoost(1)
+		self.__SetCurExpertToggles()
+
+	def __OnToggleShadowDynamicBoostOff(self):
+		systemSetting.SetShadowDynamicBoost(0)
+		self.__SetCurExpertToggles()
+
+	def __OnToggleTextTailGridOptOn(self):
+		systemSetting.SetTextTailGridOpt(1)
+		self.__SetCurExpertToggles()
+
+	def __OnToggleTextTailGridOptOff(self):
+		systemSetting.SetTextTailGridOpt(0)
+		self.__SetCurExpertToggles()
 
 	def __OnChangeMusic(self, fileName):
 		self.selectMusicFile.SetText(fileName[:MUSIC_FILENAME_MAX_LEN])

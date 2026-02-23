@@ -1446,6 +1446,10 @@ class DragButton(Button):
 
         self.callbackEnable = True
         self.eventMove = lambda: None
+        if app.ENABLE_EXTENDED_SLIDERBAR:
+            self.upVisual = None
+            self.overVisual = None
+            self.downVisual = None
 
     def __del__(self):
         Button.__del__(self)
@@ -1491,20 +1495,24 @@ class DragButton(Button):
 
     if app.ENABLE_EXTENDED_SLIDERBAR:
         def OnMouseOverIn(self):
-            if self.overVisual:
-                self.SetOverVisual(self.overVisual)
+            over = getattr(self, "overVisual", None)
+            if over:
+                self.SetOverVisual(over)
 
         def OnMouseOverOut(self):
-            if self.upVisual:
-                self.SetUpVisual(self.upVisual)
+            up = getattr(self, "upVisual", None)
+            if up:
+                self.SetUpVisual(up)
 
         def OnMouseLeftButtonDown(self):
-            if self.downVisual:
-                self.SetDownVisual(self.downVisual)
+            down = getattr(self, "downVisual", None)
+            if down:
+                self.SetDownVisual(down)
 
         def OnMouseLeftButtonUp(self):
-            if self.overVisual:
-                self.SetUpVisual(self.overVisual)
+            over = getattr(self, "overVisual", None)
+            if over:
+                self.SetUpVisual(over)
 
 class NumberLine(Window):
 

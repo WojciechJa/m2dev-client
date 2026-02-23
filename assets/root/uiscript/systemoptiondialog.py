@@ -15,7 +15,7 @@ window = {
     "y": 0,
 
     "width": 305,
-    "height": 430,
+    "height": 465,
 
     "children":
         (
@@ -27,7 +27,7 @@ window = {
                 "y": 0,
 
                 "width": 305,
-                "height": 430,
+                "height": 465,
 
                 "children":
                     (
@@ -507,6 +507,80 @@ window = {
                             "y" : 363,
 
                             "text" : "3500",
+                        },
+                        {
+                            "name": "fx_stride_bias_mode",
+                            "type": "text",
+
+                            "x": 30,
+                            "y": 388,
+
+                            "text": "FX Stride",
+                        },
+                        {
+                            "name": "fx_stride_bias_0",
+                            "type": "radio_button",
+
+                            "x": 110,
+                            "y": 385,
+
+                            "text": "Cons",
+
+                            "default_image": ROOT_PATH + "small_Button_01.sub",
+                            "over_image": ROOT_PATH + "small_Button_02.sub",
+                            "down_image": ROOT_PATH + "small_Button_03.sub",
+                        },
+                        {
+                            "name": "fx_stride_bias_1",
+                            "type": "radio_button",
+
+                            "x": 160,
+                            "y": 385,
+
+                            "text": "Bal",
+
+                            "default_image": ROOT_PATH + "small_Button_01.sub",
+                            "over_image": ROOT_PATH + "small_Button_02.sub",
+                            "down_image": ROOT_PATH + "small_Button_03.sub",
+                        },
+                        {
+                            "name": "fx_stride_bias_2",
+                            "type": "radio_button",
+
+                            "x": 210,
+                            "y": 385,
+
+                            "text": "Aggr",
+
+                            "default_image": ROOT_PATH + "small_Button_01.sub",
+                            "over_image": ROOT_PATH + "small_Button_02.sub",
+                            "down_image": ROOT_PATH + "small_Button_03.sub",
+                        },
+                        {
+                            "name": "shadow_dynamic_boost_toggle",
+                            "type": "toggle_button",
+
+                            "x": 110,
+                            "y": 410,
+
+                            "text": "Shadow Boost",
+
+                            "default_image": ROOT_PATH + "Middle_Button_01.sub",
+                            "over_image": ROOT_PATH + "Middle_Button_02.sub",
+                            "down_image": ROOT_PATH + "Middle_Button_03.sub",
+                        },
+                        {
+                            "name": "texttail_grid_opt_toggle",
+                            "type": "toggle_button",
+
+                            "x": 190,
+                            "y": 410,
+
+                            "text": "TextTail Grid",
+
+                            "default_image": ROOT_PATH + "Middle_Button_01.sub",
+                            "over_image": ROOT_PATH + "Middle_Button_02.sub",
+                            "down_image": ROOT_PATH + "Middle_Button_03.sub",
                         },
 
                         ## 그림자
