@@ -1,0 +1,37 @@
+name: test-flying-assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - assets/**/*.msf
+      - tests/test_flying_assets.py
+      - .github/workflows/test-flying-assets.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - assets/**/*.msf
+      - tests/test_flying_assets.py
+      - .github/workflows/test-flying-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Flying attachment contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Validate flying assets
+        run: >-
+          python -m unittest discover -s tests
+          -p test_flying_assets.py -v
